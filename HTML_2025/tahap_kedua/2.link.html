@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Link</title>
+</head>
+<body>
+    <h2>Belajar Link</h2>
+    <ol>
+
+        <li>
+            <a href="http://www.youtube.com">Youtube</a>
+        </li>
+        <li>
+            <a href="http://www.goggle.com">Google</a>
+        </li>
+        <li>
+            <a href="http://www.github.com">Github</a>
+        </li>
+    </ol>
+
+    <h4>link ke halaman sendiri</h4>
+    <ul>
+        <li><a href="1.list.html">Resep Makanan</a></li>
+        <li><a href="100.link_saja.html">Cerita Ucup dan Otong</a></li>
+    </ul>
+    <!-- membuat email -->
+    <h4>memasukan dan mengirimkan email</h4>
+    <ol>
+        <li><a href="mailto:ucup@gmail.com">e-mail ke ucup</a></li>
+    </ol>
+    <form class="div">
+        <label for="nama">nama anda :</label>
+        <input type="text" name="nama" id="nama" required autofocus placeholder="masukan nama" style="border-color: aquamarine;">
+        <label for="requiredInput">Input Wajib:</label>
+        <input type="text" id="requiredInput" name="requiredInput" required placeholder="Wajib diisi"><br><br>
+        <input type="submit" name="button_biasa" value="kirim" onclick="alert('nama anda sudah terkirim')">
+    </form>
+</body>
+<style>
+    label,input {
+        display: block;
+        padding: 5px;
+    }
+</style>
+</html>

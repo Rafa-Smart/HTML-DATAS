@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar form</title>
+    <script>
+        function handleChange() {
+            alert("Nilai input telah berubah!");
+        }
+
+        function handleClick() {
+            alert("Input diklik!");
+        }
+    </script>
+</head>
+<body>
+    <h1>jenis jenis inputan</h1>
+    <form>
+        <!-- Text Input -->
+        <label for="text">Input Teks:</label>
+        <input type="text" id="text" name="text" placeholder="Masukkan teks"><br><br>
+        <!-- jadi gini label itu buat bikin keterangannya nah label ini punya atribut yaitu for yang gunanya 
+        buat menghubungkan tag label dengan tag inputan, tag inputan ini juga punya beberapa atribut yaitu,
+        1.type fungsinya buat menentukan jenis inputan dari user.
+        2.id fungsinya untuk membuat kode unik dan harus sama dengan for karena agar keduanya bisa nyambung.
+        3.name fungsinya untuk memberikan nama pada elemen input. Nama ini digunakan untuk mengirimkan data input ke server.
+        4.placehorder fungsinya buat agar ketika inputan kosong maka akan ada keterangan yang  -->
+
+
+
+        
+    
+        <label for="password">Kata Sandi:</label>
+        <input type="password" id="password" name="password" placeholder="Masukkan kata sandi"><br><br>
+    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="example@example.com"><br><br>
+    
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url" placeholder="https://example.com"><br><br>
+    
+        <label for="tel">Nomor Telepon:</label>
+        <input type="tel" id="tel" name="tel" placeholder="Masukkan nomor telepon"><br><br>
+    
+        <label for="search">Pencarian:</label>
+        <input type="search" id="search" name="search" placeholder="Cari..."><br><br>
+    
+        <!-- Number Input -->
+        <label for="number">Input Angka:</label>
+        <input type="number" id="number" name="number" min="1" max="100"><br><br>
+    
+        <label for="range">Slider:</label>
+        <input type="range" id="range" name="range" min="0" max="100"><br><br>
+    
+        <!-- Date and Time Input -->
+        <label for="date">Tanggal:</label>
+        <input type="date" id="date" name="date"><br><br>
+    
+        <label for="time">Waktu:</label>
+        <input type="time" id="time" name="time"><br><br>
+    
+        <label for="datetime-local">Tanggal dan Waktu Lokal:</label>
+        <input type="datetime-local" id="datetime-local" name="datetime-local"><br><br>
+    
+        <label for="month">Bulan dan Tahun:</label>
+        <input type="month" id="month" name="month"><br><br>
+    
+        <label for="week">Minggu:</label>
+        <input type="week" id="week" name="week"><br><br>
+    
+        <!-- Boolean Input -->
+        <label for="checkbox">Pilihan Ganda:</label>
+        <input type="checkbox" id="checkbox" name="checkbox"> Pilih saya<br><br>
+    
+        <label for="radio1">Pilihan Tunggal 1:</label>
+        <input type="radio" id="radio1" name="radio" value="option1"> Opsi 1<br>
+        <!-- 
+        value="option1": Atribut yang menentukan nilai yang akan dikirimkan ke server 
+        jika input ini dipilih saat formulir dikirim. Dalam hal ini, jika pengguna memilih opsi ini, 
+        nilai yang dikirim adalah "option1". -->
+        <label for="radio2">Pilihan Tunggal 2:</label>
+        <input type="radio" id="radio2" name="radio" value="option2"> Opsi 2<br><br>
+    
+        <!-- File Input -->
+        <label for="file">Unggah File:</label>
+        <input type="file" id="file" name="file"><br><br>
+    
+        <!-- Button Input -->
+        <input type="submit" value="Kirim">
+        <input type="reset" value="Reset">
+        <input type="button" value="Tombol Biasa" onclick="alert('Tombol biasa diklik!')"><br><br>
+    
+        <!-- Color Input -->
+        <label for="color">Pilih Warna:</label>
+        <input type="color" id="color" name="color"><br><br>
+    
+        <!-- Image Input -->
+        <input type="image" src="https://via.placeholder.com/100" alt="Kirim" title="Kirim"><br><br>
+    
+        <!-- Hidden Input -->
+        <input type="hidden" name="hidden" value="data tersembunyi"><br><br>
+    
+        <!-- Textarea -->
+        <label for="textarea">Input Teks Panjang:</label><br>
+        <textarea id="textarea" name="textarea" rows="4" cols="50" placeholder="Masukkan teks di sini..."></textarea><br><br>
+    
+        <!-- Select Dropdown -->
+        <label for="select">Dropdown Pilihan:</label>
+        <select id="select" name="select">
+            <option value="option1">Opsi_1</option>
+            <option value="option1">Opsi_2</option>
+            <option value="option1">Opsi_3</option>
+            </form>
+            <br>
+
+
+            <h1>Contoh Atribut Input</h1>
+
+
+            <form id="myForm">
+                <!-- type -->
+                <label for="text">Input Teks:</label>
+                <input type="text" id="text" name="text" placeholder="Masukkan teks"><br><br>
+            
+                <!-- name -->
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="example@example.com"><br><br>
+            
+                <!-- value -->
+                <label for="defaultValue">Nilai Awal:</label>
+                <input type="text" id="defaultValue" name="defaultValue" value="Nilai Awal"><br><br>
+            
+                <!-- id -->
+                <label for="uniqueId">ID Unik:</label>
+                <input type="text" id="uniqueId" name="uniqueId" placeholder="ID unik"><br><br>
+            
+                <!-- class -->
+                <label for="styledInput">Input Bergaya:</label>
+                <input type="text" id="styledInput" name="styledInput" class="input-style" placeholder="Input dengan gaya"><br><br>
+            
+                <!-- style -->
+                <label for="inlineStyle">Gaya Inline:</label>
+                <input type="text" id="inlineStyle" name="inlineStyle" style="border: 2px solid red;" placeholder="Gaya inline"><br><br>
+            
+                <!-- placeholder -->
+                <label for="placeholderInput">Placeholder:</label>
+                <input type="text" id="placeholderInput" name="placeholderInput" placeholder="Teks placeholder"><br><br>
+            
+                <!-- required -->
+                <label for="requiredInput">Input Wajib:</label>
+                <input type="text" id="requiredInput" name="requiredInput" required placeholder="Wajib diisi"><br><br>
+            
+                <!-- disabled -->
+                <label for="disabledInput">Input Dinonaktifkan:</label>
+                <input type="text" id="disabledInput" name="disabledInput" disabled placeholder="Input ini dinonaktifkan"><br><br>
+            
+                <!-- readonly -->
+                <label for="readonlyInput">Input Hanya Baca:</label>
+                <input type="text" id="readonlyInput" name="readonlyInput" readonly value="Tidak bisa diubah"><br><br>
+            
+                <!-- maxlength -->
+                <label for="maxLengthInput">Maksimal Karakter:</label>
+                <input type="text" id="maxLengthInput" name="maxLengthInput" maxlength="10" placeholder="Maks 10 karakter"><br><br>
+            
+                <!-- min -->
+                <label for="minInput">Nilai Minimum:</label>
+                <input type="number" id="minInput" name="minInput" min="1" placeholder="Minimal 1"><br><br>
+            
+                <!-- max -->
+                <label for="maxInput">Nilai Maksimum:</label>
+                <input type="number" id="maxInput" name="maxInput" max="100" placeholder="Maksimal 100"><br><br>
+            
+                <!-- step -->
+                <label for="stepInput">Langkah:</label>
+                <input type="number" id="stepInput" name="stepInput" step="0.1" placeholder="Langkah 0.1"><br><br>
+            
+                <!-- autocomplete -->
+                <label for="autocompleteInput">Autocomplete:</label>
+                <input type="text" id="autocompleteInput" name="autocompleteInput" autocomplete="on" placeholder="Autocomplete aktif"><br><br>
+                <!-- autocomplete: Mengontrol pengisian otomatis nilai input berdasarkan data yang telah dimasukkan
+                  sebelumnya oleh pengguna. Ini membantu mempercepat pengisian formulir.
+                
+                <!- autofocus -->
+                <label for="autofocusInput">Fokus Otomatis:</label>
+                <input type="text" id="autofocusInput" name="autofocusInput" autofocus placeholder="Fokus otomatis saat halaman dimuat"><br><br>
+                <!-- autofocus: Menentukan bahwa input tertentu harus mendapatkan
+                  fokus secara otomatis saat halaman dimuat, memungkinkan pengguna untuk langsung mulai mengetik. -->
+                <!-- form -->
+                <label for="formInput">Form Terkait:</label>
+                <input type="text" id="formInput" name="formInput" form="myForm" placeholder="Input ini terkait dengan form"><br><br>
+            
+                <!-- list -->
+                <label for="datalistInput">Datalist:</label>
+                <input type="text" id="datalistInput" name="datalistInput" list="options" placeholder="Pilih dari daftar">
+        
+                        
+                            <!-- pattern -->
+                            <label for="patternInput">Pola Regex:</label>
+                            <input type="text" id="patternInput" name="patternInput" pattern="[A-Za-z]{3,}" placeholder="Minimal 3 huruf"><br><br>
+                        
+                            <!-- multiple -->
+                            <label for="multipleInput">Pilih Beberapa File:</label>
+                            <input type="file" id="multipleInput" name="multipleInput" multiple><br><br>
+                            <!-- bisa memasukan jenis file apapun -->
+                        
+                            <!-- accept -->
+                            <label for="acceptInput">Jenis File Diterima:</label>
+                            <input type="file" id="acceptInput" name="acceptInput" accept=".jpg, .png"><br><br>
+                            <!-- hanya bisa memasukan jenis file yang sudah ditentukan -->
+                        
+                            <!-- size -->
+                            <label for="sizeInput">Lebar Input:</label>
+                            <input type="text" id="sizeInput" name="sizeInput" size="30" placeholder="Lebar 30 karakter"><br><br>
+                        
+                            <!-- tabindex -->
+                            <label for="tabindexInput">Tabindex:</label>
+                            <input type="text" id="tabindexInput" name="tabindexInput" tabindex="1" placeholder="Tabindex 1"><br><br>
+                        
+                            <!-- onchange -->
+                            <label for="onchangeInput">Onchange:</label>
+                            <input type="text" id="onchangeInput" name="onchangeInput" onchange="handleChange()" placeholder="Ubah nilai input"><br><br>
+                        
+                            <!-- onclick -->
+                            <label for="onclickInput">Onclick:</label>
+                            <input type="button" id="onclickInput" name="onclickInput" onclick="handleClick()" value="Klik Saya"><br><br>
+                        
+                            <input type="submit" value="Kirim">
+        </form>
+        <form action="">
+            <label for="nama_user">masukan nama anda :</label>
+            <input type="text" required autocomplete="additional-name" autofocus placeholder="masukan nama">
+            <label for="password">masukan password :</label>
+            <input type="password" required >
+        </form>
+</body>
+</html>
+<!-- 
+PENTING INI ADALAH BERBAGAI JENIS INPUTAN
+
+<input type="text"> - Untuk input teks biasa.
+<input type="password"> - Untuk input teks yang disembunyikan (misalnya, kata sandi).
+<input type="email"> - Untuk input alamat email.
+<input type="url"> - Untuk input URL.
+<input type="tel"> - Untuk input nomor telepon.
+<input type="search"> - Untuk input pencarian.
+Number Input:
+
+<input type="number"> - Untuk input angka.
+<input type="range"> - Untuk input angka dalam bentuk slider.
+Date and Time Input:
+
+<input type="date"> - Untuk input tanggal.
+<input type="time"> - Untuk input waktu.
+<input type="datetime-local"> - Untuk input tanggal dan waktu lokal.
+<input type="month"> - Untuk input bulan dan tahun.
+<input type="week"> - Untuk input minggu.
+Boolean Input:
+
+<input type="checkbox"> - Untuk input pilihan ganda (checkbox).
+<input type="radio"> - Untuk input pilihan tunggal (radio button).
+File Input:
+
+<input type="file"> - Untuk input file (mengizinkan pengguna mengunggah file).
+Button Input:
+
+<input type="submit"> - Untuk tombol kirim formulir.
+<input type="reset"> - Untuk tombol reset formulir.
+<input type="button"> - Untuk tombol biasa yang dapat diprogram dengan JavaScript.
+Color Input:
+
+<input type="color"> - Untuk memilih warna.
+Image Input:
+
+<input type="image"> - Untuk tombol kirim yang menggunakan gambar.
+Hidden Input:
+
+<input type="hidden"> - Untuk menyimpan data yang tidak terlihat oleh pengguna.
+Textarea:
+
+<textarea> - Untuk input teks yang lebih panjang dan multi-baris.
+Select Dropdown:
+
+<select> - Untuk membuat dropdown pilihan.
+Datalist:
+
+<datalist> - Untuk menyediakan daftar opsi yang dapat dipilih untuk input teks. -->
+
+
+<!-- 
+PENTING INI ADALAH BERBAGAI MACAM JENIS ATRIBUT PADA TAG INPUT DI HTML
+
+
+type: Menentukan jenis input (misalnya, text, password, email, dll.).
+name: Menentukan nama elemen input, yang digunakan saat mengirimkan data formulir.
+value: Menentukan nilai awal dari input.
+id: Menentukan ID unik untuk elemen input, yang dapat digunakan untuk mengaitkan label dengan input.
+class: Menentukan kelas CSS untuk styling.
+style: Menentukan gaya inline untuk elemen input.
+placeholder: Menentukan teks yang ditampilkan saat input kosong.
+required: Menentukan bahwa input harus diisi sebelum formulir dapat dikirim.
+disabled: Menentukan bahwa input tidak dapat digunakan (dinonaktifkan).
+readonly: Menentukan bahwa input tidak dapat diubah oleh pengguna, tetapi masih dapat disalin.
+maxlength: Menentukan jumlah maksimum karakter yang dapat dimasukkan.
+min: Menentukan nilai minimum untuk input angka atau tanggal.
+max: Menentukan nilai maksimum untuk input angka atau tanggal.
+step: Menentukan langkah untuk input angka (misalnya, 0.1 untuk input desimal).
+autocomplete: Menentukan apakah browser harus mengaktifkan fitur pengisian otomatis (nilai bisa on atau off).
+autofocus: Menentukan bahwa input harus mendapatkan fokus secara otomatis saat halaman dimuat.
+form: Menentukan ID formulir yang input ini terkait, jika input berada di luar elemen <form>.
+list: Menentukan ID dari elemen <datalist> yang terkait untuk memberikan saran input.
+pattern: Menentukan pola regex yang harus dipatuhi oleh nilai input (hanya untuk input teks).
+multiple: Menentukan bahwa pengguna dapat memilih beberapa file (hanya untuk input file) atau beberapa opsi (hanya untuk input jenis email dan file).
+accept: Menentukan jenis file yang diterima untuk input file.
+size: Menentukan lebar input dalam jumlah karakter.
+tabindex: Menentukan urutan tab untuk elemen input saat menggunakan tombol Tab.
+onchange: Menentukan skrip JavaScript yang akan dijalankan saat nilai input berubah.
+onclick: Menentukan skrip JavaScript yang akan dijalankan saat input diklik. -->
