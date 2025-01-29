@@ -23,3 +23,12 @@ while(noAngkot <= angkotBeroprasi) {
 for (noAngkot = angkotBeroprasi+1; noAngkot <= jumlahAngkot; noAngkot++) {
     console.log(`angkot no. ${noAngkot} tidak beroprasi.`)
 }
+
+
+// coba coba
+
+// for(i = 1; i<=10 ;i++){
+//     for(j = 1; j<=5;j++){
+//         console.log(`${j}`)
+//     }
+// }

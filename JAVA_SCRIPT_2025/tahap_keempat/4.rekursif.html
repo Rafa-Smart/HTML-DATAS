@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>latihan</title>
+</head>
+<body>
+    <script>
+        // rekursif adalah fungsi yang memanggil dirinya sendiri
+
+        // dan perhatikan ketika menggnakan rekursif ini harus berakhir dan menghasilkan sebuah nilai
+
+        // // misal
+        // function rekursif(n) {
+        //     return rekursif()
+        // }
+        // rekursif()
+
+        // conth lagi
+        // ini akan memanggil 10 sampai 1
+        // for(i = 10; i >= 1; i--){
+        //     console.log(i)
+        // }
+
+        // kita juga bisa pake rekursif
+        // function rekursif(n) {
+        //     console.log(n)
+        //     return rekursif(n-1)
+        // }
+        // // rekursif(10)
+
+        // makanya kita harus pake base case
+        function rekursif(n){
+            if (n === 0){
+                return // yang maksudna adalah break atau sudah dikembalikan yang artinya fungsinya sudah berhenti, karena jika program sudah sampe ke return maka fungsinya akan berhenti
+            }
+            console.log(n)
+            return rekursif(n-1)
+        }
+        rekursif(5)
+
+        console.log("========")
+
+        // jadi ini bisa di buat faktorial
+        // jadi faktorial itu gini 5! = 5x4x3x2x1
+        function Faktorial(n){
+            if (n === 0){
+                return true // maka langsung di kali kan yang bawahnya
+            }
+            return n * Faktorial(n-1)
+        }
+        // jadi cara kerjany itu gini
+        /* misal user ngasih Faktorial(5) maka;
+        5 * faktorial(5-1) = 5 * faktorial(4)
+        5 * (4 * faktorial(4-1)) = faktorial(3)
+        5 * 4 * (3 * faktorial(3-1))) = faktorial(2)
+        5 * 4 * (3 * (2 * faktorial(2-1)))) = faktorial(1)
+        seteelah itu baru masuk ke yg if maka akan di return niali 1 atau true karena kita akan menjalan kan return yang kedua caranya adalah dnegan men true kan return yang pertama agar menjalankan return yang kedua, maka;
+        // baru di oeprasikan
+        5 * 4 * (3 * (2 * 1)) = 120
+
+          */
+        console.log(Faktorial(5))
+        
+        console.log("=============")
+        hasil = 1
+        for(i = 5;i>=1;i--){
+            hasil *= i
+        }
+        console.log(hasil)
+        /* penjelasan 
+            1 (inisialisasi)
+            1 × 5 = 5
+            5 × 4 = 20
+            20 × 3 = 60
+            60 × 2 = 120
+            120 × 1 = 120 
+        */
+
+        // semua looping bisa dibuat rekursif tetapi tiak semua rekursif bisa dibuat looping
+
+        function lagij(n){
+            if(n === 11){
+                return
+            }
+            console.log(n)
+            return lagij(n+1)
+        }
+        lagij(1)
+    </script>
+</body>
+</html>

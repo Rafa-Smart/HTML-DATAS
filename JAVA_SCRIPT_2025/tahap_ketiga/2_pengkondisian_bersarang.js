@@ -102,6 +102,7 @@ let b = "";
 for (let i = 0; i < tinggi; i++){
     for (let j=0; j < tinggi - i -1;j++ ){
         b+=" "
+        // nah nanti bakal terus diulang disini sampe false
     }
     for (let y = 0; y <= i; y ++){
         b+="* "
@@ -156,3 +157,46 @@ for (let i = 0; i<10;i++){
 }    
 
 // nanti kit atanya kechat gpt materi in lagi yang perulangan 
+
+
+// keren nih
+
+// let i = 1;
+// let hasil = 0;
+// for(i = 1; i<=10; i++){
+//     for(j = 1; j <=i;j++){
+//         hasil += j
+//     }
+// hasil +="\n"
+// }
+// console.log(hasil)
+
+
+
+// let i = 1;
+// let hasil = "";
+// for(i = 1; i<=10; i++){
+//     for(j = 1; j <=i;j++){
+//         hasil += "*"
+//     }
+// hasil +="\n"
+// }
+// console.log(hasil)
+
+
+// let i = 1;
+// let hasil = "";
+// for(i = 10; i>=1;i--){
+//     for(j=1;j<i;j++){
+//         hasil += "*"
+//     }
+// hasil += "\n"
+// }
+// console.log(hasil)
+
+
+// let i = 1;
+// let hasil = "";
+// for(i= 1;i<=10;i++){
+//     for(j=0; j<=10-i-1;j--)
+// }

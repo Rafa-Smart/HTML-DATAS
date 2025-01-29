@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // ini artinya 2 dan 6 adalah argumen dan a dan b adalah parameter, jadi argumen itu adalah bahan baku yang dikirimkan ke parameter untuk di proses di dalam blok fungsi
+        function tambah(a,b){
+            return a + b;
+        }
+        let jumlah = tambah(2,6);
+        console.log(jumlah)
+
+        // atau gini
+
+        // jadi maksudnya itu inget ya a sebagai variable berbeda dengan a sebagai argumen, a yang sebagai variable itu berfungsi untuk menyimpan nilai 34 dan akan di kirim ke a yang ada di parameter dan akan di eksekusi
+        a = 34;
+        b = 55;
+        let jumlah2 = tambah(a,b)
+        console.log(jumlah2)
+        
+        // atau bisa juga kita nilai variable a menjadi nilai yang akan di pilih olel user, jangan lupa di parseInt dulu
+
+        // atau bisa juga seperti ini
+        // let jumlah2 = tambah(a* 20,b-4)
+        // jadi maksudnya apapun yang di inputkan oleh user yang a nya akan dikali dulu dengan 20 dan b nya akan dikurangi 4 baru akan dieksekusi
+        
+        console.log("===================")
+
+        // atau bisa juga seperti ini
+        function kali(a,b,c){
+            return a * b * c;
+        }
+        function bagi(a,b){
+            return a / b;
+        }
+
+        // jadi kita bisa meletakan fungsi sebagai parameter di fungsi lainnya
+
+        let hasil = kali(bagi(10,5), bagi(15,5), tambah(50,12))
+        console.log(hasil)
+
+
+        // jika parameternya lebih sedikit dari argumen, maka argumen yang lebihnya akan di abaikan 
+
+        // jika parameternya lebih banyak dari argumen, maka parameternya yang lebih banyak akan jadikan undifined
+
+        // ini berbeda dengan bahasa pemrograman lain, karena kalo yang lain, jika parameter dan argumennya tidak sesuai maka akan erorr
+
+
+        // nih kalo di js ada matei tmbahan yaitu 
+        // arguments yaitu array yang berisi nilai yang dikirimkan saat fungsi dipanggil
+
+        // jadi gini contoh penggunaannya
+        // misal saya punya fungsi tambah dan ingin menambhakan argumen ke parametrnya, tapi argumennya kebanyakan, maka seluruh argumen ini sebenarnya disimpan di array arguments
+        // dan masing masing nilai di argunmen ini punya index
+        // tambah(2,4,"haii",false)
+
+        // arguments = [2,4,"haii",false]
+
+        // nih
+        function contoh(){
+            return arguments
+        }
+        contoh(32,32,32,65,"fsd")
+        // coba di console.log()
+        // maka semua argumen ini akan masuk ke array arguments
+
+        // berati begini
+
+        // jadi arguments ini mirip sama kayak args di python 
+
+        function pakeArgumen(){
+            let total = 0
+            for(i=0;i<arguments.length;i++){
+                total += arguments[i]
+            }
+            return total
+        }
+        coba = pakeArgumen(2,5,6,3,2,1)
+        console.log(coba)
+
+    </script>
+</body>
+</html>

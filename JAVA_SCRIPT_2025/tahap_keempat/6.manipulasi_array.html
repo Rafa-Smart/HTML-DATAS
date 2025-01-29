@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // manual
+
+        // let arr = ["rafa","putri","udin",true]
+        // for (i=0;i<=arr.length;i++){
+        //     console.log(arr[i])
+        // }
+        // console.log(typeof arr,arr[0])
+
+        // 1. menambah isi array
+        // ini akan menambah kan isi array di akhir array
+        let arr = []
+        arr.push("rafa")
+        arr.push("rafa")
+        arr.push("putri")
+        arr.push("rafa")
+        console.log(arr)
+
+    //     arr[0] = "jamal"
+    //     arr[1] = "udin"
+    //     arr[24] = "siti"
+    //     console.log(arr)
+    //     // tapi kalo misal kita masukinnya yang indexnya kebanyakan atau terlewat, makaa akan error dan yang index yangkosong akan di isi oleh undefined atau kosong
+
+
+    console.log("==============")
+
+    let arr2 = ["rafa","putri","siti","muhaimin"]
+    arr2[2] = undefined
+    console.log(arr2)
+
+    // ini masih pake cara manualnya
+
+    console.log("=========")
+    
+    // 3.menampilkan isi array
+    let arr3 = ["satu","dua","tiga","empat","siti"]
+    i = 0
+    while(i < arr3.length){
+        console.log(arr3[i])
+        i += 1
+    }
+
+
+
+    console.log("=========")
+
+    // pake method
+    // 1. join = akan menggabungkan seluruh isi array dan menjadikannya jadi string
+    let arr4 = ["satu","dua","tiga","empat"]
+    // parameter yang ada di dalam fungsi atau method join itu fungsinya untuk memisahkannya mau pake apa, atau tidak mau pake pemisah
+    console.log(arr4.join(" - "))
+    console.log(typeof arr4,",tapi bentuknya masih objek ya")
+
+    // 2. push = menambah elemen baru diakhir 
+    //           arraynya 
+    //           arr.push("rafa")
+    // bisa banyak langsung, kalo pop ga bisa
+    //           arr.push("rafa","putri","jamal")
+    
+    // 3. pop = menghilangkan elemen terakir dari
+    //           aray 
+    //           arr.pop()
+    
+    // 4. unshift = menambah elemen baru di awal
+    //             arraynya
+    //           arr.unshift("rafa","jamal")
+    // 5. shift = menghilangkan elemen terawal
+    //           dari arraynya
+    //           arr.shift("rafa")
+
+    // let jamla = ["dajalasad",'asdsa']
+    // jamla.unshift("sis","sda","sdsa")
+    // console.log(jamla)
+
+    // bagaimana jika kamu ingin menambahkan elemen di tengah tengah arraynya
+    console.log("============")
+    // 6.splice
+    let array = ["anggur","pisang","mangga"]
+    // kita ignin menambah kan durian di antara pisang dan mangga
+    // template
+    
+    // array.splice(index tempat yg baru,berapa yang mau di hapus(kalo ga 0 aja),"elemen tambahan1","elemen tambahan2""elemen tambahan...."}
+    
+    // parametre yang keduanya itu buat hapus berapa elemen yang ada setelah elemen baru ditambahkan
+    console.log(`sebelum = ${array.join(" - ")}`)
+    
+    array.splice(2,0,"sapi")
+    console.log(`sesudah = ${array.join(" - ")}`)
+    console.log("===================")
+    // 7. slice = mengiris sebuah array menjadi sebuah array yang baru
+    // template
+    // array.slice(index awal, index akhir + 1)
+
+    // disini kita buat array baru, karena slice ini akan mereturn aray yang baru, bukan mnegganti
+    let array2 = ["anggur","pisang","mangga","jamal"]
+    let arrayBaru = array2.slice(1,3)
+    console.log(`array baru = ${arrayBaru.join(" - ")}`)
+    </script>
+</body>
+</html>

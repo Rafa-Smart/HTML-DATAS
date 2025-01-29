@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Perpustakaan</title>
+</head>
+<body>
+  <h1>Perpustakaan</h1>
+  <form>
+    <label for="judul">Judul:</label>
+    <input type="text" id="judul" name="judul"><br><br>
+    <label for="pengarang">Pengarang:</label>
+    <input type="text" id="pengarang" name="pengarang"><br><br>
+    <label for="tahunTerbit">Tahun Terbit:</label>
+    <input type="number" id="tahunTerbit" name="tahunTerbit"><br><br>
+    <button onclick="tambahBuku()">Tambah Buku</button>
+  </form>
+  <h2>Daftar Buku:</h2>
+  <div id="daftarBuku"></div>
+
+  <script>
+    // Membuat objek perpustakaan
+    let perpustakaan = {
+      buku: [],
+
+      // Metode untuk menambahkan buku
+      tambahBuku: function() {
+        let judul = document.getElementById("judul").value;
+        let pengarang = document.getElementById("pengarang").value;
+        let tahunTerbit = document.getElementById("tahunTerbit").value;
+        let bukuBaru = {
+          judul: judul,
+          pengarang: pengarang,
+          tahunTerbit: tahunTerbit
+        };
+        this.buku.push(bukuBaru);
+        this.tampilkanDaftarBuku();
+      },
+
+      // Metode untuk menampilkan daftar buku
+      tampilkanDaftarBuku: function() {
+        let daftarBuku = document.getElementById("daftarBuku");
+        daftarBuku.innerHTML = "";
+        for (let i = 0; i < this.buku.length; i++) {
+          let buku = this.buku[i];
+          let html = `<p>${i + 1}. ${buku.judul} oleh ${buku.pengarang}, terbit ${buku.tahunTerbit}</p>`;
+          daftarBuku.innerHTML += html;
+        }
+      }
+    };
+
+    // Menambahkan event listener untuk tombol tambah buku
+    document.addEventListener("DOMContentLoaded", function() {
+      let tombolTambahBuku = document.querySelector("button");
+      tombolTambahBuku.addEventListener("click", function(event) {
+        event.preventDefault();
+        perpustakaan.tambahBuku();
+      });
+    });
+  </script>
+</body>
+</html>

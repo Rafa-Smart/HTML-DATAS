@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>latihan</title>
+</head>
+<body>
+    <script>
+        // refactoring = adalah proses mengubah kode agar menjadi lebih baik tanpa mengubah fungsi kode tersebut
+        // kenapa kita harus refactoring?
+        // bagaimana cara refactoring?
+
+
+        // block scope = biasanya digunakan bahasa c dan java, jadi pake block scope di setiap kodenya misal kalo pake if pake block for pake block. dll
+
+        // dan kalo javascript itu pakenya function block, daji yang variable blok nya itu hanya ada pada fungsi saja tidak ada di ifm for, while dll
+
+        // nah meskipun kita punya var didalam blok scope functionnya, tetap saja tidak akan bisa diakses di luar scope functionnya
+
+
+        // contoh
+        // let t = 4+3;
+        // function tes(){
+        //     var s = 6;
+        //     // return s
+       
+        //     // ini bisa, jadi kita tetep bisa akses var global di dalam scope function
+        // console.log(t)
+        // }
+
+        // tes()
+
+        // ini tidak bisa
+        // console.log(s)
+
+
+
+        // var = variable global yang artinya bisa di gunakan dimanapun di program kita.
+
+        // PENTING
+        // jadi kalo ada variable di dalam fungsi dan ada variable  di luar fungsi yang sama nama  variablenya, itu nanti bukan ditimpa nilainya tetapi karena memeang keduanya adalah variable yang berbeda.
+        // 
+
+        // atau bisa juga seperti ini
+
+        // ini kan biasa yah
+        // var a = 10;
+        // function lagi(){
+        //     var a = 20;
+        // }
+        // console.log(a)
+        
+        // coba kalo gini
+        var a = 10;
+        function lagi(){
+            a = 20;
+        }
+        lagi()
+        console.log(a)
+
+        /* Pada JavaScript, fungsi tidak akan dieksekusi secara otomatis. Fungsi hanya akan dieksekusi ketika dipanggil secara eksplisit.
+
+Jadi, pada kode Anda, urutan eksekusi adalah sebagai berikut:
+
+Deklarasi variabel a dengan nilai 10.
+Deklarasi fungsi lagi().
+Eksekusi console.log(a) yang mencetak nilai a saat itu, yaitu 10.
+Fungsi lagi() belum dipanggil, sehingga nilai a belum diubah menjadi 20.
+Jika Anda ingin hasilnya menjadi 20, Anda harus memanggil fungsi lagi() sebelum melakukan console.log(a). Contohnya seperti ini:
+
+javascript
+Insert Code
+Run
+Copy code
+var a = 10;
+function lagi(){
+    a = 20;
+}
+lagi(); // panggil fungsi lagi()
+console.log(a) // hasilnya akan menjadi 20
+Dengan demikian, urutan eksekusi menjadi:
+
+Deklarasi variabel a dengan nilai 10.
+Deklarasi fungsi lagi().
+Panggil fungsi lagi() yang mengubah nilai a menjadi 20.
+Eksekusi console.log(a) yang mencetak nilai a saat itu, yaitu 20. */
+
+
+        // begitu pula kalo misal kamu tidak punya variable dengan nama yang sama didalam sebuah scope fungsi, dan variable di dalam fungsi tersebut tidak memiliki var, let, const, maka variable yang ada di dalam fungsi tersebut akan dapat diakses oleh program yang diluar
+
+        // makanya kalo mau buat variable di scope maka harus pake var,let,const
+
+        // atau bisa ketik ini "use strict"; diatas banget, berati kita hanya bisa mengakses variable scope di scope itu saja
+
+
+        console.log("========================")
+        var a = 1;
+        function coba(a) {
+
+            console.log(a);
+        }
+        coba(2)
+
+        // berati parameter yang berisi argumen itu akan menjadi variable scope lokal saja
+
+        </script>
+</body>
+</html>

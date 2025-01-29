@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>JavaScript Object Constructors</h1>
+
+<p id="demo"></p>
+
+<script>
+
+// Constructor function for Person objects
+
+// jadi turunan objek akan memiliki property dari induknya
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eye;
+}
+
+// Create two Person objects
+const myFather = new Person("John", "Doe", 50, "blue");
+const myMother = new Person("Sally", "Rally", 48, "green");
+
+// Display age
+document.getElementById("demo").innerHTML =
+"My father is " + myFather.age + ". My mother is " + myMother.age + "."; 
+
+/* tapi anda tidak bisa menambahkan property baru ke objek parentnya
+
+// Constructor function for Person Objects
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eye;
+}
+
+// Create 2 Person Objects
+const myFather = new Person("John", "Doe", 50, "blue");
+const myMother = new Person("Sally", "Rally", 48, "green");
+
+// Will Not Work
+Person.nationality = "English";
+
+// Display Nationality
+document.getElementById("demo").innerHTML =
+"The nationality of my father is " + myFather.nationality; */
+
+// bisa kecuali ika pake prototype 
+// nah nanti karena si parentnya sudah punya rpoperty baru maka objek turunanna pun juga punya gitu
+// 
+/* // Constructor function for Person Objects
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eye;
+}
+
+// Create 2 Person Objects
+const myFather = new Person("John", "Doe", 50, "blue");
+const myMother = new Person("Sally", "Rally", 48, "green");
+
+// Add a new Property
+Person.prototype.nationality = "English";
+
+// Display new Property
+document.getElementById("demo").innerHTML =
+"The nationality of my father is " + myFather.nationality; */
+
+</script>
+
+</body>
+</html>

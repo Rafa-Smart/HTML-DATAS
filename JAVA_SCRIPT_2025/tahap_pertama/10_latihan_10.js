@@ -1,4 +1,4 @@
-let angka_,angka_2,hasil ;
+let angka_1,angka_2,hasil ;
 
 
 // membuat fungsi

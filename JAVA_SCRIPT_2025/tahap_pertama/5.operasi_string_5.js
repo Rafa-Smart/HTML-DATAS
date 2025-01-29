@@ -43,7 +43,7 @@ console.log(`ini adalah index karakter yg tdk ada (y) = ${namaLengkap.indexOf("y
 console.log("===================");
 
 // 3. substring atau mengambil kalimat atau kata atau lebih dari 1 karakter dari seuah string.
-// dan kita jika ingin mengambil di index yang ke -11 maka harus ditmbahkan 1 jadi 12 agar terbaca
+// dan kita jika ingin mengambil di index yang ke 11 maka harus ditmbahkan 1 jadi 12 agar terbaca
 console.log(`mengambil surucup = ${namaLengkap.substring(5,12)}`)
 
 // atau mencarinya juga bisa dibalik seperti :

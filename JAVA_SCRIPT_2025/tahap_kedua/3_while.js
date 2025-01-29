@@ -23,6 +23,7 @@ let ulang = true;
 while(ulang) {
     console.log("hello");
     ulang = confirm("apakah masih mau lagi ?")
+    // jad confirm itu akan mengembalikan nilai false atau true
 }
 
 // 2. berhenti oleh kita sendiri atau sudah di atur didalam programya
@@ -56,3 +57,11 @@ while(awal <= 5) {
     awal++;
 }
 
+// megnhitung nilai ganjil
+let ganjil = 1;
+while(ganjil <= 15){
+    if(ganjil % 2 === 0){
+        console.log(ganjil)
+    }
+    ganjil ++;
+}

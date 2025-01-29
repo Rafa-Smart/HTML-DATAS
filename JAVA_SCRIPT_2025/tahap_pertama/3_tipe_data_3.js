@@ -47,3 +47,8 @@ data = "9.8";
 console.log("ini data setelah tipenya =",typeof data); // string
 
 // NaN jadi ini adalah not a number
+
+let dataLagih = "rafa";
+let dataLagih2 = parseInt(dataLagih);
+console.log(dataLagih2)
+// ini akan menghasilkan NaN karena tidak bisa diubah menjadi angka. jadi ini adalah

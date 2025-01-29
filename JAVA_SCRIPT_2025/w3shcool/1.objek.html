@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>JavaScript Object Properties</h1>
+<h2>Accessing a Property with an Expression</h2>
+
+<p id="demo"></p>
+
+
+<!-- 
+ jadi bisa gini 
+// objectName.property
+let age = person.age;
+atau
+
+//objectName["property"]
+let age = person["age"];
+atau
+
+//objectName[expression]
+let age = person[x];
+ -->
+
+<script>
+const person = {
+  firstName: "John",
+  lastName : "Doe",
+  age      :  50
+};
+
+// kalo mau nambah tingggal gini
+// person.girlFriend = "putri"
+
+// kalo mau delete tinggal
+// delete person.girlFriend;
+
+// jadi ini tuh maksudnya kita megakses property firstName, terus kita taruh di varialble x dan begitu juga yang age dan y, terus di gabungin, coba liat,
+
+// atau ini tuh maksudnya kit asingkat penulisan dari firstName jadi x dan begitu juga yang y nya
+// ini disebut objek ecpresion karena kita oanggil expresinya saja yang nilainya adalah nama property pada objeknya
+
+
+let x = "firstName";
+let y = "age";
+document.getElementById("demo").innerHTML = person[x] + " is " + person[y] + " years old.";
+</script>
+
+
+<!-- nah jadinya kalo mau mengoperasikan metode di dalam property objek kita pakenya fungsi -->
+ <!-- jadi metode itu kayak sebuah hal yang bisa dilakukan oleh si objek misal objek mobil bisa melakukan metode jalan, ngerem, dll -->
+
+<!-- // Create an Object
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  id: 5566,
+};
+
+// Add a Method
+person.name = function() {
+  return this.firstName + " " + this.lastName;
+};
+
+// Display Object Data
+document.getElementById("demo").innerHTML =
+"My father is " + person.name(); -->
+
+
+<!-- CARA CARA MENGAKSES PROPERTY DI DALAM OBJEK -->
+
+<!-- 1.  -->
+<!-- kita ibisa mengakses property didalam objek pake for atau perlungann -->
+
+<!-- haha ini artinya kita bisa menggunakan for i in person mirip sama kayak python -->
+ <!-- // Create an Object
+const person = {
+  name: "John",
+  age: 30,
+  city: "New York"
+};
+
+// Build a Text
+let text = "";
+for (let x in person) {
+  text += person[x] + " ";
+};
+
+// Display the Text
+document.getElementById("demo").innerHTML = text; -->
+
+<!-- 2. -->
+ <!-- // Create an Object
+const person = {
+  name: "John",
+  age: 30,
+  city: "New York"
+};
+
+// Create an Array
+const myArray = Object.values(person);
+
+// Display the Array
+document.getElementById("demo").innerHTML = myArray; -->
+
+<!-- 3. -->
+
+    <!-- ini artinya entries itu funginy sama kayak yang dipython kalo mau mengambil 2 nilai dari dictionary, pake enumerate -->
+
+ <!-- const fruits = {Bananas:300, Oranges:200, Apples:500};
+
+let text = "";
+for (let [fruit, value] of Object.entries(fruits)) {
+  text += fruit + ": " + value + "<br>";
+} -->
+</body>
+</html>
