@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>latihan prototype</title>
+</head>
+<body>
+    <script>
+
+            // MOHON UNTUK MEMBACA SEMUA KOMEN SAYA INI AGAR PAHAM
+
+        // jadi prototype ini fungsinya adalah membuat agar objek templatenya dapat mewariskan seluruh proprtynya kedalam objek baru
+
+
+        // nah ini kan biasa ya
+        function Mahasiswa(nama, energi){
+            // let this = {}; ini yang terjadi dibelakang layar sebenarnya, dan sebenarnya ada lagi yaitu :
+            // let this = Object.create(Mahasiswa.prototype); ini yang terjadi dibelakang layar sebenarnya
+            this.nama = nama;
+            this.energi = energi;
+            // return this; ini yang tejadi dibelakang layar sebenarnya
+
+        }
+        let rafa = new Mahasiswa("rafa",10)
+
+
+        console.log("==========")
+
+        // ini yang pake prototype
+
+        function Mahasiswa(nama, energi){
+            // let this = {}; ini yang terjadi dibelakang layar sebenarnya, dan sebenarnya ada lagi yaitu :
+            // let this = Object.create(Mahasiswa.prototype); ini yang terjadi dibelakang layar sebenarnya
+            this.nama = nama;
+            this.energi = energi;
+            // return this; ini yang tejadi dibelakang layar sebenarnya
+
+        }
+
+        // nah bagaimana cara kita menambahkan methodnya 
+        // nah makan yang nempel dgn prototype itu adalah property atau method (karena memiliki fungsi) (dan ini baru) makan yang ada pada objek mahasiswa dan dapat di turunkan karena menggunakan prototype, dan property makan ini mempunyai sebuah value yaitu fungsi
+
+        Mahasiswa.prototype.makan = function(porsi){
+            this.energi += porsi
+            return `halo ${this.nama}, selamat makan`
+        }
+
+        // jadi kita tidak perlu memuat objek literal lagi, karena kita tinggal meempelkan property atau method kedalam mahasiswa menggunakan protorype ( agar bisa di warikan ke bawahnya ) dan tinggal kita buat methodnya, tapi ini sudah sebagiannya benar,
+
+
+        /* PENJELASAN ULANG DARI AI
+Namun, ada satu hal yang perlu diperjelas. Ketik
+kita membuat objek baru dengan menggunakan konstrukto
+Mahasiswa, maka JavaScript secara otomatis membua
+objek baru dengan menggunakan sintaks let this 
+Object.create(Mahasiswa.prototype);. Namun, ini tida
+berarti bahwa objek baru tersebut secara otomati
+memiliki semua properti dan method yang ada d
+Mahasiswa.prototype.
+
+Sebagai contoh, jika kita membuat objek baru dengan menggunakan konstruktor Mahasiswa seperti ini:
+
+javascript
+Insert Code
+Run
+Copy code
+let putri = new Mahasiswa("putri",10)
+Maka objek putri tersebut hanya memiliki properti nama dan energi yang telah diatur oleh konstruktor Mahasiswa. Namun, objek putri tersebut tidak secara otomatis memiliki method makan yang ada di Mahasiswa.prototype.
+
+Untuk mengakses method makan tersebut, kita harus menggunakan sintaks seperti ini:
+
+javascript
+Insert Code
+Run
+Copy code
+console.log(putri.makan(5)) // halo putri, selamat makan
+Jadi, untuk menjawab pertanyaan Anda, pernyataan Anda sebagian besar benar, namun ada beberapa hal yang perlu diperjelas. Objek baru yang dibuat dengan menggunakan konstruktor Mahasiswa tidak secara otomatis memiliki semua properti dan method yang ada di Mahasiswa.prototype, namun kita dapat mengakses method tersebut dengan menggunakan sintaks yang benar.
+ */
+
+        let putri = new Mahasiswa("putri",10)
+
+        // nah kalo kita console.log seperti ini, sebenarnya putri tidak memiliki method makan karena method makan itu ada di prototype mahasiswa, jadi kita harus menggunakan sintaks putri.makan(parameternya) untuk mengakses method makan tersebut
+        console.log(putri)
+
+
+
+
+        // ini versi classsnya
+
+        // nah sebenarnya kita bisa pake ini tetapi kita harus memahami secara dalam tentang prototype dulu, karena dibelakang layar itu lah yang terjadi
+
+        class Mahasiswaaa {
+            constructor(nama, energi){
+                this.nama = nama;
+                this.energi = energi;
+            }
+            
+                    // makan(porsi){
+                    //     this.energi += porsi;
+                    // }
+        }
+
+        let jamal = new Mahasiswaaa("rafa",10)
+
+
+
+
+        // nah lagi, fakt selanjutnya
+        // kalo kita buat array atau objek maka
+        // yang sebenarnya terjadi adalah
+        // let angka = [1,2,3,4,5];
+
+        // yang sebenarnya terjadi adalah
+        // karena angka ini adalah sebuah objek turunan dari Array.prototype, atau tempalte array 
+        // let angka = new Array(1,2,3,4,5);
+        
+        // atau begini anggap saja bahwa sebenarnya dibelakang layar, sebenarnya kita sudah punya fungsi declaration array
+        // function Array(){
+            //     let this = Object.create(Array.prototype)
+            // }
+            // lalu kita panggil fungsinya
+        // let angka = new Array(1,2,3,4,5);
+
+
+        // makanya kalo kita buat array
+        let angka = [1,2,3]
+        // maka arry angka ini mewrisi method dari objek array
+
+        // maka kita bisa mengakses method-method yang ada di Array.prototype misalnya
+        console.log(angka.length)
+        console.log(angka.reverse())
+        // dll
+
+        // OHH BERATI SELAMA INI KALO KITA MENGAKSES FUNGSI ATAU METHOD ITU BERATI KITA SEDANG MEGAKSES FUNGSI YANG ADA DI ARRAY.PROTOTYPE ( KALO MISAL KITA PAKE ARRAY)
+
+        // nih kalo mau liat apa aja method yan gada didalam object array
+        console.log(Array.prototype)
+        console.log("=========")
+
+        // atau gini
+        console.log(Object.prototype)
+
+        // jadi prototype itu adalah parentnya
+        // jadi kalo misal kamu punya let n = 1
+        // maka kamu sudah membuat objek baru bernama n dengan parentnya adalah Number.prototype, dan kamu bisa mengakses semua method yang ada didalam objek Number.prototype
+
+    </script>
+            <!-- 
+             Prototype adalah objek yang digunakan sebagai template atau contoh untuk membuat objek lain. Dalam JavaScript, setiap objek memiliki properti prototype yang menunjuk ke objek lain. Objek ini disebut sebagai "prototype" dari objek yang pertama.
+
+        Bagaimana Prototype Bekerja?
+
+        Ketika Anda membuat objek baru di JavaScript, objek tersebut secara otomatis memiliki properti prototype yang menunjuk ke objek lain. Objek ini disebut sebagai "prototype" dari objek yang baru dibuat.
+
+        Contoh:
+
+        javascript
+        Insert Code
+        Run
+        Copy code
+        function Person(nama, umur) {
+        this.nama = nama;
+        this.umur = umur;
+        }
+
+        var orang = new Person('John Doe', 30);
+        Dalam contoh di atas, orang adalah objek yang baru dibuat, dan Person adalah fungsi yang digunakan untuk membuat objek tersebut. Secara otomatis, orang memiliki properti prototype yang menunjuk ke objek lain, yaitu Person.prototype.
+
+        Properti Prototype
+
+        Setiap objek memiliki properti prototype yang menunjuk ke objek lain. Properti ini dapat diakses menggunakan sintaks objek.prototype.
+
+        Contoh:
+
+        javascript
+        Insert Code
+        Run
+        Copy code
+        console.log(orang.prototype); // undefined
+        console.log(Person.prototype); // [Function: Person]
+        Dalam contoh di atas, orang.prototype adalah undefined karena orang bukanlah fungsi. Namun, Person.prototype adalah objek yang menunjuk ke fungsi Person.
+
+        Menggunakan Prototype
+
+        Prototype dapat digunakan untuk menambahkan properti dan metode ke objek yang baru dibuat. Anda dapat menambahkan properti dan metode ke prototype dari fungsi yang digunakan untuk membuat objek tersebut.
+
+        Contoh:
+
+        javascript
+        Insert Code
+        Run
+        Copy code
+        Person.prototype.tampilkanNama = function() {
+        console.log(this.nama);
+        };
+
+        var orang = new Person('John Doe', 30);
+        orang.tampilkanNama(); // John Doe
+        Dalam contoh di atas, kita menambahkan metode tampilkanNama ke Person.prototype. Kemudian, kita dapat menggunakan metode tersebut pada objek orang yang baru dibuat.
+
+        Warisan Prototype
+
+        Prototype juga dapat digunakan untuk mewariskan properti dan metode dari objek lain. Anda dapat membuat objek baru yang memiliki properti dan metode yang sama dengan objek lain.
+
+        Contoh:
+
+        javascript
+        Insert Code
+        Run
+        Copy code
+        function Karyawan(nama, umur, jabatan) {
+        Person.call(this, nama, umur);
+        this.jabatan = jabatan;
+        }
+
+        Karyawan.prototype = Object.create(Person.prototype);
+        Karyawan.prototype.constructor = Karyawan;
+
+        Karyawan.prototype.tampilkanJabatan = function() {
+        console.log(this.jabatan);
+        };
+
+        var karyawan = new Karyawan('John Doe', 30, 'Manager');
+        karyawan.tampilkanNama(); // John Doe
+        karyawan.tampilkanJabatan(); // Manager
+        Dalam contoh di atas, kita membuat objek Karyawan yang memiliki properti dan metode yang sama dengan objek Person. Kemudian, kita menambahkan metode tampilkanJabatan ke Karyawan.prototype.
+ -->
+</body>
+</html>

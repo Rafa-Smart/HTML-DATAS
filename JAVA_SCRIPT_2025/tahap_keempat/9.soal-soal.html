@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log("=======")
+        let string = "    rafa     "
+        hasil = string.trim()
+        console.log(hasil.length)
+
+        console.log("============")
+
+        function rekursif(n){
+            if ( n === 0){
+                return true
+            }
+            return n * rekursif(n-1)
+        }
+        console.log(rekursif(5))
+
+        console.log("==============")
+        function cariAngka(a){
+            return a.find(function(e){
+                return e === 3
+            })
+        }
+        console.log(cariAngka([3,4,6,7,5,3,2],5))
+
+
+        console.log("==========")
+        function gede(a){
+            return a.map(function(e){
+                return e.toUpperCase()
+            })
+        }
+        console.log(gede(["dasdsa","sadsad"]))
+
+        console.log("===========")
+        function saring(a){
+                return a.filter(function(e){
+                return e > 3
+            })
+        }
+
+        console.log(saring([1, 2, 3, 4, 5]))
+
+        console.log("==============")
+        let tes = ["jamal","udin"];
+        function unshiftlag(a,b){
+           a.unshift(b)
+           return a
+        }
+        console.log(unshiftlag(tes,"ushi"))
+
+
+        console.log("==========")
+        
+        </script>
+</body>
+</html>

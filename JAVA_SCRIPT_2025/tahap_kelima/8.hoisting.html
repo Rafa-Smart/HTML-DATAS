@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // jadi gini, ketika program kamu dijalanka maka akan ada 2 execution kontext, yaitu
+        // 1. fase = creation = 
+        // console.log(nama) = ini akan erorr
+
+        console.log(nama)
+        var nama = "putri"
+        // hasilnya akan undifined dan tidak eror
+
+
+        // let nama = "putri"
+        // nah kalo ini akan eror
+
+        
+
+        // nah kenpaa ini terjadi karena ketika program dijalankan, ada yang namanya creation fase pada global konteks
+
+        // jadi pada fase ini, js nya akan mengecek apakah ada variable atau function didalam kodingannya, itu dulu yang dia cek, jadi dia tidka akan dulu memperdulikan perintah perintah yang lain, jadi misal didalam 10 baris maka dicari apakah ada keyword var,let, atau const, nah kalo ada dia akan membuat nama variable misal nama dan itu akan diisi dnegan undifined, lalu kalo ada function, maka akan diisi kode fungsinya tapi tidak dijalankan fungsinya, maka konsep ini disebut dengan hoisting,
+
+        // dan program dijalankan maka otomatis js mendefinisikan objek window sebagai global objek dna js mendefinisikan this sebagai window
+
+
+        // 2. fase = execution = 
+        // kemudian pada fase ini baru dijalankan kode programnya satu persatu, jdi pas ada console.log(nama) yang var namanya ada dibawah maka, var ini akan diisi dimemori dan ditaruh diatas kode program menjadi undefined, lalu kemudian ada console.log(nama), maka nama ini akan di console.log() sebagai undefined, lalu kode masih berjalan lagi, kalo ada console.log() setelah var nama, maka nama di memori akan ditimpa dengan value dari variable nama yang baru, jadi nama yang muncul di console bukan undefined tapi putri
+
+
+// contoh lagi
+
+
+        console.log(sayHello) // maka ini akan isinya yang ditulis,dan ini tanpa () agar tidak terexsekusi
+        var nami = "rafa"
+        var umur = 33
+         function sayHello(){
+            console.log(`halo nama saya ${nama} umur saya ${umur} tahun.`)
+         }
+
+        //  nih nama webnya javascript visualizer
+
+
+        // nah kalo ketemu dengan function, maka akan dibuatkan lagi lokal scopenya jadi execution kontex lokal, yag ada fase creation dna execution, dna bedanya selain kita punya akses ke window atau this, kita jga bisa akses agruments nya, dan didalamnya ada hoisting juga, jadi nanti dicari apakah ada variable atau ada function lagi
+
+
+
+         var hay = "halo semua"
+
+        //  jadi kalo misal kita punya console di dala ungsi yang merujuk kepada sebuah variable, maka execution lokalnya akan nyari dulu apakah di dalam fungsi tersebut terdapat sebuah variable yang namanya sama dnegan yang di console,jika ada maka akan dipakai variable tersebut, tpai jika tidak ada maka akan menjadi eecution global dan akan mencari ke luar dari fungsi dan mencari kembali apakah ada variable yang sama dnegan nama variable yang ada di console
+        function tes() {
+            console.log(hay)
+        }
+        tes()
+    </script>
+</body>
+</html>

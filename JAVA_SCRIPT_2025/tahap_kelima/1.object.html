@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>objek</title>
+</head>
+<body>
+    <script>
+        console.log(typeof console.log)
+
+        console.log("==============")
+        // jadi objek itu bedanya sama array adalah, kalo array itu memiliki index pada setiap nilainya, kalo objek itu mempunyai nama pada setiap propertynya, dan di dalam objek tidak punya index
+
+        // anatomi dari objek
+        let mahasiswa = { // mahasiswa = nama objeknya
+            nama : "rafa",   // property dari objek
+            kelas : "xpplg2", // property dari objek
+            sapa : function(){
+                return "haii " + this.nama // ini adalah method atau hal hal yang bisa dilakukan oleh property objek, fungsi yang ada di dalam objek disebut method
+            }
+        }
+
+
+        // membuat objek
+        let jamal = {} // objek kosong
+
+        // atau kita juga bisa memasukan objek didalam objek
+
+        // ini adalah cara membuat objek secara literal
+
+        let siswa = {
+            nama : "rafa",
+            kelas : "xpplg2",
+            umur : 15,
+            ipk : [4.00,4.00,4.00,4.00],
+            alamat : {
+                jalan : "Jl. gekbrong",
+                hobi : "belajar coding",
+                citaCita : "software engineer"
+            }
+        }
+
+        // cara mengakses property objek
+        console.log(siswa.nama)
+        console.log(siswa.umur)
+
+        console.log(siswa["kelas"])
+
+        console.log(siswa["ipk"])
+
+        console.log(siswa.ipk[2])
+
+        console.log(siswa.alamat.hobi)
+        console.log(siswa["alamat"]["jalan"])
+
+        console.log(siswa)
+
+    </script>
+</body>
+</html>

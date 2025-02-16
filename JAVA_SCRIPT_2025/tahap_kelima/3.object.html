@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // this adalah key word spesial, yang merujuk kepada nama objek tersebut.
+
+      // jadi this ini sama dengan window, coba saja console.log(window)
+
+      // jadi gini, anngap saja pada program ita itu sudah ada objek yang namanya this atau window, maka variable dan fungsi apapun yang bersifat global, maka kalo yang variable itu disebut property dari objek this atau window, dan yang fungsi itu artinya adalah method yang ada pada objek this atau window
+
+      // misal
+      var a = 10;
+      console.log(this.a);
+
+      // jadi kalo ada variable global itu saja aja seperti property pada objek window atau objek this
+
+      console.log("========");
+
+      // PENTING
+
+      // 1.jadi maksud this pada objek atau fungsi declaration itu maksudnya adalah mengubah variable global dan fungsi global menjadi proprety dan method dari objek this atau window
+
+      //  menggunakan this pada function declaration
+      // function hello(){
+      //     return console.log("halo semuanyaa")
+      // }
+      // hello()
+
+      // ini adalah fungsi global
+      function hello() {
+        return console.log("hellos semua");
+      }
+      // berati this itu mengembalikan objek global
+      this.hello();
+      window.hello();
+
+      console.log("========");
+
+      // 2.
+      //  mneggunakan objek literal
+      // this dalam objek literal itu berati mengembalikan objek yang bersangkutan , jadi this ini akan mengembalikan isi objeknya
+
+      var obj = { nam: "rafa", jim: "er" };
+      // ini berati kita memasukan method hello kedalam objek obj, method karena isinya adalah fungsi
+      obj.hello1 = function () {
+        console.log(this); // ini berati kita mengembaikan objek obj saja atau objek yang bersangkutan
+        console.log("ges");
+      };
+      obj.hello1();
+
+      console.log("========");
+
+      // 3. menggunakan this pada construktor
+      // nah jadi this ini akan mengembalikan objek yang baru dibuat,
+
+      // nah jadi kalo kita buat objek constructor maka thisnya akan mengembalikan objek yang baru dibuat, bukan objek awalnya atau templatenya
+
+      function sapa() {
+        console.log(this);
+      }
+
+      let ini = new sapa(); // nanti this nya itu akan mengembaikan objek ini saja
+    </script>
+  </body>
+</html>

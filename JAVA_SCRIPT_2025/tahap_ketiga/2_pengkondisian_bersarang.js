@@ -53,6 +53,20 @@ Pada iterasi kelima, kondisi s < 10 tidak terpenuhi karena s adalah 15. Oleh kar
 // }
 // console.log(s)
 
+// PENJELASAN YANG SANGAT PENTING
+/* Pada penjelasan sebelumnya, saya bilang bahwa setiap looping variable i dan j selalu direset kembali menjadi 0. Namun, pada contoh yang saya berikan sebelumnya, hanya variable j yang direset kembali menjadi 0 pada setiap looping.
+
+Hal ini karena variable i dan j memiliki scope yang berbeda. Variable i memiliki scope yang lebih luas, yaitu pada blok for yang pertama, sedangkan variable j memiliki scope yang lebih kecil, yaitu pada blok for yang kedua.
+
+Pada blok for yang pertama, variable i diinisialisasi dengan nilai 0 dan kemudian diincrement pada setiap looping. Namun, pada blok for yang kedua, variable j diinisialisasi dengan nilai 0 pada setiap looping, sehingga nilai j selalu direset kembali menjadi 0.
+
+Jadi, pada setiap looping, hanya variable j yang direset kembali menjadi 0, sedangkan variable i tidak direset kembali menjadi 0. Hal ini karena variable i memiliki scope yang lebih luas dan tidak direset pada setiap looping. */
+
+
+
+
+
+
 // disini ketika kita pake while, maka kit ahaurs reset ulang nilai j karena agar bisa selalu 0 ketika dibandingkan bersama i, tapi kalo pake for, maka tidak perlu mereset nilai j nya lagi karena disetiap perulangan j nya akan selalau direset coba aja liat
 
 // let i = 0;
@@ -173,15 +187,15 @@ for (let i = 0; i<10;i++){
 
 
 
-// let i = 1;
-// let hasil = "";
-// for(i = 1; i<=10; i++){
-//     for(j = 1; j <=i;j++){
-//         hasil += "*"
-//     }
-// hasil +="\n"
-// }
-// console.log(hasil)
+let s = 1;
+let hasil2 = "";
+for(i = 1; i<=10; i++){
+    for(j = 1; j <=i;j++){
+        hasil2 += "*"
+    }
+hasil2 +="\n"
+}
+console.log(hasil2)
 
 
 // let i = 1;

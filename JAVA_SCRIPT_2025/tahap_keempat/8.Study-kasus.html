@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penumpang Angkot</title>
+</head>
+<body>
+    <script>
+        var penumpang = ["rafa",undefined,"putri"]
+        var tambahPenumpang = function(namaPenumpang,penumpang){
+            if (penumpang.length == 0){
+                penumpang.push(namaPenumpang)
+                return penumpang
+            } else {
+                for (let i = 0;i<penumpang.length;i++){
+                    if (penumpang[i] == undefined){
+                        penumpang[i] == namaPenumpang;
+                        return penumpang
+                    }
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>

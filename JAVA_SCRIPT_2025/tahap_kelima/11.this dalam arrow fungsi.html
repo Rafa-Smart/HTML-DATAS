@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coba arrow fungsi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            margin: 50px auto;
+            transition: .3s width,
+                        .3s height .3s,
+                        .3s margin-top .3s,
+                        1s background-color;
+        }
+
+        .size {
+            width: 150px;
+            height: 150px;
+            margin-top: 25px;
+        }
+
+        .caption {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box size"></div>
+
+
+    <!-- jadi nanti tuh bakal awalnya box biasa, terus nanti bakal dikasih size terus nanti bakal dikasih caption -->
+
+    <script>
+        // konteks this didalam arrow function
+        // contoh
+        // const Orang = function(nama,umur){
+        //     this.nama = nama
+        //     this.umur = umur
+        //     this.hello = function(){
+        //         console.log(`hallo ${this.nama} dan saya berumur ${this.umur} tahun.`)
+        //     }
+        // }
+
+        // const putri = new Orang("putri maulidia yusuf",15)
+        
+        // contoh arrow fungsi
+
+        // dan kita tidak bisa menggunakan arrow fngsi pada construktor atau pada objek
+        // tapi kalo method itu bisa
+        const Orang = function(nama,umur){
+            this.nama = nama
+            this.umur = umur
+            this.hello = () => console.log(`hallo ${this.nama} dan saya berumur ${this.umur} tahun.`)
+            // tapi jika kita mneggunakan arrow function pda sebuah method, maka kita sebenarnya tidak memiliki konteks this pada variable didalam fungsi nya, tapi program akan mencari keluar fungsi
+        }
+
+        const putri = new Orang("putri maulidia yusuf",15)
+
+
+        // nah mungkin terlihat sama saja, tpai berbeda jika kita meggunakan objek literal
+
+        console.log("==========")
+
+        const mahasiswa1 = {
+            nama: "rafa",
+            umur:15,
+            sayHello: () => {
+                console.log(`hallo ${this.nama} dan saya berumur ${this.umur} tahun.`)
+                
+                // nah ini akan undefined
+                // mahasiswa1.sayHello()
+                // hallo undefined dan saya berumur undefined tahun.
+                // undefined 
+    
+                // dan this ini akan merujuk langsung ke window bukan ke objeknya
+    
+                // sayHello: () => console.log(`hallo ${nama} dan saya berumur ${umur} tahun.`)
+                // kalo begitu malah eror
+
+                // ini bisa
+            // sayHello: function() {
+            //     console.log(`hallo ${this.nama} dan saya berumur ${this.umur} tahun.`)
+
+
+            // jadi sebernarnya arrow fungsi itu tidak memiliki this jadi ketika di panggil didalam arrow fungsi this.nama, maka akan dicari ke scope paretnnya yaitu di objeknya, karena tidka akda maka akan dicari di global, dan masih belum ketemu maka akan tetap dikasih nilai undefined
+
+            // kalo ayng di construktor atau yang di prototype, itu memang didalam method sayHello itu tidak ada this, tapi dia akan mencari ke scope parentnya dan menemukan this.nama
+
+            // nih buktinya
+
+            console.log(this)
+            // nah harusnya kan this ini akan merujuk ke objeknya, tpai ini malah merujuk ke objek window, itu artinya arrow function otu tidak punya this
+            }
+        }
+
+
+
+
+        // contoh lagi
+        const Siswa = function(nama,umur){
+            this.nama = nama
+            this.umur = umur
+            sapa = function(){
+                console.log(`hallo ${this.nama} dan saya berumur ${this.umur} tahun.`)
+            }
+
+            // PENTINNGGGG PLISS BACA
+
+            // nah kalo ini bisa cuyy, jadi ternyata KALO KITA PAKE OBJEK LITERAL BIASA, KITA BISA MEMASUKAN METHOD KEDALAMNYA, TPAI KALO PAKE UFNCTION ATAU KITA MENJADIKAN OBJEK TERSEBUT ADALAH OBJEK MAKA KITA TIDAK BISA MEMASUKAN METHOD AAU FUNGSI KEDALAMNYA, MAKANYA CARA MEMASUKAN FUNGSI ATAU METHOD KEDALAM OBJEK YG AKAN DIJADIKAN TEMPLATE ADALAH MENGGUNAKAN PROTOTYPE
+            Siswa.prototype.halo = function() {
+                console.log(`hallo ${this.nama} dan saya berumur ${this.umur}`)
+            }
+
+            // kalo dibikin arrow fungsi malah gabisa
+            
+            // Siswa.prototype.halo = () => {
+            //     console.log(`hallo ${this.nama} dan saya berumur ${this.umur}`)
+            // }
+            
+
+            // maksudnya adalah jalankan fungsi ini setiap setengah detik
+            // ini pake fungsi deskription
+            // setInterval(function(){
+            //     console.log(this.umur++)
+            // },500)
+
+
+            // WOOOYY INI PENTINNGGG
+            // jadi ketika di panggil maka akan masuk ke hoisting, dan akan ditaro di global, dan isinya akan undefined
+
+            
+            // jadi inget lagi, kalo fungsi declaration itu bisa di hoisting atau bisa di panggil sebelum di deklarasikan
+
+            // sementara kalo fungsi expresion itu tidak bisa di hoisting atau tidak bisa di panggil sebelum di deklarasikan
+
+            // jadi kalo kita mengakses this pada fungsi declaration didalam objek maka this ini akan langsung mengacu ke global scopenya tidka langsung ke parentnya tapi langsung ke globalnya, maka umur tidak ada maka akan undefined, dan undefined ini jika di tambah 1 atau ++ maka akan Nan
+
+
+            // maka kita ubah saja fungsi ini menjadi arrow fungsi,
+            // karena jika didalam arrow fungsi memanggil this.nama misal, maka karena ia tidka memiliki konsep this, maka pertama dia akan mencari this.nama didalam arrow fungsinya, jika tidak ada maka dia akan cari ke parentnya, jika tidak ada maka akan cari ke global,
+
+            // nah bedanya dengan fungsi declaration jika thisnya tidak ditemukan di dalam fungsinya maka program akan langsung mencari ke scope global bukan ke scope parentnya dulu
+            // nih
+            setInterval(() => {
+                console.log(this.umur++)
+            },500)
+
+
+
+            // kalo begini karena kita pake fungi declaration, maka akan Nan karena, thisnya itu window, dan window ga bisa di tmabah tambah lagi makanya Nan haislnya
+            // setInterval(function() {
+            //     console.log(this.umur++)
+            // },500)
+
+
+
+            // nih coba kamu ketik ini hello() di termial, maka karena ini fungsi declaration yang berada didalam objek, maka thisnya akan mengacu ke globalnya, beda halnya kalo kamu ubah fungsi ini menjadi sebuah fungsi arrow maka thisnya akan mengacu ke objeknya
+            hello = function(){
+                console.log(this)
+            }
+            // Window http://127.0.0.1:5500/JAVA_SCRIPT_2025/tahap_kelima/11.this%20dalam%20arrow%20fungsi.html
+
+
+            
+        }
+        
+        // const rafa = new Siswa("rafa",15)
+
+
+
+        // ini adalah conoth nyatanya
+        // mengambil box
+        const box = document.querySelector('.box');
+        box.addEventListener("click", function(){
+            // nah agar bisa lebih teratur lagi urutannya maka bisa pake
+            let satu = "size"
+            let dua = "caption"
+            // contains(satu) = artinya jika didalamnya terdapat satu maka jalankan programnya yaitu balikin urutan berubahnya
+            if (this.classList.contains(satu)){
+                // jadi kita tuker isinya
+                [satu, dua] = [dua, satu]
+            }
+
+
+
+
+            // maka biasanya kita pake 
+            // jadi nanti yang dipanggil itu that bukan this
+            // let that = this
+            // ini agar kita akna membuat this sendiri pada scope ini agar thisnya tidak keluar dari scope ini
+            // maka disini apapun yang pake this akan diganti dengan that =  that.classList.toggle("size")
+
+            // tapi ada cara lain yaitu mneggunakan arrow fungsi
+
+
+            // disini karena this itu konteksnya adalah box maka
+            // jadi classList ini gunanya untuk mengelola daftar class pada elemennya, dan toggle ini gunanya untuk akan menambahkan class baru jika belum ada dan akan menghilangkan class jika sudah ada, jadi kalo di klik tambahin class size, dan jika di klik lagi maka akan dihilangkan kebali classnya, disini kita akan menambhakan class size
+            this.classList.toggle(satu)
+
+            // nah disini saya akan menunggu selama 0,6 detik karena animasi sizenya berjalan selama 0.3 tambah 0.3 detik, baru saya akan menambahkan class caption
+            // caranya
+            
+            // jadi ini itu maksudnya kita akna menuggu beberapa detik baru jalankan sebuah fungsinya
+
+            // ini asalnya
+            // setTimeout(function(){
+            //     this.classList.toggle("caption")
+            // },600)
+
+            // ini ketika kita memakai arrow fungsi
+            setTimeout(() => {
+                this.classList.toggle(dua)
+            },600)
+
+            // jadi kalo misal kita buat fungsi didaam objek dapi bukan methd atau bukan property berati agar masih bisa mengakses ke this yang ada pada objeknya maka kita akan mneggunakan arrow function, jadi nanti this ini akna ke parentnya dulu baru ke window
+
+
+
+            // jadi kalo di klik maka yang size akan jalan lalu tinggu 0.6 detik baru dijalankan fungsi yang ini
+
+            // nah kalo seperti itu maka, akan dihoisting dulu lalu this ini akan berada di luar, dan merujuk pada objek window, penjelasan lanjutan ini akan ada diatas yng ini yak
+            // (  disini karena this itu konteksnya adalah box maka)
+        })
+
+    </script>
+
+    <!-- PENTING NIHHH -->
+     <!-- intinya adalah
+      1. arrow function = tidak memakai konsep this dan variablenya adan di telusuri lagi di lokal parent terdekatnya dan kalo tidak ada maka akan ke window
+      
+      2. declaration function = memakai konsep this tapi apabila variablenya yang dicari tidak ada di dalam lokalnya maka akan this nya akan langsung merujuk ke dalam window
+      
+      3. expresion function = menggunakan konsep this tapi apabila variablenya yang dicari tidak ada di dalam lokal maka akan di telusuri dulu ke lokal parentnnya baru kalo tidak ada maka thisnya akan merujuk ke window-->
+</body>
+</html>

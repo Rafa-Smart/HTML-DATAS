@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // jadi gini ges, construktor itu sebenarnya sma kayak prototype, nah kalo objek biasa itu kan gini yah
+        // ini cara biasa 
+        function Orang(nama,umur,energi=10){
+            this.nama = nama
+            this.umur = umur
+            this.energi = energi
+        }
+        
+        // dan kalo mau nambahin method itu :
+        Orang.prototype.makan = function(porsi){
+            this.energi += porsi
+            return this.energi
+        }
+
+        let rafa = new Orang("rafa",15)
+        // hasil : rafa
+        // Object { nama: "rafa", umur: 15 }
+
+
+        // nah kalo konstruktor itu beda lagi jadi 
+        class Pekerja {
+            // disini kita pake buat inisiasi proerty property dari objeknya
+            constructor(nami,usia,energi=10){
+                this.nami = nami
+                this.usia = usia
+                this.energi = energi
+            }
+
+            // dan kalo mau nambahin methd itu begini, jadi kita tambahkan didalam si objeknya
+            kerja(jam){
+                this.energi -= jam
+                return this.energi // nah kalo ini bakal langsung ada di consolenya ga kayak prototype, malah undefined
+            }
+        }
+
+        let putri = new Pekerja("putri",15)
+
+
+        // jadi KESIMPULANNYA
+        // konstruktor itu funsinya untuk mendeklarasika property property pada sebuah objek, beda kalo pake prototype, kalo pake prototype maka tinggal ditulis saja misas this.nama = nsma, kalo class itu harus di buat dulu konstruktor, lalu kurawal lalu didalamnya kita bisa pake this.nama = nama
+
+        console.log(this.alert)
+
+    </script>
+</body>
+</html><!--  -->
+
+
+<!-- Konstruktor adalah sebuah metode yang digunakan untuk menginisialisasi objek ketika objek tersebut dibuat. Konstruktor memiliki nama yang sama dengan nama kelas dan tidak memiliki tipe return (tidak seperti metode lainnya yang memiliki tipe return). Konstruktor digunakan untuk mengatur nilai-nilai awal dari objek dan melakukan inisialisasi lainnya.
+
+Bagaimana Cara Menggunakan Konstruktor?
+
+Untuk menggunakan konstruktor, Anda harus membuat sebuah kelas dan kemudian membuat sebuah metode dengan nama yang sama dengan nama kelas. Berikut adalah contoh cara menggunakan konstruktor dalam JavaScript:
+
+javascript
+Insert Code
+Run
+Copy code
+class Orang {
+  constructor(nama, umur) {
+    this.nama = nama;
+    this.umur = umur;
+  }
+}
+
+let orang = new Orang("John Doe", 30);
+console.log(orang.nama); // Output: John Doe
+console.log(orang.umur); // Output: 30
+Dalam contoh di atas, kita membuat sebuah kelas Orang dengan konstruktor yang memiliki dua parameter: nama dan umur. Ketika kita membuat sebuah objek Orang dengan menggunakan kata kunci new, konstruktor akan dipanggil dan nilai-nilai awal dari objek akan diatur.
+
+Apa Maksudnya Konstruktor?
+
+Maksudnya konstruktor adalah untuk menginisialisasi objek ketika objek tersebut dibuat. Konstruktor digunakan untuk mengatur nilai-nilai awal dari objek dan melakukan inisialisasi lainnya. Dengan menggunakan konstruktor, Anda dapat memastikan bahwa objek memiliki nilai-nilai yang benar dan siap digunakan.
+
+Kenapa Harus Ada Konstruktor?
+
+Konstruktor harus ada karena beberapa alasan:
+
+Inisialisasi objek: Konstruktor digunakan untuk menginisialisasi objek ketika objek tersebut dibuat. Dengan menggunakan konstruktor, Anda dapat memastikan bahwa objek memiliki nilai-nilai yang benar dan siap digunakan.
+Mengatur nilai-nilai awal: Konstruktor digunakan untuk mengatur nilai-nilai awal dari objek. Dengan menggunakan konstruktor, Anda dapat memastikan bahwa objek memiliki nilai-nilai yang benar dan siap digunakan.
+Menghindari kesalahan: Konstruktor dapat membantu menghindari kesalahan yang dapat terjadi ketika objek dibuat. Dengan menggunakan konstruktor, Anda dapat memastikan bahwa objek memiliki nilai-nilai yang benar dan siap digunakan.
+Pertanyaan-Pertanyaan Kritis Lainnya
+
+Apa yang terjadi jika kita tidak menggunakan konstruktor?
+Jika kita tidak menggunakan konstruktor, objek tidak akan memiliki nilai-nilai awal yang benar dan siap digunakan. Hal ini dapat menyebabkan kesalahan yang tidak diinginkan.
+
+Bagaimana cara membuat konstruktor yang memiliki banyak parameter?
+Untuk membuat konstruktor yang memiliki banyak parameter, Anda dapat menggunakan sintaks yang sama seperti membuat metode lainnya. Berikut adalah contoh cara membuat konstruktor yang memiliki banyak parameter:
+
+javascript
+Insert Code
+Run
+Copy code
+class Orang {
+  constructor(nama, umur, alamat, pekerjaan) {
+    this.nama = nama;
+    this.umur = umur;
+    this.alamat = alamat;
+    this.pekerjaan = pekerjaan;
+  }
+}
+Apa yang terjadi jika kita memiliki dua konstruktor yang memiliki nama yang sama?
+Jika kita memiliki dua konstruktor yang memiliki nama yang sama, JavaScript akan menganggap bahwa kita memiliki dua metode yang memiliki nama yang sama. Hal ini dapat menyebabkan kesalahan yang tidak diinginkan.
+
+Bagaimana cara membuat konstruktor yang memiliki nilai-nilai default?
+Untuk membuat konstruktor yang memiliki nilai-nilai default, Anda dapat menggunakan sintaks yang sama seperti membuat metode lainnya. Berikut adalah contoh cara membuat konstruktor yang memiliki nilai-nilai default:
+
+javascript
+Insert Code
+Run
+Copy code
+class Orang {
+  constructor(nama = "John Doe", umur = 30) {
+    this.nama = nama;
+    this.umur = umur;
+  }
+} -->

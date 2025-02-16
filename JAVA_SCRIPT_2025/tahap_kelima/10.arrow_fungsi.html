@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // arrow fungsi adalah cara lain untuk menuliskan sebuah fungsi tetapi menjadi lebih ringkas, jadi menggunakan fungsi expresion, namun lebih ringkas
+
+        // contoh fungsi biasa
+        const tambah1 = function(a,b){
+            return a + b
+        }
+        console.log(tambah1(2,3))
+
+        console.log("===========")
+
+        // contoh arrow function
+        const kali1 = (a,b) => {
+            return a * b
+        }
+        console.log(kali1(5,2))
+
+
+        // ini mah coba coba aja
+        const tes = function(){
+            console.log("hai sayang")
+        }()
+
+        console.log("==============")
+
+
+        // conoth contoh mneggunakan arrow fungsi
+
+        // 1.
+        // jadi kalo parameternya cuma satu, maka boleh tidak mneggunakan kurung, tapi kal dua maka wajib pake kurung
+        const kuadrat = x => x * x;
+        console.log(kuadrat(4)); // Output: 16
+
+
+        console.log("===============")
+        
+        // 2. jika isi fungisnya hanya return maka, tidak perlu pake return dan tidak perlu juga menggunakan kurung kurawal
+
+        // jadi ini itu adalah implisit return
+        const tambah = (a, b) => a + b;
+        console.log(tambah(2, 3)); // Output: 5
+        
+        console.log("===============")
+        
+        // 3. tanpa parameter, maka kita wajib menggunakan kurung buka dan tutup yang buat naro parameternya
+        const tes2 = () => "hello sayang"
+        console.log(tes2())
+
+
+
+        console.log("===============")
+
+        // 4. constoh lagi
+        // ingin menghitung huruf masing masing dari mahasiswa,lalu nanti jumlah hurufnya disimpan di array lagi
+        // ini cara biasa
+        // let mahasiswa = ["rafa","putri","jamal","siti"]
+        // let dataHuruf = mahasiswa.map(function(nama){
+        //     // disini ga perlu pake for lagi karena map ini sudah berulang
+        //     for(i=0;i<mahasiswa.length;i++){
+        //         return `${mahasiswa[i]} = ${nama.length}`
+        //     }
+        // })
+        // console.log(dataHuruf)
+
+    let mahasiswa = ["rafa","putri","jamal","siti"]
+    let dataHuruf = mahasiswa.map(function(nama){
+        return `${nama} = ${nama.length}`
+    })
+    console.log(dataHuruf)
+    console.log("=================")
+    // conoth arrow fungsi
+    let siswa = ["jamal","ucup","siti"]
+    // karena kita hanya perlu 1 parameter saja maka tidak usah pake kurung() dan jika isinya hanya return saja maka bisa itdak mneggunakan {} dan return
+    jumlahHuruf = siswa.map(nama => `${nama} = ${nama.length}`)
+    console.table(jumlahHuruf)
+
+
+
+    // kalo misal kamu inign mengembalikannya dalam bentuk objek dan bukan array lagi maka
+    console.log("============")
+    // ini mah experimen
+    let jelema = ["Dudung","daDAng","diDINg"]
+    let jumlahHurufgede = jelema.map(function(nama){
+        let hurufBesar = nama.split('').filter(c => c === c.toUpperCase()).length
+        return `${nama} = jumlah huruf besarnya = ${hurufBesar}`
+    })
+    console.log(jumlahHurufgede)
+
+    // jadi fungsi split itu untuk 
+
+    /* let nama = "Dudung"
+        let karakter = nama.split('')
+        console.log(karakter)
+        Outputnya akan menjadi:
+
+        Insert Code
+        Run
+        Copy code
+        [ 'D', 'u', 'd', 'u', 'n', 'g' ] 
+    */
+
+
+    // let jelema2 = ["Dudung","daDAng","diDINg"]
+    // jumlahHuruf2 = jelema.map(nama => {}
+        // tapi kalo gini js nya nanitaka membuaca bahwa kamu akan membuat return bukan objek maka caranya adalah
+    // })
+
+
+    let jelema2 = ["Dudung","daDAng","diDINg"]
+    jumlahHuruf2 = jelema2.map(e => ({nama:e,jumlahHuruf:e.length}))
+    console.table(jumlahHuruf2)
+    // WAHH INI KEREN BANGET SIHHHH
+
+
+    </script>
+</body>
+</html>

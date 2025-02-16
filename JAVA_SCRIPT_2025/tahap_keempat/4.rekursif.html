@@ -47,6 +47,9 @@
         function Faktorial(n){
             if (n === 0){
                 return true // maka langsung di kali kan yang bawahnya
+                // karena jika true maka akan dijalankan semua program dibawahnya yaitu return n * faktorial(n-1), dan jika diisi false maka tidak akan menjalaskan program dibawahnya dan akan langsung berhenti, yan ghasilnya akan 0 karena ifnya adalah jika n === 0 maka return false yang artinya selesai,
+
+                // tapi sebenarnya itu return true itu mengembalikan nilai 1 yang artina fungsi rekursif nya akan berhenti
             }
             return n * Faktorial(n-1)
         }
@@ -91,3 +94,21 @@
     </script>
 </body>
 </html>
+<!-- PENTING -->
+ <!-- Ketika n sama dengan 0, fungsi Faktorial Anda mengembalikan 1.
+Ketika n lebih besar dari 0, fungsi Faktorial Anda mengembalikan hasil dari n dikalikan dengan hasil dari Faktorial(n-1).
+Jadi, ketika Anda memanggil Faktorial(5), misalnya, fungsi akan bekerja sebagai berikut:
+
+Faktorial(5) mengembalikan 5 * Faktorial(4)
+Faktorial(4) mengembalikan 4 * Faktorial(3)
+Faktorial(3) mengembalikan 3 * Faktorial(2)
+Faktorial(2) mengembalikan 2 * Faktorial(1)
+Faktorial(1) mengembalikan 1 * Faktorial(0)
+Faktorial(0) mengembalikan 1
+Jadi, hasil akhirnya adalah 5 * 4 * 3 * 2 * 1 * 1 = 120.
+
+Sekarang, tentang pertanyaan Anda tentang mengapa n tidak terus di kurangi menjadi 0 ketika n sama dengan 0. Jawabannya adalah karena fungsi Faktorial Anda menggunakan teknik yang disebut "rekursi" untuk menghitung faktorial. Dalam rekursi, fungsi memanggil dirinya sendiri dengan nilai yang lebih kecil sampai mencapai nilai dasar (dalam hal ini, n sama dengan 0).
+
+Ketika n sama dengan 0, fungsi Faktorial Anda tidak memanggil dirinya sendiri lagi, tetapi sebenarnya mengembalikan nilai dasar 1. Jadi, tidak ada lagi pengurangan n menjadi 0 karena fungsi sudah mencapai nilai dasar.
+
+Namun, perlu diingat bahwa kode Anda memiliki kesalahan, karena tidak ada kondisi untuk menghentikan rekursi ketika n kurang dari 0. Jika Anda memanggil Faktorial(-1), misalnya, fungsi akan terus memanggil dirinya sendiri dengan nilai yang lebih kecil sampai mencapai batas maksimum rekursi, yang dapat menyebabkan kesalahan. -->

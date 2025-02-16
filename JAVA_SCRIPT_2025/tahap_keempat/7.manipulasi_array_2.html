@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // method foreach dan map = untuk melakukan looping pada array yg lebih keren dari looping biasa
+        let angka = [1,2,3,4,5,6,7,8,9]
+
+        // 1. forEach 
+
+        // cara biasa
+        // for(i=0;i<=angka.length;i++){
+        //     console.log(i+1)
+        // }
+
+        // jadi kita bisa memberikan fungsi kesetiap elemen pada arraynya
+
+        // maksud dari e pada parameter ini adalah untuk setiap elemennya
+
+        // bisa gini atau
+        // angka.forEach(function(e){
+        //     console.log(e)
+        // })
+
+        // atau gini
+        // let cetak = function(e){
+        //     console.log(e)
+        // }
+        // angka.forEach(cetak)
+
+
+        // dan kita juga bisa menggunakan index nya
+        // jadi ada  parameter yaitu si indek dan elemennya.
+        let nama = ["rafa","putri","jamal","udin"]
+        nama.forEach(function(e, i){
+            console.log(`nama -ke ${i+1} adalah ${e}`)
+        })
+
+
+        console.log("================")
+
+        // 2. map sama seperti forEach, tetapi ini engembalikan array, yang dimana ini lebih baik
+
+        // ini klo pake forEach
+        // let lagi = [1,2,3,4,5,6,7,8,9,]
+        // lagi.forEach(function(e){
+        //     console.log(e * 2)
+        // })
+
+
+        // ini klo pake map
+
+        // nah ini akan menghasilkan array yang baru yang bisa langsung diolah
+        let lagi = [1,2,3,4,5,6,7,8,9,]
+        let hasil = lagi.map(function(e){
+            if (e % 2 != 0){
+                return e 
+            }
+        })
+        console.log(`ini kalo pake map ${hasil}`)
+        let coba = [1,2,3,4,5,6,7,8,9,]
+        let hasil2 = lagi.map(function(e){
+            if (e % 2 == 0){
+                return e 
+            }
+        })
+
+        console.log(hasil2)
+
+
+        console.log("==============")
+
+        // 3. sort
+        let array3 = [4,5,6,3,6,8,2,8,5,2]
+        array3.sort()
+        console.log(array3)
+
+        // contoh kasus
+
+        console.log("==============")
+
+        let array4 = [2,3,54,6,7,8,23,4,6,67,1,21,4]
+        // bagaimana jika seperti ini ?
+        array4.sort()
+        console.log(`maka akan sperti ini jika tidak dikasih fungsi : ${array4} \njadi akan mengurutkan berdasarkan pada angka pertamanya, atau karakter pertamanya`)
+        
+        console.log("==============")
+        
+        array4.sort(function(a,b){
+            return a - b
+        })
+        console.log(array4)
+
+        // PENJELASAN LEBIH GAMPANG
+        /* Bayangkan kita memiliki dua angka, a dan b. Jika kita kurangkan b dari a, hasilnya akan menjadi negatif. Ini berarti bahwa a lebih kecil dari b.
+
+        Contoh:
+        a = 3 b = 5
+        Jika kita kurangkan b dari a, hasilnya adalah:
+        3 - 5 = - 2
+        Karena hasilnya negatif (-2), maka a (3) akan diurutkan sebelum b (5). Jadi, urutan yang benar adalah:
+        3, 5
+        Jika a - b > 0
+        Sekarang, bayangkan kita memiliki dua angka, a dan b. Jika kita kurangkan b dari a, hasilnya akan menjadi positif. Ini berarti bahwa a lebih besar dari b.
+        Contoh:
+        a = 5 b = 3
+        Jika kita kurangkan b dari a, hasilnya adalah:
+        5 - 3 = 2
+        Karena hasilnya positif (2), maka a (5) akan diurutkan setelah b (3). Jadi, urutan yang benar adalah:
+        3, 5
+        Jika a - b = 0
+        Sekarang, bayangkan kita memiliki dua angka, a dan b. Jika kita kurangkan b dari a, hasilnya akan menjadi nol. Ini berarti bahwa a dan b memiliki nilai yang sama.
+        Contoh:
+        a = 5 b = 5
+        Jika kita kurangkan b dari a, hasilnya adalah:
+        5 - 5 = 0
+        Karena hasilnya nol, maka urutan a dan b tidak akan berubah. Jadi, urutan yang benar adalah:
+        5, 5 (atau 5, 5, tidak ada perbedaan) */
+
+
+
+        // PENJELASAN
+        // sort itu bisa di kasih fungsi, jadi bisa di kasih fungsi 
+        /* Returnnya harus a - b karena ini adalah cara yang paling sederhana untuk membandingkan dua elemen dalam array. Dengan mengembalikan nilai a - b, fungsi sort() dapat menentukan urutan elemen a dan elemen b dengan benar.
+
+        Jika a - b < 0, maka a < b, sehingga a akan diurutkan sebelum b.
+        Jika a - b > 0, maka a > b, sehingga a akan diurutkan setelah b.
+        Jika a - b = 0, maka a = b, sehingga urutan a dan b tidak akan berubah.
+        Dengan demikian, fungsi sort() dapat mengurutkan elemen-elemen dalam array dengan benar dan efisien.
+ */
+
+
+        console.log("==============")
+
+    // 4. filter = BISA MENGEMBALIKAN BANYAK NILAI
+    // jadi fungsiya itu unutk mencari niai pada array dna mengembalikannya dalam bentuk array
+        let array5 = [23,54,65,3,6,4,3,2,645,5,3432,43,54]
+        cariLima = array5.filter(function(e){
+            return e === 5
+        })
+        // nah jadi kalo misal angka 5 ini ada maka akan masuk ke array cariLima, karena filter mengembalikan array
+        console.log(`cari lima = ${cariLima}`)
+
+        // kalo pake map dan forEach ga bisa
+        // let lagi = [1,2,3,4,5,6,7,8,9,]
+        // let hasil = lagi.map(function(e){
+        //      return e === 5
+        // })
+    
+        // atau gini
+        let array6 = [23,54,65,3,6,4,3,2,645,5,3432,43,54]
+        cariLebih = array5.filter(function(e){
+            return e > 5
+        })
+        console.log(cariLebih.sort(function(a,b){return a - b}))
+    
+    // 5. find = MENGEMBALIKAN 1 NILAI
+        console.log("============")
+        // kalo find itu hanya mengembalikan 1 nilai saja
+        let array7 = [23,54,65,3,6,4,3,2,645,5,3432,43,54]
+        cariLebih2 = array5.find(function(e){
+            return e > 5
+        })
+        // hasilnya 23 karena dia akan menemukan nilai pertama kali ditemukan yang lebih besar dari 5 = yaitu 23
+        console.log(cariLebih2)
+
+
+
+
+        // tugas
+        console.log("========")
+        let h = ["rafa","fuad","desi"]
+        h.forEach(function(e,i){
+            console.log(`nama  = ${e} index ke-${i}`)
+        })
+
+        // jadi ini akan dikali 2 jika lebih besar dari 5
+        let lagihh = [1,2,43,54,4,2,1,6,5,3,4,5]
+        let hasil6 = lagihh.map(function(e){
+            if(e>5){
+                return e *2
+            }
+        })
+        console.log(hasil6)
+
+        // link belajar lagi
+        // https://www.w3schools.com/Js/js_array_iteration.asp
+        // ada lagi some artinya ngecek beberapa apakah masuk uji jika ya maka true, jadi apakah ada dari array yan lebih dari 5, jika ada 1 saja maka akan true
+
+        // adalai every sama kayak some tpi ini ngeceknya harus semua, jadi misal apakah smeuanya lebih dari 5 maka true
+        console.log("=======")
+        let string = "    rafa     "
+        hasil = string.trim()
+        console.log(hasil.length)
+    </script>
+</body>
+</html>

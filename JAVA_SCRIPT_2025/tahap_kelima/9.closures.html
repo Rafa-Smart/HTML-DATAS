@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log("==================")
+
+        // closures adalahsebuah konsep dalam bahasa pemrograman JavaScript yang memungkinkan sebuah fungsi untuk memiliki akses ke variabel-variabel yang didefinisikan di luar fungsi tersebut, bahkan setelah fungsi tersebut telah selesai dijalankan. Dengan kata lain, closures memungkinkan sebuah fungsi untuk "mengingat" variabel-variabel yang didefinisikan di luar fungsi tersebut, sehingga dapat digunakan kembali di dalam fungsi tersebut.
+
+
+
+        // lexical scope 
+        // contoh
+        function init (){ // parent function
+            let nama = "putri" // locak vairable
+            function tampilNama(){ // inner function atau closures
+                // jadi inner function ini akan memiliki akses ke variable pada parentnnya, karena ketika execution lokalnya mencari didalam fungsi tampilNama ini, tidak ditemukan variable apapun, maka akan enjadi execution lokal di parennta dan ternyata menemukan let nama yang sesuai dnegan console yang ada didalam fungsi tampilNama
+
+                // dan kalo tidak ada, variable didalam kedua fungsi ini, maka execution nya akan pindah keluar dan menjadi global dna tetap mencari variable nama yang terkait
+                console.log(`hai ${nama} cantik`)
+            }
+            tampilNama()
+        }
+        init()
+
+        // KESIMPULAN 
+        // jadi closures itu ketika inner fungsi memiliki akses ke variable yang ada pada fungsi parentnnya.
+
+        // consoh lagi
+        function tes (){ // parent function
+            let nami = "rafa" // local vairable
+            function tampilNami(){ // inner function atau closures
+                console.log(`halo ${nami}`)
+            }
+            tampilNami()
+            // console.log(tampilNami)
+            // kalo kita ake console.dir maka kita akan liat objeknya
+            console.dir(tampilNami)
+        }
+        tes()
+
+        console.log("==========================")
+
+        // bisa juga kek gii
+        function tes2 (){ // parent function
+            let nami2 = "jamal" // locak vairable
+            function tampilNami2(){ // inner function atau closures
+                console.log(`halo ${nami2}`)
+            }
+            return tampilNami2
+        }
+        // maka berati ufngsi tes2 ini memiliki value tampilNami, maka kita harus pindahin dulu kesebuah variable agar bisa tampil
+
+        let gacor = tes2()
+        gacor()
+
+
+        // atau begini juga bisa
+        function tes3 (){ // parent function
+            // let nami3 = "saepuddin" // locak vairable // kita tidka usah pake ini juga bisa, berati kita butuh parameter
+
+            // jadi kita langsung mereturn fungis tanpa nama
+            return function(nama){ // inner function atau closures
+                console.log(`halo ${nama}`)
+            }
+        }
+        // maka berati ufngsi tes2 ini memiliki value tampilNami, maka kita harus pindahin dulu kesebuah variable agar bisa tampil
+
+        let gacor3 = tes3()
+        gacor3("siti muhaimin")
+
+
+
+
+
+        // alasan kta mneggunakan closures
+        // 1. untuk membuat fungsi faktories
+        // contoh
+        function ucapkanSalam(waktu){
+            return function (nama){
+                console.log(`halo ${nama} selamat ${waktu}`)
+            }
+        }
+
+        // nah gini
+        let pagi = ucapkanSalam("pagi")
+        let siang = ucapkanSalam("siang")
+        let malam = ucapkanSalam("malam")
+
+        // jadi ketika ucapkan salam di eksekusi dan membawa argumen "pagi" maka argumen in akan sampai di parameter ucapkanSalam, lalu fungsu ini akan dijalankan dan mengembalikan fungsi lagi, kemudian ketika fungsi ucapkanSalam (yang sudah mereturn fungsi anonymus) dimasukan ke dalam vaiable maka variable tersebut sudah menjadi fungsi innernya atau fungsi yang direturn, itulah sebabnya ketika pagi kita isi dengan argumen "rafa" maka akan masuk ke fungsi yang kedua
+
+        pagi("rafa")
+
+        console.log("=====================")
+
+        // berikutnya contoh klasik
+
+        // kalo begini maka nanti jika counter nya diubah,maka proramnya akan rusak
+        // let counter = 0;
+        // let add = function (){
+        //     return console.log(++ counter)
+        // }
+
+        // misal
+        // counter = 10
+        // add()
+        // add()
+        // add()
+
+
+
+        // maka caranya jika kita masukan counternya didalam fungsi maka, setiap funginya dijalankan maka akan diset 0 selal begitu
+        // let add = function (){
+        //     let counter = 0;
+        //     return console.log(++ counter)
+        // }
+
+
+        // add()
+        // add()
+        // add()
+
+
+
+        // maka cara terbaiknya adalah
+        // let add = function (){
+        //     let counter = 0;
+        //     return function() {
+        //         return console.log(++counter)
+        //     }
+        // }
+        // // maka kita buat dulu variable yang akan menapung si fungsi innernya
+        // let a = add()
+        // // jadi add ini untuk menjalankan seluru fungsinya, dan a hanya untuk menjalankan fungsi innernya, karena fungsi add itu mengembalikan suatu fungsi, dna tidk ada yang nangkep maka dibuatlah variable untuk menangkapnya
+
+        // karena kita telah membuat variable a, maka kita bisa menjalankan fungsi innernya dengan cara a(), dan tidak akan menggangu lagi outer fungsinya
+
+        // a()
+        // a()
+        // a()
+
+
+
+
+        // dan ada lagi cara simplenya yaitu
+
+        // let add = (function (){
+        //     let counter = 0;
+        //     return function() {
+        //         return ++counter
+        //     }
+        // })()
+
+        // // maka kita bungkus dulu, kemudian diakhir kita jalankan fungsinya mneggunakan()
+
+        // // jdai () yang ada pada function pertama itu akan menjalankan si addnya, kemudian ()yang dibawah itu akan menjalankan si inner fungsinya, jadi ini artinya fungsi pertamanya itu dijalankan dulu (yang tanpa nama) karena di fungisnya sudah ada () jadi bisa otomatis jalan dan langsung return fungsi lagi yang sudah masuk ke variable add, terus nanti baru fugsi innernya di jalanin pake add()
+
+        // console.log(add())
+        // console.log(add())
+        // console.log(add())
+
+        let add = (function (){
+        // Fungsi ini dijalankan secara langsung ketika kode program ini dijalankan
+        let counter = 0; // Variabel counter ini hanya dapat diakses oleh fungsi inner
+        return function() {
+            // Fungsi inner ini akan mengembalikan nilai counter yang telah diincrement
+            return ++counter
+        }
+        })() // Tanda kurung ini akan menjalankan fungsi outer secara langsung
+
+        // Sekarang, kita dapat memanggil fungsi add() untuk mengembalikan nilai counter
+        console.log(add()) // Output: 1
+        console.log(add()) // Output: 2
+        console.log(add()) // Output: 3
+
+
+
+        // contoh lagi penggunaan dari closures ini
+        function buatFungsiGaji(tarifGaji) {
+            return function(jamKerja) {
+                return jamKerja * tarifGaji;
+            }
+            }
+
+            const fungsiGaji = buatFungsiGaji(10000);
+            console.log(fungsiGaji(8)); // Output: 80000
+
+
+
+    </script>
+</body>
+</html>

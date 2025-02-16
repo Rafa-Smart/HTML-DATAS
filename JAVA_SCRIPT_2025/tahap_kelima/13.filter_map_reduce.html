@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // jadi pembahasan kali in tentang higher order function
+        // mengenai filter, map, reduce
+
+        // ketiga function ini adalah function yang menerima function lain sebagai argument.
+
+        // dan fungsi fungsi ini sebenarnya adalah sebuah method dari sebuah objek yaitu
+        //  Array.prototype.filter() dll
+
+
+        // contohnya
+
+        const angka = [-1,4,5,6,4,3,9,5,3,-6,-4,-3]
+        // ingin mencari elemen yang lebih besar dan sama dengan 3
+
+        // ini kalo pake for
+        let hasilFor = []
+        for(i=0;i<angka.length;i++){
+            if(angka[i] >= 3){
+                hasilFor.push(angka[i])
+            }
+        }
+        console.log(hasilFor)
+
+        console.log("=========")
+        // ini kalo pake filter
+        const hasilFilter = angka.filter(x => x >= 3)
+        // bisa juga gini
+        // const hasilFilter = angka.filter(function(x){return x >= 3})
+        console.log(hasilFilter)
+        
+        console.log("=========")
+        
+        // contoh lagi pake map
+        hasilKali = angka.map(x => x*2)
+        console.log(hasilKali)
+
+
+
+        console.log("=========")
+        // contoh lagi menggunakan reduce untuk melakukan sesuatu terhadap seluruh elemen pada arraynya
+
+        // saya pengen menjumlahkan seluruh elemennya
+        // kita mau pake arrow function dan reduce ini memiliki 2 parameter berati kita harus mneggunakan ()
+
+        // jadi ada dua parameter yaitu akumulator = hasil dari prosesnya dan elemen yaitu elemen yang sedang di looping,
+
+
+        // jadi cara kerjanya itu nanti liat aja di chat gpt
+        const hasilReduce = angka.reduce((akumulator,elemen) => akumulator + elemen
+        )
+        
+        
+        console.log(hasilReduce)
+        
+        // const hasilReduce = angka.reduce((akumulator,elemen) => akumulator + elemen, 5
+        // )
+        
+        
+        // nah sebenarnya di samping elemnnya itu ada nilai defaultnya yaitu 0, maka 0 disini itu adalah nilai awalnya jadi kalian bisa ganti nilai awalnya menjadi selain 0 misal 5, maka nanti nilai awalnya itu adalah 5, jadi ini juga bisa pake apa aja, misal dari history dari nilai user
+
+        // nah bisa juga seperti ini, agar kamu bisa meihatnya jelas
+        
+        // const hasilReduce = angka.reduce(function(akumulator,elemen) {
+        //    return akumulator + elemen 
+        // },5)
+
+
+        // method chaining = kita bisa menggabungkan fungsi fungsi yang ada pada higher fungsi ini dalam satu kali exsekusi
+
+        // method chain = method berantai
+
+        // cari angka yang lebih besar dari 3, lalu kalikan dengan 2, lalu jumlahkan hasilnya adalah
+
+        console.log("=========")
+
+        const hasilChain = angka.filter(e => e > 3).map(e => e * 2).reduce((acu,elemen) => acu + elemen, 0)
+
+        console.log(hasilChain)
+        </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan lagi nih</title>
+</head>
+<body>
+    <script>
+        console.log("hello semuanya")
+
+        console.log("============")
+        // 1. create Objek
+        // object.create()
+
+        // 1. objek literal = tidak efektif untuk objek yang banyak dan menghabiskan memori
+        // 2. function declaration = sebenarnya ketika kita membuat objek baru berdasarkan fungsi decaration ini, sebenarnya kita membuat fungsi ini lagi dan tetap tersimpan di memori, jadi sama saja
+
+
+        // nah jadi cara dibawah ini maka fungsinya tidak akan dibuatkan ulang tetapi tetap dari fungsi itu saja dan lebih hemat ruang
+
+        // jadi kita punya objek yang mempunyai 2 methid yaitu makan dan main
+        const methodMahasiswa = {
+            makan : function(porsi){
+                this.energi += porsi
+                console.log(`halo ${this.nama} `)
+            },
+
+            main : function(jam){
+                // nah ini kenapa saya tetep bisa kasih nama property energi, karena saya akan membuat turunan dari objek ini, this yang ada disini akan mengacu pada objek turunan saya ini
+                this.energi -= jam
+                console.log(`halo ${this.nama}`)
+            }
+        }
+
+        // nah dengan begitu kita bisa gini
+        // function buatOrang(nama, kelas, jurusan){
+        //     let orang = {}
+        //     orang.nama = nama;
+        //     orang.kelas = kelas;
+        //     orang.jurusan = jurusan;
+
+        //     // nah untuk memanggil methd dari objek yang ada diluar kita bisa seperti ini, tapi masih kuang efektif juga karena setiap kita membuat method baru, maka kita juga harus daftarkan ulang methodnya di dalam sini
+
+        //     // // nah kita bisa ambil method yang ada pada objek yang diluar caranya
+        //     // orang.makan = methodMahasiswa.makan;
+        //     // orang.main = methodMahasiswa.main;
+        //     return orang
+        // }
+
+
+        // nahh AGAR SI FUNGSI DECRLARATION INI TAU BAHWA KITA INGIN MENGAMBIL METHOD DARI objek literal yag diluar, maka kita bisa pake ini dan ini akan otomatis jika da pembaruan method yang ada di dalam objek literalnya, maka yang disini juga akan otomatis terupdate, tanpa mendaftarkan ulang methodnya di dalam sini, caranya
+
+        function buatOrang(nama, kelas, jurusan, energi){
+            // nah kalo mau tau apa parameter yang harus dipake itu hover sja di createnya, jadi parameternya itu adalah nama objek yang ingin diambil methodnya, dan methodnya apa saja yang ingin diambilnya
+            let orang = Object.create(methodMahasiswa)
+            // maka setelah sudah disambungkan dengan objek methodMahasiswa, kita tidak perlu lagi mendaftarkan ulang methodnya di dalam sini, karena otomatis sudah terupdate. dan bisa langsung diakses
+            orang.nama = nama;
+            orang.kelas = kelas;
+            orang.jurusan = jurusan;
+            orang.energi = energi;
+
+            // tetap harus di return
+            return orang
+        }
+
+        let rafa = buatOrang("Rafa", "XII", "IPA", 10);
+
+        // hssilnya
+ /* rafa.makan(4)
+halo Rafa 5.create_obj.html:26:25
+undefined
+rafa
+Object { nama: "Rafa", kelas: "XII", jurusan: "IPA", energi: 14 }
+
+​
+
+ */
+
+
+
+
+        // nah dengn ini sebenarnya masih kurang efektif karena kamu harus membuat 2 objek yaitu objek literal yang berfungsi menyimpan banyak methoc, dan objek template dari function declaration, sebagai templatenya, caranya ada memakai prototype
+    </script>
+</body>
+</html>

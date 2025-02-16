@@ -6,7 +6,7 @@ let namaDepan, namaBelakang, namaLengkap;
 // ini ada cara terbaru
 // jadi cara pertama ini kita buat dulu fungsinya lalu nanti bisa dipanggil
 function nama_anjay() {
-        // ini adaah isi dari fungsinya
+        // ini adalah isi dari fungsinya
 
     // mengambil data yang di input oleh user pada nama depan dan belakang
     
