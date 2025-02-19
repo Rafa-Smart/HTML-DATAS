@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // template literals atau sering disebut template string = 
+        // yaitu string literal yang memungkinkan adanya expresion di dalamnya
+
+        // string literal itu bisa pake "" dan '' bisa juga pake ``
+
+        // dengan menggunakan back tik kita bisa melakukan = 
+        // 1. multi line string
+                // ch : `rafa
+                //       putri`
+
+        // 2. embedded expresion
+                // ch : `nama saya adalah ${2+5+6*5}`
+
+                // bisa juga manggil fungsi
+                // ch : `nama saya adalah ${tambah(2,5,6*5)
+                // `nama ${alert("halo")}`
+
+
+                // bisa taruh ternary nya
+                const x = 10;
+                console.log(`${(x % 2 === 0) ? "genap" : "ganjil"}`)
+                console.log("================")
+
+
+        // 2. html fragments
+        // ini cara biasa
+        // ini mah pake concat
+        const mahasiswa = {
+            nama: `rafa khadafi`,
+            umur: 20,
+            nrp:1253354322
+        };
+
+        let elemen = ''
+        elemen += '<div class="mhs">';
+        elemen += '<h2>' + mahasiswa.nama + '</h2>';
+        elemen += 'span class="nrp">' + mahasiswa.nrp + '</span>'
+        elemen += '</div>'
+        console.log(elemen)
+        // output = <div class="mhs"><h2>rafa khadafi</h2>span class="nrp">1253354322</span></div>
+
+        // kalo pake backtik
+        let e = `<div class="mhs"> <h2> ${mahasiswa.nama} </h2> </div>`
+        console.log(e)
+        // output = <div class="mhs"> <h2> rafa khadafi </h2> </div>
+
+
+
+
+        // CARA AGAR EMMET DI HTML BISA JALAN DI JAVASCRIPT
+        //  buka settings -> cari includelang -> klik logo settings di kiri tulisan emmet include nya lalu pilih copy setting as json -> lalu klik edit in settings json, lalu di sana tinggal tambahin koma dulu lalu pastein yang tadi kamu copy lalu didalamnya ketik "jvascript":"html", yang maksudnya itu ketika jsnya dijalankan maka emmetnya juga akan aktif, jadi kamu bisa menggunakan emmetnya di jsnya juga.
+
+        // tapi inget ini hanya berguna jika kamu berada di file js bukan html lagi :)
+
+
+        // 4. expresion interpolation
+        // 5. tagged template
+    </script>
+</body>
+</html>
