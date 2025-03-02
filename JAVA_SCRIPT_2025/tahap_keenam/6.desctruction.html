@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // destruction adalah sebuah fitur yang memungkinkan kita untuk memecah item-item dalam array atau properti dalam objek menjadi variabel yang terpisah
+        // membongkar atau unpacking
+
+        // 1.
+
+        // contoh membuat desctruction array
+        const array1 = ["udin", "muhaimin", "jamal"];
+        // let [a, b, c] = array1;
+        // console.log(a); // udin
+        // console.log(b); // muhaimin
+        // console.log(c); // jamal
+
+        // misal kita tidka mau emngambil elemen kedua dari array ini maka caranya
+
+        // jadi hapus saja ama variable nya tapi komanya jangan dihapus
+        let [a, ,c] = array1;
+        console.log(a); // udin
+        console.log(c); // udin
+
+        console.log("===============")
+
+        // 2.
+        // menukar isi dari array 
+        // nanti bakal ketuker
+        let z = 1;
+        let x = 2;
+        console.log(z); // 2
+        console.log(x); // 1
+        [z, x] = [x, z];
+        console.log(z); // 2
+        console.log(x); // 1
+
+        console.log("===============")
+
+        // 3.
+
+        // sebaai return value dari sebuah fungsi
+        function coba(){
+            return [1, 2];
+        }
+        // nah nanti variable tes ini akan berubah menjadi sebuah array
+        let tes = coba();
+        console.log(tes); // [1, 2]
+
+        // atau kalo mau langsung di petakan ke sebuah variable maka bisa gini
+        let [a1, b1] = coba();
+        console.log(a1); // 1
+        console.log(b1); // 2
+
+
+        console.log("===============")
+        // 4.
+
+
+        // contoh membuat desctruction objek
+        const objek1 = {
+            nama: "rafa",
+            umur: 20,
+            alamat: "solo"
+        }
+
+        let {nama, umur, alamat} = objek1;
+        console.log(nama); // rafa
+        console.log(umur); // 20
+        console.log(alamat); // solo
+
+        console.log("===============")
+        // 5. rest parameter
+        // jadi kita tidka tau ada banyak nilai yang harus kita unpack 
+
+        let [var1, ...values] = [1,2,3,4,5,6,7,8,9];
+        console.log(var1); // 1
+        console.log(values); // [2, 3, 4, 5, 6, 7, 8, 9]
+        console.log(values[5]) // 7
+
+        console.log("=================")
+        
+        // sekarnag coba yang objek
+        const objek2 = {
+            nama2: "rafa",
+            umur2: 20,
+        }
+
+        // PENTING
+        // nah tpai dengan satu syarat, yaitu nama variable yang ingin dibuat itu harus sama dengan nama properti dari objeknya
+        let {nama2, umur2} = objek2;
+        console.log(nama2); // rafa
+        
+        console.log("=================");
+
+        // 2. asignment tanpa deklarasi objek
+        // ini artinya kita tidak perlu membuat objeknya dulu
+
+        // tapi syaratnyaharus pake kurung buka dan kurung tutup
+        ({nama3, umur3} = {nama3: "jamal", umur3: 20});
+        console.log(nama3); // jamal
+        console.log(umur3); // 20
+
+        console.log("=================");
+        // 3. memberikan default value
+        ({nama4 : hh, umur4 : u, email="rafakhadafi1205@gmail.com"} = {nama4: "jamal", umur4: 20});
+        // tapi ini bisa kalo misalkan di ojeknya tidka punya property email,maka nanti akan dicari dulu apakah di objeknya ituad property email atua tidak jika tidak ada maka akan di pake email defaultnya, tpai jika ada maka akan digunakan email yang ada di property objeknya
+
+        // bisa juga  menggunakan keduanya jadi bisa pake alias dan pake default value secara berbarengan
+
+        console.log(email)
+        
+        console.log("=================");
+        // 4. memberikan nama baru
+        // ({nama3 : n, umur3 : u} = {nama3: "jamal", umur3: 20});
+        
+        console.log("=================");
+        // 5. menggunakan rest parameter
+        let objek3 = {
+            nama: "rafa",
+            umur: 20,
+            alamat: "solo",
+            email: "siti@gmail.com",
+            jurusan: "informatika"
+        }
+        const {nama:n, ...value} = objek3;
+        console.log(value); // {umur: 20, alamat: "solo", email: "
+        // nanti akan menjadi sebuah objek yang berisi semua properti yang tidak di destruc
+
+        console.log("=================");
+
+        // 6. kombinasi dengan array
+
+        // 7. mengambil filed pada objek, setelah dikirim sebagai parameter untuk function
+
+        let objek4 = {
+            nama: "rafa",
+            umur: 20,
+            alamat: "solo",
+            email: "sdfghjksdf",
+            id:134
+        }
+
+        // ini kan biasa ya jadi kita punya objek lalu itu dijadikan sebuah parameter lalu kita return objek4.id nya saja
+        // function getId(objek){
+        //     return objek4.id;
+        // }
+
+        // console.log(getId(objek4)); //134
+
+        // bisa juga seperti ini jadi kita mendapat argumen sebuah objek tapi di tankap di parameternya langsung idnya saja, jadi di destructionya di paramternya
+        // tapi pake {} karena kita ingin mengambil idnya saja, dan ini kayaknya bisa juga pake rest parameter
+        function getId({ id, nama}){
+            return `id : ${id}, nama : ${nama}`;
+        }
+
+        console.log(getId(objek4)); //134
+    </script>
+</body>
+</html>

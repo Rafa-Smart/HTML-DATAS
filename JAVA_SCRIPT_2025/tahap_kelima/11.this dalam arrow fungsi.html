@@ -59,8 +59,12 @@
         const Orang = function(nama,umur){
             this.nama = nama
             this.umur = umur
-            this.hello = () => console.log(`hallo ${this.nama} dan saya berumur ${this.umur} tahun.`)
+            this.hello = () => console.log(`hallo saya ${this.nama} dan saya berumur ${this.umur} tahun.`)
             // tapi jika kita mneggunakan arrow function pda sebuah method, maka kita sebenarnya tidak memiliki konteks this pada variable didalam fungsi nya, tapi program akan mencari keluar fungsi
+
+            // pake prototype juga bisa untuk buat method turunannya
+
+            // yang diatas ini akan bisa ya
         }
 
         const putri = new Orang("putri maulidia yusuf",15)
@@ -75,6 +79,8 @@
             umur:15,
             sayHello: () => {
                 console.log(`hallo ${this.nama} dan saya berumur ${this.umur} tahun.`)
+
+                // nah ini undefined karena this di fungsi arrow pada objek literal itu pasti akan langsung merujuk ke parentnya yaitu si global, bade lagi kalo kita pake 
                 
                 // nah ini akan undefined
                 // mahasiswa1.sayHello()
@@ -109,18 +115,20 @@
         const Siswa = function(nama,umur){
             this.nama = nama
             this.umur = umur
+
+            // ini ga akan bisa karena sapaya tidak mengguakan this.sapa jadi sapa ini akan erorr dan tidak akan bisa, karena klao funsi declaration itu harus dipanggil bmenggunkaan atau berdasarkan dari objeknya jadi kalo tidak menggunkaan this.sapa, maka tdak akan bisa, karena this yang ada di dalam fungsi declaration yang tidak menggunakan atau berdasarkan objeknya maka thisnya akan langsung merujuk ke windownya
             sapa = function(){
                 console.log(`hallo ${this.nama} dan saya berumur ${this.umur} tahun.`)
             }
 
             // PENTINNGGGG PLISS BACA
 
-            // nah kalo ini bisa cuyy, jadi ternyata KALO KITA PAKE OBJEK LITERAL BIASA, KITA BISA MEMASUKAN METHOD KEDALAMNYA, TPAI KALO PAKE UFNCTION ATAU KITA MENJADIKAN OBJEK TERSEBUT ADALAH OBJEK MAKA KITA TIDAK BISA MEMASUKAN METHOD AAU FUNGSI KEDALAMNYA, MAKANYA CARA MEMASUKAN FUNGSI ATAU METHOD KEDALAM OBJEK YG AKAN DIJADIKAN TEMPLATE ADALAH MENGGUNAKAN PROTOTYPE
+            // nah kalo ini bisa cuyy, jadi ternyata KALO KITA PAKE OBJEK LITERAL BIASA, KITA BISA MEMASUKAN METHOD KEDALAMNYA, TPAI KALO PAKE UFNCTION ATAU KITA MENJADIKAN OBJEK TERSEBUT ADALAH TEMPLATE OBJEK MAKA KITA TIDAK BISA MEMASUKAN METHOD ATAU FUNGSI KANGSUNG KEDALAMNYA TANPA MENGGUNAKAN THIS. KEDALAMNYA, MAKANYA CARA MEMASUKAN FUNGSI ATAU METHOD KEDALAM OBJEK YG AKAN DIJADIKAN TEMPLATE ADALAH MENGGUNAKAN PROTOTYPE
             Siswa.prototype.halo = function() {
                 console.log(`hallo ${this.nama} dan saya berumur ${this.umur}`)
             }
 
-            // kalo dibikin arrow fungsi malah gabisa
+            // kalo dibikin arrow fungsi malah gabisa, karena ini dibuat langsung di objeknya, maka kalo langsung di objeknya maka nanti arrow fungsi ini this nya akan langusng merujuk ke parentnya yaitu si window dan id window tidak ada this.nama, makanya tidak akan bisa
             
             // Siswa.prototype.halo = () => {
             //     console.log(`hallo ${this.nama} dan saya berumur ${this.umur}`)
@@ -135,7 +143,7 @@
 
 
             // WOOOYY INI PENTINNGGG
-            // jadi ketika di panggil maka akan masuk ke hoisting, dan akan ditaro di global, dan isinya akan undefined
+            // jadi ketika di panggil maka akan masuk ke hoisting, dan akan ditaro di global, dan isinya akan undefined, kenapa ditaro diglobal ?, karena fungsi declaration ini sudah di hosting duluan dan di taro di global maka ketika fungsi ini dijalankan maka this nya akan langsung merujuk ke window. dan window tidak punya umur maka akan undefined, dan undefined ini jika di tambah 1 maka akan Nan
 
             
             // jadi inget lagi, kalo fungsi declaration itu bisa di hoisting atau bisa di panggil sebelum di deklarasikan
@@ -150,20 +158,20 @@
 
             // nah bedanya dengan fungsi declaration jika thisnya tidak ditemukan di dalam fungsinya maka program akan langsung mencari ke scope global bukan ke scope parentnya dulu
             // nih
-            setInterval(() => {
-                console.log(this.umur++)
-            },500)
+            // setInterval(() => {
+            //     console.log(this.umur++)
+            // },500)
 
 
 
-            // kalo begini karena kita pake fungi declaration, maka akan Nan karena, thisnya itu window, dan window ga bisa di tmabah tambah lagi makanya Nan haislnya
+            // kalo begini karena kita pake fungi declaration, maka akan Nan karena, thisnya itu window, dan window ga bisa di tmabah tambah lagi makanya Nan haislnya, kenapa this nya itu pada fungsi declaration ini bisa merujuk ke window? karena didalam fungsi declaration itu mempunyai konsep this dan this nya ini akna bergantung kepada bagaimana fungsi itu di panggil jika di panggil secara global maka this nya akan merujuk ke window, tapi jika di panggil secara objek maka this nya akan merujuk ke objeknya itu sendiri, tapi karena kita pake this.umur++ maka this nya itu window, dan window ga bisa di tambah
             // setInterval(function() {
             //     console.log(this.umur++)
             // },500)
 
 
 
-            // nih coba kamu ketik ini hello() di termial, maka karena ini fungsi declaration yang berada didalam objek, maka thisnya akan mengacu ke globalnya, beda halnya kalo kamu ubah fungsi ini menjadi sebuah fungsi arrow maka thisnya akan mengacu ke objeknya
+            // nih coba kamu ketik ini hello() di termial, maka karena ini fungsi declaration yang berada didalam objek, maka thisnya akan mengacu ke globalnya, beda halnya kalo kamu ubah fungsi ini menjadi sebuah fungsi arrow maka thisnya akan mengacu ke objeknya (mengcu kepada diamana ia di definisikan, jadi kalo misa kamu pake konsep this di arrow fungsi yang berada di dalam objek literal maka this ini akan langusng erujuk kewindownya atau ke objek turunannya, tapi kalo kamu buat mesin objek kan berati ananti akan diturunkan maka nanti objek yang diturunkan akan bisa mengakses method yang menggunakan arrow fungsi yang ada di objek turunannya, karena akan this nya aka mnegacu ke objek turunannya yaitu si objek mesin itu tadi)
             hello = function(){
                 console.log(this)
             }
@@ -173,7 +181,7 @@
             
         }
         
-        // const rafa = new Siswa("rafa",15)
+        const rafa = new Siswa("rafa",15)
 
 
 
@@ -221,7 +229,7 @@
                 this.classList.toggle(dua)
             },600)
 
-            // jadi kalo misal kita buat fungsi didaam objek dapi bukan methd atau bukan property berati agar masih bisa mengakses ke this yang ada pada objeknya maka kita akan mneggunakan arrow function, jadi nanti this ini akna ke parentnya dulu baru ke window
+            // jadi kalo misal kita buat fungsi didaam objek tapi bukan methd atau bukan property berati agar masih bisa mengakses ke this yang ada pada objeknya maka kita akan mneggunakan arrow function, jadi nanti this ini akna ke parentnya dulu baru ke window
 
 
 
@@ -237,8 +245,145 @@
      <!-- intinya adalah
       1. arrow function = tidak memakai konsep this dan variablenya adan di telusuri lagi di lokal parent terdekatnya dan kalo tidak ada maka akan ke window
       
+
+      // nih revisi : Benar sebagian. Arrow function tidak memiliki this sendiri, sehingga this di dalam arrow function akan merujuk ke this dari lingkup di mana arrow function tersebut didefinisikan (lexical scoping). Namun, tidak benar bahwa arrow function akan menelusuri variabel lokal parent terdekatnya. Arrow function hanya menelusuri this dari lingkup di mana ia didefinisikan, bukan variabel biasa.
+
+
       2. declaration function = memakai konsep this tapi apabila variablenya yang dicari tidak ada di dalam lokalnya maka akan this nya akan langsung merujuk ke dalam window
-      
+      // nih revisi Benar sebagian. Declaration function memiliki this sendiri, dan nilai this tergantung pada bagaimana fungsi tersebut dipanggil:
+        Jika fungsi dipanggil sebagai method objek, this akan merujuk ke objek tersebut.
+        Jika fungsi dipanggil secara langsung (tanpa konteks objek), this akan merujuk ke window (global object).
+    
+
       3. expresion function = menggunakan konsep this tapi apabila variablenya yang dicari tidak ada di dalam lokal maka akan di telusuri dulu ke lokal parentnnya baru kalo tidak ada maka thisnya akan merujuk ke window-->
+
+      <!-- Kurang tepat. Expression function (termasuk regular function) memiliki this sendiri, dan nilai this tergantung pada cara fungsi tersebut dipanggil, bukan pada apakah variabel yang dicari ada di lokal atau tidak. this tidak menelusuri variabel lokal parentnya; this hanya merujuk ke objek yang memanggil fungsi tersebut. -->
+
+      <!--  
+      PENTING JUGA NIH DARI DEEPSEEK
+        Gunakan regular function untuk method yang membutuhkan this merujuk ke objeknya sendiri.
+        Gunakan arrow function jika Anda ingin this merujuk ke lingkup di mana fungsi tersebut didefinisikan (lexical scoping.
+     -->
+
+
+     <!-- PERDEBATAN GW AMA DEEPSEEK -->
+
+
+
+
+      <!-- jelaska kepada saya serinci rincinya kenapa ini bsia undefined, adi anda bilang bahwa kalo arrow fungsi itu tidak punya this dam konteksnya, dan jika ada console.log() yang mengakses variable nama, dan di dalam fungsi sayHello in tidak punya variable nama didalamnya, maka program akan mencari dulu variable nama ini apakah ada di dalam objek instancenya atau tempat ia dibuat ? kenapa ini malah langsung merujuk ke window ? aneh sekali. jika saya benar tolong elaskan ulang dna jika saya salah maka tolong berikan jawaban yang jelas dan mudah dipahami, dan jangan keluar dari konteks ini
+
+Mari kita bahas secara rinci mengapa kode berikut menghasilkan undefined:
+javascript
+Copy
+
+const obj = {
+    nama: "Rafa",
+    sayHello: () => {
+        console.log(this.nama); // `this` merujuk ke `window`, bukan `obj`
+    }
+};
+obj.sayHello(); // Output: undefined
+
+1. Konsep this dalam Arrow Function
+
+Arrow function tidak memiliki this sendiri. Artinya, this di dalam arrow function akan merujuk ke this dari lingkup di mana arrow function tersebut didefinisikan, bukan di mana arrow function tersebut dipanggil.
+
+Dalam contoh di atas, arrow function sayHello didefinisikan di dalam objek obj. Namun, lingkup di mana arrow function tersebut didefinisikan adalah lingkup global (karena objek obj didefinisikan di tingkat terluar, bukan di dalam fungsi atau blok lain). Oleh karena itu, this di dalam arrow function sayHello akan merujuk ke this dari lingkup global, yaitu window (pada lingkungan browser) atau global (pada lingkungan Node.js).
+2. Mengapa this.nama adalah undefined?
+
+    this di dalam arrow function sayHello merujuk ke window (lingkup global).
+
+    Di lingkungan browser, window adalah objek global yang mewakili jendela browser.
+
+    Objek window tidak memiliki properti nama, sehingga this.nama akan menghasilkan undefined.
+
+3. Kenapa Tidak Mencari nama di Dalam Objek obj?
+
+Arrow function tidak memiliki mekanisme untuk mengubah this berdasarkan objek yang memanggilnya. Ini berbeda dengan regular function, di mana this dapat berubah tergantung pada bagaimana fungsi tersebut dipanggil.
+
+Contoh perbandingan dengan regular function:
+javascript
+Copy
+
+const obj = {
+    nama: "Rafa",
+    sayHello: function() {
+        console.log(this.nama); // `this` merujuk ke `obj`
+    }
+};
+obj.sayHello(); // Output: "Rafa"
+
+Pada regular function:
+
+    this merujuk ke objek yang memanggil fungsi tersebut (obj dalam contoh ini).
+
+    Oleh karena itu, this.nama akan merujuk ke obj.nama, yaitu "Rafa".
+
+Pada arrow function:
+
+    this tidak berubah berdasarkan objek yang memanggilnya.
+
+    this tetap merujuk ke window (lingkup di mana arrow function didefinisikan).
+
+4. Apakah Arrow Function Mencari Variabel nama di Lingkup Parent?
+
+Tidak. Arrow function hanya menelusuri this dari lingkup di mana ia didefinisikan, bukan variabel biasa. Jika Anda mencoba mengakses this.nama, arrow function tidak akan menelusuri apakah nama ada di dalam objek obj atau tidak. Ia hanya melihat this dari lingkup di mana arrow function didefinisikan (dalam hal ini, window).
+5. Contoh Lain untuk Memperjelas
+
+Berikut contoh lain untuk memperjelas perilaku this dalam arrow function:
+javascript
+Copy
+
+const obj = {
+    nama: "Rafa",
+    sayHello: () => {
+        console.log(this); // `this` merujuk ke `window`
+    }
+};
+obj.sayHello(); // Output: Window {...} (lingkup browser)
+
+Di sini, console.log(this) akan mencetak objek window, karena this di dalam arrow function merujuk ke lingkup global.
+6. Solusi jika Ingin this Merujuk ke Objek obj
+
+Jika Anda ingin this merujuk ke objek obj, gunakan regular function:
+javascript
+Copy
+
+const obj = {
+    nama: "Rafa",
+    sayHello: function() {
+        console.log(this.nama); // `this` merujuk ke `obj`
+    }
+};
+obj.sayHello(); // Output: "Rafa"
+
+Atau, jika Anda tetap ingin menggunakan arrow function, Anda bisa menggunakan closure untuk mengakses properti objek:
+javascript
+Copy
+
+const obj = {
+    nama: "Rafa",
+    sayHello: function() {
+        const nama = this.nama; // Simpan `this.nama` dalam variabel lokal
+        return () => {
+            console.log(nama); // Gunakan variabel lokal
+        };
+    }
+};
+const hello = obj.sayHello();
+hello(); // Output: "Rafa"
+
+Kesimpulan
+
+    Arrow function tidak memiliki this sendiri.
+
+    this di dalam arrow function akan merujuk ke this dari lingkup di mana arrow function didefinisikan (lexical scoping).
+
+    Dalam contoh Anda, arrow function sayHello didefinisikan di lingkup global, sehingga this merujuk ke window.
+
+    Karena window tidak memiliki properti nama, maka this.nama menghasilkan undefined.
+
+    Jika Anda ingin this merujuk ke objek obj, gunakan regular function atau closure. -->
 </body>
 </html>

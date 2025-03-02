@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let coba = "rafakhadafi@gmail.com";
+        let text = "Hello world, welcome to the universe.";
+        let result = text.match(/e/g) // .length; // Output: 6
+        console.log(result); // Output: ["world"]
+
+        console.log("==========")
+
+        let text2 = "Umur saya 25 tahun dan berat badan 70 kg.";
+        let result2 = text2.match(/\d+/g);
+        console.log(result2); // Output: ["25", "70"]
+
+        console.log("==========")
+
+        let text3 = "Email saya adalah rafakhadafi@email.com.";
+        let result3 = text3.match(/[\w\.-]+@[\w\.-]+/g);
+        console.log(result3); // Output: ["rafakhadafi@email.com"]
+
+        // [\w\.-]+: Mencocokkan satu atau lebih karakter kata, titik (.), atau tanda hubung (-).
+        // @: Mencocokkan simbol @.
+        // [\w\.-]+: Mencocokkan domain setelah @.
+
+        // nih penjelasannya
+    //     [\w\.-]+
+    // [ dan ]: Menunjukkan bracket yang digunakan untuk mencocokkan salah satu karakter di dalamnya.
+    // \w: Mencocokkan karakter kata (huruf, angka, atau underscore _).
+    //     Contoh: a, b, 1, 2, _.
+    // \.: Mencocokkan **titik (.)` secara literal.
+    //     Tanda \ adalah escape character untuk menganggap titik sebagai karakter biasa, bukan metakarakter regex.
+    // -: Mencocokkan tanda hubung (-) secara literal.
+    // +: Mencocokkan satu atau lebih karakter yang sesuai dengan pola di dalam bracket.
+
+    //     Kenapa Tulisan "Email saya adalah" Tidak Ikut Terbawa?
+    // Regex /[\w\.-]+@[\w\.-]+/g hanya mencari pola yang sesuai dengan format email, yaitu:
+    //     Satu atau lebih karakter (huruf, angka, titik, atau tanda hubung) diikuti oleh @, lalu diikuti lagi oleh satu atau lebih karakter (huruf, angka, titik, atau tanda hubung).
+    // Tulisan "Email saya adalah" tidak sesuai dengan pola ini, karena:
+    //     Tidak ada simbol @.
+    //     Terdapat spasi dan karakter lain yang tidak termasuk dalam pola [\w\.-]+.
+    // Oleh karena itu, regex hanya mengambil bagian yang sesuai dengan pola email, yaitu "contoh@email.com".
+
+        console.log("==========")
+        // contoh lagi
+        let date = "2023-10-05";
+        let result4 = /^\d{4}-\d{2}-\d{2}$/.test(date);
+        // let result4 = /\d{4}-\d{2}-\d{2}/.test(date);
+        console.log(result4); // Output: true
+        
+        console.log("==========")
+        let kata5 = "Apel, anggur, pisang, dan alpukat.";
+        let result5 = kata5.match(/\b[aA]\w+/g)
+        console.log(result5); // Output:  [ "Apel", "anggur", "alpukat" ]
+
+
+        console.log("==========")
+        let kata6 = "siti, api, jamal, kiwi, dan joko";
+        let result6 = kata6.match(/\w+[iI]\b/g)
+        console.log(result6); // Output:  
+        
+        console.log("==========");
+        let kata7 = "siputriti, apputrii, jamaputril, kiwputrii, daputrin jokputrio";
+        let result7 = kata7.match(/putri/g)
+        console.log(result7); // Output:  Array(6) [ "putri", "putri", "putri", "putri", "putri", "putri" ]
+        
+
+    </script>
+</body>
+</html>

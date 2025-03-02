@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li class="nama">rafa</li>
+        <li class="nama">jamal</li>
+        <li class="nama">udin</li>
+    </ul>
+    <script>
+
+        // jadi kalo kamu mau looping property dari objek maka pakenya for in , kalo kamu mau mengulang isi array dan itereble objek yang lain maka bisa pake for of
+
+
+
+
+
+        // for in dan for of
+        // 1. for in itu untuk mengambil key dari sebuah objek, adalah hanya untuk enumereble yang dimaksud enumereble adalah property dari objek yang bisa dihitung, seperti array, string, map, set, arguments, nodeList(melakukan querry pada dom), user-defined-itereble(itereble yg dibuat sendiri) dan lainnya.
+
+        const mhs3 = {
+            nama:"jamal",
+            umur:20,
+            alamat:"solo"
+        }
+
+        // for (const m of mhs3){
+        //     console.log(m);
+        // } ini gabisa karena mhs3 bukan array atau string atau map atau set atau arguments atau nodeList atau user-defined-it, atau bukan bagian dari itereble objek
+        // makanya kita pake in
+        for ( const m in mhs3){
+            console.log(m)
+        }
+
+        console.log("============")
+        for ( const m in mhs3){
+            console.log(mhs3[m])
+        }
+console.log("============")
+
+
+
+        // 2. for of itu untuk mengambil value dari sebuah objek, adalah sebuah loop yang digunakan untuk mengulang elemen dari objek yang itereble atau bisa diulang seperti array, string, map, set, arguments, nodeList(melakukan querry pada dom), user-defined-itereble(itereble yg dibuat sendiri) dan lainnya.
+
+        // 1.for of array
+        const mhs = ["udin", "muhaimin", "jamal"];
+        // bisa pake for biasa, atau forEach
+
+        // ini karena array ini salah satu dari itereble objek maka kita bisa pake for of
+
+        for (const m of mhs){
+            // jadi m itu di anggap sebagai setiap elemen atau value dari array mhs
+            console.log(m);
+        }
+        console.log("================")
+        // 2 for of string
+        // nah kalo pake for of kita bisa loop srtring, namun forEach tidak bisa karena khusus untuk array saja
+        let str = "jamal";
+        for (const s of str){
+            console.log(s);
+        }
+        // tapi kalo di foreach itu kan parameter keduanya adalah sebagai indexnya, tapi kalo for of itu tidak mempunyai index, jadi hanya value saja, tapi bisa pake method entries
+        console.log("================")
+        // 3. for of pake index bisa pake entries
+        // for (const m of mhs.entries()){
+        //     console.log(`${m} adalah mahasiswa ke-${i + 1}`);
+        // }
+
+        // nah kita destructio saja jadi tangkep index dan juga elemennya
+        for (const [i, m] of mhs.entries()){
+            console.log(`${m} adalah mahasiswa ke-${i + 1}`);
+        }
+        
+        console.log("================")
+
+        // 4.nodeList
+        const liNama = document.querySelectorAll(".nama") // jadi ngambil semua value dari elemen apapun yang mempunyai class .nama, dan nanti kalo pake querrySelectorAll biasanya akan menjadi array atau nodeList karena mengambil banyak value sekaligus
+
+        // nodeList = sebuah array yang berisi banyak data yang diambil dari querrySelectorAll
+        
+        // ini kita bisa pake forEach buat ngambil 
+        // liNama.forEach(n => console.log(n.textContent))
+
+        // ini kita pake for of
+        for( const n of liNama){
+            console.log(n.innerHTML)
+        }
+
+        console.log("================")
+        // bisa untuk arguments
+        function tes(){
+            // return arguments.reduce((a, i) => a + i), ini ga bisa karena argumnet itu bukan array, pake forEach juga ga bisa
+
+            // return Array.from(arguments).reduce((a, i) => a + i), ini bisa karena kita ubah dulu argumentsnya menjadi array
+
+            // atau bisa pake for of
+            let jumlah = 0;
+            for (let i of arguments){
+                jumlah += i;
+            }
+            return jumlah
+        }
+        console.log(tes(3,4,5,6,4,3,2,4,4))
+
+    </script>
+</body>
+</html>

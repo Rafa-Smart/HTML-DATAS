@@ -6,7 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    
     <h3>My Videos</h3>
     <ul>
       <li data-duration="15:27">Teknik Pomodoro</li>
@@ -31,68 +30,75 @@
         <p>Total Durasi : <span class="total-durasi"></span></p>
       </li>
     </ol>
+    <button id="hasil">Lihat Hasil</button>
   
   <!-- jadi caranya itu kita pilih dulu mana yang video yang bagian playlist js, lalu di ambil durasi masing masing videonya dan jumlahkan hasil durasi semua videonya -->
 
     <script>
+
+      // memanggil ketika button di klik
+      const hasil = document.getElementById("hasil");
+      hasil.addEventListener("click",function(){
+
+        
         // 1. ambil semua elemen video
         // jadi ini itu maksudnya berati mengambih seluruh tag yang mempunyai atribut data duration nya
-
-
+        
+        
         // karena ini masih nodeList, maka ubah dulu menjadi array. caranya pake array.from, jadi maksudnya kita mengubah ini menjadi array
         const videos = Array.from(document.querySelectorAll("[data-duration]"))
+        
 
-
-
-
+        
+        
         // 2. pilih hanya yang js lanjutan
-
+        
         // maksud dari includes itu maksudnya adalah terdapat apa didalamnya
         let jsLanjutan = videos.filter(video => video.textContent.includes("JAVASCRIPT LANJUTAN"))
 
-
+        
         // ambil durasi masing masing videonya
         // jadi di js itu ada data set untuk ngambil atribut
-
+        
         // titik ini maksudnya masih lanjut dari yang atas ya
-
+        
         // jadi ini itu maksudnya adalah kita mengunakan dataset lalu mengambil atribut bernama duration
-            .map(item => item.dataset.duration)
-            // output = Array(8) [ "11:18", "21:40", "12:10", "20:43", "26:38", "17:33", "10:39", "17:31" ]
+        .map(item => item.dataset.duration)
+        // output = Array(8) [ "11:18", "21:40", "12:10", "20:43", "26:38", "17:33", "10:39", "17:31" ]
 
-
-
+        
+        
         // 3. ubah durasi menjadi float, lalu ubah menit menjai detik
         // misal 10:50 berati 10 menit dikali 60 detik lalu ditambah 50 detik
-
+        
         // berati kita pecah dulu mneggunakan split karena ingin menjadi arraykan = [10,50]
         .map(waktu => {
-            const dahSplit = waktu.split(":")
-            return parseFloat(dahSplit[0] * 60) + parseFloat(dahSplit[1])
+          const dahSplit = waktu.split(":")
+          return parseFloat(dahSplit[0] * 60) + parseFloat(dahSplit[1])
         })
-
+        
         // ini harus di parse float dulu karena kalo ga maka
         // karena artinya kita menambahkan dua string bukan mengoprasikannya
         // output = Array(8) [ "66018", "126040", "72010", "120043", "156038", "102033", "60039", "102031" ]
-
+        
         // PENJELASAN
         // jadi sebenernya itu gini kita punya array parentnya yan gisinya itu adalah array dari durasi video, nah dibagian ini kita ngambil array dari durasi video lalu index ke 0 nya kita kali 60 dan ditambah index ke 1 nya.
 
 
-
+        
         // 4. jumlahkan semua detiknya
             .reduce((total, detik) => total + detik, 0);
-
-
-        // 5. ubah formatnya menjadi jam, menit, detik
+            
+            
+            // 5. ubah formatnya menjadi jam, menit, detik
             // ini kita tidak bisa chaining lagi jadi atu atu aja
 
             const jam = Math.floor(jsLanjutan / 3600)
-
+            
             // floor = bulatkan kebawah
             // sail/langit langit = bulatkan ke atas
             // round = bulatkan ke dekatnya
-
+            
             // jsLanjutan = 8000 yang tadi di total yang ini 
             // jsLanjutan
             // 8292 
@@ -107,27 +113,28 @@
             // ini kondisi jslanjutan sekarang 1092
             // ini menitnya yang udah dikali 60 = 1080
             // ini mau ubah dulu detik
-
-            const detik = jsLanjutan - menit * 60
-
-            // maka hasilnya = 1092 - 1080
-
             
-        // 6. ngambil jumlah video
-        const jumlahVideo = videos.filter(video => video.textContent.includes("JAVASCRIPT LANJUTAN")).length
-
-
-        // 7. simpan di dom
-
-        const paragrafDurasi = document.querySelector(".total-durasi")
-
+            const detik = jsLanjutan - menit * 60
+            
+            // maka hasilnya = 1092 - 1080
+            
+            
+            // 6. ngambil jumlah video
+            const jumlahVideo = videos.filter(video => video.textContent.includes("JAVASCRIPT LANJUTAN")).length
+            
+            
+            // 7. simpan di dom
+            
+            const paragrafDurasi = document.querySelector(".total-durasi")
+            
         paragrafDurasi.textContent = `${jam} jam ${menit} menit ${detik} detik`
 
         const paragrafJumlahVideo = document.querySelector(".jumlah-video")
         
         paragrafJumlahVideo.textContent = `${jumlahVideo} video.` 
-
-    </script>
-
-  </body>
-</html>
+        
+      })
+        </script>
+        
+        </body>
+        </html>

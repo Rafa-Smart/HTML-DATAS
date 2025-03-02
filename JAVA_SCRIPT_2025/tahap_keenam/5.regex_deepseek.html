@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //         1. Modifier (Pengubah)
+
+        // Modifier adalah tanda yang digunakan untuk mengubah cara pencarian regex dilakukan. Berikut adalah beberapa modifier yang umum digunakan:
+
+        //     /g (Global Match):
+
+        //         Mencari semua kecocokan dalam string, bukan hanya yang pertama.
+
+        //         Contoh: "hello hello".match(/hello/g) akan mengembalikan ["hello", "hello"].
+
+        //     /i (Case-Insensitive):
+
+        //         Mencari tanpa memperhatikan huruf besar atau kecil.
+
+        //         Contoh: "Hello".match(/hello/i) akan mengembalikan ["Hello"].
+
+        //     /m (Multiline):
+
+        //         Mencari di setiap baris secara terpisah (jika string memiliki banyak baris).
+
+        //         Contoh: "hello\nworld".match(/^w/m) akan mengembalikan ["w"] karena mencari di awal baris kedua.
+
+        // 2. Brackets (Kurung Siku)
+
+        // Brackets digunakan untuk mencocokkan karakter tertentu dalam sebuah string.
+
+        //     [abc]:
+
+        //         Mencari salah satu karakter di dalam kurung siku.
+
+        //         Contoh: "apple".match(/[aeiou]/g) akan mengembalikan ["a", "e"].
+
+        //     [^abc]:
+
+        //         Mencari karakter yang tidak ada di dalam kurung siku.
+
+        //         Contoh: "apple".match(/[^aeiou]/g) akan mengembalikan ["p", "p", "l"].
+
+        //     [0-9]:
+
+        //         Mencari angka dari 0 hingga 9.
+
+        //         Contoh: "a1b2".match(/[0-9]/g) akan mengembalikan ["1", "2"].
+
+        //     [^0-9]:
+
+        //         Mencari karakter yang bukan angka.
+
+        //         Contoh: "a1b2".match(/[^0-9]/g) akan mengembalikan ["a", "b"].
+
+        //     (x|y):
+
+        //         Mencari salah satu dari alternatif yang diberikan.
+
+        //         Contoh: "apple banana".match(/apple|banana/g) akan mengembalikan ["apple", "banana"].
+
+        // 3. Metacharacters (Karakter Khusus)
+
+        // Metacharacters adalah karakter dengan arti khusus dalam regex.
+
+        //     .:
+
+        //         Mencocokkan satu karakter apa pun, kecuali baris baru (\n).
+
+        //         Contoh: "cat".match(/c.t/) akan mengembalikan ["cat"].
+
+        //     \w:
+
+        //         Mencocokkan karakter kata (huruf, angka, atau underscore _).
+
+        //         Contoh: "hello_123".match(/\w+/g) akan mengembalikan ["hello_123"].
+
+        //     \W:
+
+        //         Mencocokkan bukan karakter kata (spasi, simbol, dll.).
+
+        //         Contoh: "hello!".match(/\W/g) akan mengembalikan ["!"].
+
+        //     \d:
+
+        //         Mencocokkan angka (digit).
+
+        //         Contoh: "a1b2".match(/\d/g) akan mengembalikan ["1", "2"].
+
+        //     \D:
+
+        //         Mencocokkan bukan angka.
+
+        //         Contoh: "a1b2".match(/\D/g) akan mengembalikan ["a", "b"].
+
+        //     \s:
+
+        //         Mencocokkan spasi (spasi, tab, baris baru).
+
+        //         Contoh: "hello world".match(/\s/g) akan mengembalikan [" "].
+
+        //     \S:
+
+        //         Mencocokkan bukan spasi.
+
+        //         Contoh: "hello world".match(/\S+/g) akan mengembalikan ["hello", "world"].
+
+        //     \b:
+
+        //         Mencocokkan batas kata (awal atau akhir kata).
+
+        //         Contoh: "hello world".match(/\bhello\b/g) akan mengembalikan ["hello"].
+
+        //     \B:
+
+        //         Mencocokkan bukan batas kata.
+
+        //         Contoh: "hello".match(/\Bhell\B/g) akan mengembalikan null karena tidak ada batas kata di tengah.
+
+        //     \n:
+
+        //         Mencocokkan baris baru.
+
+        //         Contoh: "hello\nworld".match(/\n/g) akan mengembalikan ["\n"].
+
+        //     \t:
+
+        //         Mencocokkan tab.
+
+        //         Contoh: "hello\tworld".match(/\t/g) akan mengembalikan ["\t"].
+
+        // 4. Quantifier (Pembilang)
+
+        // Quantifier digunakan untuk menentukan berapa kali suatu pola harus muncul.
+
+        //     n+:
+
+        //         Mencocokkan satu atau lebih karakter n.
+
+        //         Contoh: "aaa".match(/a+/g) akan mengembalikan ["aaa"].
+
+        //     n*:
+
+        //         Mencocokkan nol atau lebih karakter n.
+
+        //         Contoh: "aaab".match(/a*/g) akan mengembalikan ["aaa", ""].
+
+        //     n?:
+
+        //         Mencocokkan nol atau satu karakter n.
+
+        //         Contoh: "aaab".match(/a?/g) akan mengembalikan ["a", "a", "a", "", ""].
+
+        //     n{X}:
+
+        //         Mencocokkan tepat X kali karakter n.
+
+        //         Contoh: "aaa".match(/a{2}/g) akan mengembalikan ["aa"].
+
+        //     n{X,Y}:
+
+        //         Mencocokkan antara X hingga Y kali karakter n.
+
+        //         Contoh: "aaa".match(/a{1,2}/g) akan mengembalikan ["aa", "a"].
+
+        //     n{X,}:
+
+        //         Mencocokkan minimal X kali karakter n.
+
+        //         Contoh: "aaa".match(/a{2,}/g) akan mengembalikan ["aaa"].
+
+        //     n$:
+
+        //         Mencocokkan karakter n di akhir string.
+
+        //         Contoh: "hello".match(/o$/) akan mengembalikan ["o"].
+
+        //     ^n:
+
+        //         Mencocokkan karakter n di awal string.
+
+        //         Contoh: "hello".match(/^h/) akan mengembalikan ["h"].
+
+        //     ?=n:
+
+        //         Mencocokkan string yang diikuti oleh n.
+
+        //         Contoh: "hello".match(/l(?=o)/) akan mengembalikan ["l"].
+
+        //     ?!n:
+
+        //         Mencocokkan string yang tidak diikuti oleh n.
+
+        //         Contoh: "hello".match(/l(?!o)/) akan mengembalikan null.
+
+        // 5. Properti Objek RegExp
+
+        // Properti ini memberikan informasi tentang regex yang dibuat.
+
+        //     constructor:
+
+        //         Mengembalikan fungsi yang membuat prototipe objek RegExp.
+
+        //         Contoh: /abc/.constructor akan mengembalikan RegExp.
+
+        //     global:
+
+        //         Mengecek apakah modifier g digunakan.
+
+        //         Contoh: /abc/g.global akan mengembalikan true.
+
+        //     ignoreCase:
+
+        //         Mengecek apakah modifier i digunakan.
+
+        //         Contoh: /abc/i.ignoreCase akan mengembalikan true.
+
+        //     multiline:
+
+        //         Mengecek apakah modifier m digunakan.
+
+        //         Contoh: /abc/m.multiline akan mengembalikan true.
+
+        //     source:
+
+        //         Mengembalikan teks pola regex.
+
+        //         Contoh: /abc/.source akan mengembalikan "abc".
+
+        // 6. Metode Objek RegExp
+
+        // Metode ini digunakan untuk bekerja dengan regex.
+
+        //     exec():
+
+        //         Mencari kecocokan dalam string dan mengembalikan hasilnya.
+
+        //         Contoh: /a/.exec("abc") akan mengembalikan ["a"].
+
+        //     test():
+
+        //         Mengecek apakah string cocok dengan pola regex.
+
+        //         Contoh: /a/.test("abc") akan mengembalikan true.
+
+        //     toString():
+
+        //         Mengembalikan regex dalam bentuk string.
+
+        //         Contoh: /abc/.toString() akan mengembalikan "/abc/".
+
+        // Kesimpulan
+
+        //     Modifier mengubah cara pencarian regex.
+
+        //     Brackets digunakan untuk mencocokkan karakter tertentu.
+
+        //     Metacharacters adalah karakter dengan arti khusus.
+
+        //     Quantifier menentukan berapa kali suatu pola harus muncul.
+
+        //     Properti dan Metode RegExp membantu mengelola dan menggunakan regex.
+    </script>
+</body>
+</html>

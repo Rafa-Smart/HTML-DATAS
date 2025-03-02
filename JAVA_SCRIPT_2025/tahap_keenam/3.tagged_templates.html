@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tes {
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // tagged templates ini adalah bentuk yang lebih komplex dari template literals, yang memungkinkan kita untuk membaca template literals melalui sebuah function
+
+
+        // ini biasa
+        const nama = "rafa khadafi";
+        const umur = 20;
+        const str = `halo saya ${nama}, saya berumur ${umur} tahun. `
+        
+        
+        // ini tag template
+
+        function coba(strings, nama,umur,email){
+            // return nama  // rafa khadafi
+            // return umur // 20
+            return strings //Array(3) [ "halo saya ", ", saya berumur ", " tahun. " ]
+        }
+
+        const str2 = coba`halo saya ${nama}, saya berumur ${umur} tahun. `
+        console.log(str2) 
+        // Array(3) [ "halo saya ", ", saya berumur ", " tahun. " ]
+
+        // berati ketika kita jalankan template literals ini maka tag templatenya akan memecah tiap tiap string yang ada didalam nya, dipisakan oleh expresion, dan espresion nya masuk kemana ?, jadi dia masuk sebagai parameter berikutnya di dalam fungsi coba ini
+
+
+
+        // nah terkdang kita bisa tidak mengetahui ada berapa expresion yang ada didalam telmpale literalsnya, maka ada yang namanya rest parameter, yaitu ...strings, ini adalah sebuah parameter/ expresion yang ada didalam template literalsnya, yang bisa kita ambil secara dinamis, dan kita masukkan ke dalam sebuah array, dan cara menggunakannya adalah
+
+        function coba2(strings, ...value){
+            return value
+        }
+
+        // nah value ini bisa bebas, dan nantinya value ini akan menjadi sebuah array yang isinya adalah seluruh expresion yang ada di template literalsnya.
+
+        const str3 = coba2`woyy${nama}, gw berumur ${umur} tahun. `
+        console.log("nih yang value",str3) 
+
+
+        // jadi strings ini untuk mengambil stringnya, yang dipisahkan oleh expresion, dan value ini untuk mengambil expresionnya, yang ada didalam template literalsnya
+
+
+        console.log("============")
+        function coba5(strings, ...values){
+
+            // ini pake cara biasa
+
+            // let isi_str = "";
+            // strings.forEach((str, i) => {
+            //     isi_str += `${str} ${values[i] || ''}`
+            //     // itu ada operator || karena agar ketika jika valuenya ada maka cetak dan jika tidak ada maka cetak string kosong agar tidak muncul undefined
+
+            //     // ini kalo kita tidak menggunakan operator || maka akan muncul undefined 
+            //     // woyy rafa khadafi, gw berumur  20 tahun. ini coba lagih.  undefined
+            // });
+            // return isi_str;
+
+
+            // ini pake reduce
+            // return strings.reduce((hasil, elemen, index) => `${hasil} ${elemen} ${values[index] || ""}`
+            // ,"")
+
+
+            return strings.reduce((hasil, elemen, index) => `${hasil}${elemen} ${values[index] || ""}`, "")
+
+            // disini kita kasih nilai awalnya itu string kosong bukan 0 karena bukan hitung angka
+
+        }
+
+
+        const str5 = coba5`woyy${nama}, gw berumur ${umur} tahun. ini coba lagih. `
+
+        console.log(str5)
+
+        /* begini alurnya */
+        /* Proses dalam Fungsi coba5:
+
+    Ketika fungsi coba5 dipanggil dengan template literal, JavaScript akan memecah template literal menjadi dua bagian:
+
+        strings: Array yang berisi bagian-bagian string dari template literal.
+        javascript
+        Copy
+
+        strings = ["woyy", ", gw berumur ", " tahun. ini coba lagih. "];
+
+        values: Array yang berisi nilai dari ekspresi ${...}.
+        javascript
+        Copy
+
+        values = ["John", 25];
+
+    Proses reduce:
+
+        Iterasi 1:
+
+            hasil = "" (nilai awal).
+
+            elemen = "woyy".
+
+            values[index] = "John".
+
+            Hasil: "" + "woyy" + "John" = "woyy John".
+
+        Iterasi 2:
+
+            hasil = "woyy John".
+
+            elemen = ", gw berumur ".
+
+            values[index] = 25.
+
+            Hasil: "woyy John" + ", gw berumur " + "25" = "woyy John, gw berumur 25".
+
+        Iterasi 3:
+
+            hasil = "woyy John, gw berumur 25".
+
+            elemen = " tahun. ini coba lagih. ".
+
+            values[index] tidak ada (undefined), jadi diganti dengan "".
+
+            Hasil: "woyy John, gw berumur 25" + " tahun. ini coba lagih. " + "" = "woyy John, gw berumur 25 tahun. ini coba lagih. " */
+
+
+
+
+
+
+
+            // contoh implementasinya
+            let email = "rafakhadafi1205@gmail.com";
+
+
+            function high(strings, ...value) {
+                return strings.reduce((hasil, elemen, index) => `${hasil}${elemen} ${value[index] || ""}`, "")
+            }
+
+            const highlight = high`halo semua perkenalkan nama saya <span class="tes">${nama}</span> dan umur saya <span class="tes">${umur}</span> tahun, dan email saya <span class="tes">${email}</span>`;
+
+            document.body.innerHTML = highlight;
+
+
+            // contoh lagi
+            // 1. Definisikan tag function
+            function formatPesan(strings, ...values) {
+            // strings: Array berisi bagian-bagian string statis
+            // values: Array berisi nilai dari ekspresi di dalam ${...}
+
+            // let hasil = "";
+
+            // // 2. Loop melalui setiap bagian string dan nilai ekspresi
+            // strings.forEach((str, i) => {
+            //     hasil += str; // Tambahkan bagian string statis
+
+            //     if (i < values.length) {
+            //     // 3. Format nilai ekspresi: ubah huruf pertama menjadi kapital
+            //     const nilai = values[i];
+            //     const nilaiTerformat = nilai.charAt(0).toUpperCase() + nilai.slice(1);
+            //     hasil += nilaiTerformat; // Tambahkan nilai yang sudah diformat
+            //     }
+            // });
+
+            // // 4. Tambahkan tanda baca di akhir kalimat
+            // hasil = hasil.trim() + ".";
+
+            // // 5. Kembalikan hasil yang sudah diproses
+            // return hasil;
+
+            let hasil = "";
+            strings.forEach((string, index) => {
+                hasil += string;
+                if (index < values.length){
+                    const nilai = values[index];
+                    const sudahBesar = nilai.charAt(0).toUpperCase() 
+                    + nilai.slice(1)
+                    hasil += sudahBesar;
+                }
+            });
+            hasil = hasil.trim() + ".";
+            return hasil;
+            }
+
+
+            // 6. Contoh penggunaan
+            const nama2 = "john";
+            const pekerjaan = "developer";
+            const kota = "jakarta";
+
+            const pesan = formatPesan`Halo, nama saya ${nama2}, saya seorang ${pekerjaan}, dan saya tinggal di ${kota}`;
+            console.log(pesan);
+
+
+
+
+
+            console.log("=========")
+
+
+            // contoh lagi
+            // Fungsi untuk membersihkan input dari karakter yang berpotensi menyebabkan SQL Injection
+            function sanitizeSQLInput(input) {
+                // Menghapus karakter khusus SQL seperti kutip tunggal, kutip ganda, dan backslash
+                return input.replace(/'/g, "''")
+                            .replace(/"/g, '""')
+                            .replace(/\\/g, "\\\\");
+                            // /'/g: Ini adalah ekspresi reguler (regex) yang mencari semua tanda kutip tunggal (') dalam string. Tanda / di awal dan akhir adalah penanda bahwa ini adalah regex, dan g (global) berarti mencari semua kemunculan, bukan hanya yang pertama.
+
+                            // "''": Ini adalah teks pengganti yang akan menggantikan setiap tanda kutip tunggal (') yang ditemukan. Jadi, setiap ' akan diganti dengan ''.
+
+                            // /\\/g: Ini adalah ekspresi reguler yang mencari semua backslash (\) dalam string. Karena backslash adalah karakter khusus dalam regex, kita perlu meng-escape-nya dengan menambahkan backslash lain (\\).
+                                                       
+                            // "\\\\": Ini adalah teks pengganti yang akan menggantikan setiap backslash (\) yang ditemukan. Karena backslash juga karakter khusus dalam string, kita perlu meng-escape-nya dua kali (\\\\).
+
+            }
+
+            // Contoh penggunaan
+            const userInputSQL = `'; DROP TABLE users; --`;
+            const sanitizedSQLInput = sanitizeSQLInput(userInputSQL);
+
+            console.log("Input Pengguna (SQL):", userInputSQL);
+            console.log("Input yang Sudah Disanitasi (SQL):", sanitizedSQLInput);
+
+
+    </script>
+</body>
+</html>

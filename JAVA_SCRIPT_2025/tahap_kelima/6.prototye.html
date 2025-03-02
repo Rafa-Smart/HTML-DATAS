@@ -10,7 +10,7 @@
 
             // MOHON UNTUK MEMBACA SEMUA KOMEN SAYA INI AGAR PAHAM
 
-        // jadi prototype ini fungsinya adalah membuat agar objek templatenya dapat mewariskan seluruh proprtynya kedalam objek baru
+        // jadi prototype ini fungsinya adalah membuat agar objek templatenya dapat mewariskan seluruh propertynya kedalam objek baru dibuat
 
 
         // nah ini kan biasa ya
@@ -39,7 +39,11 @@
         }
 
         // nah bagaimana cara kita menambahkan methodnya 
-        // nah makan yang nempel dgn prototype itu adalah property atau method (karena memiliki fungsi) (dan ini baru) makan yang ada pada objek mahasiswa dan dapat di turunkan karena menggunakan prototype, dan property makan ini mempunyai sebuah value yaitu fungsi
+        // nah makan yang nempel dgn prototype itu adalah property atau method (karena memiliki fungsi) (dan ini baru) makan yang ada pada objek mahasiswa dan dapat di turunkan karena menggunakan prototype, dan property makan ini mempunyai sebuah value yaitu fungsi,
+
+        // NIH PENTING NIH........
+
+        // kenapa pake Mahasiswa.prototype ? karena di awal kita sudah menambahkan Object.create(Mahasiswa.protoytpe), yang secara tidak langsung berati sudah ada sebuah objek lain yang namanya Mahasiswa.prototype maka kita tinggal menambahkan saja methodnya di objek prototype tersebut
 
         Mahasiswa.prototype.makan = function(porsi){
             this.energi += porsi
@@ -145,6 +149,16 @@ Jadi, untuk menjawab pertanyaan Anda, pernyataan Anda sebagian besar benar, namu
         // jadi kalo misal kamu punya let n = 1
         // maka kamu sudah membuat objek baru bernama n dengan parentnya adalah Number.prototype, dan kamu bisa mengakses semua method yang ada didalam objek Number.prototype
 
+
+
+
+        // contoh lagi
+        console.log("=======")
+        // nah sebenarnya kita bisa membuat array enggunakan metode ini
+        let coba = new Array(2,3,4,5,6,4,2,3,4,)
+        console.log(coba)
+
+        
     </script>
             <!-- 
              Prototype adalah objek yang digunakan sebagai template atau contoh untuk membuat objek lain. Dalam JavaScript, setiap objek memiliki properti prototype yang menunjuk ke objek lain. Objek ini disebut sebagai "prototype" dari objek yang pertama.

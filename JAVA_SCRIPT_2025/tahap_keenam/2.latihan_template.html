@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan</title>
+</head>
+<body>
+    <!-- html Framents : -->
+
+
+
+
+    <script>
+        // nanti cara pakenya kamu tinggal buka aja yang bagian 1,2,3 seterusnya buat cari tau outputnya
+
+        // BAGIAN 1
+
+        // const Mhs1 = {
+        //     nama: "rafa",
+        //     umur: 20,
+        //     alamat: "solo",
+        //     nrp:234567890
+        // }
+
+        // const elemen = `<div class="mhs">
+        //                     <h2>${Mhs1.nama}</h2>
+        //                     <span class="nrp">${Mhs1.nrp}</span>
+        //                 </div>`;
+
+        // // jadi kita mnegambil documentnnya terus kita ambil bodynya lalu kita sisipkan inner html yang berisi variable elemen yang tadi sudah diisi
+
+
+        // BAGIAN 2
+        // const Mhs2 = [
+        //     {
+        //         nama:"jamal",
+        //         nrp:98765432
+        //     },
+        //     {
+        //         nama:"udin",
+        //         nrp:9872345
+        //     },
+        //     {
+        //         nama:"muhaimin",
+        //         nrp:98654356
+        //     }
+        // ]
+
+        // // melakukan loppingan
+        // const elemen = `<div class="mhs">
+        //                     ${Mhs2.map(e => 
+        //                         `<ul>
+        //                             <li>
+        //                                 ${e.nama}
+        //                                 ${e.nrp}
+        //                             </li>
+        //                         </ul>`
+        //                     ).join("")}
+        //                 </div>`
+
+                        
+
+
+    // BAGIAN 3
+    // const lagu = [
+    // {
+    //     judul:"tetap dalam ",
+    //     penyanyi:"isyana sarasvati",
+    //     umur:22
+    // },
+    // {
+    //     judul:"tetap jiwa",
+    //     penyanyi:"jamla",
+    //     umur:10
+    // },
+    // {
+    //     judul:"tetap dalam jiwa",
+    //     penyanyi:"udin",
+    //     umur:55
+    // }
+    // ]
+
+    // const elemen = `<div class="lagu">
+    //                 ${lagu.map(x => `
+    //                     <ul>
+    //                         <li>${x.judul}</li>
+    //                         <li>${x.penyanyi}</li>
+    //                         <li>${x.umur > 15 ? `${x.umur} : dewasa` : `${x.umur} : remaja`}</li>
+    //                     </ul>
+    //                     `)}
+    //                 </div>`
+
+
+
+
+
+
+
+
+    // BAGIAN 4 
+
+
+    // fungsi
+    // function cetakMata(mataKuliah){
+    //     return `
+    //         <ol>
+    //             ${mataKuliah.map(mk => `<li>${mk}</li>`).join("")}
+    //         </ol>
+    //     `
+    // }
+
+    //     const mahasiswa = {
+    //         nama:"rafa khadafi",
+    //         mataKuliah:["mtk","b.inggris","b.indo"]
+    // }
+
+    // const elemen =  `<div class="mhs">
+    //                     <h2>${mahasiswa.nama}</h2
+    //                     <h4>Mata Kuliah :</h4>
+    //                         ${cetakMata(mahasiswa.mataKuliah)}
+    //                 </div>`
+
+
+
+    // bagian 5
+
+    function Orang(nama, umur, cita, status) {
+    this.nama = nama;
+    this.umur = umur;
+    this.cita = cita;
+    this.status = status;
+    }
+
+    const siti = new Orang("siti", 20, "pilot", "manusia");
+    const jamal = new Orang("jamal", 15, "koki", "manusia");
+    const udin = new Orang("udin", 10, "penyanyi", "manusia");
+    const bukan = new Orang("kucing", 5, "tidak ada", "hewan");
+
+    const orangArray = [siti, jamal, udin, bukan];
+
+    const elemen = `
+    <div class="tes">
+        <h1>Daftar Orang</h1>
+        <h3>${orangArray.map(x => x.nama).join(', ')}</h3>
+        ${orangArray
+            .filter(x => x.status === "manusia")
+            .map(x => `
+                <ul>
+                    <li>${x.nama}</li>
+                    <li>${x.umur}</li>
+                    <li>${x.cita}</li>
+                    <li>${x.status}</li>
+                </ul>
+            `).join('')}
+    </div>
+    `;
+
+    document.body.innerHTML = elemen;
+    </script>
+
+    </div>
+</body>
+</html>

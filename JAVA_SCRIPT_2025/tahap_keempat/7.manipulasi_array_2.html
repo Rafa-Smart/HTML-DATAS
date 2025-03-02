@@ -87,6 +87,23 @@
         // bagaimana jika seperti ini ?
         array4.sort()
         console.log(`maka akan sperti ini jika tidak dikasih fungsi : ${array4} \njadi akan mengurutkan berdasarkan pada angka pertamanya, atau karakter pertamanya`)
+
+        console.log("==============")
+        // ini kalo ga pake fungsi sort
+        let arraycuy = [2, 3, 54, 6, 7, 8, 23, 4, 6, 67, 1, 21, 4];
+
+        for (let i = 0; i < arraycuy.length; i++) {
+            for (let j = 0; j < arraycuy.length - 1; j++) {
+                // Bandingkan dua nilai yang berdekatan
+                if (arraycuy[j] > arraycuy[j + 1]) {
+                    // Jika nilai di kiri lebih besar, tukar posisi
+                    let temp = arraycuy[j];
+                    arraycuy[j] = arraycuy[j + 1];
+                    arraycuy[j + 1] = temp;
+                }
+            }
+        }
+        console.log(arraycuy); // Output: [1, 2, 3, 4, 4, 6, 6, 7, 8, 21, 23, 54, 67]
         
         console.log("==============")
         
@@ -182,7 +199,7 @@
         let lagihh = [1,2,43,54,4,2,1,6,5,3,4,5]
         let hasil6 = lagihh.map(function(e){
             if(e>5){
-                return e *2
+                return e * 2
             }
         })
         console.log(hasil6)

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // regex itu adalah sebuah objek didalam js yang bisa digunakan untuk mencari sebuah pola tertentu dalam sebuah string
+        // cara membuat regex itu ada dua cara :
+        // 1. literal regex = menggunakan tanda / /
+                // ch : let regex1 = /abc/;
+                // ch : let regex2 = /abc/g; // g itu adalah global, yang berarti mencari semua kemunculan pola di dalam teks, bukan hanya yang pertama.
+                // ch : let regex3 = /abc/i; // i itu adalah case insensitive, yang berarti mencari pola tanpa memperdulikan huruf besar atau kecil.
+                // ch : let regex4 = /abc/gi; // g dan i bisa digabungkan.
+
+        // 2. menggunakan fungsi constructor = menggunakan fungsi RegExp()
+                // ch : let regex5 = new RegExp("abc");
+                // ch : let regex6 = new RegExp("abc", "g"); // g itu adalah global, yang berarti mencari semua kemunculan pola di dalam teks, bukan hanya yang pertama.
+                // ch : let regex7 = new RegExp("abc", "i"); // i itu adalah case insensitive, yang berarti mencari pola tanpa memperdulikan huruf besar atau kecil.
+                // ch : let regex8 = new RegExp("abc", "gi"); // g dan i bisa digabungkan.
+
+
+        // cara menggunakannya adalah dengan menggunakan method test() yang akan mengembalikan nilai true atau false
+        
+        // contoh
+        let kata = "halo dunia";
+        let pola = /dunia/;
+        console.log(pola.test(kata))
+        console.log("=======")
+        // // jadi maksudnya itu kita akan mencari pola yang sudah kita buat yaitu /dunia/ nah / ini berada di awal dan berada diakhir yang berfungsi untuk menandakan bahwa ini adalah pola regex, lalu pola ini akan mencari kata "dunia" di dalam string "halo dunia" dan akan mengembalikan nilai true karena kata "dunia" ada di dalam string "halo dunia" dan akan mnehasilkan false jika tidak ada (itulah fungsi test())
+
+        // // contoh berikutnya
+        // // 1. . (dot) = berfungsi untuk mencocokan satukarakter apapun kecuali \n
+        // let teks = "cat, bat, rat";
+        // let pola2 = /.at/g;
+        // console.log(teks.match(pola2)); 
+        // console.log("=======")
+        
+        // // jadi kita membuat pola regex di variable pola2, yang berisi pola /.at/g, nah / itu adalah tanda bahwa ini adalah sebuah pola regex,lalu .at itu berarti mencari satu karakter apapun kecuali \n yang didepannya terdapat kata at (apa saja), kemudian ada g,  Ini adalah flag (tanda) yang berarti "global", yaitu mencari semua kemunculan pola di dalam teks, bukan hanya yang pertama.
+
+
+        // // 2. ^ (caret) = berfungi untuk mencocokan awal string dengan pola regex
+
+        // let kata3 = "hai sayang";
+        // let pola3 = /^hai/g;
+        // console.log(pola3.test(kata3))
+        // console.log("=======")
+        
+        // // 3. $ (dollar) = berfungi untuk mencocokan di akhir string dengan pola regex
+        
+        // let kata4 = "hai sayang";
+        // let pola4 = /sayang$/g;
+        // console.log(pola4.test(kata4))
+        // console.log("=======")
+        
+        // // 4. [abc] = Mencocokkan satu karakter yang ada di dalam kurung siku.
+        
+        // let teks5 = "a, b, c, d";
+        // let pola5 = /[abc]/g;
+        // console.log(teks5.match(pola5)); // Output: ["a", "b", "c"]
+        // console.log("=======")
+        
+        
+        // // 5.[^abc] = Mencocokkan satu karakter yang tidak ada di dalam kurung siku.
+
+        // let teks6 = "a, b, c, d";
+        // let pola6 = /[^abc]/g;
+        // console.log(teks6.match(pola6)); // Output: [",", " ", ",", " ", ",", " ", "d"]
+        // console.log("=======")
+        
+        // // 6. [a-z] = Mencocokkan satu karakter dalam rentang tertentu. nah ini berati akan mencari karakter dalam kelompok a sampai z, dan berati kalo [^a-z] = mencari yang tidka termasuk kedalam karakter a sampai z, dan ini bersifat global berati buakn untuk yang pertama saja, tapi untuk semua kemunculan karakternya akan dicari
+        //     let teks7 = "a1b2c3";
+        //     let pola7 = /[a-z]/g;
+        //     console.log(teks7.match(pola7)); // Output: ["a", "b", "c"]
+        // console.log("=======")
+        
+        
+        // // 7. quantifier (*) = mencocokan 0 atau lebih kali pengulangan dari karakter sebelumnya, 0 atau lebih itu maksudnya karakter sebelum * boleh tidak muncul sama sekali atau bisa muncul berulang kali
+        // let teks8 = "caaat";
+        // let pola8 = /ca*t/;
+        // console.log(pola8.test(teks8)); // Output: true
+        // console.log("=======")
+        // // jadi cat boleh ct, caat, caaaat,caaat
+        
+        // // 8. + = Mencocokkan 1 atau lebih pengulangan karakter sebelumnya.
+        // let teks9 = "goooal";
+        // let pola9 = /go+al/;
+        // console.log(pola9.test(teks9)); // Output: true
+        // // jadi gool boleh gool, goool, goooool, gooooool, dll. tapi tidak boleh (gal) karena tidak bisa 0 tapi hanya bisa mencari 1, kalo mau yang dari 0 maka pake saja yang * quantifier
+        // // bisa juga
+        // // Pola (abc)+ akan mencocokkan abc, abcabc, abcabcabc, dll.
+        // console.log("=======")
+
+        
+        // // 9. ? = Mencocokkan 0 atau 1 pengulangan karakter sebelumnya.
+        // let teks10 = "tesss";
+        // let pola10 = /tes?/;
+        // console.log(pola10.test(teks10)); // output = true
+        // // jadi ini tuh mencari karakter sebelum ? yang boleh muncul 1 kali saja atau tidak muncul sama sekali
+        // console.log("=======")
+        
+        // // 10. {n} = Mencocokkan tepat n pengulangan karakter sebelumnya. jadi n ini bisa tepat misal kamu mau cari tesss yang s nya itu bener bener ngulang 3 kali maka bisa pake ini, jadi ini lebih spesifik
+        // let teks11 = "tesss";
+        // let pola11 = /tes{3}/;
+        // console.log(pola11.test(teks11)); // output = true
+        // console.log("=======")
+
+        // // 11. {n, } = Mencocokkan n atau lebih pengulangan karakter sebelumnya., jadi misal ada tes{2, } maka ini maksudnya itu tes nah s nya itu harus ss, sss, ssss, sssss sampai berapa aja, yang penitngnya itu awalnya harus 2, tapi bisa lebih dari 2
+        // let teks12 = "tesss";
+        // let pola12 = /tes{3,}/;
+        // console.log(pola12.test(teks12)); // output = true
+        // console.log("======= atas ini 12")
+        
+        // // 12. {n,m} = mencocokan n atau m pengulangan karakter sebeumnya
+        // let teks13 = "tesss";
+        // // let pola13 = /tes{6,7}/; // false
+        // let pola13 = /tes{1,3}/; // true
+        // console.log(pola13.test(teks13)); // output = true
+        // console.log("=======")
+
+
+        // //  \. mencocokkan tanda titik (.).
+        //     // \\ mencocokkan backslash (\).
+        //     // \d mencocokkan digit (sama dengan [0-9]).
+        //     // \w mencocokkan karakter word (huruf, angka, atau underscore _).
+        //     // \s mencocokkan whitespace (spasi, tab, newline).
+        
+
+
+
+
+
+        </script>
+</body>
+</html>

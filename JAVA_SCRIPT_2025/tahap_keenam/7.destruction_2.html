@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // destruction pada function
+        // 1. 
+        console.log("==============")
+        function penjumlahanPerkalian(a, b){
+            return [a + b, a * b];
+        }
+
+        // ini kalo ga pake destruction
+        let jumlah = penjumlahanPerkalian(2, 3)[0];
+        let kali = penjumlahanPerkalian(2, 3)[1];
+        console.log(jumlah); // 5
+        console.log(kali); // 6
+
+        let [a, b] = penjumlahanPerkalian(2, 3);
+        console.log(a); // 5
+        console.log(b); // 6
+
+        console.log("==============")
+        
+        // 2. return valuenya ada banyak
+        function kalkulasi(a, b){
+            return [a + b, a * b, a - b, a / b];
+        }
+        
+        const [jumlah1, kali1, kurang, bagi] = kalkulasi(2, 3);
+        console.log(jumlah1); // 5 dll
+        
+        
+        
+        console.log("==============")
+        // function kalkulasi(a, b){
+            //     return [a + b, a * b, a - b];
+        // }
+
+        // const [jumlah1, kali1, kurang, bagi] = kalkulasi(2, 3);
+        // console.log(bagi); // undefined
+        console.log("==============")
+        
+        
+        // function kalkulasi(a, b){
+            //     return [a + b, a * b, a - b];
+            // }
+            
+            // const [jumlah1, kali1, kurang, bagi = "tidak ada"] = kalkulasi(2, 3);
+            // console.log(bagi); //tidak ada
+            console.log("==============")
+            
+            // function kalkulasi(a, b){
+                //     return [a + b, a * b, a - b, a / b];
+                // }
+                
+                // const [jumlah1, kali1, kurang, bagi = "tidak ada"] = kalkulasi(2, 3);
+                // console.log(bagi); // 0.6666666666666666
+        console.log("==============")
+
+        // biar urutannya tidka berpengaruh maka kita bisa mereturn nya sebagai sebuah objek
+        function kalkulasi2(a, b){
+            return {
+                jumlah2: a + b,
+                kali2: a * b,
+                kurang2: a - b,
+                bagi2: a / b
+            }
+        }
+        
+        const {tambahc, kalic, bagic, kurangc} = kalkulasi2(2, 3);
+        console.log(kali1); // 6, jadi tetapi pake nama propertynya
+
+        console.log("==============")
+        // 3. destruction pada argumen
+
+        // sebenarnya bisa begini
+
+        const mhs1 = {
+            nama: "rafa",
+            umur: 20,
+            email: "rafakhadafi1205@gmail.com"
+        }
+
+        // function cetakMhs(nama, umur){
+        //     return console.log(`halo nama saya ${nama}, saya berumur ${umur} tahun.`)
+        // }
+        
+        // cetakMhs(mhs1.nama, mhs1.umur);
+        
+        // atau bisa juga pake cara yang seperti ini
+        // function cetakMhs(objek){
+        //     return console.log(`halo nama saya ${mhs1.nama}, saya berumur ${mhs1.umur} tahun.`)
+        // }
+        // cetakMhs(mhs1);
+        
+        // atau bisa juga pake destruction di argumennya, jadi kita pecah dulu di argumennya
+        // function cetakMhs({nama, umur}){
+        //     // ini tuh sama aja kayak gini {nama, umur} = mhs1;, tapi dulakukan di dalam parameter
+        //     return console.log(`halo nama saya ${nama}, saya berumur ${umur} tahun.`)
+        // }
+        // cetakMhs(mhs1);
+
+        // contoh lagi tapi leih kompleks, jadi destructionnya didalam destruction
+        const mhs2 = {
+            nama: "rafa",
+            umur: 20,
+            email: "rafakhadafi1205@gmail.com",
+            nilai: {
+                tugas: 80,
+                uts: 85,
+                uas: 90
+            }
+        }
+        function cetakMhs({nama, umur, email, nilai:{tugas, uas, uts}}){
+            return console.log(`halo nama saya ${mhs1.nama}, saya berumur ${mhs1.umur} tahun, dan \nnilai uas : ${uas}\nnilai uts : ${uts}\nnilai tugas : ${tugas}`)
+        }
+
+        cetakMhs(mhs2);
+
+
+    </script>
+</body>
+</html>

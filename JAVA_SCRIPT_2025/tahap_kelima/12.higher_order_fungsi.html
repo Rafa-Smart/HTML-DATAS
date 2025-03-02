@@ -22,13 +22,19 @@
         // ...
         ];
 
+        const MesinPemcari = (array, bulan) => {
+            return array.filter(x => x.month === bulan).map(x => x.sales)
+        }
+
+        console.log(MesinPemcari(salesData, 'Januari'))
 
 
-        const dapetSales  = (array, month) => {
-            return array.filter(x => x.month === month).map(x => x.sales);
-         };
+        // const dapetSales  = (array, month) => {
+        //     return array.filter(x => x.month === month).map(x => x.sales);
+        //     // x.month === month memeriksa apakah properti month dari objek x sama dengan parameter month yang diberikan.
+        //     // x => x.sales adalah fungsi callback yang mengambil properti sales dari setiap objek x.
+        //  };
 
-         console.log(dapetSales(salesData, 'Januari'))
 
 
         // const getSalesReport = (data, month) => {
@@ -49,11 +55,25 @@
         // ...
         ];
 
+
+        const MesinPencariLagih = (array, ...stock_user) => {
+            return array.filter(x => stock_user.includes(x.stock)).map(x => ({
+                product: x.product,
+                stock: x.stock
+            }))
+        }
+        console.log(MesinPencariLagih(stockData,100,200,300))
+
+            // PENJELASAN
+            //     filter(x => stock_user.includes(x.stock)) akan memeriksa apakah stock dari setiap item di stockData ada dalam array stock_user.
+            // Jika ada, item tersebut akan disimpan dalam hasil filter.
+
+
         // buat dulu fungsinya
-         const dapetStock = function(array, category){
-            return array.filter(x => x.category === category).map(x => x.stock)
-         }
-         console.log(dapetStock(stockData, 'Kategori A'))
+        //  const dapetStock = function(array, category){
+        //     return array.filter(x => x.category === category).map(x => x.stock)
+        //  }
+        //  console.log(dapetStock(stockData, 'Kategori A'))
 
 
 
@@ -107,7 +127,7 @@
             }) */
 
 
-        // dan fungsi yang bisa disebut  higher order function itu juga ketika sebuah fungsi mereturn sebuah fungsi lagi, jadi closures juga termasuk kedalam higher order function
+        // dan fungsi yang bisa disebut  higher order function itu juga ketika sebuah fungsi mereturn sebuah fungsi lagi, jadi closures juga termasuk kedalam higher order function, dan rekursif juga sebuah higher order function karena mereturn sebuah fungsi lagi
 
         // contoh lagi
         function repeat(n, aksi){
@@ -118,6 +138,12 @@
         repeat(4,console.log)
         // repeat(5, alert)
 
+        function ulang(n, repeat){
+            for(i=0;i<n;i++){
+                repeat(i)
+            }
+        }
+        ulang(5, console.log)
     </script>
 </body>
 </html>

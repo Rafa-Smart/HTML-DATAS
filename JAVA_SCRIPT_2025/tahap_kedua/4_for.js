@@ -5,6 +5,18 @@ for (let nilaiAwal = 1; nilaiAwal <=10; nilaiAwal++) {
 } 
 */
 
+// urutanya     Inisialisasi (let nilaiAwal = 1)
+
+    // Periksa kondisi (nilaiAwal <= 10)
+
+    // Jika kondisi true, jalankan blok kode (console.log("hello world"))
+
+    // Increment (nilaiAwal++)
+
+    // Kembali ke langkah 2 (periksa kondisi lagi)
+
+    
+
 // contoh sederhananya
 // for (let i = 1; i <= 6; i++){
 //     console.log("hello wolrd")

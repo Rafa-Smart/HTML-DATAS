@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Data Diri</h1>
+    <form action="">
+      <label for="nama">Masukan nama :</label>
+      <input type="text" placeholder="masukan nama" id="nama" />
+      <label for="email">Masukan email :</label>
+      <input type="text" placeholder="masukan email" id="email" />
+      <label for="umur">Masukan umur :</label>
+      <input type="number" placeholder="masukan umur" id="umur" />
+      <button type="button" id="button">Kirim</button>
+    </form>
+    <div id="hasil"></div> <!-- Tempat untuk menampilkan hasil -->
+    <script>
+      const button = document.getElementById("button");
+
+      button.addEventListener("click", function () {
+        const nama = document.getElementById("nama").value;
+        const emailInput = document.getElementById("email");
+        const emailValue = emailInput.value;
+        const umur = document.getElementById("umur").value;
+
+        function cekEmailValid(email) {
+          // Regex untuk memeriksa email yang valid
+          const regex = /^[\w\.-]+@[\w\.-]+\.\w+$/;
+          return regex.test(email); // Mengembalikan true jika email valid
+        }
+
+        function ekstrakEmailValid(emailValue) {
+          // Memisahkan teks berdasarkan spasi atau koma
+          const potongan = emailValue.split(/[\s,]+/);
+          console.log(potongan)
+          // Array [ "sdsadsad", "rafakhadafi@gmail.com" "sadsadss" ] // outputnya
+          // Filter hanya email yang valid
+          const emailValid = potongan.filter((potong) => cekEmailValid(potong));
+          return emailValid;
+        }
+
+        // sebenarnya kita ga usah pake cek email valid karena ya tinggal di pisahkan saja koma atau spasinya gitu, jadi kita bisa langsung aja ambil emailnya dan langsung di regex, tapi ini bisa buat belajar saja
+
+        function tes(strings, ...values) {
+          let hasil_str = "";
+
+          strings.forEach((str, index) => {
+            hasil_str += str;
+
+            // nah ini di setting dulu kondisinya jadi setipa perulnagan bakal di cek dulu
+
+            if (values[index]) {
+              if (
+                typeof values[index] === "string" &&
+                values[index].includes("@")
+              ) {
+                const email = values[index];
+                const emailValid = ekstrakEmailValid(email);
+
+                if (emailValid.length > 0) {
+                  hasil_str += `<strong>${email}</strong> (Email Valid) <br>
+                  <p>Email yang valid: ${emailValid.join(", ")}</p>`;
+                } else {
+                  hasil_str += `<strong>${email}</strong> (Email Tidak Valid) <br>
+                  <p>Tidak ada email yang valid.</p>`;
+                }
+              } else {
+                // nah jadi selain itu, kalau bukan email, maka bakal tetep di tambahkandi hasil_strnya gitu
+                hasil_str += values[index];
+              }
+            }
+          });
+
+          return hasil_str;
+        }
+
+        let hasil = tes`Halo ${nama} <br> ini adalah email kamu : ${emailValue} <br> ini adalah umur kamu : ${umur}. `;
+        const hasilElement = document.getElementById("hasil");
+        hasilElement.innerHTML = hasil;
+      });
+
+
+    //   ini si kayaknya sebenarnya kamu gausah pake tagged begini an cok, karena kamu sendiri yang sudah buat ngambil atau akses emailnya karea berbentuk sebuah array, jadi kamu bisa aja ambil si emailnya dan langsung di regex, jadi gausah pake tagged begini an cok, tapi ini bisa buat belajar saja
+    </script>
+  </body>
+</html>
+<!-- <script>
+  const button = document.getElementById("button");
+
+  button.addEventListener("click", function () {
+    const nama = document.getElementById("nama").value;
+    const emailInput = document.getElementById("email");
+    const emailValue = emailInput.value;
+    const umur = document.getElementById("umur").value;
+
+    function cekEmailValid(email) {
+      // Regex untuk memeriksa email yang valid
+      const regex = /^[\w\.-]+@[\w\.-]+\.\w+$/;
+      return regex.test(email); // Mengembalikan true jika email valid
+    }
+
+    function ekstrakEmailValid(emailValue) {
+      // Memisahkan teks berdasarkan spasi atau koma
+      const potongan = emailValue.split(/[\s,]+/);
+      // Filter hanya email yang valid
+      const emailValid = potongan.filter((potong) => cekEmailValid(potong));
+      return emailValid;
+    }
+
+    function tes(strings, ...values) {
+      // Menggunakan reduce untuk menggantikan forEach
+      const hasil_str = strings.reduce((acc, str, index) => {
+        acc += str;
+
+        if (values[index]) {
+          if (
+            typeof values[index] === "string" &&
+            values[index].includes("@")
+          ) {
+            const email = values[index];
+            const emailValid = ekstrakEmailValid(email);
+
+            if (emailValid.length > 0) {
+              acc += `<strong>${email}</strong> (Email Valid) <br>
+              <p>Email yang valid: ${emailValid.join(", ")}</p>`;
+            } else {
+              acc += `<strong>${email}</strong> (Email Tidak Valid) <br>
+              <p>Tidak ada email yang valid.</p>`;
+            }
+          } else {
+            acc += values[index];
+          }
+        }
+
+        return acc;
+      }, ""); // Nilai awal acc adalah string kosong
+
+      return hasil_str;
+    }
+
+    let hasil = tes`Halo ${nama} <br> ini adalah email kamu : ${emailValue} <br> ini adalah umur kamu : ${umur}. `;
+    const hasilElement = document.getElementById("hasil");
+    hasilElement.innerHTML = hasil;
+  }); -->
