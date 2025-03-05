@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // javascript = adalah single thread,  non blocking
+
+        // ----------
+
+        // thread = adalah urutan atau yang menjalankan sebuah kode kalo single berati cma satu aja pelayannya tapi kalo multi berati ada banyak pelayannya
+        // single thread = urutan eksekusi kode yang dapat dilakukan secara bebas / independent satu sama lain, jadi kalo singel thread maka js itu akan mengeksekusi kode secara berurutan saja dan satu satu
+
+        // multi thread = bisa melakuka banyak hal secara bersamaan
+        // -----------
+
+        // ----------
+        // blocking = jadi satu satu, jadi kalo misal ada dua kode nah program itu akan menyelesaikan dulu satu kode sampai beres, baru ke kode selanjutnya
+
+        // non blocking = berati kalo satu kode yang diljalankan itu belum beres maka program masih bisa mengerjakan kode yanglainnya terlebih dahulu
+
+        // ---------
+        // -----------
+        // asy (single thread) = itu berati threadnya bisa menjalankan kode secara bergantian tanpa harus menunggu kode yang sebelumnya beres
+
+        // asy (multi thread) = berati ada banyak pelayan yang bisa mengerjakan banyak kode secara bersamaan tanpa harus menunggu kode yang sebelumnya beres
+
+        // asy + singe-thread = concurrency
+        // asy + multi-thread = parallelism
+        // ----------
+
+        // single thread dan multi = lingkungan eksekusi (task)
+
+        // blocking dan non -blocking = cara eksekusi (execution) atau teknik ngoding
+
+        // sy dan asy = cara mengakses (access) atau cara mengakses data (data access) atau cara meng akses resource (resource access),
+        // atau hubungannnya dnegan teknik ngoding untuk reques http
+
+        // ----------
+
+
+        // di dalm js itu ada mesin yang khusus untuk mengcompile js yang ditanam di web browser yang namanya v8 engine
+
+        // jadi di dalam v8 engine ini terbagi menjadi 2 yaitu heap dan stack,
+        // heap adalah tempat penyimpanan data yang dinamis,  atau tempat penyimpanan variable, function, hoisting nah ini dilakukan dibagian heap
+        // dan stack adalah tempat untuk pemanggilan function dan exsekusi script, maka ketika sebuah variable di pangil maka akan di paggil di bagian stack ini dan akan dieksekusi disini
+
+        console.log("satu")
+        console.log("dua") // ini terjadi di stack
+        console.log("tiga")
+
+        // jadi ketika program membaca kode ini maka akn ketemu console.log() dan akan angusng di eksekusi dan disimpan di stack, lalu ketika sudah di eksekusi maka console.log() yang ada didalam stack ini akan hilang dan di ganti degan mengeksekusi program yang lain
+
+        // cara membaca nya itu bisa pake website  latenflip.com
+
+        // jadi kalo misalkan ada web yang ngelek, mungkin itu sedang menunggu programnya berjalan
+
+        console.log("--------------")
+        console.log("satu")
+        setTimeout(() => {
+            console.log("dua")
+        }, 5000)
+        console.log("tiga") // ini terjadi di stack
+
+    </script>
+</body>
+</html>

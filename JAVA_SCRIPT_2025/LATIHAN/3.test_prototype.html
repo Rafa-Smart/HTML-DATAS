@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ini untuk mengetes apakah isi dari objek prototype
+
+        function Orang(nama, umur, alamat) {
+            this.nama = nama;
+            this.umur = umur;
+            this.alamat = alamat
+            this.energi = 10;
+        }
+
+        Orang.prototype.makan = function(makan){
+            this.energi += makan;
+            return this.energi;
+        }
+        Orang.prototype.kerja = function(jam){
+            this.energi -= jam;
+            return this.energi;
+        }
+
+        const rafa = new Orang("rafa",20,"jakarta")
+
+        // nah untuk di tes kita akan liat, apakah benar sebenarnya ada lagi satu objek yang berisi method method 
+        console.log(Orang.prototype)
+        // Object { makan: makan(makan), kerja: kerja(jam)
+        // , … }
+        // ​
+        // constructor: function Orang(nama, umur, alamat)​
+        // kerja: function kerja(jam)​
+        // makan: function makan(makan)​
+        // <prototype>: Object { … }
+
+            // ternyata ADAAA
+
+            // ohh jadi kayaknya yang kalo kita pake ptototype itu nanti bakalan dibuat otomatis obeh jsnya si constructor coyy 
+
+
+    </script>
+</body>
+</html>

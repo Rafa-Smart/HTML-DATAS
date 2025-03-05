@@ -235,5 +235,22 @@
 //     }
 //     hasil1 += "\n"
 // }
-// console.log(hasil1)
+// // console.log(hasil1)
+// let hasil = ""
+// for(i=0;i<10;i++){
+//     for(j=0;j<i;j++){
+//         hasil += "*"
+//     }
+//     hasil += "\n"
+// }
+// console.log(hasil)
+// console.log("==========")
 
+// let hasil2 = "";
+// for(i=10;i>0;i--){
+//     for (j=0;j<i;j++){
+//         hasil2 += "*"
+//     }
+//     hasil2 += "\n"
+// }
+// console.log(hasil2)

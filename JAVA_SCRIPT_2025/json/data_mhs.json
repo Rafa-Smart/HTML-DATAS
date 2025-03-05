@@ -1,0 +1,20 @@
+[
+    {
+        "nama": "budi",
+        "umur": 20,
+        "alamat":"jakarta",
+        "npwp":237384
+    },
+    {
+        "nama": "siti",
+        "umur": 23,
+        "alamat":"batak",
+        "npwp":65432
+    },
+    {
+        "nama": "jamal",
+        "umur": 30,
+        "alamat":"sumedang",
+        "npwp":383902
+    }
+]

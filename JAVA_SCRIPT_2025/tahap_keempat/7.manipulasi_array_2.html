@@ -92,17 +92,28 @@
         // ini kalo ga pake fungsi sort
         let arraycuy = [2, 3, 54, 6, 7, 8, 23, 4, 6, 67, 1, 21, 4];
 
-        for (let i = 0; i < arraycuy.length; i++) {
-            for (let j = 0; j < arraycuy.length - 1; j++) {
-                // Bandingkan dua nilai yang berdekatan
-                if (arraycuy[j] > arraycuy[j + 1]) {
-                    // Jika nilai di kiri lebih besar, tukar posisi
-                    let temp = arraycuy[j];
-                    arraycuy[j] = arraycuy[j + 1];
-                    arraycuy[j + 1] = temp;
+        // for (let i = 0; i < arraycuy.length; i++) {
+        //     for (let j = 0; j < arraycuy.length - 1; j++) {
+        //         // Bandingkan dua nilai yang berdekatan
+        //         if (arraycuy[j] > arraycuy[j + 1]) {
+        //             // Jika nilai di kiri lebih besar, tukar posisi
+        //             let temp = arraycuy[j];
+        //             arraycuy[j] = arraycuy[j + 1];
+        //             arraycuy[j + 1] = temp;
+        //         }
+        //     }
+        // }
+
+        for(let i = 0; i< arraycuy.length;i++){
+            for(let j = 0; j< array.length - 1; j++){
+                if(arraycuy[j] > arraycuy[j+1]){
+                    let dummy = arraycuy[j]
+                    arraycuy[j] = arraycuy[j+1]
+                    arraycuy[j+1] = dummy
                 }
             }
         }
+
         console.log(arraycuy); // Output: [1, 2, 3, 4, 4, 6, 6, 7, 8, 21, 23, 54, 67]
         
         console.log("==============")
@@ -213,6 +224,29 @@
         let string = "    rafa     "
         hasil = string.trim()
         console.log(hasil.length)
+
+        // mengurut kan angka dengna mengurutkan sebuah huruf itu sama karena huruf itu diihtungnya pake unicode
+
+        // let arr = [4,5,3,6,7,8,33,4,544,5,1,4,2,22]
+        function sortNumbers(arr) {
+        let n = arr.length; // lalo length itu berati 4 ya bukan index kalo index pasti jadi 3
+        for (let i = 0; i < n - 1; i++) {
+            for (let j = 0; j < n - i - 1; j++) {
+            // Bandingkan dua angka berurutan
+            if (arr[j] > arr[j + 1]) {
+                // Tukar posisi jika angka di depan lebih besar
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+            }
+        }
+        return arr;
+        }
+
+        let numbers = [4, 2, 7, 1];
+        console.log(sortNumbers(numbers)); // Output: [1, 2, 4, 7]
+
     </script>
 </body>
 </html>

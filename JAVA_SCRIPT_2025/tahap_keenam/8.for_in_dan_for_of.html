@@ -16,9 +16,6 @@
         // jadi kalo kamu mau looping property dari objek maka pakenya for in , kalo kamu mau mengulang isi array dan itereble objek yang lain maka bisa pake for of
 
 
-
-
-
         // for in dan for of
         // 1. for in itu untuk mengambil key dari sebuah objek, adalah hanya untuk enumereble yang dimaksud enumereble adalah property dari objek yang bisa dihitung, seperti array, string, map, set, arguments, nodeList(melakukan querry pada dom), user-defined-itereble(itereble yg dibuat sendiri) dan lainnya.
 
@@ -32,13 +29,14 @@
         //     console.log(m);
         // } ini gabisa karena mhs3 bukan array atau string atau map atau set atau arguments atau nodeList atau user-defined-it, atau bukan bagian dari itereble objek
         // makanya kita pake in
+
         for ( const m in mhs3){
             console.log(m)
         }
 
         console.log("============")
         for ( const m in mhs3){
-            console.log(mhs3[m])
+            console.log(mhs3[m],"tesaja")
         }
 console.log("============")
 
@@ -106,6 +104,128 @@ console.log("============")
         }
         console.log(tes(3,4,5,6,4,3,2,4,4))
 
+        const array = ["Alice", 25];
+
+
+        // INI MAH CUMA BELAJAR AJA
+        // Destructuring array menjadi variabel terpisah
+        const [name, age] = array;
+
+        // Membuat objek dari variabel yang sudah di-destructure
+        const obj = { name, age };
+
+        console.log(obj); // Output: { name: "Alice", age: 25 }
+
+        // const obj = { name: "Alice", age: 25 };
+
+        // Destructuring objek menjadi variabel terpisah
+        const { name3, age3 } = obj;
+
+        // Membuat array dari variabel yang sudah di-destructure
+        const array3 = [name3, age3];
+
+        console.log(array3); // Output: ["Alice", 25]
+
+
+        const array2 = ["Alice", 25];
+
+        // Destructuring array menjadi variabel terpisah
+        const [name2, age2] = array;
+
+        // Membuat objek dari variabel yang sudah di-destructure
+        const obj2 = { name, age };
+
+        console.log(obj2); // Output: { name: "Alice", age: 25 }
+
+
+
+
+
+        console.log("==========")
+        // Data dari API (array of arrays)
+        const apiData = [["id", 1], ["name", "Alice"], ["role", "Developer"]];
+
+        // Mengubah array menjadi objek
+
+
+        // const dataObj = apiData.reduce((acc, [key, value]) => {
+        //     acc[key] = value;
+        //     return acc
+        // },{})
+        // console.log(dataObj)
+
+
+        // const userData = apiData.reduce((acc, [key, value]) => {
+        //     acc[key] = value;
+        //     return acc;
+        // },{})
+
+        // Output: { id: 1, name: "Alice", role: "Developer" }
+        console.log("==================")
+
+        // Data pengguna
+        const user = { id: 1, name: "Alice", role: "Developer" };
+
+        // Mengubah objek menjadi array of arrays
+        const userArray = Object.entries(user);
+
+        console.log(userArray);
+        // Output: [["id", 1], ["name", "Alice"], ["role", "Developer"]]
+
+        console.log("==================")
+        const user2 = {
+        id: 1,
+        name: "Alice",
+        details: {
+            email: "alice@example.com",
+            preferences: {
+            theme: "dark",
+            notifications: true
+            }
+        }
+        };
+
+        function nestedObjekLagih(objek){
+            return Object.entries(objek).map(([key, value]) => {
+                if (typeof value === "object" && value !== null && !array.isArray(value)){
+                    return [key, nestedObjekLagih(value)]
+                }else {
+                    return [key, value]
+                }
+            })
+        }
+
+        function nestedObjek(objek) {
+            return Object.entries(objek).map(([key, value]) => {
+                if ( typeof value === "object" && !Array.isArray(value) && value !== null) {
+                    return [key, nestedObjek(value)];
+                }
+                else {
+                    return [key, value]
+                }
+            })
+        }
+
+        const hasil = nestedObjek(user2);
+        console.log(hasil)
+
+
+
+        // function nestedObjectToArray(obj) {
+        // return Object.entries(obj).map(([key, value]) => {
+        //     if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+        //     return [key, nestedObjectToArray(value)];
+        //     }
+        //     return [key, value];
+        // });
+        // }
+
+        // const userArray2 = nestedObjectToArray(user);
+        // console.log(userArray2);
+
+
+
+        
     </script>
 </body>
 </html>

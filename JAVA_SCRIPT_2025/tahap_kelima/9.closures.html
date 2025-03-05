@@ -190,7 +190,29 @@
             console.log(fungsiGaji(8)); // Output: 80000
 
 
+            // coba
 
+            function sapaNama(pagi){
+                return function (nama){
+                    return `halo ${nama} selamat ${pagi}`
+                }
+            }
+
+            let rafa = sapaNama("siang")
+            console.log(rafa("rafa"))
+
+
+            let lagihnih = (function (){
+                let hasil = 0
+                return function (){
+                    return hasil++ // o , 1, 2
+                    // return ++ hasil // 1, 2, 3
+                }
+            })()
+
+            console.log(lagihnih())
+            console.log(lagihnih())
+            console.log(lagihnih())
     </script>
 </body>
 </html>

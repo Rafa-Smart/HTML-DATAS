@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // asy = asingkronus
+        // syc = singkronus
+        // callback itu sudah ada di hegher order function
+
+        // callback = adalah sebuah function yang dikirimkan sebagai sebuah parameter pada function yang lain.
+
+        // callback sebuah function yang dieksekusi setelah function lain selesai dijalankan.
+
+        // ini adalah syc callback
+
+        // kita buat dulu callbacknya
+        // function halo(nama){
+        //     alert(`halo ${nama}`);
+        // }
+
+        // baru kita masukan fungsi tadi sebagai paramter
+        // function tampilkanPesan(callback){ 
+        //     // jadi pertama itu nanti kita isi dulu const nama ini dengan promt, kemudian kita panggil function halo, di dalam paramternya disini kita punya parameter callback yang seharusnya berisi sebua function, nah yang kita mau isi adalah fungsi halo, nah di callback ini ita masukan variable nama dari promt user tadi
+        //     const nama = prompt("masukan nama : ");
+        //     callback(nama);
+        // }
+
+        // nah disini kita langsung panggil saja fungsi tampilkanPesan yang berisi callback fungsi halo, ini tidak perlu pake halo(), karena nanti akan langsung di eksekusi, nah makanya nanti di eksekusinya  di dalam fungsi tampilkanNama yang barian callback(nama)
+        // tampilkanPesan(halo)
+
+
+        // atau sebenarnya kita tidak perlu membuat fungsi lagi diluar sebagai callback fungsinya
+        // tapi kita bisa buat fungsi anonimus
+        // function tampil(callback){
+        //     const nama = prompt("masukan nama:")
+        //     callback(nama)
+        // }
+        // tampil(function(nama){
+        //     alert(`halo ${nama}`);
+        // })
+
+        console.log("============")
+        const mhs = [
+            {
+                nama: "budi",
+                umur: 20,
+                alamat:"jakarta",
+                npwp:237384
+            },
+            {
+                nama: "siti",
+                umur: 23,
+                alamat:"batak",
+                npwp:65432
+            },
+            {
+                nama: "jamal",
+                umur: 30,
+                alamat:"sumedang",
+                npwp:383902
+            },
+        ];
+
+        const hasilNama = mhs.map(x => {
+            return x.nama;
+        })
+        console.log(hasilNama)
+
+        
+        console.log('---------------')
+        // ini mah nanti bukan asy tpai syc karena bukan pake setTimeout
+        console.log("mulai")
+        mhs.forEach(x => {
+            // nah coba kita buat agar ini bisa lama
+            // for(i=0;i<10000000;i++){
+            //     let date = new Date();
+            // }
+
+            // nah ini akan syc jadi yang ini harus beres dulu baru nanti lanjut ke program yang lain
+            console.log(x.nama)
+        })
+        console.log("selesai")
+        console.log('----------------------------------')
+        
+        // nah coba kita simulasikan bahwa kita mengambil datanya itu lama dan dari api
+
+        function GetDataMhs(url, succes, error){
+            // url = ini bisa adalah tempat penympanan datanya atau api
+            // succes = callback ketika berhasil
+            // erorr = callback ketika erorr
+
+            let xhr = new XMLHttpRequest();
+            // pokonyaa ini adlah cara untuk mengambil data di api secara asyncronus
+
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState === 4 ){
+                    if(xhr.status === 200){
+                        succes(xhr.response) // response itu hasil nya, jadi paramter success itu adalah hasil yang diambilnya
+                    }else if (xhr.status === 404){
+                        error();
+                    }
+                }
+            }
+            xhr.open('GET', url); // ini kita mneggunakan method get untuk mendapatkan data, jika mengirim data itu apke post dll
+            xhr.send();
+        }
+
+        function succes(result){ // result ini menginisisasi nama paramter xhr.response
+            const mhs = JSON.parse(result); // jadi ini itu kita ubah jadi json formatnya buakn string
+            mhs.forEach(x => {
+                console.log(x.nama, x);
+        })}
+
+        function eror(){
+            console.log("gagal nieh")
+        }
+
+
+        // PENTING
+        // INI KENAPA DISEBUT ASNGKRONUS ? KARENA DIA MEMBACA FILE JSON, SEBENARNYA BANYAK CARA CARA ASINGKRONUS SEPERTI MEMBACA FILE, DLL CARI AJa
+
+        // nih coba liat nanti mulai dan selesai ini aka dieksekusi duluan.
+
+        // // ini pake cara anonimus buat si fungsi callbacnya
+        // console.log("mulai")
+        // GetDataMhs('../json/data_mhs.json', (result) =>{ // result itu isinya adalah xhr.response, seprti yang sudah diatur di fungis sebelumnya
+        //     const mhs = JSON.parse(result).forEach(x => {
+        //         console.log(x.nama, x)
+        //         console.log("berhasil")
+        //     })
+        // }, () => {
+        //     console.log("gagal")
+        // })
+        // console.log("selesai")
+
+        // jadi result ini itu artinya adlaah si parameter callback succesnya dan coba liat itu di paramter ke tiganya ada erorr tapi pake function anonimus
+
+
+
+
+        // ini pake fungsi callback yang sudah di declaration sebelumnya 
+        console.log("mulai")
+        GetDataMhs("../json/data_mhs.json",succes,eror)
+        console.log("selesai")
+        
+
+        // console.log("=============oke lanjut============")  wah ini kalo lo liat ya, jadi nanti di console itu kode ini bakal di eksekusi duluan dari si fungsi getdatamhs, cuyy kerenna amaat
+
+
+        // INI PENTING HARAP BAC BERULANG ULANG
+        // karena ketika program mengerjakan kode ini dan dia melihat ada satu fungsi yang asy maka akan di taro dulu di web api, kemudian di tunggu sampai selesai, terus console.log(mulai dan selesainya ), masuk ke stack kemudian di exsekusi, nah kemudain kerika si fungsi getDataMhs ini sudah beres, maka akan masuk ke event loop, lalu si event loop ini akna mengecek apakah ada antrian di event loop nya, jika ada maka akan di cek lagi di stacknya apakah masih ada kode yang sedang di eksekusi, jika tidak akda maka yang di event loop ini akan di pindahkan ke stack kemudian baru di eksekusi
+
+
+
+        
+    </script>
+</body>
+</html>

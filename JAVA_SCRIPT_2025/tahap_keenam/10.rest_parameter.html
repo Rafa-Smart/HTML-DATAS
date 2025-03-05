@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // rest parameter adalah sesuatu yang merepresentasikan argumen pada function dengan jumlah yang tidka terbatas menjadi sebuah array
+        // rest parameter selalu di taruh di akhir parameter
+        // rest parameter menggunakan tanda titik tiga kali
+        // rest parameter adalah array yang berisi nilai yang tidak terbatas
+
+        // contoh
+        function myFunc(a,b,...myArgs){
+            return `nilai a : ${a}\nnilai b : ${b}\nnilai lainnya : ${myArgs}`
+
+            // nilai a : 1
+            // nilai b : 2
+            // nilai lainnya : 3,4,5,6,7,8,9,10
+
+        }
+        console.log(myFunc(1,2,3,4,5,6,7,8,9,10)) // 1 2
+        // nah kalo kita mau mengambil nilai 3 sampai 10 maka kita bisa pake rest parameter
+        console.log("======")
+        // jadi didalam sebuah function itu terdapat satu objek yang menampung semua argument yang tidak ditangkap oleh parameter yang sudah di tentukan, jadi arguments itu menangkap semua argumen yang di tangkap oleh si rest parameternya
+
+        // jadi arguments ini bukan array tapi sebuah objek
+
+        // arguments bukanlah array sejati, tetapi memiliki properti length dan dapat diakses menggunakan indeks. Anda bisa mengonversinya ke array menggunakan Array.from(arguments) atau const arr1 = [...arguments].
+
+        function tes(){
+            return console.log(arguments)
+        }
+        tes(2,3,4,5,6,7,8,5,4)
+
+
+        // JADI KALO REST PARAMETER ITU ADALAH ARRAY SEJATI DAN BIA MENGGUNAKAN SELURUH METHOD YANG ADA PADA PROTOTYPE ARRAY, DAN KALO ARGUMENTS ITU BUKAN ARRAY SEJATI TAPI OBJEK dan bisa mneggunakan METHOD METHOD DARI PROTOTYPE OBJEK, ya soalnya sama aja kayak di sperad cok iya ga ???
+        console.log("===============")
+
+        function contoh() {
+        // Menggunakan method objek
+        console.log(Object.keys(arguments), typeof arguments); // Output: ['0', '1', '2']
+        console.log(Object.values(arguments), typeof arguments); // Output: [1, 2, 3]
+            console.log("+++++++++")
+
+            // ini tiga cara mengubah arguments menjadi array
+        let myArgs = [...arguments];
+        console.log(myArgs, typeof myArgs)
+        console.log("+++++++++")
+        const myArgs2 = Array.from(arguments);
+        console.log(myArgs2, typeof myArgs2)
+        console.log("+++++++++")
+        const myArgs3 = Object.entries(arguments);
+        console.log(myArgs3, typeof myArgs3)
+        }
+        contoh(1, 2, 3, 5);
+
+        console.log("===============")
+        function jumlah(){
+            // let hasil = 0;
+            // for (i=0;i<=arguments.length;i++){
+            //     hasil += i
+            // }
+            // return hasil // 55
+            // atau bisa pake reduce
+
+            // return Array.from(arguments).reduce((acc, i) => {
+            //     return acc + i
+            // },0) // 55
+            // atau kalo ga mau pake Array.from kamu juga bisa ubah dulu arguments menjadi array dengan cara menggunakan spread operator jadi di parameternya kamu bisa menambahkan ...arguments
+
+
+            let hasil = 0;
+            for (e of arguments){
+                hasil += e
+            }
+            // karena e ini mereprentasikan setiap elemen pada arguments
+
+            // kalo pake for in = // 00123456789
+            return hasil
+        }
+        console.log(jumlah(1,2,3,4,5,6,7,8,9,10))
+        console.log("=======")
+
+        // 4. melakuka array desctruction
+        const kelompok1 = ["udin","jamal","ucup","siti"]
+        const ketua = kelompok1[0]
+        const Wketua = kelompok1[1]
+        // itu cara biasa
+
+        const [ketua2, wakil2, ...anggota2] = kelompok1
+        console.log(anggota2) //Array [ "ucup", "siti" ]
+        // buatkan objek
+        const osis = {
+            ketua:ketua2,
+            wakilKetua:Wketua,
+            anggota:anggota2
+        }
+        console.log(osis)
+
+        console.log("===========")
+        const tim = {
+            pm:"jamal",
+            f:"doddy",
+            f2:"siti",
+            f3:"muhaimin",
+            f4:"udin"
+        }
+        
+        const {pm, ...myteam} = tim
+        console.log(pm) 
+        // mau buat array dari objek berdasarkan pasangan ?
+        const timArray = Object.entries(tim);
+        console.log(timArray)
+
+        console.log("====filter====")
+        function filterby(type, ...values){
+            return values.filter(v => {
+                return typeof v === type
+            })
+
+            // itu jadi harus 2 returnnya padahal bisa sebaris
+            // return values.filter(v => typeof v === type),
+            // nah ini akan langusng ke return dan returnnya hanya 1 kali saja
+
+            // jadi ini tuh kita buat array yang index pertamanya itu nama type data yaitu number, nah jika values yang lain itu tipe datanya adalah "number" maka return,
+            // dan ini nanti bisa di ganti jadi 'string', dll
+        }
+        // jadi saya ingin memilih dari parameter paramter ini yang bertipe data number
+        console.log(filterby('number',1,2,3,4,5,false,4,5, "rafa"))
+
+
+    </script>
+</body>
+</html>

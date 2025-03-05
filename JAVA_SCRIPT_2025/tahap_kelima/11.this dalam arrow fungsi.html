@@ -224,10 +224,16 @@
             //     this.classList.toggle("caption")
             // },600)
 
-            // ini ketika kita memakai arrow fungsi
+            // ini ketika kita memakai arrow fungsi, bisa juga pake fungsi declaration tapi harus pake this.setTimeout
             setTimeout(() => {
                 this.classList.toggle(dua)
             },600)
+
+            // eh ini ga bisa deng
+            // this.setTimeout(function() {
+            //     this.classList.toggle(dua)
+            // }, 600);,
+            // ya ga bisa lah nanti fungsi ini bakal jadi method dari objek literal si box, nah kalo pake arow kan nanti thisnya bakal merujuk ke lexical scopenya yaitu si window.
 
             // jadi kalo misal kita buat fungsi didaam objek tapi bukan methd atau bukan property berati agar masih bisa mengakses ke this yang ada pada objeknya maka kita akan mneggunakan arrow function, jadi nanti this ini akna ke parentnya dulu baru ke window
 

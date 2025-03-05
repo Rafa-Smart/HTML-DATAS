@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: rgb(151, 34, 187);
+            text-align: center;
+        }
+        li {
+            list-style: none;
+        }
+
+        h1 {
+            font-size: 500%;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        h1 span {
+            display: inline-block;
+            /* ini inlinde blok penting karena kalo span atau huruf tapi bukan pake inline block maka tidak bisa di transform */
+            transition: 40ms;
+        }
+        
+        h1 span:hover {
+            color: aliceblue;
+            transform: scale(1.4);transform: translate(0, -10px);
+        }
+
+        /* jadi saya ingin ketika saya hover si jamal maka nanti perhurufnya akan berubah scalenya jadi agak besar sedikit */
+    </style>
+</head>
+<!-- jadi saya ingin mempunyai array yang berisi data dari list ini -->
+<ul>
+    <li>arsa</li>
+    <li>andhika</li>
+    <li>fajar</li>
+</ul>
+<h1>
+    Argantara
+</h1>
+<body>
+    <script>
+        // spread operator itu adalah sebuah operator yang memungkinkan kita untuk mengeluarkan elemen-elemen array atau properti-properti dari sebuah objek
+
+        // atau memecah itreble objek menjadi single element
+
+        const mhs = ["udin", "muhaimin", "jamal"];
+        console.log(mhs) //Array(3) [ "udin", "muhaimin", "jamal" ]
+        console.log("============")
+
+        // nah kita bisa menggabungkan 2 array 
+        const siti = ["sandi", "agus"];
+        const jamal = ["vendi", "hansen"];
+        const tes = [siti, jamal]
+        // maka akan jadi ada array di dalam array
+        console.log(tes) // Array [ (2) […], (2) […] ]
+        console.log("============")
+        
+        // 2. ini kita menggunakan spread operator
+        console.log(...mhs); // udin muhaimin jamal
+
+        // nah kalo kita mau pecah salah satu elemen di dalam array ini yaitu string "udin" maka kita bisa pake spread operator caranya
+        console.log(`tes aja `,[...mhs[0]]); // u d i n
+        const p = [...mhs[0]]
+        console.log(p) //Array(4) [ "u", "d", "i", "n" ]
+
+        // kita bisa pake ini untuk menggabungkan 2 array
+        const mhs1 = ["udin", "muhaimin", "jamal"];
+        const dosen = ["budi", "joko", "andi"];
+        const orang = [...mhs1, ...dosen];
+        console.log(orang); //Array(6) [ "udin", "muhaimin", "jamal", "budi", "joko", "andi" ]
+        
+        // kita mau spread lagi 1 elemen di dalam array orang ini maka
+        console.log(...orang[4]); // j o k o
+
+        console.log("=============")
+        // atau bisa juga seperti ini pake concat dari prototype Array
+        const hasilConcat = mhs.concat(dosen)
+        console.log(hasilConcat); // Array(6) [ "udin", "muhaimin", "jamal", "budi", "joko", "andi" ]
+
+        // tapi kalo kita mau menggabungkan banyak array maka kita tidk bia menggunakan concat, dan akan lebih ribet, maka kita bisa pake spread operator
+
+        console.log("+++++++")
+        const semua = [...mhs, ...dosen[0], "jamal2",  ...siti, ...jamal]
+        console.log(semua);
+
+        console.log("============++====")
+        // 3. mengcopy nilai dari array
+
+        // ini caranya salah, karena ini jika misal kita ganti elemen pda array copyanya atau array aslinya maka array yang lainnya juga akan ikt berubah. dan ini hanya membuat referensinya saja
+        const mhstes = ["haidar","adit","dika"]
+        const mhstesCopy = mhstes;
+        console.log(mhstesCopy)
+
+        // maka caranya adalah, maka ini akan benar benar tercopy
+        const mhstesCopy2 = [...mhstes];
+        console.log(mhstesCopy2)
+        console.log("=========")
+
+
+        const liMhs = document.querySelectorAll("li");
+        console.log(liMhs)
+        // coba nanti lu buka 1: <li>
+        // nanti bakal banyak method yang bisa dipake dari nodeList ini
+        console.log(NodeList) // nih jadi bisa tau method apa saja yang bisa dipake di nodelist ini
+
+
+        // ini cara biasa
+        // const hasilMhs = []
+        // for (let i = 0;i<liMhs.length;i++){
+        //     hasilMhs.push(liMhs[i].textContent)
+        // }
+        // console.log(hasilMhs) //Array(3) [ "arsa", "andhika", "fajar" ]
+
+        // ini pake map
+
+        // nah ini akan erorr karena map itu bukan bagian dari method pada node list
+        // const hasil = liMhs.map(m => {
+        //     return m.textContent
+        // })
+        // console.log(hasil)
+        
+        // jadi caranya adalah kita ubah dulu menjadi array menggunakan spread
+        const hasil = [...liMhs].map(m => {
+            return m.textContent
+        })
+        console.log(hasil)
+
+
+        // projek
+        console.log("------------")
+        const nama = document.querySelector("h1")
+        const tanpaSpasi = nama.textContent.replace(/\s/g,"")
+
+        // terus kita buat agar disetiap hurufnya kita kasih span 
+        const huruf = [...tanpaSpasi].map(h => {
+            return `<span>${h}</span>`
+        }).join("") // agar tidak lagi berbentuk array tapi pake join jadi berbentuk string
+        console.log(huruf)
+
+        // kita masukan saja huruf ini kedalam innerHTML dari nama,
+        nama.innerHTML = huruf
+        </script>
+</body>
+</html>

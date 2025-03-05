@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <!-- kalo pake jquerry nanti jangan pake si slim, karena ga punya ajax -->
+    <script>
+        // kita menggunakan jquerry
+
+        console.log("mulai")
+        // mengambil sebuah method yang bernama ajaks
+
+        // jquerry itu simbolnya adalah $ jadi,
+        // jadi saya punya ajax yang paramternya itu objek, nahh di sini, paramter success dan error ini sudah baku ya jadi ga bisa kamu ganti ganti lagi. jadi harus sesuai
+        $.ajax({
+            url:"../json/data_mhs.json",
+            success: (mhs) => {
+                mhs.forEach(e => console.log(e.nama)) // dan disini itu hasilnya langsung berbentuk sebuah objek, jadi tidak perlu di parsekan dulu
+                console.log(mhs)
+            },
+            error: (e) => {
+                console.log(e.responseText)
+            }
+        })
+        // console.log($.ajax)
+        console.log("selesai")
+    </script>
+</body>
+</html>

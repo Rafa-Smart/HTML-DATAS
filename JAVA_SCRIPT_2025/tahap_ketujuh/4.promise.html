@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script>
+        // jadi promise ini akan mengatasi yang namanya callback hell
+
+
+        // contoh dulu, jadi kalo kita mau mengambil data dari api itu kita bisa pake library jquerry menggunakan method ajax caranya
+
+        // ini web apinya http://www.omdbapi.com/?apikey=dca61bcc&s=avengers
+
+        // $ = itu inisiasi ajax
+        // $.ajax({
+        //     url:"http://www.omdbapi.com/?apikey=dca61bcc&s=avengers",
+        //     success: (movies) => {
+        //         return console.log(movies)
+        //     },
+        //     error: (err) => {
+        //         return console.log(err)
+        //     }
+        // })
+
+        // ini ajax tanpa pake library jquerry, tapi kita harus membuat function callbacknya sendiri.
+        // const xhr = new XMLHttpRequest();
+        // xhr.onreadystatechange = function(){
+        //     if (xhr.status === 200){
+        //         if (xhr.readyState === 4){
+        //             console.log(JSON.parse(xhr.response))
+        //         }
+        //     } else if (xhr.status === 404){
+        //         console.log(xhr.responseText)
+        //     }
+        // }
+
+        // xhr.open("get","http://www.omdbapi.com/?apikey=dca61bcc&s=avengers")
+        // xhr.send()
+
+        // nah ini cara yang terbaru yaitu pake fecth
+
+        // const movies = fetch("http://www.omdbapi.com/?apikey=dca61bcc&s=avengers")
+        // console.log(movies)
+        // output // Promise { <state>: "pending" }
+            // nah itu jadinya malah promise
+
+
+        // nah ini akan benar
+        // fetch("http://www.omdbapi.com/?apikey=dca61bcc&s=avengers")
+        // .then((Response) => {
+        //     return Response.json()
+        // })
+        // .then((Response) => {
+        //     console.log(Response)
+        // })
+
+        // promise = janji
+        // janji = bisa terpenuhi dan bisa ingkar
+        // state/janji = terpenuhi = (fulfilled)
+        // state/janji = ingkar = (rejected)
+        // state = pending = waktu tunggu sebelum janjinya terpenuhi atau di ingkari
+
+        // untuk menjalankan keadaan ini ada tiga fungsi callback yaitu
+        // 1. resolve = jika terpenuhi
+        // 2. reject = jika tidak terpenuhi
+        // 3. finally = jika waktu tunggunya selesai baik terpenuhi atau di ingkari janjinya
+
+        // didalam promise ini ada aksi yang dilakukan ketika janjinya terpenuhi atau tidka terpenuhi
+
+        // kalo terpenuhi = then dan then ini akan menjalankan resolve
+        // kalo tidak terpenuhi = cacth dan cacth ini akan menjalankan reject
+
+        // promise = artinya adalah sebuah objek yang mereprentasikan keberhasilan atau kegagalan dari sebuah event yang asy yang akan terjadi di masa yang akan datang
+
+    </script>
+</body>
+</html>
