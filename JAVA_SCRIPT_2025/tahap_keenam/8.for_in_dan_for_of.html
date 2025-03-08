@@ -137,6 +137,12 @@ console.log("============")
 
         console.log(obj2); // Output: { name: "Alice", age: 25 }
 
+        console.log("tesss")
+        let arraydariobj2 = Object.entries(obj2)
+        const  [array1obj2,array2obj2] = arraydariobj2
+        console.log(array1obj2) // Array [ "name", "Alice" ]
+
+ 
 
 
 
@@ -154,11 +160,10 @@ console.log("============")
         // },{})
         // console.log(dataObj)
 
-
-        // const userData = apiData.reduce((acc, [key, value]) => {
-        //     acc[key] = value;
-        //     return acc;
-        // },{})
+        const hasilObjek = apiData.reduce((acc,[key, value]) => {
+            acc[key] = value;
+            return acc
+        },{})
 
         // Output: { id: 1, name: "Alice", role: "Developer" }
         console.log("==================")
@@ -185,8 +190,9 @@ console.log("============")
         }
         };
 
+
         function nestedObjekLagih(objek){
-            return Object.entries(objek).map(([key, value]) => {
+            return Object.entries(objek).map(([key, value]) => { // nah disini di, kan sudah jadi array ya, dan valuenya itu isinya adalah value dari property user2 yang sudah berubah menjadi array pasangan
                 if (typeof value === "object" && value !== null && !array.isArray(value)){
                     return [key, nestedObjekLagih(value)]
                 }else {
@@ -208,6 +214,24 @@ console.log("============")
 
         const hasil = nestedObjek(user2);
         console.log(hasil)
+
+        // PENJELASAN
+        //     Object.entries(objek):
+        // Ini mengubah objek menjadi array dari pasangan [key, value].
+        // Contoh: Jika objek = { a: 1, b: 2 }, maka Object.entries(objek) akan menghasilkan [ ['a', 1], ['b', 2] ].
+        // .map(([key, value]) => { ... }):
+        // Method map digunakan untuk mengiterasi setiap elemen dari array yang dihasilkan oleh Object.entries.
+        // Setiap elemen array tersebut adalah pasangan [key, value], di mana:
+        //     key adalah nama property dari objek.
+        //     value adalah nilai dari property tersebut.
+        // value:
+        // value di sini merujuk pada nilai dari property objek yang sedang diproses.
+        // Misalnya, jika objeknya adalah { a: 1, b: { c: 2 } }, maka:
+        //     Pada iterasi pertama, value adalah 1 (nilai dari property a).
+        //     Pada iterasi kedua, value adalah { c: 2 } (nilai dari property b).
+        // Kondisi if:
+        // Jika value adalah objek (typeof value === "object"), bukan null, dan bukan array (!Array.isArray(value)), maka fungsi nestedObjekLagih dipanggil secara rekursif untuk memproses objek tersebut lebih dalam.
+        // Jika value bukan objek, maka langsung mengembalikan [key, value].
 
 
 

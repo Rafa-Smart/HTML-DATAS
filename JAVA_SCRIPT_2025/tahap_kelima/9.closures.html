@@ -202,17 +202,18 @@
             console.log(rafa("rafa"))
 
 
-            let lagihnih = (function (){
-                let hasil = 0
-                return function (){
-                    return hasil++ // o , 1, 2
-                    // return ++ hasil // 1, 2, 3
+            function lagi(){
+                let hasil = 0;
+                return function(){
+                    console.log(++hasil)
                 }
-            })()
+            }
 
-            console.log(lagihnih())
-            console.log(lagihnih())
-            console.log(lagihnih())
+            let tes4 = lagi()
+            tes4()
+            tes4()
+            tes4()
+
     </script>
 </body>
 </html>

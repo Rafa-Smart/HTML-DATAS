@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rafa Movies 2</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <center>
+        <div class="container">
+            <div class="row mt-4">
+              <div class="col">
+                <h1>Rafa Khadafi Database Fetch</h1>
+              </div>
+            </div>
+      
+            <div class="row" style="margin-left: 25%;">
+              <div class="col-md-8">
+                  <div class="input-group mb-3">
+                      <input type="text" class="form-control input-keyword" placeholder="Search Movie..."aria-describedby="button-addon2">
+                      <button class="btn btn-outline-primary search-button" type="button" id="button-addon2">Search</button>
+                    </div>              
+              </div>
+            </div>      
+    </center>
+      <div class="row movie-container"></div>
+    </div>
+
+    <!-- awal modal  -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="movie-detail-modal"
+      tabindex="-1"
+      aria-labelledby="movie-detail-modal Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="movie-detail-modal Label">
+              Modal title
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- akhir modal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+
+        // ketika butto search di klik
+        const buttonSearch = document.querySelector(".search-button");
+        buttonSearch.addEventListener("click", function() {
+            const searchData = document.querySelector(".input-keyword").value
+            // sebenarnya ada banyak paramter yang ada di dalam fetch ini, tapi karena ini simple dan metode nya sudah get maka disini tidak digunakan dahulu,
+
+            // fetch akan mengembalikan promise, maka harus kita tangani ketika berhasil atau gagal
+            fetch(`http://www.omdbapi.com/?apikey=98d1d349&s=${searchData}`)
+            // .then((Response) => console.log(Response)) ini akan aneh hasilnya karena bukan dalam bentuk json
+            .then((response) => {
+                return response.json() // ini masih dalam bentuk promise oleh karena itu kita jalankan kedalam then lagi
+            })
+            .then((response) => {
+                // console.log(response) // Object { Search: (10) […], totalResults: "166", Response: "True" }
+                const movies = response.Search;
+                let cards = ""
+                movies.forEach(element => {
+                    cards += ShowCards(element)
+                });
+                const moviecontainer = document.querySelector(".movie-container")
+                moviecontainer.innerHTML = cards;
+
+
+                // ini kenapa kita taro fetch yang kedua didalam fecth yang pertama? karena,
+                // ada bebrapa faktor :
+                // 1. karena fetch yang kedua ini ketergantungan data dari fetch yang pertama yaitu si data imdbid nya
+                // 2. karena kita kan ingin mengambil buttonnya, nah buttonnya itu munucl di fetch yang pertama di bagian resolvenya atau thennya, kalo misal kita taro ini diluar, maka nanti buttonnya ga terdeteksi.
+
+
+                // ketika tombol show detail
+                const modalDetailButton = document.querySelectorAll(".modal-detail-button");
+                modalDetailButton.forEach(btn => { // karena ini itu isinya adlah nodelist, mkanya kita harus looping agar nanti bisa di klik satu satu
+                    btn.addEventListener("click", function() {
+                        // console.log(this) //  yang keluar itu adalah objeknya yaitu si btn <a class="btn btn-primary modal-detail-button" href="#" data-bs-toggle="modal" data-bs-target="#movie-detail-modal" data-imdbid="tt0418279">
+
+                        // mengambil id dari setiap show detial film yang di klik
+                        const imdbid = this.dataset.imdbid // kita ambil data-imdbid="${element.imdbID}, jadi dari atribut data-imdbid="${element.imdbID}" kita ambil isinya atau si imdbid, pake dataset
+                        fetch(`http://www.omdbapi.com/?apikey=98d1d349&i=${imdbid}`)
+                        .then((response) => {
+                           return response.json(); // ini bakal masih isinya promise, jadi kita harus ubah dulu ke json
+                        })
+                        .then((response) => {
+                            const movieDetail = ShowDetail(response);
+                            const modalbody = document.querySelector(".modal-body");
+                            modalbody.innerHTML = movieDetail;
+                        })
+
+                    })
+                })
+            })
+
+        })
+    
+
+
+
+
+    function ShowCards(element){
+            return `<div class="col-md-3 my-3">
+                                <div class="card">
+                                    <img src="${element.Poster}" class="card-img-top">
+                                    <div class="card-body">
+                                    <h5 class="card-title">${element.Title}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">${element.Year}</h6>
+                                    <a href="#" class="btn btn-primary modal-detail-button" 
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#movie-detail-modal"
+                                    // data-imdbid="${element.imdbID}">Show Details</a>
+                                    </div>
+                                </div>
+                            </div>`
+        }
+
+
+        function ShowDetail(hasil){
+            return `
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                            <img src="${hasil.Poster}" class="img-fluid" />
+                                            </div>
+                                            <div class="col-md">
+                                            <ul class="list-group">
+                                                <li class="list-group-item"><h4>${hasil.Title} ${hasil.year}</h4></li>
+                                                <li class="list-group-item">
+                                                <strong>Director : </strong>${hasil.Director}
+                                                </li>
+                                                <li class="list-group-item"><strong>Actors : </strong>${hasil.Actors}</li>
+                                                <li class="list-group-item"><strong>Awards : </strong>${hasil.Awards}</li>
+                                                <li class="list-group-item">
+                                                <strong>Plot : </strong> <br/> 
+                                                ${hasil.Plot}
+                                                </li>
+                                            </ul>
+                                            </div>
+                                        </div>
+                                        </div>`
+        }
+
+        // penjelasan fetch
+        // adalah sebuah method pada api javascript untuk mengambil resourse dari jaringan, dan mengembalikan promise yang berisi data yang diambil
+
+        // fetch('resourse', init) // init = ada;ah konfigurasi
+
+        // resourse = itu bisa url, atau bisa juga objek 
+        // nah init itu = konfigurasi, seperti methodnya apa, apa saja yang diambil, dll yang berbentuk objek
+        // jadi sma juga kayak si $.ajax({url:"",success:...})
+        // method, headers, body, mode, cache, redirect, referrer, integrity, keepalive, credentials, encoding, as, asentry. dll tadi methodnya bisa get post, put, delete, dll
+
+        // response = hasil dari fetch nah
+        // didalam response ini ada dua yaitu property dan method
+        // propertynya = headers, ok, redirected, status, statusText, type, dll
+        // ok === kode statusnya 200 jadi response.ok kalo then
+        // redicted === kode statusnya 404 jadi response.redirected
+
+        // nah kalo kita dapet response lalu kit amasukan kedalam method json, maka itu entuknya promise yang kalo resolve atau rejected baru jadi objek, method response = clone(), blob() dan ini semua akan mengembalikan promise juga, dll nanti tolog cari tahu sendiri methd blob dan kawan kawan nya di deepseek
+
+
+
+        // INI TES AJA
+        // URL API yang akan diakses
+      const apiUrl = "https://jsonplaceholder.typicode.com/posts/1";
+
+      // Opsi konfigurasi untuk fetch (init)
+      const init = {
+          method: "GET", // Metode HTTP yang digunakan (GET, POST, PUT, DELETE, dll.)
+          headers: {
+              "Content-Type": "application/json", // Tipe konten yang dikirim (jika ada)
+              "Authorization": "Bearer your_token_here" // Token otorisasi (jika diperlukan)
+          },
+          mode: "cors", // Mode permintaan (cors, no-cors, same-origin)
+          cache: "no-cache", // Kebijakan caching (no-cache, reload, force-cache, dll.)
+          credentials: "include", // Mengirim kredensial (cookies, auth headers) bersama permintaan
+          redirect: "follow", // Kebijakan pengalihan (follow, error, manual)
+          referrerPolicy: "no-referrer" // Kebijakan referrer (no-referrer, client, dll.)
+      };
+
+      // Mengambil data dari API menggunakan fetch
+      fetch(apiUrl, init)
+          .then(response => {
+              // Memeriksa apakah respons sukses (status code 200-299)
+              if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`); // Error ini akan dilempar ke dalam rejected Promise, artinya alur eksekusi akan langsung masuk ke blok .catch() (jika ada) atau menghentikan eksekusi jika tidak ada penanganan error.
+              }
+              // Mengembalikan respons dalam format JSON
+              return response.json();
+          })
+          .then(data => {
+              // Menampilkan data yang diterima dari API
+              console.log("Data dari API:", data);
+          })
+          .catch(error => {
+              // Menangani kesalahan yang terjadi selama proses fetch
+              console.error("Terjadi kesalahan:", error);
+          });
+
+
+    </script>
+  </body>
+</html>

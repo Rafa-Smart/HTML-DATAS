@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rafa Movies 2</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <center>
+        <div class="container">
+            <div class="row mt-4">
+              <div class="col">
+                <h1>Rafa Khadafi Database Fetch</h1>
+              </div>
+            </div>
+      
+            <div class="row" style="margin-left: 25%;">
+              <div class="col-md-8">
+                  <div class="input-group mb-3">
+                      <input type="text" class="form-control input-keyword" placeholder="Search Movie..."aria-describedby="button-addon2">
+                      <button class="btn btn-outline-primary search-button" type="button" id="button-addon2">Search</button>
+                    </div>              
+              </div>
+            </div>      
+    </center>
+      <div class="row movie-container"></div>
+    </div>
+
+    <!-- awal modal  -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="movie-detail-modal"
+      tabindex="-1"
+      aria-labelledby="movie-detail-modal Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="movie-detail-modal Label">
+              Modal title
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- akhir modal -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+
+    const seacrhButton = document.querySelector(".search-button")
+    seacrhButton.addEventListener("click", async function(){
+        const inputSeacrh = document.querySelector(".input-keyword")
+        const movies = await getmovies(inputSeacrh.value); // jadi gini kalo ga pake async dan await, ini adalah kode yang singkronus, karena ketika getmovies dijalankan (belum selesai promisenya pending), tapi langsung dimasukan ke dalam movies yang harusnya yang dimasukannya itu adalah resolve dari si promisenya (kalo berhasil), dan isi dari movies adalah objeknya , tapi karena langsung dimasukan kedala variable tanpa nunggu pending nya beres , makanya movies isinya itu pending, karena si jsnya g atau kalo di dalam fungsi getMovies ini isinya ada async nya. oleh karena itu kita gunakan async dan await untuk menunggu prosesnya selesai, jadi di fungsinya, kita tambahkan async, yang maksudnya memberi tahu js bahwa didalma fungsi ini ada kode asingkronus yang padahal itu adalah kode yang async, nah kode yang asycn itu ditambahkan await dibelakangnya, jadi jsnya ketika menemukan await di dalam suatu fungsi maka dia akan menunggu sampai promisenya selesai pending, baru di maskan ke variable movies
+        updateUi(movies);
+    })
+
+    // misal 
+    // const modaldetailbutton = document.querySelectorAll(".modal-detail-button")
+    // karena program ini async maka kode yang sngkronus ini akan dijalankan ketika pertama kali program ini dijalankan, nah pas ini dijalankan, buttonnya belum tampil di browser, makanya modal button ini akan undefined.
+
+    // caranya adalah event binding = yaitu kita akan kasih event yang awalnya belum ada, tapi ketika dia sudah ada, eventnya akan menjalankannya
+    // yang dimaksud dengan document disini adalah seluruh element yang ada di browsernya termasuk tombol detailnya
+    document.addEventListener("click", async function(e){ // e disini adalah elemen yang di klik
+        // console.log(e) //click { target: html, buttons: 0, clientX: 177, clientY: 185, layerX: 177, layerY: 185 } // lokasi tombol di klik dan ada banyak info disana liat aja salah sautnya adalah target yaitu si element yang di klik
+
+        // console.log(e.target) // <button id="button-addon2" class="btn btn-outline-primary search-button" type="button">, dia akan mengambil elemen yang di klik
+
+        // jadi ketika e atau elemen yang di klik adalah elemen yang nama classnya modal-detail-button, maka kita akan jalankan kode di dalamnya.
+       if(e.target.classList.contains("modal-detail-button")) { // jadi ketika elemen yang di klik nya adlaah elemen yang mempunyai class dan berisi modal-detail-button maka jalankan kode dibawahnya
+        const imdbid = e.target.dataset.imdbid;
+        const moviedetail = await getmoviesdetail(imdbid);
+        updateUiDetail(moviedetail);
+       }
+    })
+
+
+    // fungsi fungsi
+    
+
+    // fetch kedua
+    function getmoviesdetail(dataId){
+        return fetch(`http://www.omdbapi.com/?apikey=98d1d349&i=${dataId}`)
+                .then((response) => response.json())
+                .then((hasildetail) => {
+                    return hasildetail;
+                    // console.log(hasildetail) // Object { Title: "The Avengers", Year: "2012", Rated: "PG-13", Released: "04 May 2012", Runtime: "143 min", Genre: "Action, Sci-Fi", Director: "Joss Whedon", Writer: "Joss Whedon, Zak Penn", Actors: "Robert Downey Jr., Chris Evans, Scarlett Johansson", Plot: "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.", … }
+                    
+                    // nahhhh ini dia penyebabnya kenapa di dalam fetch yang kedua ini tidak di looping dua kali karena sudah berbentuk objek gitu bukan array lagi
+                })
+    }
+
+    function updateUiDetail(hasildetail){
+        const moviedetail = ShowDetail(hasildetail); // ini dia tidka dilooping lagi karena sudah di looping di awal ketika di bagian evenetnya, dan karena show detail ini tidak akan di looping isinya makanya tidak di looping,
+
+        // dan karena fetch yang kedua ini itu mengembalikan nilai detail bukan search
+        const modalbody = document.querySelector(".modal-body");
+        modalbody.innerHTML = moviedetail
+    }
+
+
+    // fetch pertama
+    function getmovies(keyword){
+        return fetch(`http://www.omdbapi.com/?apikey=98d1d349&s=${keyword}`)
+                .then((response) => response.json())
+                .then((response) => {
+                   return response.Search
+        })
+    }
+
+    function updateUi(movies){
+        let cards = "";
+        movies.forEach(element => {
+                cards += ShowCards(element)
+                const movieContainer = document.querySelector(".movie-container")
+                movieContainer.innerHTML = cards;
+        });
+    }
+
+
+
+    function ShowCards(element){
+            return `<div class="col-md-3 my-3">
+                                <div class="card">
+                                    <img src="${element.Poster}" class="card-img-top">
+                                    <div class="card-body">
+                                    <h5 class="card-title">${element.Title}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">${element.Year}</h6>
+                                    <a href="#" class="btn btn-primary modal-detail-button" 
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#movie-detail-modal"
+                                    // data-imdbid="${element.imdbID}">Show Details</a>
+                                    </div>
+                                </div>
+                            </div>`
+        }
+
+
+        function ShowDetail(hasil){
+            return `
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                            <img src="${hasil.Poster}" class="img-fluid" />
+                                            </div>
+                                            <div class="col-md">
+                                            <ul class="list-group">
+                                                <li class="list-group-item"><h4>${hasil.Title} ${hasil.Year}</h4></li>
+                                                <li class="list-group-item">
+                                                <strong>Director : </strong>${hasil.Director}
+                                                </li>
+                                                <li class="list-group-item"><strong>Actors : </strong>${hasil.Actors}</li>
+                                                <li class="list-group-item"><strong>Awards : </strong>${hasil.Awards}</li>
+                                                <li class="list-group-item">
+                                                <strong>Plot : </strong> <br/> 
+                                                ${hasil.Plot}
+                                                </li>
+                                            </ul>
+                                            </div>
+                                        </div>
+                                        </div>`
+        }
+
+
+    </script>
+  </body>
+</html>

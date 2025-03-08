@@ -117,7 +117,7 @@
             this.umur = umur
 
             // ini ga akan bisa karena sapaya tidak mengguakan this.sapa jadi sapa ini akan erorr dan tidak akan bisa, karena klao funsi declaration itu harus dipanggil bmenggunkaan atau berdasarkan dari objeknya jadi kalo tidak menggunkaan this.sapa, maka tdak akan bisa, karena this yang ada di dalam fungsi declaration yang tidak menggunakan atau berdasarkan objeknya maka thisnya akan langsung merujuk ke windownya
-            sapa = function(){
+            sapa = function(){ // ini adalah fungsi xpresion yang langsung di hoisting, jadi nanti this.umur ini akan undefined
                 console.log(`hallo ${this.nama} dan saya berumur ${this.umur} tahun.`)
             }
 
@@ -172,7 +172,7 @@
 
 
             // nih coba kamu ketik ini hello() di termial, maka karena ini fungsi declaration yang berada didalam objek, maka thisnya akan mengacu ke globalnya, beda halnya kalo kamu ubah fungsi ini menjadi sebuah fungsi arrow maka thisnya akan mengacu ke objeknya (mengcu kepada diamana ia di definisikan, jadi kalo misa kamu pake konsep this di arrow fungsi yang berada di dalam objek literal maka this ini akan langusng erujuk kewindownya atau ke objek turunannya, tapi kalo kamu buat mesin objek kan berati ananti akan diturunkan maka nanti objek yang diturunkan akan bisa mengakses method yang menggunakan arrow fungsi yang ada di objek turunannya, karena akan this nya aka mnegacu ke objek turunannya yaitu si objek mesin itu tadi)
-            hello = function(){
+            hello = function(){ // nah ini fungis expresion, yang bakal langsung di hoisting ke window, jadi thisnya akan merujuk ke window.
                 console.log(this)
             }
             // Window http://127.0.0.1:5500/JAVA_SCRIPT_2025/tahap_kelima/11.this%20dalam%20arrow%20fungsi.html

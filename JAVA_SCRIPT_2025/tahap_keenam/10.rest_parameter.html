@@ -131,7 +131,13 @@
         // jadi saya ingin memilih dari parameter paramter ini yang bertipe data number
         console.log(filterby('number',1,2,3,4,5,false,4,5, "rafa"))
 
+        let teslagih = [["satu","rafa"],["dua","putri"]]
+        let hasiltes = teslagih.reduce((acc,[key,value]) => {
+            acc[key] = value;
+            return acc
+        },{})
 
+        console.log(hasiltes) //Object { satu: "rafa", dua: "putri" }
     </script>
 </body>
 </html>

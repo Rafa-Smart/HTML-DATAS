@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Data</title>
+    <style>
+        h1 {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- berati kita bisa menambahkan style sebelum tag itu ada di dalam js 
+     ini penting berati kita bisa buatin style cssnya nanti -->
+    <button id="button" type="button">Fetch Data</button>
+    <script>
+        const button = document.querySelector("#button")
+        button.addEventListener("click", function(){
+            let elemen = "<h1>halo semuanya</h1>";
+            document.body.innerHTML = elemen;
+        })
+    </script>
+</body>
+</html>

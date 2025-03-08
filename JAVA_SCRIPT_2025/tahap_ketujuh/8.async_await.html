@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // async / asingkronus function = adalah sebuah fungsi yang berkerja secara asingkronus melalui event loop, yang dia menghasilkan implisit promise sebagai return valuenya, maksudnya fngsinya akan mengembalikan promise meskipun didalamnya tidka ada kode yang async tpai cara penulisan kodenya menggunakan penulisan yang standart atai yang singkronus
+
+      // didalam funsi async ini terdapat keyword await yang fungsinya untuk memberhentikan sementara eksekusi sebuah fungsi sambil menunggu promisenya selesai pending dan mengembalikan resolve atau rejected
+    //   await menghentikan sementara eksekusi fungsi async, tetapi tidak memblokir thread utama JavaScript. Artinya, thread utama tetap bisa menjalankan tugas lain (seperti menangani event atau rendering UI).
+
+      // contoh :
+      async function contoh() {
+        return 42;
+      }
+      console.log(contoh()); // Output: Promise { <state>: "fulfilled", <value>: 42 }
+
+      //   Meskipun fungsi ini hanya mengembalikan angka 42, karena dia adalah fungsi async, nilai kembaliannya adalah Promise yang di-resolve dengan nilai 42.
+
+
+    // Fungsi async memungkinkan Anda menggunakan await di dalamnya untuk menangani operasi asinkronus.
+    // Meskipun fungsi async selalu mengembalikan Promise, Anda tidak perlu secara eksplisit membuat Promise (misalnya, new Promise()). JavaScript secara otomatis membungkus nilai kembaliannya dalam Promise.
+
+
+
+    new Promise((resolve, rejected) => {
+        resolve("selesai")
+    })
+    console.log(coba) 
+    </script>
+  </body>
+</html>

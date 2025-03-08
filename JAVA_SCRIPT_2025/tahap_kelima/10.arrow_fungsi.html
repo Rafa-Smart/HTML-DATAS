@@ -88,10 +88,11 @@
     console.log("============")
     // ini mah experimen
     let jelema = ["Dudung","daDAng","diDINg"]
-    let jumlahHurufgede = jelema.map(function(nama){
-        let hurufBesar = nama.split('').filter(c => c === c.toUpperCase()).length
+    let jumlahHurufgede = jelema.map(function(nama){// ngambil elemennya
+        let hurufBesar = nama.split('').filter(c => c === c.toUpperCase()).length // ngambil setiap hurufnya
         return `${nama} = jumlah huruf besarnya = ${hurufBesar}`
     })
+
     console.log(jumlahHurufgede)
 
     // jadi fungsi split itu untuk 

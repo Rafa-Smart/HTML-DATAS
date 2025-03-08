@@ -50,13 +50,28 @@
 
 
         // nah ini akan benar
-        // fetch("http://www.omdbapi.com/?apikey=dca61bcc&s=avengers")
-        // .then((Response) => {
-        //     return Response.json()
-        // })
-        // .then((Response) => {
-        //     console.log(Response)
-        // })
+        fetch("http://www.omdbapi.com/?apikey=dca61bcc&s=avengers")
+        .then((Response) => { 
+            return Response.json()
+            // disini kita return kan dulu response dalam bentuk json
+        })
+        .then((Response) => {
+            // kemudian disini kita ambil lagi response yang sudah di ubah ke json tadi
+            // console.log(Response) // ini bisa kamu buka aja
+
+            // output = Object { Search: (10) […], totalResults: "163", Response: "True" }
+
+            // jadi gini alurnya
+
+            // 1.fetch mengirim permintaan HTTP ke server dan mengembalikan Promise yang menghasilkan objek Response.
+
+            // 2.Di .then() pertama, kita memanggil Response.json() untuk mengubah respons menjadi JSON. Ini juga mengembalikan Promise.
+
+            // 3.Di .then() kedua, kita menerima data JSON yang sudah di-parse dan bisa langsung digunakan.
+        })
+
+
+        // jadi fecth itu akan mneghasilkan promise yang berbentuk objek yang mereprentasikan keberhasilan atau kegagalan pada sebuah event asingkronus yaitu salah satunya adalah fetch ini jadi nangkep berhasilnya pake .then lalu callbacknya resolve === success, dan nangkep errornya pake catch lalu callbacknya rejected === error, dan nanti ada finally jika waktu tunggu jika berhasil atau gagalnya selesai
 
         // promise = janji
         // janji = bisa terpenuhi dan bisa ingkar
@@ -64,10 +79,10 @@
         // state/janji = ingkar = (rejected)
         // state = pending = waktu tunggu sebelum janjinya terpenuhi atau di ingkari
 
-        // untuk menjalankan keadaan ini ada tiga fungsi callback yaitu
-        // 1. resolve = jika terpenuhi
-        // 2. reject = jika tidak terpenuhi
-        // 3. finally = jika waktu tunggunya selesai baik terpenuhi atau di ingkari janjinya
+        // untuk menjalankan keadaan ini ada tiga fungsi callback yaitu yang ada di parameter then dan cacth
+        // 1. finally = jika waktu tunggunya selesai baik terpenuhi atau di ingkari janjinya
+        // 2. resolve = jika terpenuhi
+        // 3. reject = jika tidak terpenuhi
 
         // didalam promise ini ada aksi yang dilakukan ketika janjinya terpenuhi atau tidka terpenuhi
 
@@ -75,6 +90,160 @@
         // kalo tidak terpenuhi = cacth dan cacth ini akan menjalankan reject
 
         // promise = artinya adalah sebuah objek yang mereprentasikan keberhasilan atau kegagalan dari sebuah event yang asy yang akan terjadi di masa yang akan datang
+
+        console.log("=========")
+        // kita membuat promise, karena dia objek maka kita bisa buat dari prototypenya
+
+        // kita buat ini agar defaultnya ini ditepati, nah ini kayanya bisa di ganti pake data yang sedang diambil dari api, kita pake true karena anggap sudah bisa mengambil datanya dengan lancar
+        let ditepati = true
+
+        const janji1 = new Promise((resolve, rejected) => {
+            // kita menggunakna kondisi, jika kondisi ini terpenuhi maka kita akan menjalankan resolve dan sebaliknya
+            if (ditepati) {
+                resolve("janji sudah ditepati...")
+            } else {
+                rejected("janji di ingkari...")
+            }
+        })
+
+        // output
+        // ketik ini di console janji1
+        // Promise { <state>: "fulfilled", <value>: "janji sudah ditepati..." }
+        // <state>: "fulfilled" //  karena dia terpenuhi janjinya
+        // ​
+        // <value>: "janji sudah ditepati..." // ini karena yang dieksekusi adalah si resolvenya
+
+        // kalo misalkan kamu mau tnagkap resolve dan rejectdnya bersamaan maka kamu bisa memasukan console.log() nya didalam state then (jika berhasil) dan cacth (jika gagal).
+
+
+        janji1 // ANGGAP SAJA INI ADALAH PROMISE YANG DIDAPATKAN DARI FETCH
+            // jadi yang dimaksud parameter hasil ini adalah apapun yang dijalan kan di resolvenya yaitu "janji sudah ditepati..."
+
+            // hasil pada blok then ini merepresentaskan resolve yang ada didalam promise, dan hasil yang ada di blok catch ini merepresentasikan rejected yang ada di dalam promise
+            .then(hasil => {
+                console.log("Ok : " + hasil)
+            })
+            .catch(hasil => {
+                console.log("maaf gagal : " + hasil)
+            })
+
+            // nah ini secra default itu akan menjalankan then karena kondisi (pengambilan datanya atau ditepatinya adalah true)
+            // jika kamu ganti let ditepatinya jdi false atau misal gagal mengambil data dari api maka akan menjalankan cacthnya
+    
+
+            // contoh 2
+            let ditepati2 = false;
+            const janji2 = new Promise((resolve, rejected) => {
+                if (ditepati2) {
+                    setTimeout(() => {
+                        resolve("ditepati setelah beberapa waktu....\nsetelah 3 detik....")
+                    },2000)
+                } else {
+                    setTimeout(() => {
+                        rejected("tidak ditepati setelah beberapa waktu....\nsetelah 3 detik....")
+                    },2000)
+                }
+            })
+
+            console.log("mulai")
+            // kita coba jalankan
+            // janji2
+                // .then(hasil => console.log(hasil))
+                // .catch(hasil => console.log(hasil))
+                
+                // atau kalo mau liat pendingnya maka
+
+                // nah kalo gini nanti pending dulu di antara mulai dan selesai baru nanti beres setelah dua detik muncul hasilnya
+
+                // buka aja
+                // console.log(janji2.then(() => console.log(janji2)))
+                // console.log(janji2.catch(() => console.log(janji2))),
+
+                // ini karena ketika dipromise di jalankan sudah langsung di console.log (pas pendingnya keahuan), nah terus isi dari then atau catch ini baru mengconsole.log() si janjinya yang sudah tidak pending lagi
+                
+            console.log("selesai")
+            console.log("==========")
+            let ditepati3 = true
+            const janji3 = new Promise((resolve, rejected) => {
+                if (ditepati3) {
+                    setTimeout(() => {
+                        resolve("ditepati setelah beberapa waktu....\nsetelah 3 detik....")
+                    },2000)
+                } else {
+                    setTimeout(() => {
+                        rejected("tidak ditepati setelah beberapa waktu....\nsetelah 3 detik....")
+                    },2000)
+                }
+            })
+
+            janji3 
+            // kita pake finally ini akan dijalankan ketika salah satu dari then atau catch ini selesai dijalankan, jadi ketika pendingnya selesai maka finallynya dulu dijalankan, baru salah satu dari then atau catch
+
+            // jadi biasanya finally ini buat animasi loading
+
+            .finally(() => console.log("selesai menjalankan menunggu...."))
+            .then((hasil) => console.log(hasil))
+            .catch((hasil) => console.log(hasil))
+
+
+            // contoh 3
+            // Promise.all()
+
+            // misalkan saya mengambil data dari 2 api yang berbeda
+
+            let tes = true
+
+            const film = new Promise((resolve, rejected) => {
+                if(tes) {
+                    setTimeout(() => {
+                        resolve([{
+                            judul:"rafa khadafi",
+                            pemeran:"jack",
+                            penonton:["jamal","udin","siti"]
+                        }])
+                    }, 5000)
+                }else {
+                    rejected("gagal nih...")
+                }
+            })
+
+            const cuaca = new Promise((resolve,rejected) => {
+                if (tes) {
+                    setTimeout(() => {
+                        resolve([{
+                            cuaca:"hujan",
+                            suhu:"20 derajat celcius",
+                            kondisi:"cerah berawan"
+                        }])
+                    }, 5000)
+                } else {
+                    rejected("gagal lagi nih...")
+                }
+            })
+
+            // kalo kita mau menjalankan maka kita bisa satu satu,
+            // misal
+            // film
+            // .finally(() => console.log("sedang proses..."))
+            // .then((hasil) => console.log(hasil))
+            // .catch((hasil) => console.log(hasil))
+
+            // cuaca
+            // .finally(() => console.log("sedang proses..."))
+            // .then((hasil) => console.log(hasil))
+            // .catch((hasil) => console.log(hasil))
+
+
+            // kalo mau langsung maka
+            Promise.all([film, cuaca])
+            // .then((hasil) => console.log(hasil)) // ini malah array didalam array, kalo pengen terpisah maka bis apake destruction
+            .finally(() => console.log("sedang proses..."))
+            .then((hasil) => {
+                let [film1, cuaca1] = [...hasil];
+                console.log(film1)
+                console.log(cuaca1)
+                // console.log(hasil)
+            })
 
     </script>
 </body>
