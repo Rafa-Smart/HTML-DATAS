@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // class dalam javascript adalah blueprint, prototype atau cetakan untuk membuat Object
+      // class berisikan deklarasi semua property dan function yang dimiliki object
+      // setiap object selalu dibuat dari class
+      // dan sebuah class bisa membuat objek tanpa batas
+
+      // nahh hasil dari cetakan class ini disebut dengan object
+
+      // 1 cara lama membuat class
+      function Person(nama, kelas) {
+        this.nama = nama;
+        this.kelas = kelas;
+        this.sayHello = function () {
+          // ini methodnya langsung nempel di object instancenya dna ini tidka direkomendasikan, yg direkomendasikan adalah membuat method nya di prototype constructor functionnya yaitu di Person.prototype
+          return `halo ${this.nama}`;
+        };
+      }
+
+      // membuat method atau fungsi di constructor function pake prototype
+      Person.prototype.umur = function (umur) {
+        // ini direkomendasikan karna hanya membuat method satu kali, kalo yang angusng nempel di objek instancenya maka, nanti setiap kali membuat objek akan selalu dibuatkan methodnya meski tidak dipakai, jadi tidak efisien
+        return `umur ${this.nama} adalah ${umur}`;
+      };
+
+      const rafa = new Person("rafa", "X pplg 2");
+
+      //   constructor inheritance
+
+      // jadi constructor itu  adllah sebuah blueprint atau cetakan untuk membuat objek lainnya
+
+      // dalam constuctor kita biasanya membuat property atau sebuah method, tapi di dalma constructor juga kita bisa memanggil constructor lain, dengan begitu kita bisa mewarisi semua property yang dibuat di constructor lain tersebut, nah biasanya kan kita kalo mau ngambil property atau method dari pelajaran sebelumnya itukan objek keduanya bukan constructor dan objek pertamanya itu masih mmenggunakan mesin pembuat objek yang fungsi dan masih di return objeknya coba liat aja (buka)
+      const method = {
+        // ini bukan constructor
+        kelas: "10pplg2",
+        makan: function (jumlah) {
+          return (this.energi += jumlah);
+        },
+      };
+
+      function buatOrang(nama, umur, energi = 10) {
+        // ini masih pake return yg cara lama
+
+        // Object.create() adalah metode dalam JavaScript yang digunakan untuk membuat objek baru dengan prototype tertentu. Dengan kata lain, metode ini memungkinkan kamu membuat objek baru yang mewarisi properti dan method dari objek lain (yang disebut sebagai prototype).
+
+        // berati kita membuat objek baru yang kemudian objek baru tersebut merupakan turunan atau instance dari sebuah prototype dan objek baru ini aan bisa mengakses seluruh property dan method yang ada di prototypenya, maka dalam kasus ini berati :
+
+        // PENTING
+        // objek barunya adalah OrangLagi
+        // Object.create(method) menggunakan objek yang sudah ada (bisa objek literal atau function constructor dalam hal ini objek literal yaitu method) sebagai prototype untuk objek baru yang dibuat.
+
+        // PENTING
+        // jadi objek Oranglagi ini akan mempunyai sebuah prototype dari si objek literal method.
+
+        OrangLagi = Object.create(method);
+        OrangLagi.nama = nama;
+        OrangLagi.umur = umur;
+        OrangLagi.energi = energi;
+        return OrangLagi;
+      }
+
+      const orang1 = new buatOrang("siti", 12);
+
+      // tetep bisa akses selain pethod yaitu property
+      // orang1.kelas
+      // "10pplg2"
+
+      // nah ini cara ketika kita sudah pake constructor yg baru, dna objek keduanya itu menggunakan constructor juga
+
+      // caranya adalah kita bisa menggunakna NamaConstructor.call(this.parameter)
+      // maka nanti hasilnya semua inisiasi yang ada pada constructor kedua itu akan di copy ke constructor yang pertama
+
+      // contoh
+
+      // construction pertama
+      function karyawan(firstName, tes) {
+        this.firstName = firstName;
+        this.tes = tes;
+        this.sayHello2 = function () {
+          return `halo ${this.firstName}`;
+        };
+      }
+
+      //   costruction kedua
+      function manager(firstName, lastName, tes) {
+        karyawan.call(this, firstName, tes); // jadi this yang sebenarnya ada di objek karyawan jadi ada di objek manager, nah paramternya ini bebas mau ngambil method atau property yang mana saja
+
+        this.lastName = lastName;
+      }
+      const manager1 = new manager("siti", "muhaimin", "jamal"); // disini prlu nambha lagi paramternya
+      // Object { firstName: "siti", tes: "jamal", sayHello2: sayHello2(), lastName: "muhaimin" }
+
+      // karyawan.call(this, firstName); adalah cara untuk memanggil konstruktor karyawan dalam konteks objek manager. Ini berarti bahwa properti dan metode yang didefinisikan dalam karyawan akan diterapkan ke objek manager.
+      // this dalam karyawan.call(this, firstName); merujuk ke objek manager yang sedang dibuat. Dengan kata lain, this di sini adalah objek manager yang baru.
+
+      // Dengan kata lain, karyawan.call(this, firstName); berarti "Jalankan fungsi karyawan dengan this yang merujuk ke objek manager yang sedang dibuat, dan berikan firstName sebagai argumen."
+
+      // PENTING
+      // ini terlihat seperti inheritance atau mewarisi semua property dan method yang ada di constructor lain, tapi ini sebenernya adalah mengcopy saja method dan propertynya dari constructor lain
+
+      // perbedaan Object.create dengan call
+
+      // Object.create
+      // 1. Fungsi: Membuat objek baru dengan prototype tertentu.
+      // 2. Cara Kerja: Menggunakan objek yang sudah ada sebagai prototype untuk objek baru.
+
+      // call
+      // 1 Fungsi: Memanggil fungsi dengan mengubah nilai this di dalam fungsi tersebut.
+      // 2. Cara Kerja: Mengizinkan Anda untuk memanggil fungsi dengan konteks (this) yang berbeda.
+
+      // Gunakan Object.create() jika:
+      // Anda ingin membuat objek baru yang mewarisi properti/method dari objek lain.
+      // Anda ingin mengimplementasikan pewarisan tanpa menggunakan constructor function.
+
+      // Gunakan call() jika:
+      // Anda ingin memanggil fungsi dengan konteks (this) yang berbeda.
+      // Anda ingin meminjam method dari objek lain.
+      // Anda ingin memanggil fungsi dengan argumen tambahan.
+
+      // contoh lagi
+      const method2 = {
+        makan: function () {
+          console.log(`${this.nama} sedang makan`);
+        },
+      };
+
+      function Orang(nama) {
+        this.nama = nama;
+      }
+
+      Orang.prototype = Object.create(method2); // Menggunakan `Object.create()` untuk pewarisan,
+
+      const orang12 = new Orang("siti");
+      orang12.makan(); // Output: "siti sedang makan"
+
+      function sapa(pesan) {
+        console.log(`${pesan}, ${this.nama}`);
+      }
+
+      sapa.call(orang1, "Halo"); // Output: "Halo, siti" (Menggunakan `call()` untuk mengubah konteks)
+    </script>
+  </body>
+</html>

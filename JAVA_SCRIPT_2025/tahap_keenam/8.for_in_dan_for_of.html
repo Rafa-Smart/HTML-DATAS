@@ -69,7 +69,7 @@ console.log("============")
         // }
 
         // nah kita destructio saja jadi tangkep index dan juga elemennya
-        for (const [i, m] of mhs.entries()){
+        for (const [i, m] of mhs.entries()){ // entries ini mengeubah jadi array berpasangan, jadi 1 pasangannya apa dll, karena entries itu akan mengubah objek menjadi sebuah arrray berpasangan, dan karena array itu objek maka bisa di giniiin, dan ebrati pasangan dari setia element array adalah index nya makanya bisa begini ( karena setiap array itu adalah objek)
             console.log(`${m} adalah mahasiswa ke-${i + 1}`);
         }
         
@@ -154,7 +154,7 @@ console.log("============")
         // Mengubah array menjadi objek
 
 
-        // const dataObj = apiData.reduce((acc, [key, value]) => {
+        // const dataObj = apiData.reduce((acc, [key, value]) => { // [key, value] =  adalah isi dari nilai yang berisi hasil
         //     acc[key] = value;
         //     return acc
         // },{})

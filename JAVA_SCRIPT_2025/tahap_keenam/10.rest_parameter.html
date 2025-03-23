@@ -43,6 +43,9 @@
         // Menggunakan method objek
         console.log(Object.keys(arguments), typeof arguments); // Output: ['0', '1', '2']
         console.log(Object.values(arguments), typeof arguments); // Output: [1, 2, 3]
+        for(m of Object.keys(arguments)){
+            console.log(m) // output : 0,1,2
+        }
             console.log("+++++++++")
 
             // ini tiga cara mengubah arguments menjadi array

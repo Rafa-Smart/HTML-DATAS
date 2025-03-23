@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dom Selection</title>
+  <style>
+    * { 
+        border: 2px solid #dedede; 
+        padding: 15px; 
+        margin: 15px; 
+    }
+    html { 
+      margin: 0;
+      padding: 0;
+    }
+    body { 
+      max-width: 600px;
+      margin: 30px auto;
+      font-family: sans-serif;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="judul">Hello World</h1>
+  <div id="container">
+      <section id="a">
+          <p class="p1">paragraf 1</p>
+          <a href="http://instagram.com/sandhikagalih">Instagram Sandhika Galih</a>
+          <p class="p2">paragraf 2</p>
+          <p class="p3">paragraf 3</p>
+      </section>
+      <section id="b">
+          <p>paragraf 4</p>
+          <ul>
+              <li>item 1</li>
+              <li>item 2</li>
+              <li>item 3</li>
+          </ul>
+      </section>
+  </div>
+
+<script>
+    // innerHTML = mengubah isi dan tag atua mengambahkan tag juga bisa
+    // textContent = mnegubah isi text
+    // setAttribute() = memanipulasi atribut ada sebuah element
+    // element.classList = memanipulasi class list element
+
+    // 1.
+    // const judul = document.getElementById('judul');
+    // judul.style.textAlign = "center"
+    // judul.innerHTML = "<em>Rafa Khadafi</em>"
+
+    // const sectionA = document.querySelector("#a")
+    // // sectionA.innerHTML = "hello world" ini bakal ilang semua, karena seluruh isinya akan diganti oleh hello wolrd
+
+
+    // 2.
+    // const judul = document.querySelector("h1#judul")
+    // judul.style.color = "red"
+
+
+    // 3. nambah antribut dll
+    // const judul = document.getElementsByTagName("h1")[0]
+    // judul.setAttribute("namaAtribut","isinya")
+
+    // // mengetahui isi dari atribut
+    // console.log(judul.getAttribute("namaAtribut")) // isinya
+
+    // // menghilangkan atribut
+    // console.log(judul.removeAttribute("namaAtribut")) // undefined
+
+
+    // 4. menambahkan value ke atribut class
+    // const judul = document.getElementById("#judul")
+    // judul.setAttribute("class","label")
+    // console.log(judul.classList) // label / ini sudah ada sebelunya
+    
+    // ilmu
+    // 1. element.classList.add() = menambahkan value dari class, atau nambah class baru
+
+    // 2. element.classList.remove() = menghapus value dari class, atau menghapus class
+
+    // 3. element.classList.toggle() = kalo misalkan sebuah element tidak punya class tertentu maka dia akan menambahkan, tapi begitu element tersebut sudha punya, maka class tersebut akan dihilangkan
+
+    // 4 element.classList.item() = untuk mengetahui class tertentu yg ada didalam sebuah element, misalkan sebuah elemnt itu mempunyai tiga class, nah untuk mengetahui class ke tiganya itu bisa dengan item ini
+
+    // 5. element.classList.contains() = untuk ngecek, dalam sebuah element apakah mempunyai class tertentu atau tidak
+
+    // 6. element.classList.replace() = untuk mnegganti class yg ada dengan class yang baru
+
+
+
+    // 1. menambahkan
+    const p2 = document.querySelector(".p2")
+    // p2.classList
+    // DOMTokenList [ "p2" ]
+    p2.classList.add("label") // DOMTokenList [ "p2", "label" ]
+
+
+    // 2. menghapus
+    p2.classList.remove("p2") // jdai ini ngapus value dari atribut yang nilai valuenya adalah p2
+
+    // 3. toggle
+    // ini sebelum p2 <p class="label">
+
+        // ini pas udah pake toggle
+        p2.classList.toggle("label")
+        // false
+        // p2
+        // <p class="">  langsung hilang karena sebelumnya sudah ada
+
+    // 4. item
+    p2.classList.add("satu")
+    p2.classList.add("dua")
+    p2.classList.item(1) // "dua" ini tuh buat nyarinya pake index dari 0 
+
+
+    // 5.contians
+    // ngecek apakah value class ini ada didalam sebuah class ? 
+    p2.classList.add("label")
+    p2.classList.contains("label") // true 
+
+
+    // 6. replace
+    p2.classList.replace("dua", "tiga") // mengganti value class dua dengan tiga
+
+
+
+
+</script>
+</body>
+</html>

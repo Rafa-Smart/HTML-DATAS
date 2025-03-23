@@ -112,6 +112,7 @@
                     btn.addEventListener("click", function() {
                         // console.log(this) //  yang keluar itu adalah objeknya yaitu si btn <a class="btn btn-primary modal-detail-button" href="#" data-bs-toggle="modal" data-bs-target="#movie-detail-modal" data-imdbid="tt0418279">
 
+
                         // mengambil id dari setiap show detial film yang di klik
                         const imdbid = this.dataset.imdbid // kita ambil data-imdbid="${element.imdbID}, jadi dari atribut data-imdbid="${element.imdbID}" kita ambil isinya atau si imdbid, pake dataset
                         fetch(`http://www.omdbapi.com/?apikey=98d1d349&i=${imdbid}`)
@@ -120,6 +121,7 @@
                         })
                         .then((response) => {
                             const movieDetail = ShowDetail(response);
+                            
                             const modalbody = document.querySelector(".modal-body");
                             modalbody.innerHTML = movieDetail;
                         })

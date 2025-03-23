@@ -5,6 +5,8 @@ for (let nilaiAwal = 1; nilaiAwal <=10; nilaiAwal++) {
 } 
 */
 
+
+// terbaru nih
 // urutanya     Inisialisasi (let nilaiAwal = 1)
 
     // Periksa kondisi (nilaiAwal <= 10)

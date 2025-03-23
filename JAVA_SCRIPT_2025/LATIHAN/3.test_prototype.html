@@ -42,6 +42,28 @@
             // ohh jadi kayaknya yang kalo kita pake ptototype itu nanti bakalan dibuat otomatis obeh jsnya si constructor coyy 
 
 
+        // coba aja lagi ini mah
+
+        const method = {
+            kelas: "10pplg2",
+            makan : function(jumlah){
+                return this.energi += jumlah;
+            }
+        }
+
+        function buatOrang(nama, umur, energi=10){
+            OrangLagi = Object.create(method)
+            OrangLagi.nama = nama;
+            OrangLagi.umur = umur;
+            OrangLagi.energi = energi;
+            return OrangLagi
+        }
+
+        const orang1 = new buatOrang("siti",12)
+
+        // tetep bisa akses selain pethod yaitu property
+        // orang1.kelas
+        // "10pplg2" 
     </script>
 </body>
 </html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Product {
+        constructor(name, initialStock) {
+          this._name = name; // Nama produk (properti privat)
+          this._stock = initialStock; // Stok produk (properti privat)
+          this._lowStockThreshold = 10; // Batas stok rendah (properti privat)
+        }
+
+        // Getter untuk nama produk
+        get name() {
+          return this._name;
+        }
+
+        // Getter untuk stok produk
+        get stock() {
+          return this._stock;
+        }
+
+        // Setter untuk stok produk
+        set stock(newStock) { // ini jika user ingin mengganti stock, dan dicek tidak boleh 0
+          if (newStock >= 0) {
+            // Validasi: stok tidak boleh negatif
+            this._stock = newStock;
+            this._checkLowStock(); // Memeriksa apakah stok hampir habis
+          } else {
+            console.log("Stok tidak boleh negatif!");
+          }
+        }
+
+        // Metode untuk mengurangi stok (misalnya, saat produk terjual)
+        sell(quantity) {
+          if (quantity > 0 && quantity <= this._stock) {
+            this._stock -= quantity;
+            console.log(
+              `${quantity} ${this._name} terjual. Stok tersisa: ${this._stock}`
+            );
+            this._checkLowStock(); // Memeriksa apakah stok hampir habis
+          } else {
+            console.log(
+              "Jumlah penjualan tidak valid atau stok tidak mencukupi."
+            );
+          }
+        }
+
+        // Metode untuk menambah stok (misalnya, saat restok)
+        restock(quantity) {
+          if (quantity > 0) {
+            this._stock += quantity;
+            console.log(
+              `${quantity} ${this._name} ditambahkan. Stok sekarang: ${this._stock}`
+            );
+            this._checkLowStock(); // Memeriksa apakah stok hampir habis
+          } else {
+            console.log("Jumlah restok harus lebih dari 0.");
+          }
+        }
+
+        // Metode privat untuk memeriksa stok rendah
+        _checkLowStock() {
+          if (this._stock <= this._lowStockThreshold) {
+            console.log(
+              `Peringatan: Stok ${this._name} hampir habis! (${this._stock} tersedia)`
+            );
+          }
+        }
+      }
+
+      // Membuat objek Product
+      const product = new Product("Laptop", 20);
+
+      // Menggunakan getter
+      console.log(`Nama Produk: ${product.name}`); // Output: Nama Produk: Laptop
+      console.log(`Stok Awal: ${product.stock}`); // Output: Stok Awal: 20
+
+      // Menggunakan setter (valid)
+      product.stock = 15;
+      console.log(`Stok Sekarang: ${product.stock}`); // Output: Stok Sekarang: 15
+
+      // Menggunakan setter (tidak valid)
+      product.stock = -5; // Output: "Stok tidak boleh negatif!"
+
+      // Menjual produk
+      product.sell(5); // Output: "5 Laptop terjual. Stok tersisa: 10"
+      // Output: "Peringatan: Stok Laptop hampir habis! (10 tersedia)"
+
+      // Restok produk
+      product.restock(20); // Output: "20 Laptop ditambahkan. Stok sekarang: 30"
+
+      // Menjual produk (stok tidak mencukupi)
+      product.sell(40); // Output: "Jumlah penjualan tidak valid atau stok tidak mencukupi."
+    </script>
+  </body>
+</html>

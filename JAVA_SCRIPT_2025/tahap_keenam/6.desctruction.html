@@ -68,8 +68,8 @@
             alamat: "solo"
         }
 
-        let {nama, umur, alamat} = objek1;
-        console.log(nama); // rafa
+        let {nama:s, umur, alamat} = objek1;
+        console.log(s,"ini s nih"); // rafa
         console.log(umur); // 20
         console.log(alamat); // solo
 
@@ -154,7 +154,7 @@
 
         // bisa juga seperti ini jadi kita mendapat argumen sebuah objek tapi di tankap di parameternya langsung idnya saja, jadi di destructionya di paramternya
         // tapi pake {} karena kita ingin mengambil idnya saja, dan ini kayaknya bisa juga pake rest parameter
-        function getId({ id, nama}){
+        function getId({ id, nama}){ // nahh disini sudah di descruction yaaa inget contoh diatas
             return `id : ${id}, nama : ${nama}`;
         }
 

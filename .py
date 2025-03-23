@@ -11,9 +11,14 @@ def hitung_file(folder_path):
         # Cek dulu apakah item adalah file
         if os.path.isfile(item_path):
             jumlah_file += 1
+        else:
+            # Jika item bukan file, maka cek apakah item adalah folder
+            if os.path.isdir(item_path):
+                jumlah_file += hitung_file(item_path)
     return jumlah_file
 
 
 folder_path = input("masukan nama folder = ")
 jumlah = hitung_file(folder_path)
 print(f'Jumlah file dalam folder {folder_path} adalah: {jumlah}')
+

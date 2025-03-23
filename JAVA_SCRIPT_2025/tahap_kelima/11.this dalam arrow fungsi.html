@@ -80,6 +80,8 @@
             sayHello: () => {
                 console.log(`hallo ${this.nama} dan saya berumur ${this.umur} tahun.`)
 
+                // ini kenapa bisa eror karena ketika di deklarasikan ungsi sayhello dan tidak disertakan dengan nama objeknya berati fungsi ini adalah fngsi global yang langsung di hoisting lalu thisnya akan merujuk ke window
+
                 // nah ini undefined karena this di fungsi arrow pada objek literal itu pasti akan langsung merujuk ke parentnya yaitu si global, bade lagi kalo kita pake 
                 
                 // nah ini akan undefined
@@ -123,7 +125,9 @@
 
             // PENTINNGGGG PLISS BACA
 
-            // nah kalo ini bisa cuyy, jadi ternyata KALO KITA PAKE OBJEK LITERAL BIASA, KITA BISA MEMASUKAN METHOD KEDALAMNYA, TPAI KALO PAKE UFNCTION ATAU KITA MENJADIKAN OBJEK TERSEBUT ADALAH TEMPLATE OBJEK MAKA KITA TIDAK BISA MEMASUKAN METHOD ATAU FUNGSI KANGSUNG KEDALAMNYA TANPA MENGGUNAKAN THIS. KEDALAMNYA, MAKANYA CARA MEMASUKAN FUNGSI ATAU METHOD KEDALAM OBJEK YG AKAN DIJADIKAN TEMPLATE ADALAH MENGGUNAKAN PROTOTYPE
+            // nah kalo ini bisa cuyy, jadi ternyata KALO KITA PAKE OBJEK LITERAL BIASA, KITA BISA MEMASUKAN METHOD KEDALAMNYA, TPAI KALO PAKE UFNCTION ATAU KITA MENJADIKAN OBJEK TERSEBUT ADALAH TEMPLATE OBJEK MAKA KITA TIDAK BISA MEMASUKAN METHOD ATAU FUNGSI KANGSUNG KEDALAMNYA TANPA MENGGUNAKAN THIS. KEDALAMNYA, MAKANYA CARA MEMASUKAN FUNGSI ATAU METHOD KEDALAM OBJEK YG AKAN DIJADIKAN TEMPLATE ADALAH MENGGUNAKAN PROTOTYPE,
+
+            // ini bisa karena ketika ini dibuat maka fungsi declarationnya ini sudah mneggunakan this.halo, jadi konteks fungsi ini ketika dipanggil adalah di dalam objeknya bukan di window
             Siswa.prototype.halo = function() {
                 console.log(`hallo ${this.nama} dan saya berumur ${this.umur}`)
             }

@@ -17,15 +17,16 @@
             <div class="row mt-4">
               <div class="col">
                 <h1>Rafa Khadafi Database Fetch</h1>
+                <h3></h3>
               </div>
             </div>
-      
+            
             <div class="row" style="margin-left: 25%;">
               <div class="col-md-8">
                   <div class="input-group mb-3">
                       <input type="text" class="form-control input-keyword" placeholder="Search Movie..."aria-describedby="button-addon2">
                       <button class="btn btn-outline-primary search-button" type="button" id="button-addon2">Search</button>
-                    </div>              
+                  </div>              
               </div>
             </div>      
     </center>
@@ -77,63 +78,72 @@
 
     <script>
 
+
+        // kita menggunakan eror handling
+        // kalo pake promise biasa kita bisa pake then dan catch buat eror handling
+
+        // kalo pake async dan await kita bisa pake try dan catch() buat eror handling
+
+        // kita coba menggunakan fetch yang mereturn sebuah promise
+
+
     const seacrhButton = document.querySelector(".search-button")
     seacrhButton.addEventListener("click", async function(){
         const inputSeacrh = document.querySelector(".input-keyword")
-        const movies = await getmovies(inputSeacrh.value); // jadi gini kalo ga pake async dan await, ini adalah kode yang singkronus, karena ketika getmovies dijalankan (belum selesai promisenya pending), tapi langsung dimasukan ke dalam movies yang harusnya yang dimasukannya itu adalah resolve dari si promisenya (kalo berhasil), dan isi dari movies adalah objeknya , tapi karena langsung dimasukan kedala variable tanpa nunggu pending nya beres , makanya movies isinya itu pending, karena si jsnya g atau kalo di dalam fungsi getMovies ini isinya ada async nya. oleh karena itu kita gunakan async dan await untuk menunggu prosesnya selesai, jadi di fungsinya, kita tambahkan async, yang maksudnya memberi tahu js bahwa didalma fungsi ini ada kode asingkronus yang padahal itu adalah kode yang async, nah kode yang asycn itu ditambahkan await dibelakangnya, jadi jsnya ketika menemukan await di dalam suatu fungsi maka dia akan menunggu sampai promisenya selesai pending, baru di maskan ke variable movies
-        updateUi(movies);
+
+        // disini kita tangkep erornya karena ini belum bisa menangkap errornya
+        try {
+            const movies = await getmovies(inputSeacrh.value); 
+            updateUi(movies);
+        }catch(err) {
+            const h3tes = document.querySelector("h3")
+            h3tes.textContent = `Maaf, ada kesalahan ${err}`;
+            // itu ga akan bisa, karena sebenarnya error yang ada di fetch itu adalah eror yang ada pada networknya, dan eror yag kmu tangkp sekarang bukan dari fetch, tapi dari eror yang lain TypeError: movies is undefined
+            console.log(err)
+
+            // makanya kita harus lempar eror yang ada di dalam fetchnya kesini agar terbaca
+        }
     })
 
-    // misal 
-    // const modaldetailbutton = document.querySelectorAll(".modal-detail-button")
-    // karena program ini async maka kode yang sngkronus ini akan dijalankan ketika pertama kali program ini dijalankan, nah pas ini dijalankan, buttonnya belum tampil di browser, makanya modal button ini akan undefined.
 
-    // caranya adalah event binding = yaitu kita akan kasih event yang awalnya belum ada, tapi ketika dia sudah ada, eventnya akan menjalankannya
-    // yang dimaksud dengan document disini adalah seluruh element yang ada di browsernya termasuk tombol detailnya
-    document.addEventListener("click", async function(e){ // e disini adalah elemen yang di klik
-        // console.log(e) //click { target: html, buttons: 0, clientX: 177, clientY: 185, layerX: 177, layerY: 185 } // lokasi tombol di klik dan ada banyak info disana liat aja salah sautnya adalah target yaitu si element yang di klik
-
-        // console.log(e.target) // <button id="button-addon2" class="btn btn-outline-primary search-button" type="button">, dia akan mengambil elemen yang di klik
-
-        // jadi ketika e atau elemen yang di klik adalah elemen yang nama classnya modal-detail-button, maka kita akan jalankan kode di dalamnya.
-       if(e.target.classList.contains("modal-detail-button")) { // jadi ketika elemen yang di klik nya adlaah elemen yang mempunyai class dan berisi modal-detail-button maka jalankan kode dibawahnya
-        const imdbid = e.target.dataset.imdbid;
-        const moviedetail = await getmoviesdetail(imdbid);
-        updateUiDetail(moviedetail);
+    document.addEventListener("click", async function(e){ 
+       if(e.target.classList.contains("modal-detail-button")) { 
+        try {
+            const imdbid = e.target.dataset.imdbid;
+            const moviedetail = await getmoviesdetail(imdbid);
+            updateUiDetail(moviedetail);
+        } catch (err) {
+            const modalBodyerr = document.querySelector(".modal-body")
+            modalBodyerr.textContent  = ` maaf ges ${err}`
+        }
        }
     })
 
 
     // fungsi fungsi
-    
-
-    // fetch kedua
-    function getmoviesdetail(dataId){
-        return fetch(`http://www.omdbapi.com/?apikey=98d1d349&i=${dataId}`)
-                .then((response) => response.json())
-                .then((hasildetail) => {
-                    return hasildetail;
-                    // console.log(hasildetail) // Object { Title: "The Avengers", Year: "2012", Rated: "PG-13", Released: "04 May 2012", Runtime: "143 min", Genre: "Action, Sci-Fi", Director: "Joss Whedon", Writer: "Joss Whedon, Zak Penn", Actors: "Robert Downey Jr., Chris Evans, Scarlett Johansson", Plot: "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.", … }
-                    
-                    // nahhhh ini dia penyebabnya kenapa di dalam fetch yang kedua ini tidak di looping dua kali karena sudah berbentuk objek gitu bukan array lagi, dan karena disini datanya hanya satu bukan banyak jadi ga perlu di looping
-                })
-    }
-
-    function updateUiDetail(moviedetaildariatas){
-        const moviedetail = ShowDetail(moviedetaildariatas); // ini dia tidka dilooping lagi karena sudah di looping di awal ketika di bagian evenetnya, dan karena show detail ini tidak akan di looping isinya makanya tidak di looping,
-
-        // dan karena fetch yang kedua ini itu mengembalikan nilai detail bukan search
-        const modalbody = document.querySelector(".modal-body");
-        modalbody.innerHTML = moviedetail
-    }
-
 
     // fetch pertama
     function getmovies(keyword){
         return fetch(`http://www.omdbapi.com/?apikey=98d1d349&s=${keyword}`)
-                .then((response) => response.json())
                 .then((response) => {
-                   return response.Search
+                    console.log(response)
+                    // isi dari response ada banyak, salah satunya adalah Response { type: "cors", url: "http://www.omdbapi.com/?apikey=98d1d349&s=", redirected: false, status: 200, ok: true, statusText: "OK", headers: Headers(4), body: ReadableStream, bodyUsed: false }, jadi ada kode status dll, jadi kalo kosong atau cari film yang tidak ada, itu sebenarnya itu masih benar dan kode statusnya 200, nah jika fetch nya gagal (misal salah apikey), maka kode statusnya adalah 401
+                    if(!response.ok) { // kalo responsenya not ok / gagal
+                        // maka kita akan kirim kan erornya dan kita lempar ke atas yang bagian try dan catch()
+
+                        throw new Error(response.statusText)
+                    }else {
+                        return response.json();
+                    }
+                })
+                .then((response) => {
+                //disini kita ceklagi
+                console.log(response) //Object { Response: "False", Error: "Incorrect IMDb ID." }
+                if(response.Response === "False"){
+                    throw new Error(response.Error)
+                }else {
+                    return response.Search
+                }
         })
     }
 
@@ -145,8 +155,32 @@
                 movieContainer.innerHTML = cards;
         });
     }
+    
 
+    // fetch kedua
+    function getmoviesdetail(dataId){
+        return fetch(`http://www.omdbapi.com/?apikey=98d1d349&i=${dataId}`)
+                .then((response) => {
+                    if(!response.ok) {
+                        throw new Error(response.Error)
+                    } else {
+                        return response.json()
+                    }
+                })
+                .then((hasildetail) => {
+                    if(hasildetail.Response === "False"){
+                        throw new Error(hasildetail.Error)
+                    }else {
+                        return hasildetail;
+                    }
+                })
+    }
 
+    function updateUiDetail(moviedetaildariatas){
+        const moviedetail = ShowDetail(moviedetaildariatas); 
+        const modalbody = document.querySelector(".modal-body");
+        modalbody.innerHTML = moviedetail
+    }
 
     function ShowCards(element){
             return `<div class="col-md-3 my-3">

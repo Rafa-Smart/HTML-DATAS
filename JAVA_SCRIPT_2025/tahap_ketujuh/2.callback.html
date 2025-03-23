@@ -77,7 +77,7 @@
         console.log('---------------')
         // ini mah nanti bukan asy tpai syc karena bukan pake setTimeout
         console.log("mulai")
-        mhs.forEach(x => {
+        mhs.forEach(x => { // ini blocking, karena foreach itu tidak akan dimasukan ke dalam web api
             // nah coba kita buat agar ini bisa lama
             // for(i=0;i<10000000;i++){
             //     let date = new Date();
@@ -112,7 +112,7 @@
             xhr.send();
         }
 
-        function succes(result){ // result ini menginisisasi nama paramter xhr.response
+        function succes(result){ // result ini menginisisasi nama paramter xhr.response dan result ini mengembalikan json, makanya harus kita parse dulu.
             const mhs = JSON.parse(result); // jadi ini itu kita ubah jadi json formatnya buakn string
             mhs.forEach(x => {
                 console.log(x.nama, x);

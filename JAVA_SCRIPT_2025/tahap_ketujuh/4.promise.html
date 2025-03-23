@@ -45,7 +45,7 @@
 
         // const movies = fetch("http://www.omdbapi.com/?apikey=dca61bcc&s=avengers")
         // console.log(movies)
-        // output // Promise { <state>: "pending" }
+        // output // Promise { <state>: "pending" } // ini kenapa pending ?, karena sebenarnya fetch itu sudah mengirimkan requestnya ke server, tapi kita belum mendapatkan response dari server, dan karena fetch itu menggunakan callback, maka kita harus menunggu response dari server, dan itu memakan waktu, dan karena FETCH INI ADALAH SEBUAH FUNGSI ASY MAKA AKAN DITARO DULU DI WEB API, LALU AKAN DI TUNGGU PROSESNYA, TAPI KEBURU DI CONSOLE.LOG() DULU MAKANYA YANG TERLIHAT MALAH PENDING, DAN KARENA SI FETCH NYA INI BELUM DIATUR RESOLVE DAN REJECTEDNYA MAKANYA YANG KELUAR HANYA PENDING
             // nah itu jadinya malah promise
 
 
@@ -63,7 +63,7 @@
 
             // jadi gini alurnya
 
-            // 1.fetch mengirim permintaan HTTP ke server dan mengembalikan Promise yang menghasilkan objek Response.
+            // 1.fetch mengirim permintaan HTTP ke server dan mengembalikan Promise yang menghasilkan objek Response yaitu promise
 
             // 2.Di .then() pertama, kita memanggil Response.json() untuk mengubah respons menjadi JSON. Ini juga mengembalikan Promise.
 
@@ -159,7 +159,7 @@
                 // console.log(janji2.then(() => console.log(janji2)))
                 // console.log(janji2.catch(() => console.log(janji2))),
 
-                // ini karena ketika dipromise di jalankan sudah langsung di console.log (pas pendingnya keahuan), nah terus isi dari then atau catch ini baru mengconsole.log() si janjinya yang sudah tidak pending lagi
+                // ini karena ketika dipromise di jalankan sudah langsung di console.log (pas pendingnya ketahuan), nah terus isi dari then atau catch ini baru mengconsole.log() si janjinya yang sudah tidak pending lagi
                 
             console.log("selesai")
             console.log("==========")
@@ -243,6 +243,11 @@
                 console.log(film1)
                 console.log(cuaca1)
                 // console.log(hasil)
+            })
+            .catch((hasil) => {
+                let [film1, cuaca1] = [...hasil];
+                console.log(film1)
+                console,log(cuaca1)
             })
 
     </script>

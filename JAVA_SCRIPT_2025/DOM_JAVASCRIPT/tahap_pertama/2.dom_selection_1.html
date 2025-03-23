@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <h1 id="tes2">hello semua</h1>
+        <p class="p1">ini paragraf 1</p>
+        <p class="p2">ini paragraf 2</p>
+        <p class="p3">ini paragraf 3</p>
+        <h3>Ini pake tag name</h3>
+        <div id="div">
+            <h4>
+                ini ngubah root
+            </h4>
+        </div>
+    </center>
+    <script>
+        // memilih element di html
+        // 1. getElementById() = hanya bisa satu id tidak bisa double // mengembalikan element
+        const h1tes2 = document.getElementById("tes2") // tolong carikan element yg ada didalam root / document yg idnya tes2, jadi kita bisa melakukan apapun di elemen ini.
+
+        // contoh
+        h1tes2.style.color = 'red' // dan kalo kita menambahkan style sdi js, maka nanti akan menambahkan inline css di element tersebut.
+        // h1tes2.style.background-color = "yellow"
+        h1tes2.style.backgroundColor = "grey"
+        h1tes2.innerHTML = "Rafa khadafi"
+
+
+
+
+        // 2. getElementsByTagname() = jdi js tolong carikan saya elemen elemen yang memiliki tagname ini // mengembalikan htmlcolletion
+        let p = document.getElementsByTagName("p") 
+        //HTMLCollection { 0: p.p1, 1: p.p2, length: 2 }
+        // p.style.backgroundColor = "lightblue" // gagal
+
+        // karena yang bisa dikasih style itu hanya element bukan array atua htmlcolletion
+        // maka harus pake indexnya
+        p[1].style.backgroundColor = "lightblue"
+
+        // atau kalo mau bisa semua maka bisa pake looping
+        for(let i = 0;i<p.length;i++){
+            p[i].style.backgroundColor = "lightblue"
+        }
+
+        // misal kta hanya mengambil 1 element saja maka bentuknya tetap saja mirip seperti array / htmlcolletion, dan tetap mneggunakan indexnya
+
+
+        // 3. getelementsByClassName() = jadi js tolong carikan saya elemen elemen yang memiliki nama class ini, bisa banyak karena class yang sama bisa digunakan di banyak elemen // mengembalikan htmlcolletion
+
+        const p1 = document.getElementsByClassName("p1")
+        // HTMLCollection { 0: p.p1, length: 1 }
+        // dan tetap harus mneggunakan index
+
+
+
+
+
+
+
+        // 4. querrySelector = mencari elemen berdasarkan selectornya, seperti memanggil di css // menghasilkan element
+
+        // 5. querrySelectorAll = mengambil banyak elemen sekaligus berdasarkan selectornya, dan akan menghasilkan nodeList // menghasilkan nodeList
+
+
+        // dan yang paling cepat adalah yang getElementById dan GetElementsByTagName
+
+        // mengubah node root
+        // biasa
+        const h3 = document.getElementsByTagName("h3")
+        h3[0].style.color = "blue"
+
+        // mengubah scope dari node rootnya / document, jadi kan biasanya itu kita cari di document, nahh sekarnag kita persempit rootnya jadi
+
+        const div = document.getElementById("div")
+        const h4 = div.getElementsByTagName("h4")
+        
+
+    </script>
+</body>
+</html>

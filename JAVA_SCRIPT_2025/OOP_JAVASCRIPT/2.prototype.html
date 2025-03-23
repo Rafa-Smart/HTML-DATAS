@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // prototype
+      // TOLONG BACA DAN PAHAMI KONSEP INI
+      // 1. saat kita membuat objek dari constructor function, maka object tersebut instance (turunan dari construction function tersebut), semua property dan methodnya akan diwariskan ke objek baru tersebut.
+      // 2. setiap saya membuat sebuah constructor function, maka secara otomatis akan dibuatkna prototypenya, dan prototype tersebut akan dijadikan sebagai parent dari constructor function tersebut. misal saya memuat sebuah constructor function bernama Person maka nanti akan dibuatkan Person.prototype.
+      // 3. saat saya membuat sebuah object instance, maka secara otomatis object baru tersebut adalah turunan dari constructor prototypenya yaitu si Person.prototype bukan dari constructor functionnya
+      // 4. prototype dari sebuah object instance adalah prototype dari constructor functionnya bukan dari object instance itu sendiri.
+      // 5. untuk mengakses prototype milik sebuah insctance, kamu bisa mneggunakan __proto__ atau Object.getPrototypeOf()
+
+      // jadi ketika kita buat construction function itu maka semua property dna methodnya itu akan nempel di objek instancenya atua objek turunannya misal ada constructor function Person lalu diturunkan ke
+      // const rafa = new Person(), maka seluruh property dan method yang ada pada construction function atau Person ini akan nempel atau turun ke objek baru yaitu si rafa
+
+      // jadi gini ketika kamu membuat objek yang instance atau turunan dari sebuah construction function maka, secara otomatis itu dia akan menjadi turunan dari si prototypenya si construction functionnya, nah
+      // kan tadi udah di bilang kalo buat construction function itu maka bakal otomatis dibuatkna prototypenya, nah jadi si prototypenya itu adalah parent dari construction functionnya, nah jadi objek turunan dari construction function ini sebenarnya dia adalah turunan dari prototype construction functionnya bukan dari construction functionnya sendiri.
+
+      // VISUALISASINYA
+
+      // function Person(namaAwal, namaAkhir){
+      //     this.nameAwal = namaAwal; --ini akan dibuatkan otomatis si person.prototypenya
+      //     this.namaAkhir = namaAkhir
+      // }
+
+      // Object 1 (turunan)              Person.prptotype                     Object.prototype
+      // -namaAwal                        // -namaAwal                          -......
+      // -namaAkhir ---------------->     // -namaAkhir ------------->          -......
+      // -__proto__                       // -__proto__                         -......
+
+      // Object 2 (turunan)
+      // -namaAwal
+      // -namaAkhir ---------------->
+      // -__proto__
+
+      // jadi yang dimaksud __proto__ itu adalah sebuah objek ini mewarisi semua property dan method dari objek yang berada diatasnya, yaitu prototype dari construction
+
+      // dan si prototype ini juga memiliki sebuah prototype yang merujuk ke prototype lainnya dan sampai yang paling ujung nya itu adalah Object.prototype.
+
+      // 1. menambah property atau method di prototype
+      function Person(nama, kelas, energi=10) {
+        this.nama = nama;
+        this.kelas = kelas;
+        this.energi = energi;
+        this.sayHello = function () {
+          return `halo ${this.nama}`;
+        };
+      }
+
+      // membuat method atau fungsi di constructor function pake prototype
+      Person.prototype.umur = function (umur) {
+        return `umur ${this.nama} adalah ${umur}`;
+      };
+
+      Person.prototype.makan = function(jumlah) {
+        this.energi += jumlah
+        return `energi ${this.nama} sekarang ${this.energi}`
+      }
+
+      const rafa = new Person("rafa", "X pplg 2");
+    //   rafa
+        // Object { nama: "rafa", kelas: "X pplg 2", energi: 10, sayHello: sayHello()
+        //  }
+        // energi: 10
+        // kelas: "X pplg 2"                   // ini isi dari objek instancenya atau objek
+        // nama: "rafa"                        // turunan dari constructor functionnya
+        // sayHello: function sayHello()​
+
+        // <prototype>: Object { umur: umur(umur), makan: makan(jumlah)
+        // , … }
+        // constructor: function Person(nama, kelas, energi)​​
+        // makan: function makan(jumlah)​​                      // nanti bakal muncul disini 
+        // umur: function umur(umur)​​                              methodnya
+        // <prototype>: Object { … }
+
+
+        // nah jadi method ini
+    //     Person.prototype.makan = function(jumlah) {
+    //     return this.energi += jumlah
+    //   }
+
+    // akan ada di prototype personnya atau prototype dari construction functionnya BUKAN PADA OBJEK INSTANCENYA ATAU OBJEK TURUNAN
+
+
+    // maka cara mengakses property di prototype diakses dari objek instance / turunan adalah 
+    // maka cara kerjanya adalah ketika kamu mengakses property di objek instance, pertama adlah akan di cek dulu apakah di objek tersebut ada propertynya, jika tidak maka akan di cek di __proto__ nya, dan jika masih tidka ada maka akan dicek lagi di __proto__ nya, dan seterusnya sampai di Object.prototype yang paling ujung yaitu Object.prototype., kalo ga ada maka eror
+
+    // dan jika di objek instance ini sudah ada methodnya maka yang dipake akan yang di objek instancenya dan di prototypenya tidak akan dipake
+
+    // rafa.umur()
+    // rafa.makan()
+
+    </script>
+  </body>
+</html>

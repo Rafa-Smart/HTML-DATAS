@@ -7,10 +7,10 @@
   </head>
   <body>
     <script>
-      // async / asingkronus function = adalah sebuah fungsi yang berkerja secara asingkronus melalui event loop, yang dia menghasilkan implisit promise sebagai return valuenya, maksudnya fngsinya akan mengembalikan promise meskipun didalamnya tidka ada kode yang async tpai cara penulisan kodenya menggunakan penulisan yang standart atai yang singkronus
+      // async / asingkronus function = adalah sebuah fungsi yang berkerja secara asingkronus melalui event loop, yang dia menghasilkan implisit promise sebagai return valuenya, maksudnya fngsinya akan mengembalikan promise meskipun didalamnya tidka ada kode yang async tpai cara penulisan kodenya menggunakan penulisan yang standart atau yang singkronus
 
       // didalam funsi async ini terdapat keyword await yang fungsinya untuk memberhentikan sementara eksekusi sebuah fungsi sambil menunggu promisenya selesai pending dan mengembalikan resolve atau rejected
-    //   await menghentikan sementara eksekusi fungsi async, tetapi tidak memblokir thread utama JavaScript. Artinya, thread utama tetap bisa menjalankan tugas lain (seperti menangani event atau rendering UI).
+      //   await menghentikan sementara eksekusi fungsi async, tetapi tidak memblokir thread utama JavaScript. Artinya, thread utama tetap bisa menjalankan tugas lain (seperti menangani event atau rendering UI), dll.
 
       // contoh :
       async function contoh() {
@@ -20,16 +20,110 @@
 
       //   Meskipun fungsi ini hanya mengembalikan angka 42, karena dia adalah fungsi async, nilai kembaliannya adalah Promise yang di-resolve dengan nilai 42.
 
+      // Fungsi async memungkinkan Anda menggunakan await di dalamnya untuk menangani operasi asinkronus.
+      // Meskipun fungsi async selalu mengembalikan Promise, Anda tidak perlu secara eksplisit membuat Promise (misalnya, new Promise()). JavaScript secara otomatis membungkus nilai kembaliannya dalam Promise.
 
-    // Fungsi async memungkinkan Anda menggunakan await di dalamnya untuk menangani operasi asinkronus.
-    // Meskipun fungsi async selalu mengembalikan Promise, Anda tidak perlu secara eksplisit membuat Promise (misalnya, new Promise()). JavaScript secara otomatis membungkus nilai kembaliannya dalam Promise.
+      const coba = new Promise((resolve, rejected) => {
+        setTimeout(() => {
+          resolve("selesai");
+        }, 2000);
+      });
+      console.log(coba); // Promise { <state>: "pending" }
+
+      coba.then((hasil) => {
+        // hasil ini merepresentasikan resolve
+        console.log(hasil);
+      });
+
+      // disini kita coba menggunakna async dan await, jadi kita buat fungsi yang return valuenya adalah sebuah promise, ini sama seperti ita buat fungsi yang return valuenya adalah fetch yang menhasilkan promise.
+      function tes() {
+        return new Promise((resolve, rejected) => {
+          setTimeout(() => {
+            resolve("selesai nih promise yang kedua");
+          }, 2000);
+        });
+      }
+
+
+      // ini masih belum menggunakan async dan await.
+
+      // const cobalagi = tes();
+      // console.log(cobalagi) // Promise { <state>: "pending" }, tetep msaih pending karena belum kita tangkap resolvenya pake then dan rejectednya pake catch
+
+      // cobalagi
+      //   .then((hasil) => {
+      //     console.log(hasil)
+      //   })
+
+
+      // nah ini baru kalo kita menggunakan async dan await
+      // nah berati kita butuh sebuah fungsi untuk memanggil function yang return valuenya adalah promise (tes)
+
+
+      async function cobaasync (){
+        const coba = await tes()
+        console.log(coba)
+      }
+      // cobaasync() = ini sebelum pake async = Promise { <state>: "pending" }, tetep pending
+
+      cobaasync() // selesai nih promise yang kedua, ini ketika sudah dikasih keyword async dan await
 
 
 
-    new Promise((resolve, rejected) => {
-        resolve("selesai")
-    })
-    console.log(coba) 
+
+
+
+
+
+
+      // melakukan error handling di async dan await
+
+      // kalo pake promise biasa itu suda ditangkap menggunakan then dan juga catch
+
+      // tpai kalo pae async dan await kita menggunakan try dan catch()
+
+      function laginih(){
+        return new Promise((resolve, rejected) => {
+          const s = 1000;
+          if (s > 2000) {
+            setTimeout(() => {
+              resolve("ini di atas 2000")
+            },1000)
+          }else {
+            setTimeout(() => {
+              rejected("ini dibawah 2000")
+            },1000)
+          }
+        })
+      }
+
+      // ini kalo pae cara then
+      // let hasiltes = laginih()
+      // hasiltes.then((hasil) => {
+      //   console.log(hasil)
+      // })
+      // .catch((err) => {
+      // console.log(err)
+      // })
+
+      // ini kalo pake async dan await, nah di async ini kita tidak bisa menggunakan then dan catch, karena ketika dijalankan itu asumsinya adaah sudah resolve dan yang gagalnya tidak ketangkep
+      async function hasil() {
+        // let t = await laginih() // kalo gagal
+        // console.log(t) // Uncaught (in promise) ini dibawah 2000, jadi ga ketangkep
+
+        // nih caranya
+        try {
+          const i = await laginih();
+          console.log(i)
+        } catch(err) { // err ini adalah paramter yang dikirim ketika gagal, jadi isinya adalah hasil dari rejected
+          console.error(err)
+        }
+      }
+      hasil()
+
+      // kenapa kita pake try lagi ? karena ketika kita menggunakan asy await maka hasil dari itu adalah sebuah promise, nah karena proise itu bisa resolve dan rejected, maka kita seharusnya bisa mengambil resolve dan rejectednya kan ???,
+      //  nah tpai kalo pake asy await maka kita ga bisa nangkep si erornya karena secara default akna hanya bisa menangkap si resolvenya saja tapi si rejectednya tidak, mka bisa ditanggapnya hanya menggunakan try dan catch()
+
     </script>
   </body>
 </html>

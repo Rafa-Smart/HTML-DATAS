@@ -7,19 +7,20 @@
 </head>
 <body>
     <script>
-        function Angkot(sopir, trayek, penumpang, kas){
+        function Angkot(sopir, trayek, penumpang, kas, energi=10){
             this.sopir = sopir;
             this.trayek = trayek;
             this.penumpang = penumpang;
-            this.kas = kas
+            this.kas = kas;
+            this.energi = energi;
 
             // membuat method ketika penumpang naik
-            this.naik = function(namaPenumpang){
+            this.naik = function(namaPenumpang){ // ini menambahkan method di object instancenya (kurang bagus karena selalu membuatkan salinan metody disetiap pembuatan object instancenya, dll)
                 this.penumpang.push(namaPenumpang);
                 return this.penumpang;
             }
 
-            this.turun = function(namaPenumpang, bayar){
+            this.turun = function(namaPenumpang, bayar){ // ini menambahkan method di object instancenya (kurang bagus karena selalu membuatkan salinan metody disetiap pembuatan object instancenya, dll)
                 if (this.penumpang === 0){
                     alert("Angkot masih kosong")
                     return false // ini artinya ketika blok ini sudah di lakukan maka akan di return false atau akan di break
@@ -36,6 +37,13 @@
 
             }
         }
+
+        Angkot.prototype.makan = function(jumlah){ // ini menambahkan method langsung di prototypenya jadi karena object istance itu akan merujuk dan merupakan turunan dari prototype constructor functionnya (Angkot.prototype) bukan dari constructor functionnya (Angkot), maka ini lebih baik karena method hanya dibuat satu kali
+            this.energi += jumlah;
+            return this.energi;
+        }
+
+
 
         // meninisiasi objek baru dari objek Angkot
 

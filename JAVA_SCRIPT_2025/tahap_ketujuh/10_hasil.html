@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+        gap: 20px;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #1e1e1e;
+        color: #efefef;
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      .gambar img {
+        width: 200px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+      }
+
+      .keterangan {
+        text-align: center;
+      }
+
+      .keterangan button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .keterangan button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Overlay untuk latar belakang */
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      /* Box detail */
+      .container-detail {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #e7e1e1;
+        padding: 20px;
+        border-radius: 10px;
+        z-index: 1001;
+        max-width: 800px;
+        width: 90%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .detail {
+        display: flex;
+        gap: 20px;
+      }
+
+      .gambar-detail img {
+        max-width: 300px;
+        border-radius: 10px;
+      }
+
+      .keterangan-detail {
+        flex: 1;
+      }
+
+      .keterangan-detail h2 {
+        margin-top: 0;
+      }
+
+      .keterangan-detail button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .keterangan-detail button:hover {
+        background-color: #0056b3;
+      }
+
+
+    .loading h1 {
+      font-size: 2em;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <center>
+        <h1>Cari Film</h1>
+      </center>
+      <center>
+        <form action="">
+          <input
+            type="text"
+            name="cari"
+            placeholder="Cari Film"
+            class="seacrh"
+          />
+          <button type="button" class="tombolCari">Cari</button>
+        </form>
+      </center>
+      <div class="container-grid"></div>
+      <div
+        class="error-message"
+        style="display: none; color: red; text-align: center; margin-top: 20px"
+      >
+        <h1>
+          Inputan tidak boleh kosong atau film tidak ditemukan! <br />Masukin
+          yang bener yaa
+        </h1>
+      </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Box detail -->
+    <div class="container-detail"></div>
+    <center>
+      <div class="loading" style="display: none;">
+        <h1>
+          Sedang Loading...
+        </h1>
+      </div>
+    </center>
+
+    <script>
+      const button = document.querySelector(".tombolCari");
+
+      button.addEventListener("click", async function () {
+        const inputSearch = document.querySelector(".seacrh").value.trim();
+        const errorMessage = document.querySelector(".error-message");
+        const loading = document.querySelector(".loading")
+        if (!inputSearch) {
+          errorMessage.style.display = "block";
+          const container = document.querySelector(".container-grid");
+          container.innerHTML = ""; // Kosongkan container jika ada hasil sebelumnya
+          return;
+        }
+
+        try {
+          const apikey = "4096082f56549378513c81b8f1cbddb3";
+          const konfigurasi = konfigurasianjay();
+          const container = document.querySelector(".container-grid");
+
+
+          // ini buat pokoknya kalo ada animasi loading, maka yang lain harus hilang
+          container.innerHTML = ""; // kosong kan jika sudah ada
+          errorMessage.style.display = "none";
+          loading.style.display = "block"
+
+          setTimeout( async() => {
+            const films = await film(inputSearch, apikey, konfigurasi);
+            if (films.length === 0) {
+              loading.style.display = "none"
+              errorMessage.style.display = "block";
+              const container = document.querySelector(".container-grid");
+              container.innerHTML = ""; // kosong kan jika sudah ada
+            } else {
+              errorMessage.style.display = "none";
+              loading.style.display = "none"
+              TampilkanLayar(films);
+            }
+          },1500)
+        } catch (err) {
+          errorMessage.innerHTML = `<h1>ini pesan error :${err}</h1>`;
+          errorMessage.style.display = "block";
+          const container = document.querySelector(".container-grid");
+          container.innerHTML = ""; // kosong kan jika sudah ada
+          console.log(err, "ini adlah erereorere");
+        }
+      });
+
+      // Event delegation untuk tombol "Detail" dan "Close"
+      document.addEventListener("click", async function (e) {
+        // Jika tombol "Detail" diklik
+        if (e.target.classList.contains("tombolDetail")) {
+          const dataID = e.target.dataset.id;
+          const apikey = "4096082f56549378513c81b8f1cbddb3";
+          const konfigurasi = konfigurasianjay();
+          const detailFilms = await detailFilm(dataID, apikey, konfigurasi);
+          TampilkanLayarDetail(detailFilms);
+        }
+
+        // Jika tombol "Close" diklik
+        if (e.target.classList.contains("tombolClose")) {
+          closeDetail();
+        }
+      });
+
+      // Fungsi untuk mengambil data film
+      function film(inputan, apikey, options) {
+        return fetch(
+          `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${inputan}`,
+          options
+        )
+          .then((response) => {
+            if (!response.ok && response.length === 0) {
+              throw new Error(`Error : tolong isi`);
+            } else {
+              console.log(response)
+              return response.json();
+            }
+          })
+          .then((response) => {
+            if (response.Response === "False") {
+              throw new Error(`Error : ${response.Error}`);
+            } else {
+              return response.results;
+            }
+          });
+        // ini kayaknya GAUSAH PAKE CATCH KARENA SUDA DITANGKAP ERRORNYA OLEH SI IF ELSENYA TAPI KALO MAU PAKE JUGA GPP
+      }
+
+      // Fungsi untuk menampilkan film
+      function TampilkanLayar(films) {
+        let box = "";
+        films.forEach((element) => {
+          box += displayItemGrid(element);
+        });
+        const container = document.querySelector(".container-grid");
+        container.innerHTML = box;
+      }
+
+      // Fungsi untuk mengambil detail film
+      function detailFilm(id, apikey, options) {
+        return fetch(
+          `https://api.themoviedb.org/3/movie/${id}?api_key=${apikey}`,
+          options
+        )
+          .then((response) => response.json())
+          .then((response) => {
+            console.log("Detail Film:", response); // Periksa respons
+            return response;
+          });
+      }
+
+      // Fungsi untuk menampilkan detail film
+      function TampilkanLayarDetail(detailData) {
+        console.log("Menampilkan Detail:", detailData); // Periksa data detail
+        let boxDetail = displayDetail(detailData);
+        const containerDetail = document.querySelector(".container-detail");
+        const overlay = document.querySelector(".overlay");
+
+        // Tampilkan overlay dan box detail
+        overlay.style.display = "block";
+        containerDetail.style.display = "block";
+        containerDetail.innerHTML = boxDetail;
+      }
+
+      // Fungsi untuk menampilkan item film
+      function displayItemGrid(film) {
+        return `<div class="item">
+                <div class="gambar">
+                  <img src="https://image.tmdb.org/t/p/w500${film.poster_path}" alt="${film.original_title}">
+                </div>
+                <div class="keterangan">
+                  <h2>${film.original_title}</h2>
+                  <h3>Rilis pada : ${film.release_date}</h3>
+                  <button type="button" class="tombolDetail" data-id="${film.id}">Detail</button>
+                </div>
+              </div>`;
+      }
+
+      // Fungsi untuk menampilkan detail film
+      function displayDetail(detail) {
+        return `<div class="detail">
+                <div class="gambar-detail">
+                  <img src="https://image.tmdb.org/t/p/w500${detail.poster_path}" alt="${detail.original_title}">
+                </div>
+                <div class="keterangan-detail">
+                  <h2>${detail.original_title}</h2>
+                  <h3>Rilis pada : ${detail.release_date}</h3>
+                  <p>Deskripsi : ${detail.overview}</p>
+                  <h4>Tagline : ${detail.tagline}</h4>
+                  <h4>Budget : $${detail.budget}</h4>
+                  <button type="button" class="tombolClose">Close</button>
+                </div>
+              </div>`;
+      }
+
+      // Fungsi untuk konfigurasi fetch
+      function konfigurasianjay() {
+        const accessToken =
+          "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MDk2MDgyZjU2NTQ5Mzc4NTEzYzgxYjhmMWNiZGRiMyIsIm5iZiI6MTc0MTQ4OTg0NC4wMTUsInN1YiI6IjY3Y2QwNmI0YTRkZjk3ZGI5NjRmYTA5YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fcw3AcCmPC6y1RN1mbk0foGUl9bmYqpYoDdHn9ZSUgk";
+        const options = {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+        };
+        return options;
+      }
+
+      // Fungsi untuk menutup detail
+      function closeDetail() {
+        const containerDetail = document.querySelector(".container-detail");
+        const overlay = document.querySelector(".overlay");
+
+        // Sembunyikan overlay dan box detail
+        overlay.style.display = "none";
+        containerDetail.style.display = "none";
+      }
+    </script>
+  </body>
+</html>
