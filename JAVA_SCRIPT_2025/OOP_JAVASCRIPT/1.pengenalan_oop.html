@@ -12,7 +12,7 @@
       // setiap object selalu dibuat dari class
       // dan sebuah class bisa membuat objek tanpa batas
 
-      // nahh hasil dari cetakan class ini disebut dengan object
+      // nahh hasil dari cetakan class ini disebut dengan object instance
 
       // 1 cara lama membuat class
       function Person(nama, kelas) {
@@ -30,15 +30,17 @@
         return `umur ${this.nama} adalah ${umur}`;
       };
 
+      // karena cara kerjanya itu klo methog bakal dicari dulu apakah ada didalam objek instancenya, jika tidak maka akan dicari ke protoype nya jika tidak maka akan dicari lagi di prototypenya sanpai object.prototype
+
       const rafa = new Person("rafa", "X pplg 2");
 
-      //   constructor inheritance
+      //   ini mah inheritance prototype di constructor function, (bukan di class consructor)
 
       // jadi constructor itu  adllah sebuah blueprint atau cetakan untuk membuat objek lainnya
 
       // dalam constuctor kita biasanya membuat property atau sebuah method, tapi di dalma constructor juga kita bisa memanggil constructor lain, dengan begitu kita bisa mewarisi semua property yang dibuat di constructor lain tersebut, nah biasanya kan kita kalo mau ngambil property atau method dari pelajaran sebelumnya itukan objek keduanya bukan constructor dan objek pertamanya itu masih mmenggunakan mesin pembuat objek yang fungsi dan masih di return objeknya coba liat aja (buka)
       const method = {
-        // ini bukan constructor
+        // ini bukan constructor function
         kelas: "10pplg2",
         makan: function (jumlah) {
           return (this.energi += jumlah);
@@ -72,8 +74,8 @@
       // orang1.kelas
       // "10pplg2"
 
-      // nah ini cara ketika kita sudah pake constructor yg baru, dna objek keduanya itu menggunakan constructor juga
 
+      // INI MAH PASANGANNYA SAMA SI SUPER KARENA NGAKSES CONSTRUCTORNYA BUKAN NGAKSES PROTOTYPENYA
       // caranya adalah kita bisa menggunakna NamaConstructor.call(this.parameter)
       // maka nanti hasilnya semua inisiasi yang ada pada constructor kedua itu akan di copy ke constructor yang pertama
 
@@ -90,8 +92,12 @@
 
       //   costruction kedua
       function manager(firstName, lastName, tes) {
-        karyawan.call(this, firstName, tes); // jadi this yang sebenarnya ada di objek karyawan jadi ada di objek manager, nah paramternya ini bebas mau ngambil method atau property yang mana saja
+        karyawan.call(this, firstName, tes); // jadi this yang sebenarnya ada di objek karyawan jadi ada di objek manager, nah paramternya ini tergantung si constructornya butuh paramternya apa saja, disini kan di fngis sayhalonya hanya butuh firstnama, makanya kita kasih paramternya firstname saja,
 
+        // PENTING
+        // tapi yg bener kayaknya kita emnag harus masukin aja semua paramternya dari sesuai sama semua paramter yg ada di conatructornya
+
+        // nah ini bukan merujuk ke prototypenya ya, tapi ini kayak copy seluruh property dan method yg ada di constructor lain
         this.lastName = lastName;
       }
       const manager1 = new manager("siti", "muhaimin", "jamal"); // disini prlu nambha lagi paramternya
@@ -135,10 +141,16 @@
         this.nama = nama;
       }
 
-      Orang.prototype = Object.create(method2); // Menggunakan `Object.create()` untuk pewarisan,
+      Orang.prototype = Object.create(method2); // ini kenapa pake Orang.prototype, karena ingin yang diturunkannya itu adalah prototype dari method2 yang di turunkannya bukan ke constructor functionnya, tapi ke prototype constructor functionnya agar nanti kalo di buatkan objek instancenya methodnya hanya sekali buat, tapi kalo di constuctornya nanti maka method methodnya akan selalu dibuat staip kali membuat objek instancenya meskipun method tersebut tidak digunakan (tidak efisien)
+
+
+      // jadi nanti objek instance dari Orang ini akan mempunyai 3 prototype yaitu
+      // 1. prototype dari dirinya sendiri atau dari constructor functionya yaitu si Person.prototype.
+      // 2. prototype dari objek literal atau constructor function (dalam kasus ini objek literal)
+      // 3. prototype objek / Object.prototype
 
       const orang12 = new Orang("siti");
-      orang12.makan(); // Output: "siti sedang makan"
+      orang12.makan(); // Output: "siti sedang makan", nah di objek orang12 ini tidka ada method makan, tapi method makan ini adanya di prototypenya ornag12.
 
       function sapa(pesan) {
         console.log(`${pesan}, ${this.nama}`);

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // jadi sebuah class itu bisa menjadi sebuah class child atau yg diwariskan dan parent class yaitu class yg mewariskan dengan cara menggunakan kata kunci extends
+
+        // class inheritance sama seperti di prototype inheritance, yg hanya bisa memiliki satu parent class saja
+        class karyawan {
+            sayHello(name){
+                console.log(`Hello ${name}, my name is ${this.name}`);
+            }
+        }
+        class Manager extends karyawan {
+
+        }
+
+        const eko = new karyawan();
+        eko.name = "Eko"
+        eko.sayHello("joko")
+        
+        const budi = new Manager('Budi');
+        budi.name = "Budi"
+        budi.sayHello("joko")
+
+        console.log(eko)
+        console.log(budi)
+
+
+        // jadi nanti si budi (turunan dari class Manager) ini bakal punya 3 prototype yaitu:
+        // 1. prototype Manager
+        // 2. prototype karyawan
+        // 3. prototype Object (yg paling atas)
+
+        
+
+
+    </script>
+</body>
+</html>

@@ -10,7 +10,7 @@
       // prototype
       // TOLONG BACA DAN PAHAMI KONSEP INI
       // 1. saat kita membuat objek dari constructor function, maka object tersebut instance (turunan dari construction function tersebut), semua property dan methodnya akan diwariskan ke objek baru tersebut.
-      // 2. setiap saya membuat sebuah constructor function, maka secara otomatis akan dibuatkna prototypenya, dan prototype tersebut akan dijadikan sebagai parent dari constructor function tersebut. misal saya memuat sebuah constructor function bernama Person maka nanti akan dibuatkan Person.prototype.
+      // 2. setiap saya membuat sebuah constructor function, maka secara otomatis akan dibuatkna prototypenya, dan prototype tersebut akan dijadikan sebagai parent dari constructor function tersebut. misal saya memubat sebuah constructor function bernama Person maka nanti akan dibuatkan Person.prototype.
       // 3. saat saya membuat sebuah object instance, maka secara otomatis object baru tersebut adalah turunan dari constructor prototypenya yaitu si Person.prototype bukan dari constructor functionnya
       // 4. prototype dari sebuah object instance adalah prototype dari constructor functionnya bukan dari object instance itu sendiri.
       // 5. untuk mengakses prototype milik sebuah insctance, kamu bisa mneggunakan __proto__ atau Object.getPrototypeOf()
@@ -31,14 +31,14 @@
       // Object 1 (turunan)              Person.prptotype                     Object.prototype
       // -namaAwal                        // -namaAwal                          -......
       // -namaAkhir ---------------->     // -namaAkhir ------------->          -......
-      // -__proto__                       // -__proto__                         -......
+      // -__proto__  __proto__ ini akan ke -> // -__proto__                         -......
 
       // Object 2 (turunan)
       // -namaAwal
       // -namaAkhir ---------------->
       // -__proto__
 
-      // jadi yang dimaksud __proto__ itu adalah sebuah objek ini mewarisi semua property dan method dari objek yang berada diatasnya, yaitu prototype dari construction
+      // jadi yang dimaksud __proto__ ini adalah maksudnya objek ini adalah turunan dari prototype apa dan seterusnya
 
       // dan si prototype ini juga memiliki sebuah prototype yang merujuk ke prototype lainnya dan sampai yang paling ujung nya itu adalah Object.prototype.
 
@@ -47,7 +47,7 @@
         this.nama = nama;
         this.kelas = kelas;
         this.energi = energi;
-        this.sayHello = function () {
+        this.sayHello = function () { // ini akan langsung turun ke objek instancenya
           return `halo ${this.nama}`;
         };
       }
@@ -88,9 +88,9 @@
 
 
     // maka cara mengakses property di prototype diakses dari objek instance / turunan adalah 
-    // maka cara kerjanya adalah ketika kamu mengakses property di objek instance, pertama adlah akan di cek dulu apakah di objek tersebut ada propertynya, jika tidak maka akan di cek di __proto__ nya, dan jika masih tidka ada maka akan dicek lagi di __proto__ nya, dan seterusnya sampai di Object.prototype yang paling ujung yaitu Object.prototype., kalo ga ada maka eror
+    // maka cara kerjanya adalah ketika kamu mengakses property / method di objek instance, pertama adlah akan di cek dulu apakah di objek tersebut ada propertynya, jika tidak maka akan di cek di __proto__ nya, dan jika masih tidka ada maka akan dicek lagi di __proto__ nya __proto__ sebelumnya, dan seterusnya sampai di Object.prototype yang paling ujung yaitu Object.prototype., kalo ga ada maka eror
 
-    // dan jika di objek instance ini sudah ada methodnya maka yang dipake akan yang di objek instancenya dan di prototypenya tidak akan dipake
+    // dan jika di objek instance ini sudah ada methodnya maka yang dipake akan yang di objek instancenya dan di prototypenya tidak akan dipake, jadi ug dipake adalah property atau method yg pertama kali ditemukan, jadi kalo misalkan punya 2 methd yg namanya sama maka yang dipake adalah yang di objek instancenya, dan yang di prototype tidak akan dipake dna seterusnya
 
     // rafa.umur()
     // rafa.makan()

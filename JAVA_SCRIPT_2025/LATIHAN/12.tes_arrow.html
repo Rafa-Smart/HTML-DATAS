@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class tes {
+        constructor(nama, kelas) {
+          this.nama = nama;
+          this.kelas = kelas;
+          this.sayHalo = function () {
+            console.log(
+              `Halo, saya ${this.nama} dari kelas ${this.kelas} = ${this}`
+            );
+            console.log(this); //Object { nama: "rafa", kelas: "10", sayHalo: sayHalo() }
+          };
+        }
+      }
+
+      const rafa = new tes("rafa", "10");
+      class tes2 {
+        constructor(nama, kelas) {
+          this.nama = nama;
+          this.kelas = kelas;
+          this.sayHalo = () => {
+            // sama aja
+            console.log(
+              `Halo, saya ${this.nama} dari kelas ${this.kelas} = ${this}`
+            );
+            console.log(this); //Object { nama: "rafa", kelas: "10", sayHalo: sayHalo() }
+          };
+        }
+      }
+
+
+      const rafa2 = new tes2("rafa", "10");
+      class tes3 {
+        constructor(nama, kelas) {
+          this.nama = nama;
+          this.kelas = kelas;
+        }
+        sayHalo = function () { // sama
+          console.log(
+            `Halo, saya ${this.nama} dari kelas ${this.kelas} = ${this}`
+          );
+          console.log(this); //Object { nama: "rafa", kelas: "10", sayHalo: sayHalo() }
+        };
+      }
+
+      const rafa3 = new tes3("rafa", "10");
+      class tes4 {
+        constructor(nama, kelas) {
+          this.nama = nama;
+          this.kelas = kelas;
+        }
+        sayHalo = () => {// sama
+          // sama aja
+          console.log(
+            `Halo, saya ${this.nama} dari kelas ${this.kelas} = ${this}`
+          );
+          console.log(this); //Object { nama: "rafa", kelas: "10", sayHalo: sayHalo() }
+        };
+      }
+
+      const rafa4 = new tes4("rafa", "10");
+
+
+      const nih = {
+        nama:"rafa",
+        sayhalo: function(){ //Object { nama: "rafa", sayhalo: sayhalo() }
+            console.log(this)
+        }
+      }
+
+      
+      const nih2 = {
+        nama:"rafa",
+        sayhalo: () => { //Window http://127.0.0.1:5500/JAVA_SCRIPT_2025/LATIHAN/12.tes_arrow.html
+            console.log(this)
+        }
+      }
+
+
+    </script>
+  </body>
+</html>

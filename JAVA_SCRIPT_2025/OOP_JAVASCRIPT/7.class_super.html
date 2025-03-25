@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      firstName="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // PENTING
+      // di file sebelumnya itu adalah class inheritance, dan di file ini itu constructor inheritance
+
+      // inheritance = (mewarisi properti dan method dari parent class)
+
+      // kalo mau inheritance consturctor di consuctor function itukan kita bisa mneggunakan keyword call
+
+      // tapi kalo inheritance constructor di class itu kita harus menggunakan keyword super
+
+      // bagaimana cara untuk membuat constructor inheritance (class) di javascript?
+
+      // Kata kunci super digunakan untuk mengakses dan memanggil method atau property dari parent class (kelas induk) dalam child class (kelas anak) yang telah melakukan inheritance (pewarisan) menggunakan kata kunci extends.
+
+      // 1. class inheritance(extends) itu sifatnya sama dengan prototype inheritance (object.create) // ini yg prototype
+      // 2. kemudian sebenarnya constructor inheritance(class)(pake super) di class dan di constructor function(prototype)(pake call,apply, dll) ini sebenarnya hanya lah melakukan eksekusi ocnstructor lain dnegna tujuan agar property di constructor lain bisa di tambahkan ke instance object yang baru saja dibuat.
+      // 3. super digunakan untuk mengakses dan memanggil fungsi atau constructor dari parent class.
+      // Ini sangat berguna ketika Anda ingin menambahkan atau memodifikasi fungsionalitas di child class tanpa menulis ulang kode yang sudah ada di parent class.
+      // 4. dan penmangilan super ini wajib dilakukan di awal constructor child class, karena constructor child class akan dijalankan setelah constructor parent class
+      // dan kita ketika di sonctructor childnya kita ingin membuat sebuah cnstructor, maka kita wajib mneggunakan super() di awal constructor childnya meskipun di constructor parentnya tidak memiiki constuctor.
+
+      // PENJELASAN RINCI
+      // Meskipun child class telah mewarisi seluruh property dan method dari parent class, kata kunci super masih diperlukan dalam beberapa kasus:
+
+      // 1. Mengakses property yang hidden oleh child class: Jika child class memiliki property dengan nama yang sama dengan property di parent class, maka property di parent class akan tersembunyi (hidden). Dalam kasus ini, kata kunci super digunakan untuk mengakses property di parent class.
+      // 2. Memanggil method yang overridden oleh child class: Jika child class memiliki method dengan nama yang sama dengan method di parent class, maka method di parent class akan tersembunyi (hidden). Dalam kasus ini, kata kunci super digunakan untuk memanggil method di parent class.
+      // 3. Mengakses constructor parent class: Dalam beberapa kasus, child class perlu mengakses constructor parent class untuk melakukan inisialisasi atau konfigurasi tertentu. Kata kunci super digunakan untuk memanggil constructor parent class.
+
+      // ini super untuk property
+
+      class Karyawan {
+        // parent class
+        constructor(firstName) {
+          this.firstName = firstName;
+        }
+
+        sayHello(name) {
+          console.log(`Hello ${name}, my firstName is ${this.firstName}`);
+        }
+      }
+
+      class Manager extends Karyawan {
+        // child class
+        // nah bagaimana cara agar di class yg ini saya ingin membuat cnstructor ny juga maka bisa ake keyword super(),
+
+        // karena sebelumnya jika kita tidak menggunakan super() maka akna eror
+
+        constructor(firstName, lastName) {
+          super(firstName); // ini wajib di awal constructor child class untuk mengakses constructor parent class, dan tidak usah deklaasikan ulang
+          this.lastName = lastName;
+        }
+      }
+
+      const eko = new Karyawan("Eko"); // Object { firstName: "Eko" }
+      eko.sayHello("joko");
+
+      const budi = new Manager("Budi", "kurniawan"); //Object { firstName: "Budi", lastName: "kurniawan" }
+      budi.sayHello("joko");
+
+      // ini super untuk method
+      class Shape {
+        paint() {
+          console.log("hello Shape");
+        }
+      }
+
+      class Cirlce extends Shape {
+        paint() {
+          super.paint(); // ini buat akses fungsi paint yg di class parentnya
+          // jadi yg dimaksud supre itu maksudny itu adalah mengakses parent classnya
+          console.log("hello Circle");
+        }
+      }
+
+      const bulat = new Cirlce();
+      bulat.paint();
+      // hello Shape
+      // hello Circle
+
+      // jadi sebenarnya yg terjadi adalah ketika kita mengakses method pain di class Cirlce maka maka akan dicari method paint di objek instancenya itu, kemudian jika tidak ada maka akan dicari di prototypenya  dan jika tidak ada maka aka dicari di prototypenya prototype , dan seterusnya sampai mencapai Object.prototype, dan jika masih tidak ada maka akan undefined.
+
+      // nah karena class cirlce ini prototypenya adalah turunan dari prototype si class shape, maka nanti method di shape ini yg paint tidak akan dieksekusi oleh si bulat karena method paint di objek bulat itu ada di prorotypenya sendiri, jadi keburu diakses method yg ada di prototype objek bulat, jadi method yg di prototype shape tidak akan dieksekusi.
+
+      // ini urutannya ketika mengakses bulat.paint
+      // 1. Object bulat (tidak ada method paint)
+      // 2. prototype objek bulat (ada method paint) -> ini yg akan dipake
+      // 3. prototype prototypenya objek bulat (yaitu dari constructor shape karena suda di extends) (tidak ada method paint) -> ada tapi tidak keburu di akses
+      // 4. object.prototype (tidak ada method paint)
+
+
+
+
+
+
+
+
+
+
+      // contoh lagi
+      // Kelas dasar Vehicle
+      class Vehicle {
+        constructor(brand, model) {
+          this.brand = brand;
+          this.model = model;
+        }
+
+        getInfo() {
+          return `${this.brand} ${this.model}`;
+        }
+
+        start() {
+          return `${this.getInfo()} is starting.`;
+        }
+      }
+
+      // Kelas turunan Car
+      class Car extends Vehicle {
+        constructor(brand, model, doors) {
+          super(brand, model); // Memanggil konstruktor Vehicle
+          this.doors = doors; // Menambahkan properti khusus untuk Car
+        }
+
+        getInfo() {
+          const parentInfo = super.getInfo(); // Memanggil getInfo dari Vehicle
+          return `${parentInfo} with ${this.doors} doors`; // ini nambah lagi
+        }
+
+        start() {
+          const parentStart = super.start(); // Memanggil start dari Vehicle
+          return `${parentStart} Vroom!`;
+        }
+      }
+
+      // Kelas turunan ElectricCar
+      class ElectricCar extends Car {
+        constructor(brand, model, doors, batteryCapacity) {
+          super(brand, model, doors); // Memanggil konstruktor Car
+          this.batteryCapacity = batteryCapacity; // Menambahkan properti khusus untuk ElectricCar
+        }
+
+        getInfo() {
+          const parentInfo = super.getInfo(); // Memanggil getInfo dari Car
+          return `${parentInfo} with a battery capacity of ${this.batteryCapacity} kWh`;
+        }
+
+        start() {
+          const parentStart = super.start(); // Memanggil start dari Car
+          return `${parentStart} Shhh... I am electric!`;
+        }
+      }
+
+      // Menggunakan kelas-kelas tersebut
+      const myCar = new Car("Toyota", "Camry", 4);
+      console.log(myCar.getInfo()); // Toyota Camry with 4 doors
+      console.log(myCar.start()); // Toyota Camry is starting. Vroom!
+
+      const myElectricCar = new ElectricCar("Tesla", "Model S", 4, 100);
+      console.log(myElectricCar.getInfo()); // Tesla Model S with 4 doors with a battery capacity of 100 kWh
+      console.log(myElectricCar.start()); // Tesla Model S is starting. Vroom! Shhh... I am electric!
+    </script>
+  </body>
+</html>

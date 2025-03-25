@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // nih penting
+        // Field adalah variabel yang didefinisikan di dalam class untuk menyimpan data.
+        // Property adalah konsep yang lebih luas, mencakup field dan accessor (get/set).
+        // Semua field adalah property, tetapi tidak semua property adalah field (karena property bisa berupa getter/setter).
+
+
+        // Property adalah istilah yang digunakan untuk mengacu pada kombinasi dari field dan accessor (getter dan setter). Property memungkinkan Anda untuk mengontrol akses ke field dan melakukan operasi tambahan saat field diakses atau diubah.
+
+        // Field adalah istilah yang digunakan untuk mengacu pada variabel yang didefinisikan langsung di dalam class. Field adalah bagian dari class dan dapat diakses menggunakan notasi dot (.) atau notasi bracket ([]).
+        // dan field ini ditempatkan selevel dengan pembuatan method
+
+        // - Field adalah variabel yang didefinisikan langsung di dalam class, sedangkan property adalah kombinasi dari field dan accessor.
+        // - Field tidak memiliki kontrol akses, sedangkan property memiliki kontrol akses melalui getter dan setter.
+
+        // jadi sebenarnya ketika kamu membuat sebuah property
+
+
+        // 1. public field
+        class Person {
+            // dan ini akan bersifat public, jadi bisa diakses dari mana saja
+            // ketika kamu membuat property di constructor maka sebenarnya kamu juga sudah membuat field
+            // dan ini akan nempel langung di objek instance nya
+            nama; // ini sudah otomatis
+            kelas; 
+            alamat = "jakarta"; // ini juga bisa langsung di isi valuenya
+            constructor(nama, kelas){
+                this.nama = nama;
+                this.kelas = kelas;
+            }
+        }
+
+        const org1 = new Person("Eko", "XII");
+
+
+        // ================================
+
+        // 2. private field
+
+        // PENTING 
+        // ini beda ya bukan private property klo private property itu pake _
+        // jadi field ini akan bersifat private, jadi tidak bisa diakses dari luar classnya dgn tanda #
+
+        class Counter {
+            #hasil;
+            increment(){
+                this.#hasil ++;
+            }
+            decrement(){
+                this.#hasil --;
+            }
+            get hasil(){
+                return this.#hasil;
+            }
+        }
+
+        let counter = new Counter();
+        console.log(counter.hasil); // 0
+        console.log(counter.hasil); // 1
+        console.log(counter.hasil); // 2
+        console.log(counter.hasil); // 3
+
+        // counter.#counter = 200; // ini akan eror
+        
+    </script>
+</body>
+</html>

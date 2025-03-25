@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // pembuatan consctructor class
+
+        class Person {
+            constructor(nama, energi=10){
+                this.nama = nama;
+                this.energi = energi;
+            }
+        }
+
+        // dan pada class ini masih menggunakan prototype
+        Person.prototype.makan = function(jml){
+            this.energi += jml
+            return this.energi
+        }
+
+        const org1 = new Person("jamal")
+
+
+        // method di class
+        class Mahasiswa {
+            constructor(nama, jurusan, energi=10){
+                this.nama = nama;
+                this.jurusan = jurusan;
+                this.energi = energi
+            }
+
+            // membuat method
+            // untungnya di class kita tidak perlu menggunakan keyword prototype, karena method yang dibuat di class akan langung otomatis dibuatkan di prototypenya bukan di objke instancenya
+            makan(jml){ // akan sudah ada langung di prototypenya si constructor mahasiswa
+                this.energi += jml
+                return this.energi
+            }
+            sayHello(){
+                return `halo ${this.nama}`
+            }
+        }
+
+        // jika kita membuat sebuah method langsung di constructornya maka nanti method tersebut akan langsung nempel di objek instancenya, dan ini tidak efisien karena setiap memuat objek instance, kita selalu membuat methodnya meski ga dipake, nah oleh karena itu kita sebaiknya membuat method itu di prototypenya agar bisa diturunkan dan efisien karena setiap membuat objek instance, methodnya tidak selalu dibuat tpai bisa dipanggil. karena kalo manggil method itu kalo ga ada di objek instancenya maka akan dicek di prototype nya dan seterusnya
+
+        const mhs1 = new Mahasiswa("rafa", "informatika")
+
+
+
+
+        
+
+
+    </script>
+</body>
+</html>

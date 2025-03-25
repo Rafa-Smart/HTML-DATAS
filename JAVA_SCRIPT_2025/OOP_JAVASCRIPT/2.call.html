@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+            // contoh penggunaan call 1
+            // Meminjam Method dari Objek Lain
+            const kendaraan = {
+              nama: "Mobil",
+              klakson: function () {
+                console.log(`${this.nama} berbunyi: Telolet!`);
+              },
+            };
+
+            const sepeda = { nama: "Sepeda" };
+
+            // Meminjam method klakson dari objek kendaraan
+            kendaraan.klakson.call(sepeda); // Output: "Sepeda berbunyi: Telolet!"
+
+            //   contoh penggunaan call 2
+            // Mengubah Konteks (this) dalam Fungsi
+            function sapa() {
+              console.log(`Halo, nama saya ${this.nama}`);
+            }
+
+            const orang = { nama: "siti" };
+
+            sapa.call(orang); // Output: "Halo, nama saya siti", ini ga perlu pake paramter tambahan karena didalam fungsi sapa tidak butuh paramter, dan yg this.nama itu kan nanti thisnya akan menjadi objek orang
+
+            // contoh penggunaan call 3
+            // Mengirim Argumen ke Fungsi
+            function tambah(a, b) { // ini perlu ngasih paramter dari objeknya buat dikirim ke paramter di fungsi yg dipanggil
+              console.log(a + b);
+            }
+
+            tambah.call(null, 5, 3); //nih
+
+              // PENTING
+            // Output: 8 Argumen pertama call() adalah konteks (this). Karena tidak diperlukan, kita bisa mengisi null., disini kenapa saya gunakan 3 parameter ? karena:
+            // 1. parameter pertama itu konteksnya adalah nama objeknya, dan karena tidak butuh makanya saya isikan null
+            // 2.paramter pertama dan kedua itu adalah paramter yg dibutuhkan obleh fungsi tambah.
+
+            // jadi ketika kita memanggil sebuah fungsi yang tidka membutuhkan paramter tambahan maka kita boleh tidak menambahkan paramternya tpai parameter pertamanya wajib diisi yaitu yg objek
+
+
+            // ===========================
+
+            // contoh penggunaan call 3
+            //  Menggunakan call() dengan Constructor Function
+            function Orang(nama) {
+              this.nama = nama;
+            }
+
+            function Karyawan(nama, jabatan) {
+              Orang.call(this, nama); // Memanggil constructor Orang dengan konteks Karyawan
+              // ini kenapa saya kirim 1 parameter tambahan lagi selain objek ? karna :
+              // didalam constructor yg di call atau di panggil iti membutuhan 1 paramter yaitu nama, makanya kita kirim nama yg ada di constructor karywan ke paramter nama di constructor orang,
+
+
+              // PENTINGG
+              // tapi sebenearnya karena constructor yg dipanggil tidak butuh paramter tambahan di funginya maka sebenarnya kita juga bisa tidak mengirimkan paramter tambahan di call nya, dan tetap sama hasilnya, kecuali jika kita mengakses sebuah fungsi di constructor yg di call atau di panggil yg fungsi tersebut ternyata membutuhkan sebuah parameter tambahan maka kita wajib mengisinya klo engga bakal undefined,
+
+              // tapi kalo misalkan di constructor yg dipanggil itu misal punya property nama dan kelas, maka jika constructor yg dipanggil ini ingin membuat nya juga sama dengan constrructor yg dipanggil maka paramter yg dikirim harus sama dan semuanya dikasih sesuai dengan paramter yg ada di constructor yg di panggil
+              this.jabatan = jabatan;
+            }
+
+            const karyawan2 = new Karyawan("siti", "Developer");
+            console.log(karyawan2.nama); // Output: "siti"
+            console.log(karyawan2.jabatan); // Output: "Developer"
+
+
+
+
+            //   contoh lagi
+            //   Menggunakan call() untuk Meminjam Method dari Prototype
+            function Orang(nama) {
+              this.nama = nama;
+            }
+
+            Orang.prototype.sapa = function () {
+              console.log(`Halo, nama saya ${this.nama}`);
+            };
+
+            function Karyawan(nama, jabatan) {
+              this.nama = nama;
+              this.jabatan = jabatan;
+            }
+
+            const karyawan3 = new Karyawan("siti", "Developer");
+
+            // Meminjam method sapa dari prototype Orang
+            Orang.prototype.sapa.call(karyawan3); // Output: "Halo, nama saya siti"
+
+
+
+
+            //   contoh lagi
+            const data = {
+              nilai: 10,
+              kali: function (faktor) {
+                return this.nilai * faktor;
+              },
+            };
+
+            const hasil = data.kali.call({ nilai: 5 }, 3); // Mengubah konteks this menjadi { nilai: 5 },
+            //  dan mengirim paramter tambahan karena di fungis yg dipanggil itu membutuhkan paramter faktor
+            console.log(hasil); // Output: 15
+
+
+
+
+            //   contoh sendiri
+            // contoh call, jadi kita akan meminjam fungsi di objek lain dengan metode this yang berbeda
+            // contoh objek lain
+            function ObjekLain(kelas = 10) {
+              this.kelas = kelas;
+              this.halo = function (istri) {
+                return `halo ${this.name} pacar kamu ${istri} dan kamu kelas ${this.kelas}`;
+              };
+            }
+
+            function tes(name) {
+              this.name = name;
+              ObjekLain.call(this);
+            }
+
+            const arsa = new tes("arsa"); // ini objek yang ingin ngambil fungsi di objek lain
+
+            // ini hasilnya
+            // arsa.halo("khadijah")
+            // "halo arsa pacar kamu khadijah dan kamu kelas 10"
+
+
+            // atau bisa juga gini
+
+            // objek yg dipanggil
+            const ObjekLain2 = {
+              kelas : "10pplg2",
+                halo2 : function (istri) {
+                console.log(`halo ${this.name} pacar kamu ${istri} dan kamu kelas ${kelas}`);
+              }
+            }
+
+
+            function tes2(name){
+              this.name = name;
+              ObjekLain2.halo2.call(this, "siti muhaimin")
+            }
+
+            const supri = new tes2("Supri");
+
+    </script>
+  </body>
+</html>

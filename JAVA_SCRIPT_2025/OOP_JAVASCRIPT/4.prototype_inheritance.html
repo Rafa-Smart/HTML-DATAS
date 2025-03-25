@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // prototype inheritance
+
+        // perlu diketahui bahwa prototype selalu memiliki parent, artinya dia adalah turunan, dan parent tertingginya adalah object.prototype
+
+
+        // cara melakukan inheritance ke prototype lain
+
+        // ini contoh kasus yang salah 
+        function karyawan1(name){
+            this.name = name;
+        }
+        function manager1(name){
+            this.name = name;
+        }
+        manager1.prototype = karyawan1.prototype;
+
+        manager1.prototype.sayHello = function(nama){
+            return `halo ${nama}, saya ${this.name} sebagai manager.`
+        }
+
+        karyawan1.prototype.sayHello = function(nama){
+            return `halo ${nama}, saya ${this.name} sebagai karyawan.`
+        }
+
+        const udin = new karyawan1("udin")
+        console.log(udin.sayHello("jamal")) // halo jamal, saya udin sebagai karyawan.
+        
+        const siti = new manager1("siti")
+        console.log(siti.sayHello("jamal")) // halo jamal, saya siti sebagai karyawan.
+
+        // ===========================
+
+        
+
+        // PENJELASAN 
+        // ini kenapa malah keluar karyawan ? karena, ketika kita ketik manager1.prototype = karyawan1.prototype;
+        // maka yang terjadi adalah gini jadi udin itu sebenarnya sudah benar mempunyai prototype karyawan1, dan siti juga sudah benar mempunyai prototype manager1, tapi ketika kamu ketik manager1.prototype = karyawan1.prototype;, maka kamu secara mentah mentah sudah mereplace prototype manager1 menjadi prototype karyawan1, yang dimana berati prototype manager1 sudah hilang dan diganti dengan prototype karyawan1.
+
+        // nah pas disetting seperti itu maka prototypennya akan berubah, nah kemudian dibawahnya kita setting manager dan karyawannya, nah sebenarnya pas di setting di bagian manager maka kedua prototype ini adalah manager nah pas berubah ini kebetulan di kdoe terakirnya itu yang diubahnya adlaha yang karyawan makanya keduanya berubah menjadi karyawan, makanya sesuai yg terakhir jadinya yang keluar adalah karyawan
+
+
+        // maka caranya adalah
+
+        function karyawan2(name){
+            this.name = name;
+        }
+        function manager2(name){
+            this.name = name;
+        }
+        
+
+        // nah disini kita gunakan Object.create()
+        // artinya kita membuat objek baru yaitu si manager.prototype yang kemudian objek ini mengacu ke sebuah prototype lain yang sudah di tentukan yaitu si karyawan2.prototype
+        manager2.prototype = Object.create(karyawan2.prototype)
+
+        manager2.prototype.sayHello = function(nama){
+            return `halo ${nama}, saya ${this.name} sebagai manager.`
+        }
+
+        karyawan2.prototype.sayHello = function(nama){
+            return `halo ${nama}, saya ${this.name} sebagai karyawan.`
+        }
+
+        console.log("===================")
+        const udin2 = new karyawan2("udin")
+        console.log(udin2.sayHello("jamal")) // halo jamal, saya udin sebagai karyawan.
+        
+        const siti2 = new manager2("siti")
+        console.log(siti2.sayHello("jamal")) // halo jamal, saya siti sebagai manager.
+
+        // liat aja sendiri hasilnya di console udin2 dan siti2 liat perbedaan objeknya
+        console.info(udin2)
+        console.info(siti2)
+
+
+        // PENTING NIHHH
+        // jadi si manager ini kan sebenarnya sudah punya prototype nya yang berisi fungsi sayhallo, nah karena manager ini dibuatkan lagi objek prototypenya yaitu yang berasal dari si prototype karyawan, maka manager ini punya 3 prototype yang pertama itu prototype si managernya, kemudian yg kedua prototype si karyawan, kemudian diatasnya lagi adalah object.prototype,
+
+        // dan karna eksekusinya itu kalo method itu yg diutamakan method didalam objeknya itu dulu, kalo ga ada ke prototype nya dan seterusnya, karena method sayhallo sudah ada di prototype yg pertama maka yg dipake yg method yg pertama, maka prototype yg ke dua tidak dipake gitu
+    </script>
+</body>
+</html>

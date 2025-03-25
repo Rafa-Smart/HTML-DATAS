@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // perlu di ingat getter dan setter ini akan berada di prototypenya bukan berada di instace objeknya, karena ini masih termasuk method dan dibuatnya juga di bagian method dan buakn didalam contructor.
+
+        class Person {
+            constructor(firstName, lastname){
+                this.firstName = firstName;
+                this.lastname = lastname;
+            }
+
+            // membuat getter dan setter
+            get fullName(){
+                return `${this.firstName} ${this.lastname}`   
+            }
+            set fullName(nama){
+                if(nama.length > 0){
+                    const hasil = nama.split(" ");
+                    this.firstName = hasil[0]
+                    this.lastname = hasil[1]
+                } else {
+                    console.log("nama tidak boleh kosong")
+                }
+            }
+        }
+
+        const org1 = new Person("rafa", "khadafi");
+        console.log(org1.fullName); // rafa khadafi
+        org1.fullName = "jamal istiqomah"
+        console.log(org1.fullName) // jamal istiqomah
+        console.log(org1.firstName) // jamal
+        console.log(org1.lastname) // istiqomah
+
+    </script>
+</body>
+</html>

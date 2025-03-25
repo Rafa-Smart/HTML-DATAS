@@ -53,7 +53,7 @@
 
         function buatOrang(nama, kelas, jurusan, energi){
             // nah kalo mau tau apa parameter yang harus dipake itu hover sja di createnya, jadi parameternya itu adalah nama objek yang ingin diambil methodnya, dan methodnya apa saja yang ingin diambilnya
-            let orang = Object.create(methodMahasiswa)
+            let orang = Object.create(methodMahasiswa) // ini sebenarnya unutk membuat sebuah prototype dari methodMahasiswa
             // maka setelah sudah disambungkan dengan objek methodMahasiswa, kita tidak perlu lagi mendaftarkan ulang methodnya di dalam sini, karena otomatis sudah terupdate. dan bisa langsung diakses
             orang.nama = nama;
             orang.kelas = kelas;
