@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // private method
+
+      class Person {
+        say(name) {
+          if (name) {
+            this.#sayHello(name);
+          } else {
+            this.#sayNo();
+          }
+        }
+
+        #sayHello(name) {
+          console.log(`halo ${name}`);
+        }
+        #sayNo() {
+          console.log(`halo kamu tidak terdefinisi`);
+        }
+      }
+
+      const org1 = new Person();
+      org1.say("rafa");
+    </script>
+  </body>
+</html>

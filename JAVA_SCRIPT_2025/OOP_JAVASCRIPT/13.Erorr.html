@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // eror di js itu ada banyak
+      // dan semua erorr di js selalu berujung di class Error, artinya class error adalah super class atau parent class dari semua jenis eror yang ada di javascript
+
+      //   KETIKA TERJADI ERROR MAKA :
+      // 1. Memberhentikan eksekusi kode (jika tidak ditangkap).
+      // 2. Menampilkan pesan error di console.
+      // 2. Mengembalikan object Error yang berisi:
+      // 3. name → Jenis error (misal: ReferenceError).
+      // 4. message → Pesan error.
+      // 5. stack → Informasi stack trace (untuk debugging);
+
+      // jadi gini ketika kamu melakukan error maka javascript akan mengembalikan object error yang berisi
+      // 1. name → Jenis error (misal: ReferenceError).
+      // 2. message → Pesan error.
+      // 3. stack → Informasi stack trace (untuk debugging);
+      // liat aja sendiri
+
+      // jadi Error yang ada di js ini class yang merupakan extends dari class Error
+      // dan kita prelu mentriger program kita bahwa akan terjadi error, atau istilahnya throw error, jadi kita akan melempar errornya.
+      // untuk melempar error kita perlu menuliskan keyword throw (nama instance objek Error)
+
+
+
+      // 1. contoh membuat error sendiri
+      {
+        class ValidationError extends Error {
+          constructor(message) {
+            super(message);
+            this.name = "ValidationError"; // Nama custom error
+          }
+        }
+
+        let error2 = new ValidationError("isi yg bener"); // ini kita buat object instancenya sendiri
+        console.log(error2.name); // ini akan menampilkan jenis errornya : ValidationError
+        console.log(error2.message); // ini akan menampilkan : isi yg bener
+        console.log(error2.stack); // ini akan menampilkan informasi stack trace, ini sebenarnya tidka ada di objek error2 tapi ada di prototypenya inget
+
+        // Menggunakan custom error
+        function login(username) {
+          if (!username) {
+            // throw new ValidationError("Username harus diisi!"); // Melempar error
+
+            // bisa juga
+            const error1 = new ValidationError("Username tidak boleh kosong");
+            throw error1;
+
+            // nah jika begini ini bakal langsung berhenti programnya karena sudah error, maka kita bisa empar errornya agar programnya masih bisa berjalan
+          }
+        }
+
+        try {
+          login(""); // ❌ Akan throw ValidationError
+        } catch (error) {
+          console.log(error.name); // "ValidationError"
+          console.log(error.message); // "Username harus diisi!"
+        }
+      }
+
+
+
+      //   2. contoh throw error
+      {
+
+        class math {
+          static sum(...numbers) {
+            if (numbers.length === 0 || numbers.length < 0) {
+              const error = new Error("masukan paramter yang benar");
+              throw error;
+
+              // atau bisa juga seperti ini
+              // throw new Error("masukan parameter yang benar")
+            }
+
+            let total = 0;
+            for (let number of numbers) {
+              total += number;
+            }
+
+            return total;
+          }
+        }
+
+        // const result = math.sum(); // Uncaught Error: masukan paramter yang benar
+        // console.log("haiii")// nahh ini ga bakal di eksekusi karena ketika sudah masuk ke error maka seluruh kode dibawahnya bakal dihentikan.
+
+        const result = math.sum(3,4,5,6);
+        console.log(result);
+
+
+      }
+
+
+
+
+
+      //   ini kesimpulan
+      // 1. Gunakan try-catch untuk operasi yang mungkin gagal (fetch API, pembacaan file, dll).
+      // 2. Buat custom error untuk kasus spesifik (misal: AuthError, DatabaseError).
+      // 3. Jangan biarkan error tidak tertangkap (gunakan window.onerror untuk menangkap error global).
+      // 4. Gunakan finally untuk cleanup (misal: tutup koneksi database).
+      // 5. Catat error ke logging service (Sentry, LogRocket) untuk debugging.
+    </script>
+  </body>
+</html>

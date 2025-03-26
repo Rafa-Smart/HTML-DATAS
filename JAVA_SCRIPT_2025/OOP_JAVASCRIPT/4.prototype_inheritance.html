@@ -21,13 +21,15 @@
         function manager1(name){
             this.name = name;
         }
-        manager1.prototype = karyawan1.prototype;
+        manager1.prototype = karyawan1.prototype; // ini artinya kita replace bulat bulat,
+        // PENTING
+        // dan berati di kedua prototype ini akan kosong lalu pertama muncul si manager, kemudian muncul lagi sayHello si karyawan, maka sayHello yg awalnya si managre jadi ilang dan di replace menjadi si karyawan
 
-        manager1.prototype.sayHello = function(nama){
+        manager1.prototype.sayHello = function(nama){// ini kita tambahkannya di prototypenya ya
             return `halo ${nama}, saya ${this.name} sebagai manager.`
         }
 
-        karyawan1.prototype.sayHello = function(nama){
+        karyawan1.prototype.sayHello = function(nama){// ini kita tambahkannya di prototypenya ya
             return `halo ${nama}, saya ${this.name} sebagai karyawan.`
         }
 
@@ -86,6 +88,8 @@
         // jadi si manager ini kan sebenarnya sudah punya prototype nya yang berisi fungsi sayhallo, nah karena manager ini dibuatkan lagi objek prototypenya yaitu yang berasal dari si prototype karyawan, maka manager ini punya 3 prototype yang pertama itu prototype si managernya, kemudian yg kedua prototype si karyawan, kemudian diatasnya lagi adalah object.prototype,
 
         // dan karna eksekusinya itu kalo method itu yg diutamakan method didalam objeknya itu dulu, kalo ga ada ke prototype nya dan seterusnya, karena method sayhallo sudah ada di prototype yg pertama maka yg dipake yg method yg pertama, maka prototype yg ke dua tidak dipake gitu
+
+        // dan katika fungsi sayhello di objek instancenya manager ini di eksekusi, maka akan dicari dulu di objek instancenya apakah ada fungsi sayhalo, jika tidak maka dicari di prototypenya yg pertama yaitu si manager, kemudian karena ada maka akan dipake yg itu methodnya meskipun ada lagi prototype diatas manager yaitu si karyawan dan karyawan ini juga memiliki funsi sayhalo tapi keburu yg dieksekusinya adaalah yg di prototype manager.
     </script>
 </body>
 </html>

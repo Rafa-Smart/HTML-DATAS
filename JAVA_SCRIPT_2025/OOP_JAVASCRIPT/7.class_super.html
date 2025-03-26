@@ -10,6 +10,11 @@
   </head>
   <body>
     <script>
+
+      // PENTING
+      // JADI GINI SIMPLENYA SUPER ITU GUNANYA UNTUK MENGINIALISASI ULANG PROPERTY ATAU FUNGSI DI SUPER CLASSNYA / PARENT CLASSNYA, DAN KALO MAU PAKE CONSTRUCTOR JUGA DI CHILD CLASSNYA MAKA WAJIB MENDEKLARASIKAN ULANG SEMUA (ATAU KALO GA SEMUA JUGA GPP), DI CONSTRUCTOR CHILDNY MNEGGUNAKAN SUPER(...PROPERTY) / SUPER.NAMAFUNGSI
+
+
       // PENTING
       // di file sebelumnya itu adalah class inheritance, dan di file ini itu constructor inheritance
 
@@ -26,16 +31,33 @@
       // 1. class inheritance(extends) itu sifatnya sama dengan prototype inheritance (object.create) // ini yg prototype
       // 2. kemudian sebenarnya constructor inheritance(class)(pake super) di class dan di constructor function(prototype)(pake call,apply, dll) ini sebenarnya hanya lah melakukan eksekusi ocnstructor lain dnegna tujuan agar property di constructor lain bisa di tambahkan ke instance object yang baru saja dibuat.
       // 3. super digunakan untuk mengakses dan memanggil fungsi atau constructor dari parent class.
+
+      // PENTING NIHHH
       // Ini sangat berguna ketika Anda ingin menambahkan atau memodifikasi fungsionalitas di child class tanpa menulis ulang kode yang sudah ada di parent class.
       // 4. dan penmangilan super ini wajib dilakukan di awal constructor child class, karena constructor child class akan dijalankan setelah constructor parent class
       // dan kita ketika di sonctructor childnya kita ingin membuat sebuah cnstructor, maka kita wajib mneggunakan super() di awal constructor childnya meskipun di constructor parentnya tidak memiiki constuctor.
 
+
+      // PENTINGGG
+      // oohhh jadi gini
+      // kalo di call itu akn gini yak .call(this, ...paremeter)
+      // paramter ini kan yg kita isi dan kirim kan agar kita punya property yg sama dengan yg di turunkan.
+
+      // super(...paramter / fungsi)
+      // nah kalo super itu berati kita mengammbil paramter paramter yg ingin kita miliki di child classnya, dan begitu juga dnegan yg fungsi berati kita mengambil fungsi yang ingin kita miliki di child classnya.
+
+
+
       // PENJELASAN RINCI
       // Meskipun child class telah mewarisi seluruh property dan method dari parent class, kata kunci super masih diperlukan dalam beberapa kasus:
 
-      // 1. Mengakses property yang hidden oleh child class: Jika child class memiliki property dengan nama yang sama dengan property di parent class, maka property di parent class akan tersembunyi (hidden). Dalam kasus ini, kata kunci super digunakan untuk mengakses property di parent class.
+      // 1. Mengakses property yang hidden oleh child class: Jika child class memiliki property dengan nama yang sama dengan property di parent class, maka property di parent class akan tersembunyi (hidden). Dalam kasus ini, kata kunci super digunakan untuk mengakses property di parent class. 
+      // PENTING
+      // disini tersembunyi karena alur exsekusinya, coba ingat ingat lagi alur exsekusinya, pertama itu di instance objeknya, lalu di prototypenya, lalu di prototype prototypenya lagi, lalu di object.prototype
+
+
       // 2. Memanggil method yang overridden oleh child class: Jika child class memiliki method dengan nama yang sama dengan method di parent class, maka method di parent class akan tersembunyi (hidden). Dalam kasus ini, kata kunci super digunakan untuk memanggil method di parent class.
-      // 3. Mengakses constructor parent class: Dalam beberapa kasus, child class perlu mengakses constructor parent class untuk melakukan inisialisasi atau konfigurasi tertentu. Kata kunci super digunakan untuk memanggil constructor parent class.
+      // 3. Mengakses constructor parent class: Dalam beberapa kasus, child class perlu mengakses constructor parent class untuk melakukan inisialisasi ulang atau konfigurasi tertentu. Kata kunci super digunakan untuk memanggil constructor parent class.
 
       // ini super untuk property
 
@@ -57,7 +79,7 @@
         // karena sebelumnya jika kita tidak menggunakan super() maka akna eror
 
         constructor(firstName, lastName) {
-          super(firstName); // ini wajib di awal constructor child class untuk mengakses constructor parent class, dan tidak usah deklaasikan ulang
+          super(firstName); // ini kita pake karena agar manager ini mempunyai property firstName juga, dan ini bersifat wajib, jaid kita kayk inisialisasi ulang di child classnya
           this.lastName = lastName;
         }
       }
@@ -90,12 +112,12 @@
 
       // jadi sebenarnya yg terjadi adalah ketika kita mengakses method pain di class Cirlce maka maka akan dicari method paint di objek instancenya itu, kemudian jika tidak ada maka akan dicari di prototypenya  dan jika tidak ada maka aka dicari di prototypenya prototype , dan seterusnya sampai mencapai Object.prototype, dan jika masih tidak ada maka akan undefined.
 
-      // nah karena class cirlce ini prototypenya adalah turunan dari prototype si class shape, maka nanti method di shape ini yg paint tidak akan dieksekusi oleh si bulat karena method paint di objek bulat itu ada di prorotypenya sendiri, jadi keburu diakses method yg ada di prototype objek bulat, jadi method yg di prototype shape tidak akan dieksekusi.
+      // nah karena class cirlce ini prototypenya adalah turunan dari prototype si class shape, maka nanti method di shape ini yg paint tidak akan dieksekusi oleh si bulat karena method paint di objek bulat itu ada di prorotypenya sendiri, jadi keburu diakses method yg ada di prototype objek bulat yg dieksekusi, jadi method yg di prototype shape tidak akan dieksekusi.
 
       // ini urutannya ketika mengakses bulat.paint
       // 1. Object bulat (tidak ada method paint)
       // 2. prototype objek bulat (ada method paint) -> ini yg akan dipake
-      // 3. prototype prototypenya objek bulat (yaitu dari constructor shape karena suda di extends) (tidak ada method paint) -> ada tapi tidak keburu di akses
+      // 3. prototype prototypenya objek bulat (yaitu dari constructor shape karena suda di extends) (ada method paint) -> ada tapi tidak keburu di akses
       // 4. object.prototype (tidak ada method paint)
 
 
@@ -127,7 +149,7 @@
       // Kelas turunan Car
       class Car extends Vehicle {
         constructor(brand, model, doors) {
-          super(brand, model); // Memanggil konstruktor Vehicle
+          super(brand, model); // Memanggil konstruktor Vehicle, jadi kita inisialisasi ulang
           this.doors = doors; // Menambahkan properti khusus untuk Car
         }
 

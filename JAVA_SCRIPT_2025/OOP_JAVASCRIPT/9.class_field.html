@@ -46,12 +46,9 @@
 
         // 2. private field
 
-        // PENTING 
-        // ini beda ya bukan private property klo private property itu pake _
-        // jadi field ini akan bersifat private, jadi tidak bisa diakses dari luar classnya dgn tanda #
 
         class Counter {
-            #hasil;
+            #hasil = 0;
             increment(){
                 this.#hasil ++;
             }
@@ -64,12 +61,42 @@
         }
 
         let counter = new Counter();
-        console.log(counter.hasil); // 0
-        console.log(counter.hasil); // 1
-        console.log(counter.hasil); // 2
-        console.log(counter.hasil); // 3
+        counter.increment()
+        counter.increment()
+        counter.increment()
+        counter.increment()
+        console.log(counter.hasil) // 4
 
         // counter.#counter = 200; // ini akan eror
+
+
+
+
+
+        // PENTING JADI GINI GES, BEDANYA PROPERTY DAN FIELD
+
+        // 1. PROPERY = JADI DIA ITU SAMA SAMA BISA PRIVATE DAN PUBLIC
+        // NAH TERUS DIA BISA LANGUSNG MENJADI ACCESSOR PROPERTY 
+        // CONTOH :
+        // this.fullname = fullname ; // ini adalah property
+
+        // nah terus si property ini bisa langsung kita gunakan sebagai accessor property caranya
+        // get fullname() {
+            // return `${this.namaAwal} ${this.namaAkhir}`
+        // }
+
+        // 2. FIELD = JADI DIA ITU HANYA BISA PRIVATE DAN PUBLIC JUGA TAPI
+        // Field (termasuk private #field) adalah variabel penyimpan data, bisa diakses via getter/setter, tetapi tidak bisa secara langsung menjadi accessor property,
+        // "Field sendiri bukanlah accessor property, tetapi bisa diakses melalui getter/setter terpisah."
+
+        // JADI KLO ADA FIELD :
+        // counter;
+
+        // disini agar kita bisa mengaksesnya kita bisa pake get dan set, tapi tidak bisa menjadikan field ini sebagai accessor property, Field tidak memiliki kontrol akses
+
+        // get hasil(){
+            // return this.counter;
+        // }
         
     </script>
 </body>

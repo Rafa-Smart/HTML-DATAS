@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1></h1>
+    <script>
+      {
+        // // jadi bisa melempar tipe data apapun
+        // throw "Ini error"; // ❌ Tidak disarankan
+        // throw new Error("Ini error"); // ✅ Lebih baik
+      }
+
+      console.log("=======");
+
+      {
+        // catch akan menangkap throw yang terdekat
+        try {
+          try {
+            throw new Error("Error dalam");
+          } catch (err) {
+            console.log("Tangkap dalam:", err.message); // "Tangkap dalam: Error dalam"
+            throw err; // Lempar lagi ke luar
+          }
+        } catch (err) {
+          console.log("Tangkap luar:", err.message); // "Tangkap luar: Error dalam"
+        }
+      }
+
+      // nah jadi ketika kita melempar error maka akan dilempar ke scope tredekat yang memiliki bloktry and catch
+      // Jika tidak ada try-catch, error akan menjadi "uncaught exception" dan program berhenti.
+
+      // ketika terjadi error didalam program js kita maka secara default seluruh program dibawah kode errornya  akan berhenti.
+      // maka kita harus menangani error tersebut agar program kita tidak berhenti.
+      // caranya kita bisa menangkap jika terjadi error tersebut menggunakan try catch().
+
+      // jadi pada blok try kita akan mencoba mengakses kode program yag bisa menyebabkan error, dan jika terjadi error, block try akan berhenti dan otomatis masuk ke block catch, namun jika tidak terjadi error maka block catch tidak akan dieksekusi.
+
+      console.log("=======");
+
+      {
+        class mathUtils {
+          static sum(...numbers) {
+            if (numbers.length === 0) {
+              throw new Error("tolong masukan parameter"); // ini bakal masuk ke error.message
+            }
+
+            let total = 0;
+            for (let number of numbers) {
+              total += number;
+            }
+            return total;
+          }
+        }
+
+        try {
+          // disini kita akan menuliskan program yang sekiranya bisa error
+
+          console.log(mathUtils.sum()); // ini akan berhenti
+          console.log("kode block try akan berhenti kalo error");
+        } catch (error) {
+          console.log(error instanceof Error); // nih tes aja hasilnya true
+          const h1 = document.querySelector("h1");
+          h1.textContent = error.message; // ini bakal menampilkan pesan errornya
+          console.log(
+            `terjadi error jenis : ${error.name}\npesan : ${error.message}`
+          );
+
+          // inget karena objek Error ini sudah diturunkan di throw tapi tanpa nama, kemudian objek instancenya itu akan masuk ke parameter yang ada di catch ini, dan fyi isi dari objek Error ini ada name(jenis error), message(isi error), stack(lokasi error) dan
+          // karena object Error ini sudah diturunkan maka kita bisa mengakses properti yang ada di object Error,
+          // dalam hal ini objek turunanya adalah error
+        } finally {
+          console.log("program selesaii.....");
+        }
+
+        console.log("nahh disini tidak akan berhenti meski sudah error");
+      }
+      console.log("=======");
+
+      // kata kunci finnaly
+
+      // jadi dengan blok finally ini kita kadang ingin melakukan sesuatu entah itu terjadi error atua tidak, maka blok finally akan selalu dieksekusi setelah block try dan catch.
+
+      console.log("=============");
+      try {
+        console.log("ini block try");
+      } catch (error) {
+        console.log("ini block catch");
+      } finally {
+        console.log("program selesai");
+      }
+
+      console.log("==============");
+
+      // try and finally
+      {
+        class Counter {
+          constructor() {
+            this.value = 1;
+          }
+
+          next() {
+            try {
+              return this.value;
+            } finally {
+              this.value++;
+            }
+          }
+        }
+
+        const counter = new Counter();
+        console.log(counter.next()); // 1
+        console.log(counter.next()); // 2
+        console.log(counter.next()); // 3
+      }
+
+      console.log("=======");
+
+      // contoh lagi
+      {
+        class FormError extends Error {
+          constructor(field, message) {
+            super(message);
+            this.name = "FormError";
+            this.field = field;
+          }
+        }
+
+        function validateForm({ username, password }) {
+          if (!username)
+            throw new FormError("username", "Username wajib diisi!");
+          if (password.length < 6)
+            throw new FormError("password", "Password minimal 6 karakter!");
+          // nah jadi ketika kita melempar error maka akan dilempar ke scope tredekat yang memiliki bloktry and catch
+        }
+
+        try {
+          validateForm({ username: "", password: "123" });
+        } catch (error) {
+          if (error instanceof FormError) {
+            console.log(`Error di field ${error.field}: ${error.message}`);
+          }
+        }
+      }
+
+      console.log("=======");
+
+      //   contoh lagi
+      {
+        try {
+          // Kode yang mungkin error
+          for (i = 0; i < 10; i++) {
+            console.log(ie);
+          }
+        } catch (error) {
+          if (error instanceof TypeError) {
+            console.log("TypeError terjadi!");
+          } else if (error instanceof ReferenceError) {
+            console.log("ReferenceError terjadi! nn");
+          } else {
+            console.log("Error lain:", error);
+          }
+        }
+      }
+
+    //   penjelasan lengkap 
+      {
+      //   ada error yang tidak bisa ditangkap oleh catch yaitu syntax error, karena sintax error ini itu error karena typo biasanya,
+      // ini masuknya ke parsing/compilation yaitu error sebelum kode dijalankan
+      // nah Parsing & Compilation (sebelum kode dijalankan)
+      // Runtime (saat kode dijalankan)
+
+      // penjelasan
+      /**
+       * PENJELASAN PARSE, COMPILATION, RUNTIME, DAN ERROR DI JAVASCRIPT
+       *
+       * Untuk memahami mengapa SyntaxError tidak tertangkap try-catch,
+       * kita perlu tahu proses eksekusi kode JavaScript:
+       */
+
+      // ==============================================
+      // 1. PARSE & COMPILATION (Sebelum Eksekusi)
+      // ==============================================
+
+      /*
+       * - Fase dimana JavaScript engine (seperti V8) mempersiapkan kode sebelum dijalankan
+       * - Terdiri dari 2 tahap:
+       */
+
+      // a. Parsing (Analisis Sintaks)
+      /*
+       * - Tujuan: Memeriksa struktur kode dan membuat Abstract Syntax Tree (AST)
+       * - Contoh aktivitas:
+       *   - Memeriksa keseimbangan tanda kurung {}, (), []
+       *   - Memvalidasi sintaks dasar (for, if, function)
+       * - Jika ada error:
+       *   - Langsung throw SyntaxError
+       *   - Proses berhenti, tidak lanjut ke runtime
+       *
+       * Contoh error parsing:
+       * for (i=0; i<10; i+) {} // ❌ SyntaxError karena i+ tidak valid
+       */
+
+      // b. Compilation (Generate Bytecode)
+      /*
+       * - Tujuan: Mengubah AST menjadi bytecode yang siap dieksekusi
+       * - Catatan:
+       *   - JavaScript modern pakai JIT (Just-In-Time) Compilation
+       *   - Parse dan compile terjadi tepat sebelum eksekusi
+       */
+
+      // ==============================================
+      // 2. RUNTIME (Saat Eksekusi Kode)
+      // ==============================================
+
+      /*
+       * - Fase dimana kode benar-benar dijalankan baris per baris
+       * - Contoh aktivitas:
+       *   - Menghitung ekspresi (1 + 1)
+       *   - Memanggil fungsi (console.log())
+       *   - Mengakses variabel
+       * - Error yang terjadi disebut runtime error
+       *   - Bisa ditangkap try-catch
+       *
+       * Contoh runtime error:
+       * try {
+       *   console.log(tidakAda); // ❌ ReferenceError
+       * } catch (e) {
+       *   console.log("Error ditangkap!"); // ✅
+       * }
+       */
+
+      // ==============================================
+      // 3. JENIS ERROR
+      // ==============================================
+
+      // a. Compile-Time Error (SyntaxError)
+      /*
+       * - Terjadi saat parse/compilation
+       * - Penyebab:
+       *   - Sintaks tidak valid
+       *   - Tanda kurung tidak seimbang
+       * - Ciri:
+       *   - Error muncul sebelum kode berjalan
+       *   - Tidak bisa ditangkap try-catch
+       *
+       * Contoh:
+       * function() {} // ❌ SyntaxError: function tanpa nama
+       */
+
+      // b. Runtime Error
+      /*
+       * - Terjadi saat eksekusi kode
+       * - Penyebab:
+       *   - Operasi tidak valid (null.toString())
+       *   - Variabel/fungsi tidak terdefinisi
+       * - Ciri:
+       *   - Error muncul saat kode dijalankan
+       *   - Bisa ditangkap try-catch
+       *
+       * Contoh:
+       * try {
+       *   null.toString(); // ❌ TypeError
+       * } catch (e) {
+       *   console.log("Error ditangkap!"); // ✅
+       * }
+       */
+
+      // ==============================================
+      // 4. BEST PRACTICES
+      // ==============================================
+
+      /*
+       * a. Cegah Compile-Time Error:
+       *    - Gunakan ESLint di code editor
+       *    - Perhatikan warning syntax error
+       *
+       * b. Tangkap Runtime Error:
+       *    - Gunakan try-catch untuk operasi rawan error
+       *    - Contoh:
+       *      try {
+       *        JSON.parse(invalidJson);
+       *      } catch (e) {
+       *        console.log("Gagal parse JSON");
+       *      }
+       *
+       * c. Pahami Jenis Error:
+       *    - SyntaxError: Perbaiki sintaks
+       *    - ReferenceError: Variabel/fungsi belum didefinisikan
+       *    - TypeError: Operasi pada tipe data yang salah
+       */
+
+      /**
+       * KESIMPULAN:
+       *
+       * | Konsep            | Waktu Terjadi       | Bisa Ditangkap try-catch? | Contoh               |
+       * |-------------------|---------------------|---------------------------|----------------------|
+       * | Parse/Compilation | Sebelum runtime      | ❌ Tidak                  | for(i=0;i<10;i+)     |
+       * | Runtime           | Saat eksekusi        | ✅ Ya                     | null.toString()      |
+       * | Compile-Time Error| Sebelum runtime      | ❌ Tidak                  | SyntaxError          |
+       * | Runtime Error     | Saat runtime         | ✅ Ya                     | ReferenceError, TypeError |
+       */
+      }
+    </script>
+  </body>
+</html>

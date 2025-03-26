@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // operator instanceOf
+
+        class karyawan {
+
+        }
+
+        class manager {
+
+        }
+
+        const karyawan1 = new karyawan();
+        const manager1 = new manager();
+
+        console.log(manager1 instanceof manager); // true
+        console.log(manager1 instanceof karyawan); // false
+        console.log(karyawan1 instanceof karyawan); // true
+        console.log(karyawan1 instanceof manager); // false
+
+
+
+        // dan bisa juga mengecek apakah sebuah objek ini kan memiliki prototype dan mengecek apakah prototypenya ini ada alh instance dari prototype lain 
+
+        
+        class Guru {
+        
+        }
+
+        class Siswa extends Guru {
+
+        }
+
+        const murid = new Siswa();
+        const teacher = new Guru();
+
+        console.log("============")
+
+        console.log(murid instanceof Siswa); // true
+        console.log(murid instanceof Guru); // true
+        console.log(teacher instanceof Siswa); // false
+        console.log(teacher instanceof Guru); // false
+
+
+    </script>
+</body>
+</html>

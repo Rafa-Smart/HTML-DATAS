@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>
+        ❌rrr 👍👍👍
+
+    </h1>
+    <script>
+      // statis adalah keyword yg bisa kita tambahkan sembelum filed atau method, biasanya ketika kita membuat filed atau metho, maka secara otomatis field aan emnjadi property di instance objectnya, dan method akan menjadi function di prototype
+
+      // tapi jika kita tambahkan static maka field atau method tersebut tidak akan menjadi property di instance objectnya, dan tidak akan menjadi function di prototype, tapi akan milik si class itu sendiri
+
+      // dan secara default ini akan public,
+      // tapi ketika kita ingin membuatnya private, maka kita bisa menggunakan keyword private, dan ketika kita ingin membuatnya protected, maka kita bisa menggunakan keyword protected
+
+      // jadi bedanya protected dan private adalah :
+      // 1. protected _ = fieldnya masih bisa digunakan atau diakses di class itu sendiri dan instance objeknya.
+      // 2. private # = fieldnya hanya bisa digunakan atau diakses di class itu sendiri saja,
+
+      class Logger {
+        static #logLevel = "DEBUG"; // Private static field
+
+        static setLogLevel(level) {
+          this.#logLevel = level; // Hanya bisa diubah dari dalam class
+        }
+
+        static log(message) {
+          console.log(`[${this.#logLevel}] ${message}`);
+        }
+      }
+
+      Logger.setLogLevel("INFO");
+      Logger.log("Hello"); // [INFO] Hello
+
+    //   console.log(Logger.#logLevel); // ❌ Error (Private field tidak bisa diakses dari luar)
+
+
+
+    // contoh lagi
+
+    class Configuration{
+        static #apiKey = "1234567890"; // Private static field
+        // biar lebih aman kita bisa pake private aja
+        
+        static apiUrl = "https://api.example.com"; // public static field
+    }
+
+    const config = new Configuration() // tidak mempunyai apiUrl dan apiKey
+    console.log(Configuration.apiUrl) // https://api.example.com
+    console.log(config.apiUrl) // undefined
+
+
+    // contoh lagi
+    // yg method jadi nanit method ini akan menjadi milik class nya itu sendiri
+
+    class math {
+        static sum(...numbers){
+            let total = 0;
+            for (let number of numbers){
+                total += number;
+            }
+            return total;
+        }
+
+        static multiply(...numbers){
+            let total = 1;
+            for (let number of numbers){
+                total *= number;
+            }
+            return total;
+        }
+    }
+
+    const tes = new math()
+
+    console.log(math.sum(2,4,5,7,5,3,2));
+    console.log(math.multiply(2,4,5,7,5,3,2));
+
+    // wahh anjir ini keren bgt, jadi kita bisa memasukan banyak method di dalam class ini dan kita buat method kemudian kita buat static
+
+
+
+    </script>
+  </body>
+</html>
