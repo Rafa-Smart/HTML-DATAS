@@ -6,7 +6,7 @@
 
 // res(2,3,4,5,6,6,"rafa","putri","jamal")
 
-let objekcoba ={
+let objekcoba = {
     nama:"rafa",
     kelas:"10pplg2"
 }

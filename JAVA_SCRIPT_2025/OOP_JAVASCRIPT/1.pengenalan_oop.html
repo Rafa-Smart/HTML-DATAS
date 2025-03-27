@@ -75,7 +75,7 @@
       // "10pplg2"
 
 
-      // INI MAH PASANGANNYA SAMA SI SUPER KARENA NGAKSES CONSTRUCTORNYA BUKAN NGAKSES PROTOTYPENYA
+      // CALL MAH PASANGANNYA SAMA SI SUPER KARENA NGAKSES CONSTRUCTORNYA BUKAN NGAKSES PROTOTYPENYA
       // caranya adalah kita bisa menggunakna NamaConstructor.call(this.parameter)
       // maka nanti hasilnya semua inisiasi yang ada pada constructor kedua itu akan di copy ke constructor yang pertama
 
@@ -95,7 +95,8 @@
         karyawan.call(this, firstName, tes); // jadi this yang sebenarnya ada di objek karyawan jadi ada di objek manager, nah paramternya ini tergantung si constructornya butuh paramternya apa saja, disini kan di fngis sayhalonya hanya butuh firstnama, makanya kita kasih paramternya firstname saja,
 
         // PENTING
-        // tapi yg bener kayaknya kita emnag harus masukin aja semua paramternya dari sesuai sama semua paramter yg ada di conatructornya
+        // tapi yg bener kayaknya kita emnag harus masukin aja semua paramternya dari sesuai sama semua paramter yg ada di conatructornya,
+        // agar kita juga punya semua property yang ada di constructor yang dipanggil
 
         // nah ini bukan merujuk ke prototypenya ya, tapi ini kayak copy seluruh property dan method yg ada di constructor lain
         this.lastName = lastName;

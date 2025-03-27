@@ -4,7 +4,7 @@
 
 class User {
     constructor(name) {
-        this._name = name; // Properti privat (ditandai dengan underscore _)
+        this._name = name; // Properti proteksi (ditandai dengan underscore _)
     }
 
     // nahh jadi ketika kita menggunakan keyword get dan set di awal nama function maka itu akan menjadikanya sebuah property juga, jadi nanti diaksesnya bakal sama seperti mengakses property
@@ -69,7 +69,7 @@ const user = {
     // atau mau pake function juga bisa
     namaLEngkap2: function(){
         return `${this.namaAwal} ${this.namaAkhir}`
-        // nahh dengna menggunakan ini maka kita akna megaksesnya sebagai fungsi bukan sebagai property biasa gitu
+        // nahh dengna menggunakan ini maka kita akna megaksesnya sebagai fungsi bukan sebagai property biasa
     }
 }
 // jadi harus di tambah secara manual

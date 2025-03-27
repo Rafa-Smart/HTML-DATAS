@@ -25,7 +25,7 @@
         constructor(nama, kelas) {
           this.nama = nama;
           this.kelas = kelas;
-          this.sayHalo = () => {
+          this.sayHalo = () => { // ini kenapa thisnya mengacu ke objek ?, karena di class ini fungsinya kita taro di objek instancenya . INEGET
             // sama aja
             console.log(
               `Halo, saya ${this.nama} dari kelas ${this.kelas} = ${this}`
@@ -36,7 +36,42 @@
       }
 
 
-      const rafa2 = new tes2("rafa", "10");
+      const rafa2 = new tes42("rafa", "10");
+      class tes42 {
+        constructor(nama, kelas) {
+          this.nama = nama;
+          this.kelas = kelas;
+          sayHalo = () => { // ini kenapa thisnya mengacu ke objek ?, karena di class ini fungsinya kita taro di objek instancenya . INEGET
+            // sama aja
+            console.log(
+              `Halo, saya ${this.nama} dari kelas ${this.kelas} = ${this}`
+            );
+            console.log(this); //Object { nama: "rafa", kelas: "10", sayHalo: sayHalo() }
+          };
+        }
+      }
+
+      const rafa21 = new tes2("rafa", "10");
+      
+      
+      function Tes(nama, kelas){
+        this.nama = nama;
+        this.kelas = kelas;
+      }
+      
+      Tes.prototype.sayHello = () => {
+        console.log(`hal0 ${this.nama} dari kelas ${this.kelas}`);
+        console.log(this) // ini yg keluar itu objek window
+      }
+
+      const rafa12 = new Tes("rafa", "10");
+      // in malah undefined
+      // hal0 undefined dari kelas undefined
+      
+        
+      
+      
+      
       class tes3 {
         constructor(nama, kelas) {
           this.nama = nama;
@@ -51,6 +86,7 @@
       }
 
       const rafa3 = new tes3("rafa", "10");
+
       class tes4 {
         constructor(nama, kelas) {
           this.nama = nama;

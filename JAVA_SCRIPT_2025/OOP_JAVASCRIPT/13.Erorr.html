@@ -34,7 +34,9 @@
       {
         class ValidationError extends Error {
           constructor(message) {
-            super(message);
+            super(message); 
+            // PENTING
+            // ini kita ambil salah satu property yang ada di class Error, dan agar bisa kita manupilasi, makanya kita harus inisialisasi dulu di class childnya. 
             this.name = "ValidationError"; // Nama custom error
           }
         }
@@ -59,7 +61,7 @@
 
         try {
           login(""); // ❌ Akan throw ValidationError
-        } catch (error) {
+        } catch (error) { 
           console.log(error.name); // "ValidationError"
           console.log(error.message); // "Username harus diisi!"
         }
@@ -105,9 +107,9 @@
       //   ini kesimpulan
       // 1. Gunakan try-catch untuk operasi yang mungkin gagal (fetch API, pembacaan file, dll).
       // 2. Buat custom error untuk kasus spesifik (misal: AuthError, DatabaseError).
-      // 3. Jangan biarkan error tidak tertangkap (gunakan window.onerror untuk menangkap error global).
+      // 3. Jangan biarkan error tidak tertangkap (gunakan window.onerror untuk menangkap error global). // amti cari apa aja yang termasuk ke error global itu
       // 4. Gunakan finally untuk cleanup (misal: tutup koneksi database).
-      // 5. Catat error ke logging service (Sentry, LogRocket) untuk debugging.
+      // 5. Catat error ke logging service (Sentry, LogRocket) untuk debugging. nanti kita bahas lagi, dan cari tau bagaimana caranya
     </script>
   </body>
 </html>

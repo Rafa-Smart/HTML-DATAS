@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // jadi dengan mengikuti protokol / standarisasi itereble maka secara otomatis kita bisa melakukan iterasi pada data tersebut nmenggunakan for of,
+        // conoth data yang telah mnegikuti standarisasi itereble adalah string, array, rest parameter, dll
+
+        class CounterIteratorResult {
+            constructor(value, done){
+                this.value = value;
+                this.done = done;
+            }
+        }
+
+        // disini kita membuat kontrak iterator
+        class CounterIterator {
+            constructor(value, max){
+                this.value = value;
+                this.max = max;
+            }
+
+            next() {
+                try {
+                    if(this.value > this.max) {
+                        // bisa juga gini
+                        // return new CounterIteratorResult(this.value, true)
+
+                        const result = new CounterIteratorResult(this.value, true)
+                        return result;
+                    } else {
+                        const result = new CounterIteratorResult(this.value, false)
+                        return result;
+                    }
+                } finally {
+                    this.value++;
+                }
+            }
+        }
+
+
+        class Counter {
+            constructor(nilaiAwal, nilaiAkhir){
+                this.nilaiAwal = nilaiAwal;
+                this.nilaiAkhir = nilaiAkhir;
+            }
+
+            // disini kit abuat methodnya
+            [Symbol.iterator](){
+                return new CounterIterator(this.nilaiAwal, this.nilaiAkhir);
+            }
+        }
+
+
+        // cara menggunakannnya 
+        const counter = new Counter(1, 10);
+        for (const nilai of counter) {
+            console.log(nilai);
+        }
+    </script>
+</body>
+</html>

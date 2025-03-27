@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // jadi protokol itereble itu jika mempunyai method [symbol.iteretor] yang mengembalikan objek iterator
+
+      // itereble adalah objek yang bisa di loop atau di iterasi, contonya adlah array, string, map,set, dll
+
+      // ciri cirinya adalah :
+      // 1. memiliki method [symbol.iterator] yang mengembalikan sebuahobjek iterator yang berisi method next()
+      // 2. bisa digunakan dalam for of loop, spread operator, dan destruction
+
+      // Iterator Protocol: Iterator adalah objek dengan method next() yang mengembalikan objek dengan properti value dan done.
+
+      // contoh implementasi
+      {
+        const myIterable = {
+          // memiliki method [symbol.iterator] yang mengembalikan sebuah objek iterator yang memiliki method next()
+          [Symbol.iterator]: function () {
+            let step = 0;
+            return {
+              next: function () {
+                step++;
+                if (step <= 5) {
+                  return { value: step, done: false };
+                }
+                return { value: undefined, done: true };
+              },
+            };
+          },
+        };
+
+        // Menggunakan for...of
+        for (const value of myIterable) {
+          console.log(value); // Output: 1, 2, 3, 4, 5
+        }
+
+        // Menggunakan spread operator
+        console.log([...myIterable]); // Output: [1, 2, 3, 4, 5]
+      }
+
+      // iterator adalah objek yang mengatur proses iterasi (perulangan)
+
+      // dan iterator itu harus memiliki
+      // 1. method next() yang mengembalikan objek dengan value(nilai saat ini) dan done(boolean (true jika iterasi selesai, dan false jika belum))
+
+      // contoh iterator manual
+
+      {
+        // ini seharusnya menggunakan protokol itereble
+        function createSimpleIterator(arr) {
+          let index = 0;
+          return {
+            next() {
+              return index < arr.length
+                ? { value: arr[index++], done: false }
+                : { value: undefined, done: true };
+            },
+          };
+        }
+
+        const iterator = createSimpleIterator([1, 2, 3]);
+        console.log(iterator.next()); // { value: 1, done: false }
+        console.log(iterator.next()); // { value: 2, done: false }
+        console.log(iterator.next()); // { value: 3, done: false }
+        console.log(iterator.next()); // { value: undefined, done: true }
+      }
+
+      //  contoh iterator untuk objek custom
+      {
+        class Range {
+          constructor(start, end) {
+            this.start = start;
+            this.end = end;
+          }
+
+          [Symbol.iterator]() {
+            // ini adalah method yang dipanggil ketika js perlu mnegiterasi objek ini(objek instance dari class range)
+
+            // ini persiapan iterasi
+            let current = this.start;
+            const end = this.end;
+
+            // INI WAJIB KARENA SUDAH PROTOKOL
+            // disini memang di protokol itereble itu harus menggunakan method [Symbol.iterator], yang mengembalikan iterator objeknya yang berisi method next()
+            return {
+              next() {
+                // jadi method next ini yang akan selalu dipanggil setiap kali iterasi membutuhkan nilai berikutnya
+                if (current <= end) {
+                  return { value: current++, done: false }; // ini jika belum selesai maka akan trus di tambahkan nilai valuenya, da kenapa ini false, agar ifnya diulangi terus, karena kalo tru maka nanti ketika sudah mencapai ini, maka nanti bakal langung selesai 
+                }
+                return { done: true }; // ini jika current sudah lebih besar dari pada end
+
+                // disini seharusnya bisa juga kita isikan valuenya undefined,
+                // return { value:undefined, done: true}
+              },
+            };
+          }
+        }
+
+        const range = new Range(1, 5);
+        console.log([...range]); // [1, 2, 3, 4, 5]
+
+
+        // disini alurnya
+        {
+          // disini eksekusinya (alur)
+          // new Range(1, 5) → Membuat objek dengan start=1, end=5
+          // [...range] → Cari method [Symbol.iterator] di objek range
+          // Panggil [Symbol.iterator]() → dapatkan iterator object
+          // Panggil iterator.next() pertama → dapat {value: 1, done: false}
+          // Panggil iterator.next() kedua → dapat {value: 2, done: false}
+          // ... hingga {value: 5, done: false}
+          // Panggil iterator.next() berikutnya → dapat {done: true}
+          // Stop iterasi dan kumpulkan semua value menjadi array [1,2,3,4,5]
+        }
+      }
+      
+
+    //   contoh sederhana 
+    {
+        const numbers = [1, 2, 3]; // Iterable
+        const iterator = numbers[Symbol.iterator](); // Iterator
+
+        console.log(iterator.next()); // { value: 1, done: false }
+        console.log(iterator.next()); // { value: 2, done: false }
+        console.log(iterator.next()); // { value: 3, done: false }
+        console.log(iterator.next()); // { value: undefined, done: true }
+    }
+
+    //   jadi hubungan antara itereble dan iterator itu adalah
+    // 1. itereble = menyediakan iterator melalui method [Symbol.iterator] yang mereturn iterator objeknya yang berisi method next()
+
+    // 2. iterator = objek yang digunakan untuk mengakses elemen satu per satu
+
+
+    console.log("====")
+
+    const fruits = ["Apple", "Banana", "Orange"];
+    const iterator = fruits[Symbol.iterator]();
+    console.log(iterator); // Sebuah objek iterator dengan method `next()`
+    </script>
+  </body>
+</html>

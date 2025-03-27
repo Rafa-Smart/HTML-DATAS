@@ -122,14 +122,19 @@
       // contoh lagi
       {
         class FormError extends Error {
-          constructor(field, message) {
+          constructor(bagian, message) {
             super(message);
             this.name = "FormError";
-            this.field = field;
+            this.bagian = bagian;
           }
         }
 
         function validateForm({ username, password }) {
+
+          // wiihh keren nih
+          // jdi kita bisa ngasih tau juga ke developernya, bahwa kalo terjadi error maka yang error itu di bagia mana, apakah bagian username atau password
+
+
           if (!username)
             throw new FormError("username", "Username wajib diisi!");
           if (password.length < 6)
@@ -141,7 +146,7 @@
           validateForm({ username: "", password: "123" });
         } catch (error) {
           if (error instanceof FormError) {
-            console.log(`Error di field ${error.field}: ${error.message}`);
+            console.log(`Error di bagian ${error.bagian}: ${error.message}`);
           }
         }
       }
