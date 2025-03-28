@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // jadi ini ga bisa ya karena kalo mau meggunakan super ini harus parent classnya itu adalah sama sama class juga, jadi kalo class kita extends dari objek literal maka tidak bisa // data is not a constructor
+
+
+        const data = {
+            nama:"rafa",
+            kelas:"informatika",
+        }
+
+
+        class Mahasiswa extends data { // data is not a constructor
+            constructor(nama, kelas){
+                super(nama, kelas)
+            }
+        }
+
+        const mhs1 = new Mahasiswa("Jhonny", "biologi")
+    </script>
+</body>
+</html>

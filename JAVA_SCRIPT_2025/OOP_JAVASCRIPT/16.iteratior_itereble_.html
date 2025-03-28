@@ -30,7 +30,7 @@
                         // bisa juga gini
                         // return new CounterIteratorResult(this.value, true)
 
-                        const result = new CounterIteratorResult(this.value, true)
+                        const result = new CounterIteratorResult(this.value, true) // isa jga sih disini kit langsung nambahin valuenya ++, jadi ga perlu pake finally
                         return result;
                     } else {
                         const result = new CounterIteratorResult(this.value, false)

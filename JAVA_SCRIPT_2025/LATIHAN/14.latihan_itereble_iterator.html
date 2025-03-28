@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=[Symbol.iterator], initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ini cara di chat gpt
+      {
+        class Range {
+          constructor(start, end) {
+            this.start = start;
+            this.end = end;
+          }
+
+          // disini kita buat methodnya langsung
+          [Symbol.iterator]() {
+            let start = this.start;
+            const end = this.end;
+
+            return {
+              next() {
+                if (start <= end) {
+                  return { value: start++, done: false };
+                }
+                // return {value:undefined, done:true};
+                return { done: true };
+              },
+            };
+          }
+        }
+
+        const keren1 = new Range(1, 10);
+        console.log(keren1); // Object { start: 1, end: 10 }
+
+        // cara pakenya itu whh ini keren
+        for (let i of keren1) {
+          console.log(i);
+        }
+      }
+
+
+      // ini yang bener bener simple wkwkwk
+      {
+        function* range(start, end) {
+          for (let i = start; i <= end; i++) {
+            yield i;
+          }
+        }
+
+
+        console.log("==========")
+        const numbers = range(1, 5);
+        for (const num of numbers) {
+          console.log(num); // 1, 2, 3, 4, 5
+        }
+      }
+
+      // ini cara pak eko
+      {
+        class Counter {
+            constructor(nilaiAwal, nilaiAkhir){
+                this.nilaiAwal = nilaiAwal;
+                this.nilaiAkhir = nilaiAkhir;
+            }
+
+            [Symbol.iterator](){
+                return new CounterIterator(this.nilaiAwal, this.nilaiAkhir);
+            }
+        }
+        class CounterIterator {
+          constructor(start, end){
+              this.start = start;
+              this.end = end;
+          }
+  
+          next(){
+              if(this.start <= this.end){
+                  return new CounterIteratorResult(this.start++, false);
+              } else {
+                  return new CounterIteratorResult(undefined, true);
+              }
+          }
+        }
+  
+  
+          class CounterIteratorResult {
+              constructor(value, done){
+                  this.value = value;
+                  this.done = done;
+              }
+          }
+
+          console.log('=========================');
+          const counter = new Counter(1, 10);
+          for (const nilai of counter) {
+              console.log(nilai);
+          }
+
+
+      }
+
+
+
+    //   nanti lu belajar ini yah
+    //   generator functions (function*), Symbol.iterator, atau async iterables.
+    </script>
+  </body>
+</html>

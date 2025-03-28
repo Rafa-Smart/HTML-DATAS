@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // =============================================
+      // GENERATOR FUNCTIONS DI JAVASCRIPT - PANDUAN LENGKAP
+      // =============================================
+
+      /*
+       * 🔍 DEFINISI:
+       * Generator function adalah fungsi khusus di JavaScript yang:
+       * 1. Bisa di-pause (berhenti sementara) menggunakan keyword `yield`
+       * 2. Bisa dilanjutkan kembali dari titik terakhir
+       * 3. Mengembalikan iterator object (bukan nilai langsung)
+       * 4. Sangat efisien untuk data besar atau infinite sequences
+       */
+
+      // Contoh dasar generator function
+      function* contohGenerator() {
+        yield "Nilai pertama";
+        yield "Nilai kedua";
+        yield "Nilai ketiga";
+      }
+
+      let tes = contohGenerator();
+    //   jadi yield iin akna diekse kusi kalo dipanggil pake metode next()
+      console.log(tes.next().value); // Nilai pertama
+        console.log(tes.next().value); // Nilai kedua
+
+      /*
+       * 🎯 FUNGSI & MANFAAT:
+       * 1. Lazy Evaluation - Nilai hanya dihitung saat dibutuhkan
+       * 2. Menghemat memory - Tidak perlu menyimpan semua data sekaligus
+       * 3. Mengontrol alur eksekusi - Bisa pause dan resume
+       * 4. Membuat infinite sequences - Deret tak terbatas
+       * 5. Async programming - Sebelum async/await ada
+       */
+
+      // Contoh penggunaan generator
+      const generator = contohGenerator();
+      console.log(generator.next()); // { value: 'Nilai pertama', done: false }
+      console.log(generator.next()); // { value: 'Nilai kedua', done: false }
+      console.log(generator.next()); // { value: 'Nilai ketiga', done: false }
+      console.log(generator.next()); // { value: undefined, done: true }
+
+      /*
+       * ⚠️ KERUGIAN JIKA TIDAK MENGGUNAKAN GENERATOR:
+       * 1. Memory usage lebih tinggi - Harus simpan semua data sekaligus
+       * 2. Kurang efisien untuk data besar - Proses semua meski tidak perlu
+       * 3. Tidak bisa membuat infinite sequences
+       * 4. Alur kode lebih kaku - Tidak bisa pause/resume
+       */
+
+      // =============================================
+      // FITUR UTAMA GENERATOR
+      // =============================================
+
+      /*
+       * 1. YIELD - Untuk menghentikan sementara eksekusi
+       * 2. NEXT() - Untuk melanjutkan eksekusi
+       * 3. YIELD* - Untuk mendelegasikan ke generator lain
+       * 4. RETURN - Untuk mengakhiri generator
+       * 5. THROW() - Untuk melempar error ke dalam generator
+       */
+
+      // Contoh lengkap penggunaan fitur generator
+      function* generatorLengkap() {
+        // Yield biasa
+        yield "Mulai";
+
+        // Yield dengan input dari luar
+        const input = yield "Masukkan nilai:";
+        yield `Anda memasukkan: ${input}`;
+
+        // Delegasi ke generator lain
+        yield* generatorLain();
+
+        // Throw error
+        try {
+          yield "Percobaan";
+        } catch (e) {
+          yield `Error ditangkap: ${e}`;
+        }
+
+        // Return mengakhiri generator
+        return "Selesai";
+      }
+
+      function* generatorLain() {
+        yield "Dari generator lain";
+        yield "Masih dari generator lain";
+      }
+
+      const gen = generatorLengkap();
+      console.log(gen.next()); // { value: 'Mulai', done: false }
+      console.log(gen.next()); // { value: 'Masukkan nilai:', done: false }
+      console.log(gen.next("Hello")); // { value: 'Anda memasukkan: Hello', done: false }
+      console.log(gen.next()); // { value: 'Dari generator lain', done: false }
+      console.log(gen.next()); // { value: 'Masih dari generator lain', done: false }
+      console.log(gen.next()); // { value: 'Percobaan', done: false }
+      console.log(gen.throw("Ups!")); // { value: 'Error ditangkap: Ups!', done: false }
+      console.log(gen.next()); // { value: 'Selesai', done: true }
+
+      // =============================================
+      // CONTOH KASUS NYATA
+      // =============================================
+
+      /*
+       * 🏆 CONTOH 1: ID GENERATOR
+       * Membuat deret ID unik tanpa batas
+       */
+      function* idGenerator() {
+        let id = 1;
+        while (true) {
+          yield id++;
+        }
+      }
+
+      const idGen = idGenerator();
+      console.log(idGen.next().value); // 1
+      console.log(idGen.next().value); // 2
+      // Bisa dilanjutkan tanpa batas
+
+      /*
+       * 🏆 CONTOH 2: PAGINATION
+       * Mengambil data per halaman secara lazy
+       */
+      async function* paginationFetcher(url) {
+        let page = 1;
+        while (true) {
+          const response = await fetch(`${url}?page=${page}`);
+          const data = await response.json();
+
+          if (data.length === 0) return;
+          yield data;
+
+          page++;
+        }
+      }
+
+      /*
+       * 🏆 CONTOH 3: STATE MACHINE
+       * Mengelola state aplikasi yang kompleks
+       */
+      function* stateMachine() {
+        let state = "IDLE";
+        while (true) {
+          const input = yield state;
+
+          switch (state) {
+            case "IDLE":
+              if (input === "START") state = "RUNNING";
+              break;
+            case "RUNNING":
+              if (input === "PAUSE") state = "PAUSED";
+              else if (input === "STOP") state = "STOPPED";
+              break;
+            case "PAUSED":
+              if (input === "RESUME") state = "RUNNING";
+              break;
+          }
+        }
+      }
+
+      // =============================================
+      // BEST PRACTICES
+      // =============================================
+
+      /*
+       * ✅ GUNAKAN GENERATOR UNTUK:
+       * 1. Data besar yang tidak muat di memory
+       * 2. Infinite sequences
+       * 3. Custom iteration logic
+       * 4. Complex async flows (sebelum async/await)
+       * 5. State management yang kompleks
+       */
+
+      /*
+       * ❌ JANGAN GUNAKAN GENERATOR UNTUK:
+       * 1. Operasi sederhana yang bisa dengan array biasa
+       * 2. Kasus yang membutuhkan semua data sekaligus
+       * 3. Hot code paths yang butuh performa maksimal
+       */
+
+      // =============================================
+      // PERBANDINGAN DENGAN FUNGSI BIASA
+      // =============================================
+
+      /*
+       * 🔄 PERBEDAAN UTAMA:
+       * | Fitur          | Fungsi Biasa       | Generator Function   |
+       * |----------------|--------------------|----------------------|
+       * | Eksekusi       | Sampai selesai     | Bisa di-pause        |
+       * | Return         | Nilai langsung     | Iterator object      |
+       * | Memory Usage   | Lebih tinggi       | Lebih efisien        |
+       * | Infinite Data  | Tidak mungkin      | Mungkin              |
+       * | Kompleksitas   | Lebih sederhana    | Lebih fleksibel      |
+       */
+
+      // =============================================
+      // KESIMPULAN
+      // =============================================
+
+      /*
+       * Generator functions adalah alat yang powerful untuk:
+       * 1. Mengelola data besar secara efisien
+       * 2. Membuat custom iteration logic
+       * 3. Mengontrol alur eksekusi yang kompleks
+       *
+       * Gunakan ketika:
+       * - Butuh lazy evaluation
+       * - Berurusan dengan data besar
+       * - Membutuhkan infinite sequences
+       *
+       * Hindari untuk operasi sederhana yang bisa
+       * diselesaikan dengan fungsi biasa
+       */
+
+
+    // contoh kalo kita mneggunakan delegasi
+    function* delegasiGenerator() {
+        yield 'A1';
+        yield 'A2';
+    }
+
+    function* delegasiGenerator2() {
+        yield 'B1';
+        // jadi kek ngambil berdasarkan nilai yang di return dari delegasiGenerator
+        yield* delegasiGenerator();
+        yield 'B2';
+    }
+    let tes2 = delegasiGenerator2();
+    console.log(tes2.next().value); // B1
+    console.log(tes2.next().value); // A1
+    console.log(tes2.next().value); // A2
+    console.log(tes2.next().value); // B2
+
+
+
+
+    </script>
+  </body>
+</html>

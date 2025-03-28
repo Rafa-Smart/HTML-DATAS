@@ -23,7 +23,7 @@
         ];
 
         const MesinPemcari = (array, bulan) => {
-            return array.filter(x => x.month === bulan).map(x => x.sales)
+            return array.filter(x => x.month === bulan).map(x => x.sales) // ini juga yg map bisa pake forEach deh
         }
 
         console.log(MesinPemcari(salesData, 'Januari'))

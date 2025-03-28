@@ -65,6 +65,10 @@
         }
 
         const iterator = createSimpleIterator([1, 2, 3]);
+
+        // PENTING
+        // jadi setiap kali method next ini dijalankan, maka akan mereturn sebuah objek berdasarkan kualifikasi if di dalamnya
+        
         console.log(iterator.next()); // { value: 1, done: false }
         console.log(iterator.next()); // { value: 2, done: false }
         console.log(iterator.next()); // { value: 3, done: false }
@@ -89,7 +93,7 @@
             // INI WAJIB KARENA SUDAH PROTOKOL
             // disini memang di protokol itereble itu harus menggunakan method [Symbol.iterator], yang mengembalikan iterator objeknya yang berisi method next()
             return {
-              next() {
+              next(){
                 // jadi method next ini yang akan selalu dipanggil setiap kali iterasi membutuhkan nilai berikutnya
                 if (current <= end) {
                   return { value: current++, done: false }; // ini jika belum selesai maka akan trus di tambahkan nilai valuenya, da kenapa ini false, agar ifnya diulangi terus, karena kalo tru maka nanti ketika sudah mencapai ini, maka nanti bakal langung selesai 
@@ -125,7 +129,7 @@
     //   contoh sederhana 
     {
         const numbers = [1, 2, 3]; // Iterable
-        const iterator = numbers[Symbol.iterator](); // Iterator
+        const iterator = numbers[Symbol.iterator](); // Iterator, ini tuh maksudnya sama kayak kita mau jalanin suatu mehod yang ada didalam suatu objek instnce tapi karena nama methodnya itu [symbol.iterator] jadi agak aneh, padahal mah smaa aja
 
         console.log(iterator.next()); // { value: 1, done: false }
         console.log(iterator.next()); // { value: 2, done: false }

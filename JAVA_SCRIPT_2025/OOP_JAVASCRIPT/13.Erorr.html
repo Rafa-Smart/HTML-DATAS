@@ -13,7 +13,7 @@
       //   KETIKA TERJADI ERROR MAKA :
       // 1. Memberhentikan eksekusi kode (jika tidak ditangkap).
       // 2. Menampilkan pesan error di console.
-      // 2. Mengembalikan object Error yang berisi:
+      // 2. Mengembalikan instance objek dari class Error yang berisi:
       // 3. name → Jenis error (misal: ReferenceError).
       // 4. message → Pesan error.
       // 5. stack → Informasi stack trace (untuk debugging);
@@ -36,7 +36,7 @@
           constructor(message) {
             super(message); 
             // PENTING
-            // ini kita ambil salah satu property yang ada di class Error, dan agar bisa kita manupilasi, makanya kita harus inisialisasi dulu di class childnya. 
+            // ini kita ambil salah satu property yang ada di class Error, dan agar bisa kita manipulasi, makanya kita harus inisialisasi dulu di class childnya. pake super
             this.name = "ValidationError"; // Nama custom error
           }
         }
@@ -53,7 +53,7 @@
 
             // bisa juga
             const error1 = new ValidationError("Username tidak boleh kosong");
-            throw error1;
+            throw error1; // ini akna dilempar ke block catch yang terdekat
 
             // nah jika begini ini bakal langsung berhenti programnya karena sudah error, maka kita bisa empar errornya agar programnya masih bisa berjalan
           }
@@ -62,6 +62,10 @@
         try {
           login(""); // ❌ Akan throw ValidationError
         } catch (error) { 
+
+          // PENTING
+          // jadi objek yang terbuat ketika error dilakukan di blok catch ini akan dilemparkan ke blok catchnya
+
           console.log(error.name); // "ValidationError"
           console.log(error.message); // "Username harus diisi!"
         }
@@ -94,9 +98,25 @@
         // const result = math.sum(); // Uncaught Error: masukan paramter yang benar
         // console.log("haiii")// nahh ini ga bakal di eksekusi karena ketika sudah masuk ke error maka seluruh kode dibawahnya bakal dihentikan.
 
-        const result = math.sum(3,4,5,6);
-        console.log(result);
 
+        // ini kalo berhasil
+        // const result = math.sum(3,4,5,6);
+        // console.log(result);
+
+
+        // ini baru 27/03/2025
+        // mkanya coba disini kita pake bok try catch
+        try {
+          const result = math.sum(); // ini kosong ya ges yak, berati harusnya error
+          console.log(result);
+          console.log("apakah ini di eksekusi?") // ini ga akan di eksekusi karena ketika sudah masuk ke error maka seluruh kode dibawahnya bakal dihentikan.
+        } catch(error){
+          console.log(error.message); // masukan paramter yang benar
+        } finally {
+          console.log("program ditutup") // ini akan di eksekusi
+          // ini akan di eksekusi walaupun ada error
+          console.log("ini akan di eksekusi")
+        }
 
       }
 

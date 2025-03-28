@@ -16,6 +16,7 @@
 
       console.log("=======");
 
+      // INI PENTING NIH
       {
         // catch akan menangkap throw yang terdekat
         try {
@@ -111,6 +112,8 @@
           }
         }
 
+        // jadi ini tuh maksudnya adalah setiap kali kita ingin mengakses method next() maka pertama itu adalah kita akan di kasih return dari valuenya (terjadi di blok try), kemudian mengeksekusi value++ (terjadi di blok finally)
+
         const counter = new Counter();
         console.log(counter.next()); // 1
         console.log(counter.next()); // 2
@@ -130,20 +133,24 @@
         }
 
         function validateForm({ username, password }) {
+          // wihhh nih keren nih, baru paham 27/03/2025, klo parameter yang ada didalam fungsi ini tuh sebenarnya adalah sebuah objek yang sudah di destruction langsung di paramternya, jadi 
+
+          validateForm(iniObjekLiteralCeritanya) // tuh objek literalnya langsung di destruction di paramter
+
 
           // wiihh keren nih
           // jdi kita bisa ngasih tau juga ke developernya, bahwa kalo terjadi error maka yang error itu di bagia mana, apakah bagian username atau password
 
 
           if (!username)
-            throw new FormError("username", "Username wajib diisi!");
+            throw new FormError("username", "Username wajib diisi!"); // berati ada error di username
           if (password.length < 6)
             throw new FormError("password", "Password minimal 6 karakter!");
           // nah jadi ketika kita melempar error maka akan dilempar ke scope tredekat yang memiliki bloktry and catch
         }
 
         try {
-          validateForm({ username: "", password: "123" });
+          validateForm({ username: "", password: "123" }); // ini isinya objek yah
         } catch (error) {
           if (error instanceof FormError) {
             console.log(`Error di bagian ${error.bagian}: ${error.message}`);
@@ -161,6 +168,8 @@
             console.log(ie);
           }
         } catch (error) {
+
+          // nah kalo begini sealian aja kamu kasih solusiya misal, kalo yang error itu karena typo, maka kamu bisa kasih solusi untuk memperbaiki typo tersebut
           if (error instanceof TypeError) {
             console.log("TypeError terjadi!");
           } else if (error instanceof ReferenceError) {
