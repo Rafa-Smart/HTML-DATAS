@@ -91,7 +91,13 @@
     console.log("============")
     // ini mah experimen
     let jelema = ["Dudung","daDAng","diDINg"]
-    let jumlahHurufgede = jelema.map(function(nama){// ngambil elemennya
+    // let jumlahHurufgede = jelema.map(function(nama){// ngambil elemennya
+    //     let hurufBesar = nama.split('').filter(c => c === c.toUpperCase()).length // ngambil setiap hurufnya
+    //     return `${nama} = jumlah huruf besarnya = ${hurufBesar}`
+    // })
+
+    // ini cara yang lebih efisien
+        jelema.forEach(function(nama){// ngambil elemennya
         let hurufBesar = nama.split('').filter(c => c === c.toUpperCase()).length // ngambil setiap hurufnya
         return `${nama} = jumlah huruf besarnya = ${hurufBesar}`
     })

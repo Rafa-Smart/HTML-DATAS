@@ -27,10 +27,12 @@
 
         manager1.prototype.sayHello = function(nama){// ini kita tambahkannya di prototypenya ya
             return `halo ${nama}, saya ${this.name} sebagai manager.`
-        }
 
-        karyawan1.prototype.sayHello = function(nama){// ini kita tambahkannya di prototypenya ya
-            // dan langusng mereplace fungsi yang sebelumnya yaitu si sayHelo di prototype manager1
+            // PENTING NIH
+        } // ini seharusnya ga ada, karena ketika ini dibuat langsung di replace di prototype karyawan1 yang tidak ada fungsi sayHello
+
+        karyawan1.prototype.sayHello = function(nama){// 
+            // nah ini akan di tambhakna ke prototype karyawan1, kemudian mengisi kekosongan yang ada di prototype manager1
             return `halo ${nama}, saya ${this.name} sebagai karyawan.`
         }
 

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Kelas Buku
+      class Buku {
+        constructor(judul, penulis, isbn, jumlahKopi) {
+          this._judul = judul;
+          this._penulis = penulis;
+          this._isbn = isbn;
+          this._jumlahKopi = jumlahKopi;
+          this._kopiTersedia = jumlahKopi;
+        }
+
+        get ketersediaan() {
+          return this._kopiTersedia > 0 ? "Tersedia" : "Habis";
+        }
+
+        pinjamBuku() {
+          if (this._kopiTersedia > 0) {
+            this._kopiTersedia--;
+            return true;
+          }
+          return false;
+        }
+
+        kembalikanBuku() {
+          if (this._kopiTersedia < this._jumlahKopi) {
+            this._kopiTersedia++;
+            return true;
+          }
+          return false;
+        }
+
+        get info() {
+          return `${this._judul} oleh ${this._penulis} - ${this.ketersediaan}`;
+        }
+      }
+
+      // Kelas Anggota
+      class Anggota {
+        constructor(nama, email) {
+          this._nama = nama;
+          this._email = email;
+          this._bukuDipinjam = [];
+        }
+
+        pinjamBuku(perpustakaan, isbn) {
+          const buku = perpustakaan.cariBuku(isbn);
+          if (buku && buku.pinjamBuku()) { // kalo keduanya ada maka
+            this._bukuDipinjam.push(isbn);
+            return `Berhasil meminjam ${buku._judul}`;
+          }
+          return "Buku tidak tersedia";
+        }
+
+        kembalikanBuku(perpustakaan, isbn) {
+          const buku = perpustakaan.cariBuku(isbn);
+          if (buku && buku.kembalikanBuku()) {
+            this._bukuDipinjam = this._bukuDipinjam.filter((b) => b !== isbn);
+            return `Berhasil mengembalikan ${buku._judul}`;
+          }
+          return "Pengembalian gagal";
+        }
+
+        get daftarBukuDipinjam() {
+          return this._bukuDipinjam;
+        }
+      }
+
+      // Kelas Perpustakaan
+      class Perpustakaan {
+        constructor(nama) {
+          this._nama = nama;
+          this._koleksiBuku = [];
+          this._daftarAnggota = [];
+        }
+
+        tambahBuku(buku) {
+          this._koleksiBuku.push(buku);
+        }
+
+        tambahAnggota(anggota) {
+          this._daftarAnggota.push(anggota);
+        }
+
+        cariBuku(isbn) {
+          return this._koleksiBuku.find((buku) => buku._isbn === isbn);
+        }
+
+        daftarBukuTersedia() {
+          return this._koleksiBuku.filter((buku) => buku._kopiTersedia > 0);
+        }
+      }
+
+      // Penggunaan
+      const perpustakaan = new Perpustakaan("Perpustakaan Pusat");
+
+      perpustakaan.tambahBuku(
+        new Buku("JavaScript: The Good Parts", "Douglas Crockford", "123", 3)
+      );
+      perpustakaan.tambahBuku(
+        new Buku("Eloquent JavaScript", "Marijn Haverbeke", "456", 2)
+      );
+
+      const anggota1 = new Anggota("Budi Santoso", "budi@contoh.com");
+      perpustakaan.tambahAnggota(anggota1);
+
+      console.log(anggota1.pinjamBuku(perpustakaan, "123")); // Berhasil meminjam JavaScript: The Good Parts
+      console.log(anggota1.pinjamBuku(perpustakaan, "456")); // Berhasil meminjam Eloquent JavaScript
+      console.log(anggota1.daftarBukuDipinjam); // ['123', '456']
+      console.log(anggota1.kembalikanBuku(perpustakaan, "123")); // Berhasil mengembalikan JavaScript: The Good Parts
+    </script>
+  </body>
+</html>

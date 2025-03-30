@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * { 
+            border: 3px solid black; 
+            padding: 15px; 
+            margin: 15px; 
+        }
+        html { 
+          margin: 0;
+          padding: 0;
+        }
+        body { 
+          max-width: 600px;
+          margin: 30px auto;
+          font-family: sans-serif;
+          color: #ffffff;
+          background-color: rgb(73, 73, 73);
+        }
+      </style>
+</head>
+<body>
+    <h1 id="judul">Hello World</h1>
+  <div id="container">
+      <section id="a">
+        <center><button type="button" class="button1" style="position: sticky; top: 5px;">Tambah List</button></center>
+          <p class="p1">paragraf 1</p>
+          <a href="http://instagram.com/sandhikagalih">Instagram Sandhika Galih</a>
+          <p class="p2">paragraf 2</p>
+          <p class="p3" onclick="ubahWarna()">paragraf 3</p>
+      </section>
+      <section id="b">
+          <p>paragraf 4</p>
+          <center><button type="button" class="button2" style="position: sticky; top: 5px;">Tambah List</button><center>
+          <ul>
+              <li>item 1</li>
+              <li>item 2</li>
+              <li>item 3</li>
+          </ul>
+      </section>
+  </div>
+    <script>
+        // event pada javascript adalah suatu kejadian yang terjadi pada elemen html, misalnya ketika kita mengklik tombol, menggerakan mouse, menekan tombol keyboard, dll.
+        // nahh event ini bisa kita tangkap dan kita buatkan sebuah fungsi untuk menanganinya, jadi ketika event tersebut terjadi maka fungsi yang kita buat akan dijalankan
+
+        // tapi bisa juga dialkukan otomatis oleh api, misal ketika kamu menjalakan animasi, nahh animasi ini kan ada durasinya, nahh ketika durasi animasi tersebut sudah selesai maka kita bisa menangkap event tersebut dan menjalankan fungsi yang kita buat
+
+        // 1. event hendler
+
+        // 1. on<events>
+            const p3 = document.querySelector(".p3")
+
+            // p3.onclick = function(){
+            //     p3.style.backgroundColor = "lightblue"
+            // }
+
+            function ubahWarna(){
+                p3.style.backgroundColor = "lightblue"
+            }
+
+            // disini kita buat ketika kita click maka nanti akan nambah list baru
+
+            
+            const button2 = document.querySelector(".button2")
+            button2.addEventListener("click", function(){
+                const liBaru = document.createElement("li")
+                const textLi = document.createTextNode("item baru")
+                liBaru.appendChild(textLi)
+                const ulParent = document.querySelector("ul")
+                ulParent.appendChild(liBaru)
+            })
+
+
+            const button1 = document.querySelector(".button1")
+
+            button1.addEventListener("click", function(){
+                const pbaruLagi = document.createElement("p")
+                const textP = document.createTextNode("paragraf baru")
+                pbaruLagi.appendChild(textP)
+
+                const paragraf2 = document.querySelector("p.p2")
+                sectionA = document.querySelector("section#a")
+
+                sectionA.insertBefore(pbaruLagi, paragraf2)
+            })
+
+            // kalo pake onclick itu dia ketika kita buat lagi maka perubahan di onclick sebelumnya akan ditimpa, tapi klo di endEventListener ini kita bisa menambahkan event yang sama berulang kali, jadi kita bisa menambahkan event yang sama berulang kali
+
+    </script>
+</body>
+</html>

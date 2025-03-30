@@ -36,12 +36,11 @@
       }
 
 
-      const rafa2 = new tes42("rafa", "10");
       class tes42 {
         constructor(nama, kelas) {
           this.nama = nama;
           this.kelas = kelas;
-          sayHalo = () => { // ini kenapa thisnya mengacu ke objek ?, karena di class ini fungsinya kita taro di objek instancenya . INEGET
+          this.sayHalo = () => { // ini kenapa thisnya mengacu ke objek ?, karena di class ini fungsinya kita taro di objek instancenya . INEGET (liat dulu sampe bawah)
             // sama aja
             console.log(
               `Halo, saya ${this.nama} dari kelas ${this.kelas} = ${this}`
@@ -50,7 +49,8 @@
           };
         }
       }
-
+      
+      const rafa2 = new tes42("rafa", "10");
       const rafa21 = new tes2("rafa", "10");
       
       
@@ -87,23 +87,6 @@
 
       const rafa3 = new tes3("rafa", "10");
 
-      class tes4 {
-        constructor(nama, kelas) {
-          this.nama = nama;
-          this.kelas = kelas;
-        }
-        sayHalo = () => {// sama
-          // sama aja
-          console.log(
-            `Halo, saya ${this.nama} dari kelas ${this.kelas} = ${this}`
-          );
-          console.log(this); //Object { nama: "rafa", kelas: "10", sayHalo: sayHalo() }
-        };
-      }
-
-      const rafa4 = new tes4("rafa", "10");
-
-
       const nih = {
         nama:"rafa",
         sayhalo: function(){ //Object { nama: "rafa", sayhalo: sayhalo() }
@@ -120,6 +103,48 @@
       }
 
 
-    </script>
-  </body>
-</html>
+
+
+
+
+      class tes4 {
+        constructor(nama, kelas) {
+          this.nama = nama;
+          this.kelas = kelas;
+        }
+        sayHalo = () => {// sama
+          // sama aja
+          console.log(
+            `Halo, saya ${this.nama} dari kelas ${this.kelas} = ${this}`
+          );
+          console.log(this); //Object { nama: "rafa", kelas: "10", sayHalo: sayHalo() }
+        };
+      }
+
+      const rafa4 = new tes4("rafa", "10");
+
+      // gini ges kenapa yang ini tuh malah ke objek padalah kamu tau sebelumnya kalo di method itu akan otomatis masuk ke prototypenya, tpai kenapa ini langusng asuk ke dalam instance objeknya ?, karena
+      // FUNGSI SAYHALO DISINI ITU TIDAK MENGGUNAAKN METODE CLASS YANG KALO PAKE METODE CLASS NYA MAKA METHOD INI AKAN OTOMATIS MASUK KE PROTOTYPENYA BUKAN DI INSTANCE OBJEKYA, NAH METODENYA ITU GINI SAYHALO() {} , NAH JADI LANGUNG AJA TANPA ARROW FUNCTION ATAU GIMANA
+
+      class tes5 {
+        constructor(nama, kelas) {
+          this.nama = nama;
+          this.kelas = kelas;
+        }
+        sayHalo(){ // nah ini bakal masuk ke prototypenya
+
+          console.log(
+            `Halo, saya ${this.nama} dari kelas ${this.kelas} = ${this}`
+          );
+          console.log(this);
+        };
+      }
+      const rafa5 = new tes5("rafa", "10");
+
+
+      // PENTING
+      // berati kesimpulannya kalo clas itu kalo kita buat method langsung di constructornay kan otomatis bakal masuk ke instance objeknya, tapi kao kita buat method diluar constructornya tapi kita buat methodnya itu pake function expresion atau pake arrow function maka ini method tersebut akan masuk objek instancenya bukan di prototypenya, tapi kalo kita pake method tapi buatnya itu gini namaMethod(){} mka ini akan langung masuk ke prototypenya, dan thisnya akan tetap bisa diakses oleh si objek instancenya
+
+      </script>
+    </body>
+  </html>

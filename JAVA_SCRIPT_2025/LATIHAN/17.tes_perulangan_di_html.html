@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+
+    <script>
+        let elemen = "";
+        const array = [23,54,67,87,33,23,54]
+        array.forEach((x) => {
+            elemen += nambah(x)
+            document.querySelector(".container").innerHTML = elemen
+        })
+
+
+        function nambah(elemen){
+            return `<div class="item">ini adalah data dan jumlahnya = ${elemen}</div>`
+        }
+        
+
+        // output 
+        // ini adalah data dan jumlahnya = 23
+        // ini adalah data dan jumlahnya = 54
+        // ini adalah data dan jumlahnya = 67
+        // ini adalah data dan jumlahnya = 87
+        // ini adalah data dan jumlahnya = 33
+        // ini adalah data dan jumlahnya = 23
+        // ini adalah data dan jumlahnya = 54
+
+    </script>
+</body>
+</html>

@@ -89,6 +89,11 @@
 
 
         // 4. mereplace element
+        // kita akan mengganti link dengan paragraf baru
+        const pBaru2 = document.createElement("p")
+        const textPBaru2 = document.createTextNode("ini adalah paragraf baru menggantikan link");
+        pBaru2.appendChild(textPBaru2)
+        sectionA.replaceChild(pBaru2,link)
         
 
 

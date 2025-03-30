@@ -128,6 +128,10 @@
 
     //   contoh sederhana 
     {
+
+        // PENTING
+        // disini kit amabil contoh objek itereble yaitu array, nah di dalam objek itereble array inikan dia punya method [Symbol.iterator] yang mengembalikan objek iterator yang berisi method next(), nah jadi number ini kita masukan ke const iterator, jadi ini kayak conoth di closure, jadi kita masukin ke iterator, nah setiap kita panggil iterator.next() maka akan mereturn objek yang berisi value dan done
+
         const numbers = [1, 2, 3]; // Iterable
         const iterator = numbers[Symbol.iterator](); // Iterator, ini tuh maksudnya sama kayak kita mau jalanin suatu mehod yang ada didalam suatu objek instnce tapi karena nama methodnya itu [symbol.iterator] jadi agak aneh, padahal mah smaa aja
 

@@ -192,6 +192,26 @@
       const myElectricCar = new ElectricCar("Tesla", "Model S", 4, 100);
       console.log(myElectricCar.getInfo()); // Tesla Model S with 4 doors with a battery capacity of 100 kWh
       console.log(myElectricCar.start()); // Tesla Model S is starting. Vroom! Shhh... I am electric!
+
+
+      console.log("+++++++++++++")
+      // coba dulu aja ini mah
+      class ParentClass {
+        constructor(nama, kelas, alamat){
+          this.nama = nama;
+          this.kelas = kelas;
+          this.alamat = alamat;
+        }
+      }
+
+      class ChildClass extends ParentClass {}
+      
+      const child = new ChildClass("udin", "XI", "bandung");
+      console.log(child)
+
+      // jadi tetep bisa ya, jadi kalo kita puya parent class yag punya property, nah di class childnya itu meski kita ga deklarasikan si propertynya, tapi tetep mengacu ke parent class nya
+
+
     </script>
   </body>
 </html>
