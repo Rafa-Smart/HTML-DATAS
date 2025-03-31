@@ -109,6 +109,49 @@
 
     //   nanti lu belajar ini yah
     //   generator functions (function*), Symbol.iterator, atau async iterables.
+
+
+      class hitung {
+        constructor(nilaiAwal, nilaiAkhir){
+          this.nilaiAwal = nilaiAwal;
+          this.nilaiAkhir = nilaiAkhir;
+        }
+
+        [Symbol.iterator](){
+          return new HitungIterator(this.nilaiAwal, this.nilaiAkhir);
+        }
+      }
+
+      class HitungIterator {
+        constructor(nilai, akhir){
+          this.nilai = nilai;
+          this.akhir = akhir;
+        }
+
+        next() {
+          if(this.nilai <= this.akhir){
+            return new HitungIteratorResult(this.nilai++, false);
+          } else {
+           return new HitungIteratorResult(undefined, true)
+          }
+        }
+      }
+
+
+      class HitungIteratorResult {
+        constructor(value, done){
+          this.value = value;
+          this.done = done;
+        }
+      }
+
+
+      const coba = new hitung(1, 10);
+      for (const nilai of coba) {
+        console.log(nilai);
+      }
+      console.log("================dd")
+
     </script>
   </body>
 </html>

@@ -103,8 +103,15 @@
                 if (xhr.readyState === 4 ){
                     if(xhr.status === 200){
                         succes(xhr.response) // response itu hasil nya, jadi paramter success itu adalah hasil yang diambilnya
+
+
+                        // PENTING NIH
+                        // 30/03/2025
+                        // ohh jadi callback itu akan yang ad apada fngsi yang memanggilnya itu berati di dalam fungsi yang memanggilnya itu si callback di kasih nilai di parameternya, nah baru nanti ketika kita memanggil fungsi yang memanggil callback ini, maka kita busa buat sebuah fungsi di paramternya(tepatnya di bagian callbacknya) yang mengambil paramter yang sebelumnya dikirim ke callback, lalu diolah.
+
+
                     }else if (xhr.status === 404){
-                        error();
+                        error(); // sebenarnya disini kita bisa ngasih paramter tambahan yang bisa kitakirim ke callbacknya lalu nanti diolah didala callbacknya
                     }
                 }
             }

@@ -263,7 +263,7 @@
 
             // nah disni yield itu berfungsi untuk pause, jadi dia ketika di panggil dengan method nect, maka akna selalu mengembalikan objek yang isinya temperature, dan timestamp, dan mengembalikan objek yang berisi value dan done, dan done ini akan selalu false, karena kita membuat infinite loop
 
-            yield { temperature, timestamp: new Date().toISOString() };
+            yield { temperature: temperature, timestamp: new Date().toISOString() };
           }
         }
 

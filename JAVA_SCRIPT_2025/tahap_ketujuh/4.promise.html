@@ -106,6 +106,30 @@
             }
         })
 
+
+        
+        // ini sama aja kayak gini karena yang dikirim ke paramter class Promise ini adalah sebuah fungsi
+        const janji6 = new Promise(iniFungsi(resolve, rejected))
+
+        function iniFungsi(resolve, rejected) {
+            // kita menggunakna kondisi, jika kondisi ini terpenuhi maka kita akan menjalankan resolve dan sebaliknya
+            if (ditepati) {
+                resolve("janji sudah ditepati...")
+            } else {
+                rejected("janji di ingkari...")
+            }
+        }
+
+        // 30/03/2025
+        // PENTING NIH
+        // ok ngerti
+        // jadi gini
+        // karena promise itu adalah sebuah class, maka kita bisa buat objek instancenya, nah disini itu objek instancenya adalah si janji1, nah di class promise nya ini kita masukan sebuah paramter yaitu sebuah fungsi yang berisi dua callback disini yaitu si resolve dan rejected, nah berati di class promise ini memiliki sebuah methoh yaitu si then yang isinya itu jika resolve, dan method catch yang isinya itu jika rejected,makanya kita bisa panggil methodnya ini pake janji.then jadi seperti itu,
+        // nah di di method then dan method cacth ini memiliki sebuah calback yang bis kita akses dan ambil nilainya dan setting nilainya ketika kita paneggil method thenya janji1.then((hasil) => console.log(hasil))
+
+
+
+
         // output
         // ketik ini di console janji1
         // Promise { <state>: "fulfilled", <value>: "janji sudah ditepati..." }

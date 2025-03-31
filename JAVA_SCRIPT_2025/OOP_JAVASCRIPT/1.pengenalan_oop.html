@@ -85,7 +85,7 @@
       function karyawan(firstName, tes) {
         this.firstName = firstName;
         this.tes = tes;
-        this.sayHello2 = function () {
+        this.sayHello2 = function () { // jadi fungsi ini ada didalam constuctornya
           return `halo ${this.firstName}`;
         };
       }
@@ -93,6 +93,8 @@
       //   costruction kedua
       function manager(firstName, lastName, tes) {
         karyawan.call(this, firstName, tes); // jadi this yang sebenarnya ada di objek karyawan jadi ada di objek manager, nah paramternya ini tergantung si constructornya butuh paramternya apa saja, disini kan di fngis sayhalonya hanya butuh firstnama, makanya kita kasih paramternya firstname saja,
+
+        //  INGET YA SI CALL INI HANYA BISA MEMANGGIL DARI CONSTRUCTORNYA SAJA , JADI JIKA KAMU MELAKUKAN CALL DI LUAR CONSTRUCTOR MAKA GA BISA
 
         // PENTING
         // tapi yg bener kayaknya kita emnag harus masukin aja semua paramternya dari sesuai sama semua paramter yg ada di conatructornya,
@@ -125,6 +127,7 @@
       // Gunakan Object.create() jika:
       // Anda ingin membuat objek baru yang mewarisi properti/method dari objek lain.
       // Anda ingin mengimplementasikan pewarisan tanpa menggunakan constructor function.
+      // karena ketika kita akses di instance objeknya kalo ga ada maka akna dicari ke prototypenya dan seterusnya
 
       // Gunakan call() jika:
       // Anda ingin memanggil fungsi dengan konteks (this) yang berbeda.

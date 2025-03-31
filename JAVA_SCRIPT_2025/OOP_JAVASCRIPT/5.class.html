@@ -42,6 +42,10 @@
             sayHello(){
                 return `halo ${this.nama}`
             }
+
+            // PENTING
+            // tapi kalo kita buat fungsi expresion atua arrow function, maka fungsi ini akan masuk ke objek instancenya bukan ke prototypenya.
+
         }
 
         // jika kita membuat sebuah method langsung di constructornya maka nanti method tersebut akan langsung nempel di objek instancenya, dan ini tidak efisien karena setiap memuat objek instance, kita selalu membuat methodnya meski ga dipake, nah oleh karena itu kita sebaiknya membuat method itu di prototypenya agar bisa diturunkan dan efisien karena setiap membuat objek instance, methodnya tidak selalu dibuat tpai bisa dipanggil. karena kalo manggil method itu kalo ga ada di objek instancenya maka akan dicek di prototype nya dan seterusnya
