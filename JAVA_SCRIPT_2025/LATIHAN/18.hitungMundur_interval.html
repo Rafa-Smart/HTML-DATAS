@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1 id="text"></h1>
+
+    <script>
+        // const waktuSekarang = new Date();
+        // console.log(waktuSekarang); // 2023-10-05T08:00:00.000Z // jadi akan tampil waktu saat ini persis
+        
+        
+        // const waktuSekarang = new Date().getTime() 
+        // 1743428161009, jadi akan berbentuk angka, jadi kita bisa menggunakan angka ini untuk menghitung mundur waktu, dan ini adalah MILIdetik
+        const tanggalTujuan = new Date("april 1, 2025 21:34:05").getTime(); // ini adalah waktu yang kita inginkan
+        console.log(tanggalTujuan); // 1743428161009, 
+        
+        
+        // jadi akan terus kita jalankan selama 1 detik jadi bakalan realtime
+        const hitungMundur = setInterval(function() {
+            let waktuSekarang = new Date().getTime() 
+            if(selisihWaktu <= 0){
+                clearInterval(hitungMundur)
+                teks.textContent = "Waktu habis !"
+                return;
+            }
+            
+            // nah disini kita sudah mendapatkan kedua waktunya, sekarang tinggal kita cari selisih waktunya agar bisa tau berapa lama lagi kita harus menunggu
+            const selisihWaktu = tanggalTujuan - waktuSekarang; // ini adalah selisih waktu dalam detik
+            console.log(selisihWaktu) // 357589678
+            // nah disini tinggal kita ubah menjadi hari jam menit detik.
+            
+            // 1 hari = 24 jam, 1 jam = 60 menit, 1 menit = 60 detik, 1 detik = 1000 milidetik
+            
+            const waktuHari = 1000 * 60 * 60 * 24
+            const waktuJam = 1000 * 60 * 60
+            const waktuMenit = 1000 * 60
+            const waktuDetik = 1000
+            
+            
+            
+            const hari = Math.floor(selisihWaktu / waktuHari); // ini adalah selisih waktu dalam hari
+            // jadi paramter nya itu (1 detik * 60 detik(1menit) * 60 menit(1 jam) * 24 jam(1 hari))
+            console.log(`hari = ${hari}`)
+            
+            const jam = Math.floor(selisihWaktu % waktuHari / waktuJam )
+            console.log(`jam = ${jam}`)
+            
+            const menit = Math.floor(selisihWaktu % waktuHari % waktuJam / waktuMenit)
+            console.log(`menit = ${menit}`)
+    
+            const detik = Math.floor(selisihWaktu % waktuHari % waktuJam % waktuMenit / waktuDetik)
+            console.log(`detik = ${detik}`)
+            
+            
+            const teks = document.querySelector("#text");
+            teks.innerHTML = `Hari : ${hari} hari <br>Jam : ${jam} jam<br>Menit : ${menit} menit <br>Detik : ${detik} detik`;
+            
+        }, 1000)
+        
+        
+
+
+
+    </script>
+</body>
+</html>
