@@ -134,6 +134,7 @@
         console.log("------------")
         const nama = document.querySelector("h1")
         const tanpaSpasi = nama.textContent.replace(/\s/g,"")
+        // selain bisa pake ini, bisa juga pake trim()
 
         // terus kita buat agar disetiap hurufnya kita kasih span 
         const huruf = [...tanpaSpasi].map(h => {

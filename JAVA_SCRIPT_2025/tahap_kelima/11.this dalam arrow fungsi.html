@@ -233,11 +233,21 @@
                 this.classList.toggle(dua)
             },600)
 
+            // NIH PENGERTINANNYA
+            // ohhh ngerti sekarang 02/04/2025
+            // JADI GINI
+            // ketika kita membuat setTimeout maka didalam setTimeout ini kan kit membuat sebuah arrow fungsi, nah berati thisnya kalo MISALKAN KITA PAKE FUNCTION DECLARATION maka thisnya akan merujuk ke si setTimeout, nah itulah kenapa kita pake arrow function, karena agar thisnya itu merujuk ke lexical scopenya
+
+
+
             // eh ini ga bisa deng
             // this.setTimeout(function() {
             //     this.classList.toggle(dua)
             // }, 600);,
-            // ya ga bisa lah nanti fungsi ini bakal jadi method dari objek literal si box, nah kalo pake arow kan nanti thisnya bakal merujuk ke lexical scopenya yaitu si window.
+            // ya ga bisa lah nanti fungsi ini bakal jadi method dari objek literal si box
+            // 
+            // 
+            // , nah kalo pake arow kan nanti thisnya bakal merujuk ke lexical scopenya yaitu si window.
 
             // jadi kalo misal kita buat fungsi didaam objek tapi bukan methd atau bukan property berati agar masih bisa mengakses ke this yang ada pada objeknya maka kita akan mneggunakan arrow function, jadi nanti this ini akna ke parentnya dulu baru ke window
 

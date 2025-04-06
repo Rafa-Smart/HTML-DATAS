@@ -64,6 +64,41 @@
         // tetep bisa akses selain pethod yaitu property
         // orang1.kelas
         // "10pplg2" 
+
+        // coba lagi
+        // ngetes apakah kalo di function construcntor itu, kalo punya funtion bakal gimana reaksinya
+
+        function Tes(nama, umur, kelas, energi=10){
+            this.nama = nama;
+            this.umur = umur;
+            this.kelas = kelas;
+
+            Tes.prototype.makan = function(jumlah){
+                return this.energi += jumlah;
+            }
+
+            tidur = function(jam){
+                this.energi -= jam;
+                return this.energi;
+            }
+
+            tidur2 = (jam) => {
+                this.energi -= jam;
+                return this.energi;
+            }
+
+
+        }
+
+        const orgtes = new Tes("rafa",20,"10pplg2")
+
+
+
+        // ok kesimpulannya
+        // jadi kalo kita buat function di dalam function constructor, maka kalo kita buat pake prototype maka fungsinya bakal masuk di prototypenya, kalo pake this.nama functionnya, maka fungsinya bakal masuk di objek instancenya, tapi kalo kita pake function declaration dan function arrow, maka tanpa this, maka function tersebut akan langsung di hoisting dan masuk ke objek window, coba aja window.tidur
+
+
+
     </script>
 </body>
 </html>

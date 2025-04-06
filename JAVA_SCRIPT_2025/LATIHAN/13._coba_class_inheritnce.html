@@ -17,13 +17,40 @@
         }
 
 
-        class Mahasiswa extends data { // data is not a constructor
-            constructor(nama, kelas){
-                super(nama, kelas)
+        // class Mahasiswa extends data { // data is not a constructor
+        //     constructor(nama, kelas){
+        //         super(nama, kelas)
+        //     }
+        // }
+
+        // const mhs1 = new Mahasiswa("Jhonny", "biologi")
+
+
+
+        // percobaa berikutnya
+
+        // coba lagi
+        class tes1 {
+            constructor(nama="rafa",kelas){
+                this.nama = nama;
+                this.kelas = kelas;
             }
         }
 
-        const mhs1 = new Mahasiswa("Jhonny", "biologi")
+
+        class tes2 extends tes1{
+            constructor(nama, kelas){
+                super(nama)
+                this.kelas = kelas;
+            }
+        }
+
+        const tesjelema1 = new tes2() //Object { nama: "rafa", kelas: undefined }
+        const tesjelema2 = new tes2("jamal", "informatika") // Object { nama: "jamal", kelas: "informatika" }
+
+
+        // jadi kesimpulannya jika di class parentnya sudah ada property yang sudah didefinisikan sebelumnya, maka nanti di class childnya jika kita panggil super lalu nama propertynya maka, property tersebut yang di child classnya nilainya akan sama dengan nilai default dari si class parennta, dan kalo mau diganti juga bisa.
+
     </script>
 </body>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Halo :</h1>
+    <script>
+
+
+        // jadi karena secara default server itu mengirimkan data berupa string, makanya perlu kita parsing saja agar lebih aman
+
+        const xhr = new XMLHttpRequest(); // buat request ke server
+        xhr.open("GET", "api/1_data.json"); // disini buat minta datanya dari api
+
+        xhr.addEventListener("load", () => {
+            const hasil = JSON.parse(xhr.response);
+            if(xhr.status === 200 && xhr.readyState === 4) {
+                // ajax.response ini bakal langsung ada ketika load di ekekusi.
+                console.log(xhr.status)
+                console.log(hasil); //  5) [{…}, {…}, {…}, {…}, {…}]
+
+                Display(hasil); // ini buat manggil function display dan mengirimkan data hasil ke function display
+            }
+        })
+        xhr.send()
+
+        // kemarin itu ada status cobenya adlah Status code 304 artinya server memberitahu browser:
+        // "Data yang kamu minta belum berubah sejak terakhir kali di-cache. Pakai saja versi cache-nya!"
+        // Ini normal dan bagian dari mekanisme HTTP Caching untuk menghemat bandwidth.
+
+        function Display(hasil) {
+            const h1 = document.querySelector("h1");
+            h1.textContent = `halo : ${hasil[0].nama}` //  ini data yang kita ambil dari objek index pertama dan property nama
+        }
+
+    </script>
+</body>
+</html>

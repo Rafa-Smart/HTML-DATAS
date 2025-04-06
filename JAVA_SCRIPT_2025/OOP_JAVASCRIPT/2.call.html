@@ -135,10 +135,15 @@
 
 
             // ============================================
-
+            // tapi ini bisa kayaknya tapi pake super di class
             function tes2(name) {
               this.name = name;
-             const fungsi =  ObjekLain.halo.call(this, "khadijah"); // ini bisa seharunay, tapi ini ga bisa tapi ini busa buat contoh aja jadi bisa kita masukan ke sebuah fungsi lagi, lalu nanti kita bisa panggil funsinya pake ama fungsi yang baru
+             const fungsi =  ObjekLain.halo.call(this, "khadijah"); 
+
+            //  ini penting nih
+            // 06/04/2025
+            // jadi kenap aini ga bisa, karena kita memanggil sebuah fungi dari si function construnctornya, yang dimana di dalam ObjekLain, itu tidak mempunyai sebuah fungsi halo, karena fungsi halo ini berada didalam objek instancenya, makanya kalo mau itu kita buat sebuah fungsi di prototypenya lalu kita panggil di function constructor lagi, lalu cara panggilnya ObjekLain.prototype.halo.call(this, "khadijah"),  nah ini baru bsia
+
               console.log(fungsi); // Output: "halo arsa pacar kamu khadijah dan kamu kelas 10"
             }
 

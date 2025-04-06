@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // untuk mendapatkan data dari server mneggunakan request menggunakna ajax, kita bisa menggunakan callback function, dan untuk menambahkankannya kita bisa tambahkan event listener load pada ajax, bisa pake onload atau event listener, dan untuk mendapatkan datanya kita bisa menggunakan responseText atau responseXML, atau responseJSON, atau responseXML, atau responseText
+
+        // jadi bedanya si responseText dengan response adalah kalo 
+        // responseText itu mengembalikan datanya pasti dalam bentuk string, da harus di paste manual JSON.parse(), meskipun di content-typenya sudah di set menjadi application/json,
+
+        // tapi kalo response itu datanya sesuai dengan content-typenya, jadi kalo kita set header acceptnya application/json, maka datanya bakaldiminta dengan format json, dan nanti kalo kita mau langsung parse, atau ubah datanya yang dikirim dari server menjadi json, maka kita bisa mneggunakna property dari si responsenya yaitu responseType, dan tinggal kita set ke json, jadi kita ga perlu parse lagi, dan kita bisa langsung gunakan datanya
+
+
+      const ajax = new XMLHttpRequest();
+      ajax.open("GET", "api/1_data.json"); // disini buat minta datanya dari api
+
+
+      ajax.setRequestHeader("Accept", "application/json"); // ini buat ngasih tau kalo kita mau datanya dalam bentuk json, jadi kita ga perlu parse lagi
+
+      ajax.responseType = "json"; // ini juga bisa kita set di headernya, jadi kita ga perlu parse lagi
+
+      ajax.addEventListener("load", () => {
+        if (ajax.status === 200 && ajax.readyState === 4) {
+          // ajax.response ini bakal langsung ada ketika load di ekekusi.
+
+          console.log(ajax.response); // ini kalo langsung isinya bakal string dan nanti ga bisa di looping atau dioperasikan, ini kalo sebelumnya kita ga tentukan responseTypeny maka ini nanti bakal jasi stirng, da ga bisa dioperasikan
+
+          // atau kita juga bisa langsung reques di headernya agar dapat datanya langusng berupa json
+
+          
+          const hasil = ajax.response
+          // const hasil = JSON.parse(ajax.responseText); // ini kalo mau di parse ke json
+          console.log(hasil); //  5) [{…}, {…}, {…}, {…}, {…}]
+          
+          
+          
+          // ini buat ngulang
+          
+          let text = "";
+          hasil.forEach((item) => {
+            text += data(item);
+            document.body.innerHTML = text;
+          });
+        }
+      });
+      ajax.send();
+
+      function data(item) {
+        return `<div class="item">
+                    <h2>${item.nama}</h2>
+                    <p>${item.umur}</p>
+                    <p>${item.pekerjaan}</p>
+                </div>`;
+      }
+    </script>
+  </body>
+</html>

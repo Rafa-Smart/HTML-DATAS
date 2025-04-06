@@ -220,11 +220,15 @@
             const film = new Promise((resolve, rejected) => {
                 if(tes) {
                     setTimeout(() => {
-                        resolve([{
+                        resolve(
+                        [
+                            {
                             judul:"rafa khadafi",
                             pemeran:"jack",
                             penonton:["jamal","udin","siti"]
-                        }])
+                            }
+                        ]
+                    )
                     }, 5000)
                 }else {
                     rejected("gagal nih...")

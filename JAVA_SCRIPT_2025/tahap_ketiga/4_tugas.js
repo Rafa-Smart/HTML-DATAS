@@ -32,3 +32,25 @@ function main() {
 }
 
 document.getElementById("pilihan").onclick = main;
+
+debugger
+const button = document.querySelector("#hitung")
+button.addEventListener("click", () => {
+
+    const angka = document.querySelector("#angka").value
+    counter(angka)
+    function counter(angka) {
+        counter = angka
+        setInterval(() => {
+            if(counter === 0){
+                alert("Waktu habis")
+                clearInterval(counter)
+                document.location.reload()
+            }
+            counter--
+            let hasil = document.querySelector("#counter")
+            hasil.textContent = `hitung = ${counter}`
+        },1000)
+        button.disabled = "true"
+    }
+})
