@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Worker</title>
+</head>
+<body>
+
+    <button id="button">
+        Click Me !
+    </button>
+
+    <script>
+
+        // pada dasarnya javascript adalah bahasa pemrograman yang single threaded(satu proses), artinya walaupun proses yang kita buat adalah async, tapi tetap dijalankan oleh thread yang satu/ satu pekerja saja
+
+        // kemampuan satu threaded dalam mengelola beberapa pekerjaan dinamakan concurrent
+        // kemampuan banyak / beberapa threaded dalam mengelola beberapa pekerjaan dinamakan parallel
+
+        // untuk membuat bebrapa proses secara pararel kita bisa menggunakna webWorker
+
+
+        // disini kita coba buat kasus yang relevan
+
+            // function ShowLog(total) {
+            //     for(let i = 0; i < total; i++) {
+            //         console.log(`Log ${i + 1} : ${new Date().toLocaleTimeString()}`)
+            //     }
+            // }
+
+            // document.getElementById("button").addEventListener("click", function() {
+            //     console.log("start")
+            //     ShowLog(1000)
+            //     console.log("end")
+            //     // nanti ketika kit spam tombol click nya maka nanti akan tidka bisa diklik dulu sampai selesai perhitungnnya
+            // })
+
+
+            // ini pake webWorker
+            const worker = new Worker("15.webworker.js");
+
+            // disini kita ngrim datanya dulu ke si worker
+            document.getElementById("button").onclick = function() {
+                worker.postMessage(10000) // ini buat kirim data ke worker
+            }
+
+            // worker.onmessage = callback
+
+            // kalo mau nyari event apa aja yang bisa dipake di dalam worker ini pas kemu ketik paramter di fungsi addeventlistener kamu pake ctrl + spasi
+            worker.addEventListener("message", function(e) { // ini buat nerima data dari worker
+                console.log(e.data)
+            })
+
+
+            // jadi nanti kita bisa mengklik sesuka hati si tombol nya tnapa perlu khawatir akan ngefreeze, karena sudah beda thread, jadi ada yang bagian ui, dan bagia worker nya sendiri
+
+    </script>
+</body>
+</html>

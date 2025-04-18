@@ -72,6 +72,8 @@
             // return strings.reduce((hasil, elemen, index) => `${hasil} ${elemen} ${values[index] || ""}`
             // ,"")
 
+            // ini kenapa ada ${hasil} ${elemen} ${values[index] || ""}, masih ada haisl disini, karena kita tetap ingin menambahkan hasil dari yang sebelumya ke iterasi berikutnya, makanya hasilya masih kita sertakan disini
+
 
             return strings.reduce((hasil, elemen, index) => `${hasil}${elemen} ${values[index] || ""}`, "") // reduce ini kan bakla ngulang setipa elemen dari array yaaaa inget, karen di index itu kan dari 0 bukan dari 1, jadi pasti nanti bakal lebih 1
 

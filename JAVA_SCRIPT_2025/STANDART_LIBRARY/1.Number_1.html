@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        // 255; // two-hundred and fifty-five
+        // 255.0; // same number
+        // 255 === 255.0; // true
+        // 255 === 0xff; // true (hexadecimal notation)
+        // 255 === 0b11111111; // true (binary notation)
+        // 255 === 0.255e3; // true (decimal exponential notation)
+        
+        const input = "12345";
+        const number = Number(input)
+        console.log( typeof input) // string
+        console.log( typeof number) // number
+        console.log(Number("jamal")) //Nan
+
+
+        // static property di number
+
+        console.log("===========")
+        console.log("ini maximal", Number.MAX_VALUE)
+        console.log("ini minimal", Number.MIN_VALUE)
+        console.log("ini maximal save", Number.MAX_SAFE_INTEGER)
+        console.log("ini minimal save", Number.MIN_SAFE_INTEGER)
+
+        console.log("============")
+        const a = 4;
+        console.log(Number.isNaN(a)) // false 
+
+
+        // instance method di number, jadi pake si objek isntancenya
+        console.log("============")
+        const value = 11234;
+        console.log(value.toLocaleString("en-US")) //11,234
+        console.log(value.toLocaleString("id-ID")) //11.234
+        // id = bahasa
+        // ID = negara
+
+        
+ 
+
+    </script>
+</body>
+</html>

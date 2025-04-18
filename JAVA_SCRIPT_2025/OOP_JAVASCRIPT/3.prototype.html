@@ -50,6 +50,9 @@
         this.sayHello = function () { // ini akan langsung turun ke objek instancenya, karena thisn disini mengacu ke objek instancenya
           return `halo ${this.nama}`;
         };
+
+        // disini kalo kita buat method makan sama sepertu ayng ada didalam prototypenya maka nanti yang terpanggil akan method yang ada disini, yaitu metho yang ada di instance objeknya
+
       }
 
       // membuat method atau fungsi di constructor function pake prototype

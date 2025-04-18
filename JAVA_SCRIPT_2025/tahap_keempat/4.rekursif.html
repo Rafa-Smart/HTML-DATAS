@@ -103,7 +103,44 @@
             return tesRekursif(n+1)
         }
 
+        function tes(n){
+            let hasil;
+            return function (n){
+                if(n === 0){
+                    return true
+                }
+                hasil += tes(n-1)
+                return tes(n-1)
+            }
+            return hasil
+        }
 
+        function es(n1){
+            let hasil =0;
+            if(n1 === 0){
+                return
+            }
+            return hasil += es(n1-1)
+        }
+
+
+
+        console.log(es(10))
+        console.log("tes")
+        console.log(tes(10))
+        let t = tes(10)
+        console.log(t)
+
+
+        console.log("tesss aja ")
+        function tambahLagi(n){
+            if(n === 0){
+                return 1
+            }
+            return n + tambahLagi(n-1)
+        }
+
+        console.log(tambahLagi(10))
     </script>
 </body>
 </html>

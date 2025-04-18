@@ -37,7 +37,7 @@ const hasil2 = apiData.forEach(([key, value]) => {
 
 function Nih(apiData){ // jadi disini kita langsung desctruction di dala parameternya
   return apiData.forEach(([key, value]) => {
-    return ({[key] : [value]})
+    return {[key] : [value]}
   })
 }
 console.log(Nih(apiData)) // undefined

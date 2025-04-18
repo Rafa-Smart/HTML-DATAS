@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        // jdi proxy ini berfungis untuk mengecek apakah ada perubahan pada objek yang kita buat, jadi kita bisa memantau perubahan yang terjadi pada objek tersebut.
+
+        const handler = {
+            get: function(target, property) {
+                console.log(`Property ${property} diakses`);
+                return target[property];
+            },
+            set: function(target, property, valueBaru) {
+                console.log(`Property ${property} diubah menjadi ${valueBaru}`);
+                target[property] = valueBaru;
+                return true;
+            }
+        };
+        const target = {
+            name: "John",
+            age: 30
+        };
+        console.log(target.name); // John
+        console.log(target.age); // 30
+
+        const proxy = new Proxy(target, handler);
+        console.log(proxy.name); // John
+        console.log(proxy.age); // 30
+        proxy.name = "Jane"; // Property name diubah menjadi Jane
+        console.log(proxy.name); // Jane
+        proxy.age = 25; // Property age diubah menjadi 25
+        console.log(proxy.age); // 25
+
+        console.log("========================")
+
+
+        // Proxy adalah fitur tersendiri di JS yang memungkinkan Anda mengintervensi operasi dasar pada objek (seperti membaca/menulis properti).
+
+        // jadi promise ini digunakan sebagai proxy untuk proses dari async
+
+        // jadi gini ketika promise berjalan 
+        // state :
+        // pending = menunggu (isinya undefined)
+        // fulfilled = sudah selesai (valuenya sudah ada) (ditepati)
+        // rejected = gagal (isinya error) (diingkari)
+
+        // dan dari pending itu cuma bisa satu yaitu fulfilled atau rejected, jadi ga bisa dua duanya, dan ketika sudah fulfilled atau rejected maka dia ga bisa diubah lagi, jadi kita ga bisa mengubah state dari promise yang sudah fulfilled atau rejected
+
+        // jadi kalo dari penfing lalu ke fulffiled maka janjinya sudah ditepati, dan kalo rejected maka janjinya diingkari
+
+
+        // nah jadi promise ini diadakan sebagai penyelesaian masalah dari callbackhell, jadi kita ga perlu lagi nulis callback hell yang bikin kita bingung, dan kita bisa menggunakan promise ini untuk menyelesaikan masalah dari callback hell
+
+        const promise1 = new Promise( function(resolve, rejected) {
+            // jadi disini kita bisa masukan program yang berjalan sebagai asyc, bisa manggil data prouduct
+            // dan kalo sudah ada bisa ditambahkan callback resolve, dan kalo ada error bisa ditambahkan rejected
+            resolve("ini data yang kamu inginkan - Success")
+            rejected("data yang kamu cari tidak ada - Error")
+        })
+
+
+        // coba kita liat
+
+
+
+        const promise2 = new Promise( function(resolve, rejected) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "api/2_product.json", true);
+
+            // disini ketika ajaxnya sudah berada di state baik itu 1,2,3,4 maka
+            // xhr.onreadystatechange = function() {
+            //     if(xhr.readyState === 4) {
+            //         resolve(xhr.responseText)
+            //     } else {
+            //         rejected("data yang kamu cari tidak ada - Error")
+            //         // throw new Error("data yang kamu cari tidak ada - Error")
+            //     }
+            // }
+
+            // atau bisa juga gini
+            xhr.addEventListener("load", function() {
+                if(xhr.status === 200) {
+                    resolve(xhr.responseText)
+                } else {
+                    rejected("data yang kamu cari tidak ada - Error")
+                }
+            })
+
+            xhr.send();
+        })
+
+        // kita buat function resolve dan rejected
+        function resolve(data) { // = xhr.responseText
+            console.log("ini adalah data yang kamu inginkan", data);
+        }
+        function rejected(error) {
+            console.log("ini adalah error yang terjadi", error);
+        }
+
+        // disini variable promise2 berisi sebuah janji yang dipenuhi jika ajaxnya berhasil dan berisi error jika ajaxnya gagal, dan kita bisa menggunakan method then() untuk mendapatkan data yang kita inginkan, dan kita bisa menggunakan method catch() untuk mendapatkan error yang terjadi
+
+
+        // ini kalo ebrhasil
+        console.log(promise2); // Promise {<pending>}
+                                // Promise {<pending>}[[Prototype]]: Promise[[PromiseState]]: "fulfilled"[[PromiseResult]]: "{\r\n    \"id\": 1,\r\n    \"name\": \"Product A\",\r\n    \"description\": \"Description of Product A\",\r\n    \"price\": 100.0\r\n}"
+
+
+        // ini kalo gagal
+        console.log(promise2); // Promise {<pending>}
+                                // [[Prototype]]: Promise[[PromiseState]]: "rejected"
+                                // [[PromiseResult]]: "data yang kamu cari tidak ada - Error"
+
+
+    </script>
+</body>
+</html>

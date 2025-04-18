@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+        label {
+            display: block;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            min-width: 300px;
+            margin-top: 50px;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="" name="inputanUser">
+        <label for="nama">Masukan Nama : </label>
+        <input type="text" name="nama" id="nama" required placeholder="masukan nama...">
+        <label for="email">Masukan Email : </label>
+        <input type="email" name="email" id="email" required placeholder="masukan email...">
+        <label for="password">Masukan Password : </label>
+        <input type="password" name="password" id="password" required placeholder="masukan password...">
+        <!-- <button type="submit">Kirim</button> -->
+         <input type="button" value="kirim" id='login'>
+    </form>
+
+    <script>
+        // jadi kita bisa selain mendapatkan data dati server, kita juga bisa mengirimkan data ke server dengan menggunakan ajax dengan menambahkan parameter data ke method send()
+
+        // misal kita ingin mengambil data dari user menggunakan form, lalu mengirimkan datanya ke server
+
+        // send()menerima parameter opsional yang memungkinkan Anda menentukan isi permintaan; ini terutama digunakan untuk permintaan seperti PUT. Jika metode permintaan adalah GET atau HEAD, body parameter diabaikan dan isi permintaan ditetapkan ke null.
+
+        // Jika tidak ada Accept header yang ditetapkan menggunakan setRequestHeader(), Acceptheader dengan tipe "*/*"(tipe apa pun) akan dikirim. */* adalah nilai default untuk header Accept artinya semua tipedatanya bebas
+
+
+        function Login () {
+            const url = "https://jsonplaceholder.typicode.com/posts";
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST",url, true)
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.readyState);
+                }
+            }
+
+            // ini untuk memberi tahu ke server bahwa data yang kita kirim ini bertipe json
+            xhr.setRequestHeader("Content-Type","application/json")
+            xhr.addEventListener("load", function() {
+                if (xhr.status === 200 && xhr.readyState === 4) {
+                    console.log(xhr.responseText);
+                }
+            })
+
+            const data = {
+                nama: document.getElementById("nama").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+            }
+
+            // disini ternyata ketika kita mengirim data menggunakan xhr.send ini hanya bisa menggunakna 
+            // string dll coba liat saja di dokumentasinya, jadi kita harus mengubahnya menjadi string menggunakan JSON.stringify() agar bisa dikirim ke server
+            // {nama: "John", email: "john@example.com"} adalah JavaScript object
+            // "{\"nama\":\"John\",\"email\":\"john@example.com\"}" adalah JSON string
+
+            xhr.send(JSON.stringify(data))
+        }
+
+        const login = document.getElementById("login")
+        login.addEventListener("click", function() {
+            Login()
+        })
+
+        // PENTING
+        // ini ga bisa karena kita mneggunakan live server, jadi di live erver ini kita ga bisa mnegunakan method post, jadi seharusnya kita butuh server sendiri buat nerima data yang kita kirim
+
+
+    </script>
+</body>
+</html>

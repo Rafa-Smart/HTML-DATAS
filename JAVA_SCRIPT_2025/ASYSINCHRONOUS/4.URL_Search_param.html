@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            min-width: 300px;
+            margin-top: 50px;
+            gap: 5px;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <form name="inputanUser">
+        <label for="search">Search : </label>
+        <input type="text" name="search" id="seacrh" required placeholder="Search...">
+        <input type="button" value="Kirim" id="kirim">
+    </form>
+    
+    <div id="response">
+        <h3>Respons dari Server:</h3>
+        <pre id="responseData">Belum ada data</pre>
+    </div>
+<body>
+    <script>
+        // biasanya ketika kita mengirim data ke server biasanya kita kita hanya mneggunakan dalam bentuk querryParam
+
+        // jadi datanya kita taruh di urlnya mneggunakan ?key=value&key=value.
+
+        // kita bisa langung saja menambhakan query paramnya langsung di urlnya tapi lebih baik kita mneggunakna class URLSearchParams() untuk menghindari kesalahan penulisan, dan kita bisa menggunakan method append() untuk menambahkannya.
+
+        // dan objek instanec dari URLSearchParams() ini termasuk kedalam iterable, jadi bisa pake for of atau forEach
+
+
+        function Search(){
+            const xhr = new XMLHttpRequest();
+            const url = "https://jsonplaceholder.typicode.com/posts"; // ini url yang kita tuju
+            let params = new URLSearchParams();
+            params.append("nama", "budi")
+            params.append("kelas", "XI RPL 1")
+            params.has("kelas") // true karena ada parameter yang namanya kelas
+
+            params.append("search", `${document.querySelector("#seacrh").value}`) // ini kita ambil dari inputan user
+
+            xhr.open("GET",`${url}?${params.toString()}`, true)
+            xhr.onreadystatechange = () => {
+                console.log(xhr.readyState); // ini buat ngeliat status dari request kita
+            }
+            xhr.addEventListener("load", function() {
+                if(xhr.readyState === 4){
+                    const response = xhr.responseText;
+                    console.log(response);
+                    const data = document.getElementById("responseData")
+                    data.textContent = response; // ini kita ambil dari inputan user
+
+                    // disini gausah pake parse lagi karena sudah string
+                }
+            })
+
+            xhr.send()
+        }
+
+        document.getElementById("kirim").addEventListener("click", function(){
+            Search()
+            document.forms["inputanUser"].reset() // ini buat mereset formnya setelah di kirim
+        })
+
+
+        // ini hasil dari http yang sudah di kasih param 
+        // https://jsonplaceholder.typicode.com/posts?nama=budi&kelas=XI+RPL+1&search=open+sky
+
+
+        // ini datanya PENTING
+        // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+        margin-top: 50px;
+        gap: 5px;
+      }
+      #response {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        min-width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nih disini ada atribut enctype -->
+    <form name="inputanUser" enctype="application/x-www-form-urlencoded">
+      <label for="nama">Masukan Nama : </label>
+      <input
+        type="text"
+        name="nama"
+        id="nama"
+        required
+        placeholder="masukan nama..."
+      />
+      <label for="email">Masukan Email : </label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        required
+        placeholder="masukan email..."
+      />
+      <label for="password">Masukan Password : </label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        required
+        placeholder="masukan password..."
+      />
+      <input type="button" value="Kirim" id="login" />
+    </form>
+
+    <div id="response">
+      <h3>Respons dari Server:</h3>
+      <pre id="responseData">Belum ada data</pre>
+    </div>
+  </body>
+
+  <script>
+    // selain json dan querryParam, kadang kita juga mengirim form data dari client ke server menggunakan ajax.
+    // untuk kasus ini kita tetap bisa menggunakan URLSearchParam
+    // namun objek UrlSearhpraramnya kita kirim di method send 
+
+    function Login() {
+        const xhr = new XMLHttpRequest(); // buat request ke server
+        const url = "https://jsonplaceholder.typicode.com/posts"; // ini url yang kita tuju
+
+        let form = new URLSearchParams();
+        form.append("username", `${document.querySelector("#nama").value}`); // ini kita ambil dari inputan user
+        form.append("email", `${document.querySelector("#email").value}`); // ini kita ambil dari inputan user
+        form.append("password", `${document.querySelector("#password").value}`); // ini kita ambil
+
+
+        xhr.open("POST", url, true)
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // ini untuk memberi tahu ke server bahwa kita mengirimkan data dalam bentuk form data
+
+        xhr.onreadystatechange= () => {
+            console.log(xhr.readyState);
+        }
+        xhr.addEventListener("load" , function() {
+            if(xhr.readyState === 4){
+                const response = xhr.responseText;
+                const hasil = document.getElementById("responseData")
+                hasil.textContent = response; // ini kita ambil dari inputan user
+            }
+        })
+
+        xhr.send(form.toString()) // ini kita kirimkan ke server dalam bentuk string, karena kita sudah menggunakan URLSearchParams() jadi kita tinggal panggil method toString() untuk mengubahnya menjadi string
+
+    }
+
+    document.getElementById("login").addEventListener("click", function() {
+        Login()
+        document.forms["inputanUser"].reset() // ini buat mereset formnya setelah di kirim
+    })
+
+  </script>
+
+
+</html>

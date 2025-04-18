@@ -14,6 +14,11 @@
 
         const xhr = new XMLHttpRequest(); // buat request ke server
         xhr.open("GET", "api/1_data.json"); // disini buat minta datanya dari api
+        // (method) XMLHttpRequest.open(method: string, url: string | URL): void (+1 overload)
+
+        xhr.onreadystatechange = () => {
+            console.log(`ini statenya -> ${xhr.readyState}`); // ini buat ngeliat status dari request kita
+        }
 
         xhr.addEventListener("load", () => {
             const hasil = JSON.parse(xhr.response);

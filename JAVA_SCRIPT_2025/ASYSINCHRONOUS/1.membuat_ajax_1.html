@@ -12,7 +12,11 @@
         // jadi bedanya si responseText dengan response adalah kalo 
         // responseText itu mengembalikan datanya pasti dalam bentuk string, da harus di paste manual JSON.parse(), meskipun di content-typenya sudah di set menjadi application/json,
 
-        // tapi kalo response itu datanya sesuai dengan content-typenya, jadi kalo kita set header acceptnya application/json, maka datanya bakaldiminta dengan format json, dan nanti kalo kita mau langsung parse, atau ubah datanya yang dikirim dari server menjadi json, maka kita bisa mneggunakna property dari si responsenya yaitu responseType, dan tinggal kita set ke json, jadi kita ga perlu parse lagi, dan kita bisa langsung gunakan datanya
+        // tapi kalo response itu datanya sesuai dengan content-typenya(tipe yang dikasih), jadi kalo kita set header acceptnya application/json, maka datanya bakaldiminta dengan format json, dan nanti kalo kita mau langsung parse, atau ubah datanya yang dikirim dari server menjadi json, maka kita bisa mneggunakna property dari si responsenya yaitu responseType, dan tinggal kita set ke json, jadi kita ga perlu parse lagi, dan kita bisa langsung gunakan datanya
+
+      // inget ya kalo di xmlhttprequset ini semua data yang dikirm itu defaultnya string, jadi tetp harus kamu parsein dulu, misal yang datang xml, tetep kamu pare dulu dari string xml ke xml
+
+
 
 
       const ajax = new XMLHttpRequest();

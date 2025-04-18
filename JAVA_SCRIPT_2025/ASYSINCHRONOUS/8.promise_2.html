@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table>
+      <tbody>
+        <tr>
+          <td>Id :</td>
+          <td id="id"></td>
+        </tr>
+        <tr>
+          <td>Name :</td>
+          <td id="nama"></td>
+        </tr>
+        <tr>
+          <td>Price :</td>
+          <td id="price"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      // then() = adalah method yang mengambil data jika berhasil dia punya paramter
+      // catch() = adalah method yang mengambil data errornya jika gagal dia punya parameter
+      // finally() = adalah method yang akan dieksekusi setelah then() dan catch() selesai dieksekusi baik itu berhasil atau gagal dan dia gapunya paramter
+
+      // jadi ketika
+      // GetProduct()
+      // .then((data) => console.log(data))
+      // .catch((error) => console.log(error))
+      // .finally(() => console.log("ini adalah finally"))
+
+      // jadi ini itu methodnya mengembalikan / return promise baru, jadi kita bisa chaining lagi, dan kalo then ini bisa di chaining berkali kali, tapi kalo seperti itu dianggapnya melakukan konversi data responsenya
+
+      function GetProduct() {
+        return new Promise((resolve, rejected) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "api/2_product.json", true);
+          xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                resolve(xhr.responseText); // ini kalo berhasil
+              } else {
+                // ini kalo masalah dengan path dll
+                rejected("data yang kamu cari tidak ada - Error"); // ini kalo gagal
+              }
+            }
+          };
+
+          xhr.onerror = () => {
+            // ini akan error jika
+
+            // Tidak ada koneksi internet
+            // DNS tidak resolve
+            // Koneksi terputus
+            // CORS error
+            // ini buat masalah network
+            rejected(new Error("Network error"));
+          };
+
+          xhr.send();
+        });
+      }
+
+      const promise = GetProduct();
+      promise
+        .then((data) => {
+          // jika berhasil
+          try {
+              console.log(`ini adalah data sebelum di parse: ${data}`); // ini kalo mau di parse ke json
+              console.log(`ini adalah data setelah di parse: ${JSON.parse(data)}`); // ini kalo mau di parse ke json
+          } finally{
+              return JSON.parse(data); // ini kalo mau di parse ke json
+          }
+
+          // return JSON.parse(data); // ini kalo mau di parse ke json
+        })
+        .then((dataJson) => {
+          const id = document.getElementById("id");
+          const nama = document.getElementById("nama");
+          const price = document.getElementById("price");
+          id.textContent = dataJson.id;
+          nama.textContent = dataJson.nama;
+          price.textContent = dataJson.price;
+        })
+        .catch((error) => {
+            if (error instanceof Error && error.message.includes("Network")) {
+                console.error("Network Error:", error);
+                document.getElementById("nama").textContent = "Koneksi jaringan bermasalah";
+            } 
+            else if (error instanceof Error) {
+                console.error("Server Error:", error.message);
+                document.getElementById("nama").textContent = "Server error: " + error.message;
+            }
+            else {
+                console.error("Unknown Error:", error);
+                document.getElementById("nama").textContent = "Terjadi kesalahan";
+            }
+        })
+        .finally(() => {
+          console.log("program selesai"); // ini akan dieksekusi setelah then() dan catch() selesai dieksekusi baik itu berhasil atau gagal
+        });
+    </script>
+  </body>
+</html>

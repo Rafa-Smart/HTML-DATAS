@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+        margin-top: 50px;
+        gap: 5px;
+      }
+      #response {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        min-width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nih disini ada atribut enctype -->
+     <!-- nah disini kalo kamu teliti ini beda sama yag sebelumnya -->
+      <!-- enctype="application/x-www-form-urlencoded" -->
+    <form name="inputanUser" enctype="multipart/form-data">
+      <label for="nama">Masukan Nama : </label>
+      <input
+        type="text"
+        name="nama"
+        id="nama"
+        required
+        placeholder="masukan nama..."
+      />
+      <label for="file">Masukan File : </label>
+      <input type="file" id="file" name="files[]" required multiple />
+      <input type="button" value="Kirim" id="login" />
+    </form>
+
+    <div id="response">
+      <h3>Respons dari Server:</h3>
+      <pre id="responseData">Belum ada data</pre>
+    </div>
+  </body>
+
+  <script>
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
+
+    // selain menggunakan json, querryParam, formData, kita juga bisa mengirim data berupa file ke server
+    // untuk mengirim data ile ke server kita perlu menggunakan objek Form Data, lalu kita perlu menambhaa=kan objek file kedalam formData tersebut
+
+    // knapa kita perlu menggunakan objek FormData? karena objek ini bisa mengirimkan data dalam bentuk multipart/form-data atau sebuah binery, yang mana ini adalah format yang umum digunakan untuk mengirimkan file melalui HTTP.
+
+    // dan karena kalo pake querryparam itu bakal jadi string
+    // dan di method method yang ada pada objek instance dari class FormData ini sama seperti URLsearchParams,
+    // karena class formData ini extends dari class URLSearchParams, jadi kita bisa menggunakan method append() dan lain lain tapi di method append ini kita bisa memasukan selain string yaitu file.
+
+    // nah data filenya itu apa ?, data filenya itu adalah objek turunan dari class file cari aja class file di mdn
+
+    // contoh kita bisa membuat objek file dari class file
+    const fileSaya = new File(["ini adalah file saya"], "file.txt", {
+      type: "text/plain",
+    }); // ini adalah objek file yang kita buat sendiri, dan kita bisa mengirimkan objek ini ke server
+
+    // jadi paramter pertamanya itu berisi konten dari file yang akan dibuat ini, dan harus berupa array
+
+    // penjelasan blob Blob (Binary Large Object) adalah struktur data dalam JavaScript yang merepresentasikan data biner (binary data). Blob digunakan untuk menangani file atau data mentah (raw data) seperti gambar, audio, video, dokumen, atau teks dalam format biner.
+
+
+
+    function hasil() {
+      const xhr = new XMLHttpRequest();
+      const Data = new FormData();
+      const file = document.getElementById("file").files; // ambil file yang dipilih
+      // jadi karena kita multiple jadi bisa jadi banyak dan menjadi array dan namanya adalah files, dan file ini akan otomatis menjadi objek instance dari class File
+
+    // atau bisa juga gini
+    // const files = document.getElementById("file").files; // ambil file yang dipilih
+    // const firstFile = files[0]; // ambil file pertama dari array files
+    console.log(file); // ini adalah objek file yang kita ambil dari inputan user
+
+    // yang ini salah
+    // Array.from(file).forEach((data, i) => {
+    //     Data.append(`files[]`,data);
+    //     console.log(data); 
+    // })
+
+    Data.append("file", file[0]); // ini kita ambil dari inputan user, jadi kita ambil file yang pertama dari array file, dan kita append ke dalam formData dengan nama files[]
+    Data.append("nama", document.querySelector("#nama").value); // ini kita ambil dari inputan user
+      xhr.open("POST", "https://httpbin.org/post", true); // ini url yang kita tuju
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(xhr.responseText);
+          const response = JSON.parse(xhr.responseText);
+
+        //   jadi kita dextruction dulu coba aja liat objek response, ini banyak banget
+
+          const {form, files} = response
+          document.getElementById("responseData").textContent = JSON.stringify(form.nama); // Format JSON agar mudah dibaca
+          console.log(response)
+        }
+      };
+      xhr.send(Data); // kita kirimkan data ke server
+
+      // disini kita tidak perlu reques lagi set headernya, karena sudah otomatis formdata yang kita kirimkan ini sudah otomatis di set headernya menjadi multipart/form-data.
+    }
+
+
+    document.getElementById("login").addEventListener("click", function () {
+      hasil();
+      document.forms["inputanUser"].reset(); // ini buat mereset formnya setelah di kirim
+    });
+
+
+    // sudah ini sebenarnya sudah bisa tapi problemnya itu ada di saya ga bisa mengirimkan banyak file sekaligus
+
+  </script>
+</html>

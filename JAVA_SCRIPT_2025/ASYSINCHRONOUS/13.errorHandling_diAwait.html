@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function GetData() {
+            const init = {
+                method:"GET",
+                header:{
+                    "Content-Type": "application/json"
+                },
+                mode:"cors"
+            }
+            const request = new Request("api/3.da7ta_2.json", init)
+            const response = fetch(request);
+            return response.then((data) => data.json())
+        }
+
+        (async function getDataAsync(){
+            try {
+                const hasil = await GetData()
+                hasil.forEach((data, index) => {
+                console.log(`data nama ke ${index+1} adalah ${data.nama}`)
+            });
+            }catch(e) {
+                console.error(e.message)
+            }finally{
+                console.log("selesai")
+            }
+        })()
+
+
+    </script>
+</body>
+</html>

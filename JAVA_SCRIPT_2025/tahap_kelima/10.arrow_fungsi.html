@@ -75,7 +75,9 @@
 
     let mahasiswa = ["rafa","putri","jamal","siti"]
     let dataHuruf = mahasiswa.map(function(nama){
-        return `${nama} = ${nama.length}`
+        return `${nama} = ${nama.length}` // jadi ketika di return, maka hasil dari returnan ini akan masuk kedalam sebuah array yang kosong didalam fungis map
+        // result = []
+        // nanti didalam for, result.push(callback(array[i], i, array))
     })
     console.log(dataHuruf)
     console.log("=================")

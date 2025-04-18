@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // contoh biasa
+        // ini mengembalikan promise
+        function GetProduct() {
+            return new Promise( function(resolve, rejected) {
+                resolve("Rafa Khadafi")
+            })
+        }
+
+        GetProduct()
+            .then((hasil) => {
+                console.log(hasil) //rafa khadafi
+            })
+
+        // ini kalo pake async tapi tetap mengembalikan promise
+        async function GetProduct2() {
+            return "Jamal istiqomah";
+        }
+
+        GetProduct2()
+            .then((hasil) => {
+                console.log(hasil) // jamal istiqomah
+            })
+
+
+            // tpai kalo misalkan kita punya fungsi async kemudian ternyata didalamnya mereturn promise lagi, maka nanti tidak akan promise dua kali, cukup sekali saja karena sudah cukup pintar nih si asyncnya buat ngedeteksinya
+
+
+    </script>
+</body>
+</html>

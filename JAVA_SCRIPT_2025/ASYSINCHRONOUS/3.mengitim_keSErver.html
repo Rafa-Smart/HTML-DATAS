@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirim Data ke Server</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            min-width: 300px;
+            margin-top: 50px;
+            gap: 5px;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <form name="inputanUser">
+        <label for="nama">Masukan Nama : </label>
+        <input type="text" name="nama" id="nama" required placeholder="masukan nama...">
+        <label for="email">Masukan Email : </label>
+        <input type="email" name="email" id="email" required placeholder="masukan email...">
+        <label for="password">Masukan Password : </label>
+        <input type="password" name="password" id="password" required placeholder="masukan password...">
+        <input type="button" value="Kirim" id="login">
+    </form>
+    
+    <div id="response">
+        <h3>Respons dari Server:</h3>
+        <pre id="responseData">Belum ada data</pre>
+    </div>
+
+    <script>
+        function Login() {
+            const url = "https://jsonplaceholder.typicode.com/posts";
+            const xhr = new XMLHttpRequest();
+            
+            xhr.open("POST", url, true);
+
+            // disini memberi tahu bahwa kita mengirim data ke server dengan data json
+            xhr.setRequestHeader("Content-Type", "application/json");
+            
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 201) { // 201 = Created (kode respons JSONPlaceholder untuk POST)
+                        console.log(`data sebelum di json.parse: ${xhr.responseText}`);
+                        const response = JSON.parse(xhr.responseText);
+                        console.log(`data setelah di json.parse: ${response}`);
+                        document.getElementById("responseData").textContent = JSON.stringify(response, null, 2); // Format JSON agar mudah dibaca
+
+                        // sebenernya sama aja kayak yang dibawah ini, karena data yang diterima dari response itu datanya pasti berupa sebuah string, dan dari tadi kita hanya dari sting ke json terus ke string lagi 😂😂😂
+
+                        // kenapa ita harus menggunakan string untuk di browsernya ? karena agar datanya terlihat, kalo engga nanti bakal [object]
+
+                        // document.getElementById("responseData").textContent = xhr.responseText;
+                        console.log(`data sebelum di json.stringify: ${response}`);
+                        console.log(`data setelah di json.stringify: ${JSON.stringify(response)}`);
+                        console.log("Data dikirim:", response);
+                    } else {
+                        document.getElementById("responseData").textContent = 
+                            "Error: " + xhr.status + " - " + xhr.statusText;
+                    }
+                }
+            };
+            
+            const data = {
+                nama: document.getElementById("nama").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+            };
+            
+            xhr.send(JSON.stringify(data)); // disini kita kasih berupa string
+        }
+
+        document.getElementById("login").addEventListener("click", function(){
+            Login();
+            document.forms["inputanUser"].reset(); // Reset form setelah mengirim data
+        });
+
+        // jadi gini kenapa disini responsenya itu sama dengan data yang kita kirim atau request ?, karena jsonplaceholder ini adalah fake api yang kita gunakan untuk testing, jadi ketika kita mengirim data ke server, maka server akan mengembalikan data yang kita kirimkan, dan yang dikembalikan adalah sebuah data string kemudian beserta id nya
+
+    </script>
+</body>
+</html>

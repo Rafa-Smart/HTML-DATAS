@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+
+        // https://developer.mozilla.org/en-US/docs/Web/API/Request
+        // https://developer.mozilla.org/en-US/docs/Web/API/Response
+
+        // kita bisa langung menggunakan fetch, karena bisa melakukan request GET, POST, PUT, DELETE, dll, dan mer  return sebuah promise, jadi ini kayak kita melakukan ajax dan promise, tapi lebih efisien
+
+        // Ketika Anda mengirim request (misalnya dengan fetch() atau XMLHttpRequest) dan menambahkan mode: 'cors', Anda memberi tahu browser:
+        // "Request ini boleh mengakses server dengan aturan CORS (Cross-Origin Resource Sharing), dan aku siap menangani respons yang dibatasi CORS."
+
+
+        // kita bisa menggunakan instance request dari class Request
+
+        const init = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            mode:"cors"
+            // body: JSON.stringify({
+                // ini kalo mau pake post bat ngirim data
+            // })
+        }
+        const request = new Request("api/3.data_2.json", init)
+        
+        fetch(request)
+            .then((response) => {
+                try{
+                    console.log(`ini sebelum di json kan ${response}`)
+                } finally {
+                    return response.json()
+                }
+            })
+            .then((Datajson) => {
+                console.log(Datajson)
+                let hasil = display(Datajson)
+                document.body.innerHTML = hasil;
+            })
+            .catch((error) => {
+                console.log(`error :${error}`)
+                document.body.innerHTML = error;
+            })
+            .finally(() => {
+                console.log("program selesai")
+            })
+
+
+
+        function display(e) {
+            return `
+                <div>
+                ${e.map((data) => 
+                    `<ul>
+                        <li>
+                        nama: ${data.nama}   
+                        </li>
+                        <li>
+                        kelas: ${data.kelas}   
+                        </li>
+                        <li>
+                        jurusan: ${data.jurusan}   
+                        </li>
+                    </ul>`
+                )}
+                </div>
+                `
+            
+        }
+
+
+        // ini penjelasan blob lagi
+        // URL.createObjectURL() adalah method yang disediakan browser untuk membuat URL sementara (object URL) dari objek biner seperti Blob atau File. URL ini bisa digunakan sebagai referensi ke data biner yang disimpan di memori browser (bukan di server).
+        // Analoginya:
+
+        // Bayangkan Anda punya file gambar (flowers.jpg) di komputer, tapi Anda tidak ingin mengunggahnya ke server. Anda ingin menampilkannya langsung di browser.
+
+        // Tanpa createObjectURL: Harus mengunggah ke server dulu, lalu pakai URL server (contoh: https://example.com/flowers.jpg).
+
+        // Dengan createObjectURL: Browser membuat URL lokal (blob:https://example.com/abc123) yang langsung merujuk ke data biner gambar di memori.
+
+        // jadi ini kita buat program preview dari user ketika user mengirimkan sebuah file, nanti preview file yang dikirim bisa terlihat, tanpa harus meinta rquest lagi ke server buat ngakses gambarnya, karena gambarnya sudah dibuatkan url sementara yang bisa di akses ketika halaman dimuat saja
+        const fileInput = document.querySelector("input[type=file]");
+        fileInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        const url = URL.createObjectURL(file);
+        const img = document.querySelector("img").src = url;
+        // (Opsional) Bebaskan memori saat gambar selesai dimuat
+        img.onload = () => URL.revokeObjectURL(objectURL);
+
+
+            // kalo kita ngambil datanya pake fecth itukan berati datanya bakal dalam bentuk string, makanya kita perlu ubah menjadi blob dulu pake
+            // response.blob(), di then pertamanya
+
+        });
+
+    </script>
+</body>
+</html>
