@@ -70,7 +70,7 @@ let namaBaru = namaLengkap.replace("Ucup Surucup","Otong Surotong");*/
 
 
 //  jika kita di parameter pertamanya salah atau tidak sesuai dnegan nama pada variable aslinya contoh
-let namaCoba = namaLengkap.replace("Ucup Sianjing","Otong")
+let namaCoba = namaLengkap.replace("Ucup salto","Otong")
 console.log(`ini adalah jika parameter ke-1 tidak sesuai dengan variable aslinya = ${namaCoba}`)
 // maka akan tetap seperti itu dan tidak erorr
 
