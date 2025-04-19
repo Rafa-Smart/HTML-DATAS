@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // dokumentasi resminya
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+
+        // lebih lengkapnya sudah ada di tahap keenam ini hanya materi tambahan
+
+        // 1. exec(value) = exsekusi didalam regex, yang fungsinya, 
+        // jika menemukan data sesuai pola, maka kembalikan resultnya, jika tidak ketemu maka 
+        // akan mengembalikan nilai null (tidka ada / kosong)
+
+
+        const nama = "putri maulidia yusuf";
+        const regex = /maulidia/;
+        const result = regex.exec(nama);
+        console.log(result); // maulidia
+        // hasilnya adalah sebuah array 
+        // perhatikan di console, tapi typenya bukan array, tapi object, karena di js, array dan object itu sama saja yaitu objek
+
+        const regex2 = /tidak ada/
+        console.log(regex2.exec(nama)) // null
+
+        // 2. regex modifier
+
+        // i = case insensitive
+        // g = mencari pola secara global, dan jika sudah ketemu maka secara default akan berhenti pencariannya
+        // m = multiline, jadi pencariannya akan selalu dicari disetiap baris baru (enter)
+
+
+        const data = `jamal istiqomah\njamal dua\n siti muhaimin\n jamal tiga`
+        const regex3 = /jamal/igm;
+        const regex4 = /jamal/gi;
+        console.log(data.match(regex3)); // ['jamal', 'jamal', 'jamal']
+
+        let hasil;
+        while((hasil = regex4.exec(data)) !== null){ // ini maksudnya jika data resulnya ada, maka akan dijalankan
+            console.log(hasil)
+            // liat di console
+        }
+
+        console.log("======================")
+
+        // mencari tahu bahwa data yang kita mabil itu terdapat di index berapa
+
+        const data2 = `rafa eko jamal edo siti`
+        const regex5 = /ek[aiueo]/gi
+        console.log(data2.search(regex5)) // 5
+        // mendapatkan hasil 5 karena pola eko/a/i/u/o/e, disini dapatnya eko
+        // nah eko ini didapatkan pada index ke 5 setelah rafa .
+
+    </script>
+</body>
+</html>

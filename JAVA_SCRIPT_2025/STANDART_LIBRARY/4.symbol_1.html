@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // ini dokmentasi lengkapnya
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator
+
+
+        // simbol itu adalah tipe data yang selalu unik
+        // dan biasanya kita menggunakan symbol itu ketika ingin membuat key pada sebuah objek agar bisa unik
+        const symb1 = Symbol("kunci")
+        const symb2 = Symbol("kunci")
+        console.log(symb1 === symb2) // false karena symb1 dan symb2 adalah simbol yang berbeda meskipun memiliki nilai yang sama
+
+        // cara membuatnya
+        const firstName = Symbol()
+        const lastName = Symbol()
+
+        const Person = {}
+        Person[firstName] = "Rafa"
+        Person[lastName] = "Khadafi"
+        console.log(Person)
+
+
+        for(const key in Person) {
+            // ini tidak akan bisa karena kita ga bisa melakukan iterasi pada sebuah key yang merupakan symbol didalam objek
+            console.log(key, Person[key])
+        }
+        
+
+        // caranya ada tapi
+
+        {
+            // Menggunakan akses langsung
+            console.log(Person[firstName]); // "Rafa"
+
+            // Menggunakan Object.getOwnPropertySymbols()
+            // yang fungsinya untuk mengembalikan array dari simbol-simbol yang ada di dalam objek
+            const symbolProps = Object.getOwnPropertySymbols(Person);
+            console.log(symbolProps); // [Symbol(), Symbol()]
+            console.log(Person[symbolProps[0]]); // "Rafa"
+
+            // Menggunakan Reflect.ownKeys() (mengembalikan semua keys termasuk Symbol)
+            const semuaKunci = Reflect.ownKeys(Person);
+            console.log(semuaKunci); // [Symbol(), Symbol()]
+
+            for (const key of symbolProps) {
+                console.log(key, Person[key]);
+                // hasil
+                // Symbol() 'Rafa'
+                // Symbol() 'Khadafi'
+            }
+
+            // bisa pake ownKeys atau getOwnPropertySymbols
+            // untuk mendapatkan sebuah array dari simbol-simbol yang ada di dalam objek
+
+            for (const key of semuaKunci) {
+                console.log(key, Person[key]);
+                // hasil
+                // Symbol() 'Rafa'
+                // Symbol() 'Khadafi'
+            }
+        }
+
+        // 2. membuat symbol juga bisa menggunakan static method Symbol.for()
+        // tapi jika kita menggunakan key yang sama pada sebuah symbol maka jika di bandingkan atau di compare, akan sama 
+
+        console.log(Symbol.for("rafa") === Symbol.for("rafa")); // true
+
+        const Orang = {}
+        Orang[Symbol.for("nama")] = "rafa khadafi"
+        Orang[Symbol.for("Hobby")] = "Badminton"
+        console.log(Orang)
+
+
+
+
+    </script>
+</body>
+</html>
