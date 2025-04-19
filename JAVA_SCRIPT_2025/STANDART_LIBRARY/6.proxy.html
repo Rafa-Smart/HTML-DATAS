@@ -6,6 +6,76 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+
+        // dokumentasi resmi
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+
+        // proxy
+        // merupakan sebuah objek yang berfungsi untuk  mewakili sebuah data
+
+        // dengan menggunakan proxy, maka semua interaksi ke data akan selalu melalui proxy terlebih dahulu
+        // maka dengan ini kita bisa melakukan apapun sebelum interaksi dilakukan ke data tertentu
+
+        // pembuatan sebuah proxy harus menggunakan handler, dimana dalam handler ini, kita bisa membuat function yang dinamakan interception (yaitu function yang akan selalu dipanggil ketika datanya diakses), yang digunakan ketika mengambil data atau mengubah daa ke target
+        
+
+        const target = {
+            nama:"rafa",
+            saldo:700000
+        }
+
+        const handler = {
+
+            // jadi function dan set ini adalah interception yang akan selalu dipangil, ketika si datanya dipanggil lewat proxy
+
+            get: function(target, property) {
+                console.log(`seseorang mengakses ${property}`);
+                // return target[property]
+                // atau bisa pake ini
+                return Reflect.get(target, property)
+                // untuk mengakses property tertentu, kita bisa menggunakan Reflect.get(target, property)
+            },
+            set: function(target, property, newValue) {
+                if(property === "saldo" && newValue < 0) {
+                    console.log('saldo tidak boleh kosong')
+                    return false
+                } else {
+                    console.log(`seseorang mengubah ${property} menjadi ${newValue}`)
+                    return Reflect.set(target, property, newValue)
+                }
+                
+            }
+
+        }
+
+        // penggunaanya
+        const proxyData = new Proxy(target, handler)
+        console.log(proxyData.nama) // seseorang mengakses nama
+        console.log(proxyData.saldo) // seseorang mengakses saldo
+        proxyData.saldo = -100000 // seseorang mengubah saldo menjadi -100000
+
+
+
+        // ini materi pendukungnya
+        // materi Reflect
+        {
+            console.log("dibawah ini materi tambahan")
+            const orang = { nama: "Budi", umur: 25 };
+
+            // Cara biasa:
+            console.log(orang.nama); // "Budi"
+
+            // Pakai Reflect:
+            console.log(Reflect.get(orang, "nama")); // "Budi"
+            console.log(Reflect.set(orang, umur, 30)) // nanti bakal berubah
+        }
+
+
+        // ini bedanya antara getter/setter dengan proxy
+        // https://chat.deepseek.com/a/chat/s/70c8f025-3cc7-4467-ac78-debc9f1a8ff2
+
+        
+    </script>
 </body>
 </html>
