@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // base64 adalah binary to text encoding, representasi binary data dalam format string
+        // base64 adalah format text data yang aman unutk dikirimkan di web 
+        // base64 adalah encoding yag bisasanya digunakan ketika perlu mengirim daa dari client ke server
+        // karena encoding base64 merupakan sebuah text, oleh karena itu sangat aman digunakan pada querry param url atau text body dalam form
+        // ini dokumentasi resminya
+        // http://developer.mozilla.org/en-US/docs/Glossary/Base64
+
+
+        // contohnya misalnya kita ingin mengirimkan data gambar, tapi agar lebih mudah, kita bisa encode menjadi base64, artinya dalam representasi text
+
+
+        // di javascript itu ada function bawaan untuk melakukan encode dan decode base64
+
+        // 1. btoa() adalah function untuk melakukan encode base64 dari value aslinya
+        // 2. atob() adalah function untuk melakukan decode base64 ke value aslinya
+
+
+
+        {
+            const original = "putri maulidia yusuf";
+            const encoded = btoa(original);
+            console.log(encoded); // cHV0cmkgbWF1bGlkaWEgeXVzdWY=
+
+            const decoded = atob(encoded)
+            console.log(decoded) // putri maulidia yusuf
+        }
+
+    </script>
+</body>
+</html>

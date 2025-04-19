@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // own itu artinya milik dari objek instancenya, bukan dari si prototypenya
+
+        // reflect itu mirip seperti math, yaitu hanya digunakan sebagai utility
+        // yaitu hanya menggunakan method atau property static
+
+
+        // ini untuk mendefinisikan suatu property kedalam sebuah objek
+
+        // da di paramter ketiganya ini maksudnya adalah, kita memasukan sebuah objek yang mendeskripsikan propertynya.
+        const Person = {}
+
+        const success = Reflect.defineProperty(Person, 'nama', {
+            value: 'Rafa',
+            writable: true, // bisa ditulis ulang
+            enumerable: true, // bisa di iterasi
+            configurable: true // bisa diubah ubah / dihapus
+        });
+
+        console.log(success) //  true
+        console.log(Person.nama) //Rafa
+
+        // kalo di set, tidak perlu paramter objek descritptionnya
+        Reflect.set(Person, "kelas", "10pplg2")
+
+         Reflect.set(Person, "umur", "25")
+
+         console.log(Person)
+
+
+        //  untuk mengecek apakah ada
+        console.log(Reflect.has(Person, "kelas")) // true
+        console.log(Reflect.has(Person, "alamat")) // false karena ga ada
+        </script>
+</body>
+</html>

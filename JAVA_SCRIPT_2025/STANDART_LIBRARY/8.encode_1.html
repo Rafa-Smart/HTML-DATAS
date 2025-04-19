@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // ketika kamu menuliskan url, terkadang kamu memerlukan sebuah inforasi tambahan seperti querry paramter
+        // url sendiri sudah memiliki standart encoding penulisan urlnya sendiri
+        // standart encoding ini dilakukan agar penulisan url aman ketika diterima oleh user
+        // tapi aman disini maksudnya adalah informasi url tidak berubah.
+        // constoh sederhanya itu gini
+        // misalkan walaupun kita bisa mengirim spasi dalam url, tapi disarankan untuk di encode agar nilai spasi tidak benar benar terlihat sebagai spasi di urlnya
+        // atua mengirim tanda &, pdahal saya benar benar ingin mengirimkan iformasi & ini,
+        // tpai nanti di baca oleh servernya malah sebagai separator yaitu sebagai pemisah antara paramter satu dan keynya dnegna parameter 2 dan keynya
+
+        // oleh sebab itu kita butuh sebuah fungsi yang bisa mengencode urlnya
+
+        // misal
+        // kita inign mengirimkan data &rafa=rafa&, maka url nya akan
+        // https://contoh.com?data=&rafa=rafa&, malah menjadi sebagai pemisah antara 2 paramter
+        // jadi di paramter pertama itu datanya akan dianggap kosong, kemudian di paramter kedua itu dianggapnya ada key yang namanya rafa dan valuenya rafa juga
+        // padahal kita ingin benar benar ingin mengirimkan data &rafa=rafa& ke server.
+
+
+
+
+        // function untuk melakukan encode
+
+        // 1. encodeURl(value) = melakukan encode value, namun karakter yang di pesan di url tidak akan dirubah ;@#$%^&*+, (ini tidak cocok)
+        // karena tidak bisa mengencode masalah yang kita hadapi sebelumnya
+        // kemudian hasil encodenya bisa di decode menggunakan = decodeURL(encoded)
+
+
+        // 2. encodeURLComponent(value) = melakukan encode value semua karakter, jadi karkter apapun akan bisa di encode dengna function ini,
+        // kemudian hasil encodenya bisa di decode kembali menggunakan = decodeURLComponent(encoded)
+
+
+
+        // contoh
+        console.log("=====")
+        {
+
+            const url = `http://contoh.com/?name=siti muhaimin`;
+            const url2 = `http://contoh.com/?name=siti&muhaimin=jamal`;
+            console.log(url)
+
+            const encoded = encodeURI(url);
+            console.log(encoded) // http://contoh.com/?name=siti%20muhaimin
+
+            // yang kdua
+            const encoded2 = encodeURI(url2)
+            console.log(encoded2) // http://contoh.com/?name=siti&muhaimin=jamal
+            // nah disini, tanda & kita malah tidak di encoded, padahal kita beneran inign mengirimkan data 
+            // namanya itu adalah siti&muhaimin=jamal, tapi malah dianggap sebagai pemisah 
+
+
+            // disini encoded spasinya adalah %20, dan tanda tanya, samadengan ini tidka di encoded
+
+            const decoded = decodeURI(encoded) // http://contoh.com/?name=siti muhaimin
+            console.log(decoded)
+        }
+
+
+
+
+        // nah disini kita mneggunakan encodedURLCompnent
+        {
+
+            console.log("============")
+
+            // disini kita harus memusahkan antara value dan si url alamatnya
+            // karena jika kita mengencoded semuanya maka seluruh tanda tandanya akan di encoded, maka itu adalah sebuah kesalahan
+
+            const value = `siti&muhaimin=jamal`;
+            const url = `https://contoh.com/?nama=`;
+
+            const encoded = encodeURIComponent(value)
+            const hasilURl = url + encoded;
+            console.log(hasilURl) // https://contoh.com/?nama=siti%26muhaimin%3Djamal
+            // nah disini jadi, semua tanda asing akan di encoded, jadi akan aman ketika kita inign mengirimkan sebuah tanda yang menjadi nilai dari sebuah key di querry paramternya
+
+
+            const decoded = decodeURIComponent(encoded)
+            const hasilDecoded = url + decoded;
+            console.log(hasilDecoded)
+        }
+
+
+    </script>
+</body>
+</html>
