@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // Date merupakan sebuah tipe data yang merepresentasikan waktu
+        // DALAM BENTUK MILISECOND, dan pertama kali dihitungnya itu pada 1 januari 1970 jam 00, atau yang biasa dikenal dengan Epoch dan unix Timestamp
+
+        // kalo misalkan kita tentukan waktunya kurang dari waktu pertama kali di hitung maka, nanti waktunya akan negatif
+
+        // 1. new Date = membuat date saat ini
+        // 2. new Date(year, month, day, hours, minutes, seconds, milliseconds) = membuat date sesuai
+        // 3. new Date(timestamp) // timestamp itu waktu 12376543234576 (nanti diubah ke thn, bln, hri)
+
+
+        const datasekarang = new Date() // Sat Apr 19 2025 07:41:47 GMT+0700 (Western Indonesia Time)
+        console.log(datasekarang)
+
+        const dateDitentukan = new Date(2008, 3, 14, 22, 30, 50, 1234)
+        console.log(dateDitentukan)
+
+
+        // merubah dari timestamp ke date
+
+        const timestamp = new Date(1745023424024)
+        console.log(timestamp)
+
+        // Sat Apr 19 2025 07:41:47 GMT+0700 (Western Indonesia Time) // data tanggal
+
+        // 4. Date.now() untuk mendapatkan timestamp saat ini 
+        // 5. new Date.time() untuk mengubah date tanggal ke timestamp 
+
+
+        {
+            console.log("============")
+            console.log(Date.now()) // 1745023827634
+
+            // merubah dari tanngal ke timestamp
+            const tanggal = new Date() // saat ini
+            console.log(tanggal.getTime())
+            // disini ada banyak sekali method di prototypenya, kamu kalo mau liat tinggal
+            // tanggal / nama objek instancenya terus . terus ctrl + spasi
+
+        }
+
+
+        // 6. melakukan parsing dari date string ke timestamp
+        // dengan syarat 
+
+        //   Y = 4 digit tahun
+        //   M = 2 digit bulan (01-12)
+        //   D = 2 digit tanggal (01-31)
+        //   H = 2 digit jam (00-23)
+        //   m = 2 digit menit (00-59)
+        //   S = 2 digit detik (00-59)
+        //   L = 3 digit detik (000-999)
+
+        // T =  sebagai pemisal antara tanggal dnegna jamnnya
+
+        // 1. format string harus YYYY-MM-DDTHH:mm:ss.sssZ
+        // 2. kalo mau tanggal saja bisa pake YYYY-MM-DD
+        // 3. kalo mau tanggal dan waktu pake YYYY-MM-DDTHH:mm:ss.sss
+        // 4. kalo mau pake tanggal, waktu, timezone pake YYYY-MM-DDTHH:mm:ss.sssZ
+
+        {
+            const data = "2009-05-12T23:50:30.777+07:00"
+            // ini kita pake static method dari si class Date
+            const hasil = Date.parse(data)
+            console.log(hasil) // 1242147030777
+
+            const hasiltanggal = new Date(hasil)
+            console.log(hasiltanggal) //Tue May 12 2009 23:50:30 GMT+0700 (Western Indonesia Time)
+        }
+
+
+
+        // 7. getter dan setter di instace objeknya
+        {
+            const date = new Date(1242147030777)
+            console.log(date.getYear()) // 119
+            console.log(date.getFullYear()) // 2009
+            console.log(date.getMonth()) // 5
+            console.log(date.getDate()) // 12
+            console.log(date.getHours()) // 23
+            
+            date.setFullYear(2000)
+            console.log(date.getFullYear()) // 2000
+        }
+
+
+    </script>
+</body>
+</html>

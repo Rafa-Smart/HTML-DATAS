@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // objek assign
+        // menggabungkan seluruh atribut dari suatu objek ke objek lainnya
+        // Object.assign(target, source1, source2, source3, ...)
+
+        const target = {
+            nama:"rafa",
+            kelas:"10xpplg2"
+        }
+        console.log(target, "sebelum")
+
+        const source1 = {
+            umur:12
+        }
+        const source2 = {
+            alamat:"jakarta"
+        }
+
+        Object.assign(target, source1, source2)
+        console.log(target, "sesudah")
+
+
+
+        console.log(Object.getOwnPropertyNames(target)) // ['nama', 'kelas', 'umur', 'alamat']
+        // jadinya array
+
+
+        // 2. fromEntries 
+        // merubah dari array, entries menjadi sebuah objek, ini juga bisa digunakna di arguments, 
+        // tapi lebih sering digunakan di array
+        const arrayEntries = [
+            ["nama", "rafa"],
+            ["kelas", "10xpplg2"],
+            ["umur", 12],
+            ["alamat", "jakarta"]
+        ]
+
+        console.log("=========")
+        const objek = Object.fromEntries(arrayEntries)
+        console.log(objek)
+
+        // ini cara lama
+        const objek2 = arrayEntries.reduce((acc, [key, value]) => {
+            acc[key] = value;
+            return acc
+        }, {})
+        console.log(objek2)
+
+        // latihan aja 
+        {
+            const objek = {
+                nama:"rafa",
+                kelas:"xpplg2",
+                umur:12,
+                alamat:{
+                    kota:"jakarta",
+                    provinsi:"dki"     
+                }
+
+            }
+
+            function jadiArray(objek){
+                return Object.entries(objek).map(([key, value]) => {
+                    if(typeof value === "object" && !Array.isArray(value)){
+                        return [key, jadiArray(value)]
+                    }else {
+                        return [key, value]
+                    }
+                })
+            }
+
+            console.log(jadiArray(objek))
+
+        }
+
+
+        // 3. objek freeze
+        // dengna menggunakan static method dari objek ini maka, 
+        // kita tidka bisa merubah proeprty dari objeknya
+        // kita tidak bisa merubah prototypenya
+        // kita tidak bisa menghapus, dan menambah propertynya
+        // objek hanya bisa di baca saja
+        // di kunci total
+
+        {
+            const objek = {
+                nama:"rafa",
+                kelas:"xpplg2",
+                umur:12,
+            }
+            Object.freeze(objek)
+            delete objek.nama // tidak bisa
+            objek.kelas = "xtjkt2" // tidak bisa
+        }
+
+        // 4. objek seal
+        // dengna mneggunakan ini maka kita fiturnya sama seperti si objek freeze, tapi
+        // kita tetap bisa mengubah nilai dari propertynya
+
+        {
+            const objek = {
+                nama:"rafa",
+                kelas:"10pplg2",
+                umur:12
+            }
+
+            Object.seal(objek)
+            delete objek.nama // tidak bisa
+            objek.alamat = "jakarta" // ga bisa juga
+            objek.nama = "rafael" // bisa
+            objek.kelas = "xtjkt2" // bisa
+
+            
+        }
+
+
+    </script>
+</body>
+</html> 
