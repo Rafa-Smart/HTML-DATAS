@@ -100,7 +100,12 @@
 
 
             // kalo kita ngambil datanya pake fecth itukan berati datanya bakal dalam bentuk string, makanya kita perlu ubah menjadi blob dulu pake
-            // response.blob(), di then pertamanya
+            // response.blob(), di then pertamanya,
+
+            // disini kenapa kita saya permisalkan ketika ngambil gambar dari user ?
+            // karena ketika user misalnya mengirimkan data gambar, maka kita ingin 
+            // agar gambar tersebuh dapat terlihat, seperti previewnya, makanya agar kita tidka meminta request lagi
+            // kita bisa gunakan URL.createObjectURL() untuk membuat url sementara dari file yang dikirimkan user, sehingga tinggal kita masukan saja ke src img nya
 
         });
 

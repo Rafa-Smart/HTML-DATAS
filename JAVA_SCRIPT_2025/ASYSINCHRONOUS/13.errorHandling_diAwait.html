@@ -16,9 +16,11 @@
                 },
                 mode:"cors"
             }
-            const request = new Request("api/3.da7ta_2.json", init)
+            const request = new Request("api/3.da9ta_2.json", init)
             const response = fetch(request);
-            return response.then((data) => data.json())
+            return response.then((data) => data.json()).catch((e) => {
+                throw new Error("data tidak ditemukan")
+            })
         }
 
         (async function getDataAsync(){

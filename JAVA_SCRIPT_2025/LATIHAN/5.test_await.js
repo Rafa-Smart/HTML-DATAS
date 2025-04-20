@@ -29,6 +29,7 @@
 
     // INI UDAH BENER YA GES YAK
 
+
 async function halo() {
     console.log("satu"); // Langsung dieksekusi
     let hasil = await tes(); // Menunggu promise dari `tes()` selesai

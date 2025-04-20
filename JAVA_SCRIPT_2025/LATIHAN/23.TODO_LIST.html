@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>TODO LIST</h1>
+        <form action="" name="inputanUser">
+            <label for="inputan">Data : </label>
+            <input type="text" id="inputan" name="inputan" placeholder="masukan data...">
+            <button type="button" id="button">kirim</button>
+        </form>
+
+        <table>
+            <thead>
+                <th>filter</th>
+                <th><input type="text" id="filter" name="filter" placeholder="masukan filter..."></th>
+                <tr>
+                    <h2>Data Data Todo List</h2>
+                </tr>
+            </thead>
+            
+            <tbody id="bodynya">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+
+        let DataList = []
+
+        const button = document.getElementById("button")
+        button.addEventListener("click", function() {
+            const data = document.getElementById("inputan")
+            DataList.push(data.value)
+            console.log(DataList)
+            document.forms["inputanUser"].reset()
+            display()
+        })
+
+        function display(){
+            let bodynya = document.getElementById("bodynya")
+            let tr = ""
+            DataList.forEach((data, index) => {
+                tr += dataDisplay(data, index)
+                bodynya.innerHTML = tr
+            });
+
+        }
+
+        document.addEventListener("click", function(event) {
+            if(event.target.classList.contains("done")){
+                let index = event.target.dataset.index
+                console.log(index)
+                close(index)
+            }
+        })
+
+
+
+
+        function close(index){
+            // let tr = document.querySelectorAll("tr")
+            // console.log(tr)
+            // tr.forEach(trData => {
+            //     if(trData.className === data){
+            //         trData.remove()
+            //         console.log("ada")
+            //     }
+            // })
+
+            DataList.splice(index, 1)
+            display()
+        }
+
+        function dataDisplay (data, index){
+            return `
+            <tr class="${data}">
+                <td>
+                    <button type="button" class="done"" data-index="${index}>Done</button>
+                </td>
+                <td id="konten">
+                    ${data}
+                </td>
+            </tr>
+            `
+        }
+
+    </script>
+</body>
+</html>

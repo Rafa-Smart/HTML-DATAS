@@ -16,3 +16,22 @@ function tes(array){
 
 
 console.log(tes(["Rafa","KHSss","jaMaL"]))
+
+// coba lagi
+
+function HurufGede(array){
+    let hasil = ""
+    for(let i = 0; i < array.length; i++){
+        let elemen = array[i];
+        let hurufnya = 0;
+        for ( let j = 0; j < elemen.length; j++){
+            if(elemen[j] === elemen[j].toUpperCase()){
+                hurufnya++
+            }
+        }
+        hasil += `elemen = ${elemen}\nhuruf besarnya = ${hurufnya}\n`
+    }
+    return hasil;
+}
+
+console.log(HurufGede(["Rafa","JAMal","PutrI"]))
