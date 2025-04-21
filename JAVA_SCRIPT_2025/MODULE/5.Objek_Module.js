@@ -8,3 +8,5 @@ console.log(M.alamat)
 console.log(M.sayHello())
 
 // jadi kita bisa mengambil seluruh isi dari suatu file kemudain kita jadikan dia sebuah objek, dan biasanya nama objeknya itu adalah nama filenya
+
+let d = [4,5,6,5]
