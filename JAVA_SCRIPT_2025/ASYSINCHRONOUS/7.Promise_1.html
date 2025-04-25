@@ -94,6 +94,11 @@
             xhr.send();
         })
 
+
+        // 25/04/2025, in
+        // ini ga perlu, karena kalo kita sudah pake promise, mka nanti kita bisa panggil resolvenya pake then
+        // atau kalo mau panggil catchnya bisa pake catch()
+
         // kita buat function resolve dan rejected
         function resolve(data) { // = xhr.responseText
             console.log("ini adalah data yang kamu inginkan", data);
