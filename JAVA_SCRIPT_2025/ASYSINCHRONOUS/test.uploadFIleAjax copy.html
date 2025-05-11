@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+        margin-top: 50px;
+        gap: 5px;
+      }
+      #response {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        min-width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nih disini ada atribut enctype -->
+     <!-- nah disini kalo kamu teliti ini beda sama yag sebelumnya -->
+      <!-- enctype="application/x-www-form-urlencoded" -->
+    <form name="inputanUser" enctype="multipart/form-data">
+      <label for="nama">Masukan Nama : </label>
+      <input
+        type="text"
+        name="nama"
+        id="nama"
+        required
+        placeholder="masukan nama..."
+      />
+      <label for="file">Masukan File : </label>
+      <input type="file" id="fileInput" name="files[]" required multiple />
+      <input type="button" value="Kirim" id="login" />
+    </form>
+
+    <div id="response">
+      <h3>Respons dari Server:</h3>
+      <pre id="responseData">Belum ada data</pre>
+    </div>
+  </body>
+
+  <script>
+
+
+    const isiFile = []
+    const file = document.getElementById("fileInput")
+    file.addEventListener("change", function () {
+      const file = this.files;
+      isiFile.push(file[0].name); // kita masukan ke dalam array isiFile
+      console.log(isiFile); // ini adalah array yang berisi nama file yang kita ambil dari inputan user
+      console.log(file, "tes aja"); // ini adalah objek file yang kita ambil dari inputan user
+    });
+
+  </script>
+</html>

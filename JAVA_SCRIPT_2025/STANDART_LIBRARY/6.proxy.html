@@ -27,7 +27,7 @@
 
         const handler = {
 
-            // jadi function dan set ini adalah interception yang akan selalu dipangil, ketika si datanya dipanggil lewat proxy
+            // jadi function get dan set ini adalah interception yang akan selalu dipangil, ketika si datanya dipanggil lewat proxy
 
             get: function(target, property) {
                 console.log(`seseorang mengakses ${property}`);

@@ -62,6 +62,24 @@
                 stock: x.stock
             }))
         }
+        const MesinPencariLagih2 = (array, ...stock_user) => {
+            return array.filter(x => stock_user.includes(x.stock)).reduce((acc, data) => {
+                // ini kalo di buat array lagi
+
+                // jadi disetiap perulangan kit akan push sebuah objek ke dalam array acc, yang berisi product dan stock dari data yang sedang diproses.
+                acc.push({
+                    product: data.product,
+                    stock: data.stock
+                })
+                return acc
+
+                // // ini slah
+                // acc[data.product] = data.product,
+                // acc[data.stock] = data.stock
+                // return acc
+            }, [])
+        }
+        console.log(MesinPencariLagih2(stockData,100,200,300),"ini lagi nih")
         console.log(MesinPencariLagih(stockData,100,200,300))
 
             // PENJELASAN
@@ -144,6 +162,19 @@
             }
         }
         ulang(5, console.log)
+
+
+
+        console.log("tes doang dibawah");
+
+        function rafa(callback){
+            let data = prompt("masukan nama anda : ");
+            callback(data)
+        }
+
+        rafa(e => {
+            console.log(`nama kamu adalah ${e}`)
+        })
     </script>
 </body>
 </html>

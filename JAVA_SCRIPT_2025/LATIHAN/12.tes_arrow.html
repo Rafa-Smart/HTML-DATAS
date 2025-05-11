@@ -35,6 +35,17 @@
         }
       }
 
+      // jadi ini akan bolak balik, jadi ketika kita akses arrow function di dalam constructor, maka this didalam arrow function itu akan merujuk kedalam si lexical scopenya yaitu si constructornya, nah tapi di constructornya ini juga akan merujuk ke objek instancenya. gitu
+
+      // ini penjelasannya
+      /* 
+            Kenapa this di sayHalo merujuk ke objek instance?
+    Karena arrow function mengambil this dari lexical scope-nya (constructor), dan this di constructor merujuk ke objek instance.
+
+    Di mana lexical scope untuk objek instance?
+    Lexical scope-nya adalah constructor tes2, dan this di constructor adalah objek instance.
+      */
+
 
       class tes42 {
         constructor(nama, kelas) {

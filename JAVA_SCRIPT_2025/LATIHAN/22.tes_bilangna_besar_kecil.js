@@ -8,8 +8,7 @@ function tes(array){
             }
         }
     }
-    const tes = (array.length - 1)
-    const besar = array[tes]
+    const besar = array[array.length - 1]
     const kecil = array[0]
     return `huruf terbesar : ${besar}\nhuruf terkecil : ${kecil}`
 }

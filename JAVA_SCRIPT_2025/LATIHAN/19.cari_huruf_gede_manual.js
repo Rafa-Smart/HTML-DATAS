@@ -35,3 +35,20 @@ function HurufGede(array){
 }
 
 console.log(HurufGede(["Rafa","JAMal","PutrI"]))
+
+
+
+function cariLagi(array) {
+    let hasil  = "";
+    for(let i = 0; i <array.length; i++){
+        let elemen = array[i];
+        let hurufbesar = 0
+        for(let j = 0; j <elemen.length; j++){
+            if(elemen[j] === elemen[j].toUpperCase()){
+                hurufbesar++
+            }
+        } 
+        hasil += `elemen = elemen\n huruf besar = ${hurufbesar}\n`
+       }
+
+}

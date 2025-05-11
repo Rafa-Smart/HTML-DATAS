@@ -13,16 +13,11 @@ function mesin(arr){
 console.log(mesin(array))
 
 
-
-
-
-
-
-// function sortnih(array){
-//     for (let i = 0; i < array.length; i++){
-//         for (let j = 0; j < array.length - 1; j++){
-//             if(array[j] > array[j+1]){
-//                 let dummy = array[j]
+    // function sortnih(array){
+        //     for (let i = 0; i < array.length; i++){
+            //         for (let j = 0; j < array.length - 1; j++){
+                //             if(array[j] > array[j+1]){
+                    //                 let dummy = array[j]
 //                 array[j] = array[j+1]
 //                 array[j+1] = dummy
 //             }
@@ -31,3 +26,11 @@ console.log(mesin(array))
 //     return array // [1, 2, 3, 4, 4, 5, 5, 5, 6, 7, 8, 11, 23, 32, 54, 67, 98, 253, 334]
 // }
 // console.log(sortnih(array))
+for(let j = 0; j < this.length - 1;j++){
+    if(this[j] < this[j+1]){
+        let temp = this[j]
+        this[j] = this[j+1]
+        this[j+1] = temp 
+    }
+}
+return this

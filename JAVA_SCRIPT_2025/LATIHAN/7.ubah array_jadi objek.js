@@ -42,4 +42,14 @@ function Nih(apiData){ // jadi disini kita langsung desctruction di dala paramet
 }
 console.log(Nih(apiData)) // undefined
 
+// ini yang foreach ga bisa karena, di dla fungsi foreach ini tidak ada returnnya, jadi ga bisa nampung, makanya pas direturn itu undefined
 
+
+
+// ini ubah data dari array ke objek
+// ini lebih gampang
+
+const apiData2 = [["id", 1], ["name", "Alice"], ["role", "Developer"]];
+const hasil5 = Object.fromEntries(apiData2)
+console.log("=========")
+console.log(hasil5)

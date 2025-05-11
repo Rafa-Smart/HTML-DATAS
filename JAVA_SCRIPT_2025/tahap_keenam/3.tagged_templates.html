@@ -172,6 +172,18 @@
             //     // 3. Format nilai ekspresi: ubah huruf pertama menjadi kapital
             //     const nilai = values[i];
             //     const nilaiTerformat = nilai.charAt(0).toUpperCase() + nilai.slice(1);
+
+            // 10/05/2025
+            // jadi gini kenapa slice(1), 
+            // jadi kalo hanya satu parameter saja maka defaultnya akan mengambail data dari parameter yang dimasukan misal 1, dan akan dipotong sampai akhir, kalo slice(2,5) maka akan diambil data elemen index ke 2 sampai elemen indek ke 5 -1
+            const buah = ["Apel", "Jeruk", "Mangga", "Pisang"];
+            const tesDulu = buah.slice(1);
+
+            console.log(tesDulu); // ["Jeruk", "Mangga", "Pisang"]
+            console.log(buah); // ["Apel", "Jeruk", "Mangga", "Pisang"] (tidak berubah)
+
+            
+
             //     hasil += nilaiTerformat; // Tambahkan nilai yang sudah diformat
             //     }
             // });
@@ -185,6 +197,7 @@
             let hasil = "";
             strings.forEach((string, index) => {
                 hasil += string;
+                console.log(index)
                 if (index < values.length){
                     const nilai = values[index];
                     const sudahBesar = nilai.charAt(0).toUpperCase() 
