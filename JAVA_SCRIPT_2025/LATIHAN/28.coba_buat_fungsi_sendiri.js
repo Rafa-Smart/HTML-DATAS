@@ -9,6 +9,10 @@ Array.prototype.mesin = function(){
             }
         }
     }
+    console.log(this)
+    // jadi disini this adalah si objek si arrraynya, jadi bentuknya adalah array, jadi misal, kalo this[j], artinya
+    // this[0], this[1], this[2], dll
+
     return this
 }
 
@@ -42,3 +46,4 @@ Array.prototype.terkecil = function(){
 console.log(array.terkecil())
 console.log(array.terbesar())
 console.log(array.mesin())
+array.mesin()//

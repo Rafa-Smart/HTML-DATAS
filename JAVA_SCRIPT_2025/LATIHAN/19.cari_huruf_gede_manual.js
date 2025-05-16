@@ -52,3 +52,20 @@ function cariLagi(array) {
        }
 
 }
+console.log("===============")
+
+function tesRafa(array) {
+    let hasil = ``;
+    for(let i = 0; i < array.length; i++){
+        let elemen = array[i]
+        let hurufGederNya = 0;
+        for(let j = 0; j<elemen.length; j++ ){
+            if(elemen[j] === elemen[j].toUpperCase()){
+                hurufGederNya ++
+            }
+        }
+        hasil += `elemen ${elemen} : ${hurufGederNya}\n`
+    }
+    return hasil
+}
+console.log(tesRafa(["DassdsdsS","DSdasdsdaDS","FDFSsddd"]))
