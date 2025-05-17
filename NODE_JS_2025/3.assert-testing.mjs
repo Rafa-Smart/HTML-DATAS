@@ -112,7 +112,7 @@ async function loginUser(username, password) {
     // disini kita await datanya
     async () => await loginUser("rafa", "ini sengaja salah"),
     {
-        // jdi objek yng direturn oleh si fungsi promise di parameter pertaman ini akna di kompare dengan objek yang ad di sini, dan kalo sama maka berati test nya berhasil, dan berati ada kesalahan di dalam passwordnya, tapi kalo yang di komparenya return yang return { username, token: "abc123" }, artinya berhasil, maka akan menambpikan pesan error "Test gagal: Error 'Password salah' tidak dilempar"
+        // jdi objek yng direturn oleh si fungsi promise di parameter pertaman ini akna di kompare dengan objek yang   ad di sini, dan kalo sama maka berati test nya berhasil, dan berati ada kesalahan di dalam passwordnya, tapi kalo yang di komparenya return yang return { username, token: "abc123" }, artinya berhasil, maka akan menambpikan pesan error "Test gagal: Error 'Password salah' tidak dilempar"
       name: "Error", // dari err.name
       message: "Password salah!", // dari err.message
     },

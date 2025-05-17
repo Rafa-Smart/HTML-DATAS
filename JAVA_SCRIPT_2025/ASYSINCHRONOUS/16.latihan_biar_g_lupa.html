@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" enctype="multipart/form-data">
+      <label for="nama">Nama :</label>
+      <input type="text" id="nama" placeholder="Masukan nama anda..." />
+      <label for="nama">Email :</label>
+      <input type="text" id="email" placeholder="Masukan Email anda..." />
+      <button type="button">Kirim</button>
+    </form>
+  </body>
+  <script>
+    const button = document.querySelector("button");
+    button.addEventListener("click", function () {
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = "json";
+      xhr.open("GET", "./api/3.data_2.json", true);
+      xhr.addEventListener("load", function () {
+        if (xhr.status === 200) {
+          const data = xhr.response;
+          console.log(data);
+        }
+      });
+      xhr.send();
+    });
+  </script>
+</html>

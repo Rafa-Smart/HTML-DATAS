@@ -56,7 +56,7 @@
 
         // nah jadi promise ini diadakan sebagai penyelesaian masalah dari callbackhell, jadi kita ga perlu lagi nulis callback hell yang bikin kita bingung, dan kita bisa menggunakan promise ini untuk menyelesaikan masalah dari callback hell
 
-        const promise1 = new Promise( function(resolve, rejected) {
+        const promise1 = new Promise(function(resolve, rejected) {
             // jadi disini kita bisa masukan program yang berjalan sebagai asyc, bisa manggil data prouduct
             // dan kalo sudah ada bisa ditambahkan callback resolve, dan kalo ada error bisa ditambahkan rejected
             resolve("ini data yang kamu inginkan - Success")
@@ -68,7 +68,7 @@
 
 
 
-        const promise2 = new Promise( function(resolve, rejected) {
+        const promise2 = new Promise(function(resolve, rejected) {
             const xhr = new XMLHttpRequest();
             xhr.open("GET", "api/2_product.json", true);
 

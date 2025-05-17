@@ -37,7 +37,7 @@ import { EventEmitter } from "events";
 
     // Memancarkan (emit) event
     emit(eventName, ...args) {
-      const listeners = this.events[eventName];
+      const listeners = this.events[eventName]; // ini dia akan mereturn sebuah array yang berisi listenernya
 
       if (listeners) {
         listeners.forEach((listener) => {
