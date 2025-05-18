@@ -2,7 +2,7 @@ import readline from "readline";
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 // ini cara async biasa
@@ -63,22 +63,22 @@ async function ambilDataRata(ulang){
 // coba lagi
 let total = 0;
 
-console.log('Ketik angka (atau "selesai" untuk berhenti): ');
+// console.log('Ketik angka (atau "selesai" untuk berhenti): ');
 
-rl.on('line', (input) => {
-  if (input.toLowerCase() === 'selesai') {
-    console.log(`Total: ${total}`);
-    rl.close();
-  } else {
-    const num = parseFloat(input);
-    if (!isNaN(num)) {
-      total += num;
-      console.log(`Ditambahkan: ${num}, Total sekarang: ${total}`);
-    } else {
-      console.log('Masukkan angka yang valid.');
-    }
-  }
-});
+// rl.on('line', (input) => {
+//   if (input.toLowerCase() === 'selesai') {
+//     console.log(`Total: ${total}`);
+//     rl.close();
+//   } else {
+//     const num = parseFloat(input);
+//     if (!isNaN(num)) {
+//       total += num;
+//       console.log(`Ditambahkan: ${num}, Total sekarang: ${total}`);
+//     } else {
+//       console.log('Masukkan angka yang valid.');
+//     }
+//   }
+// });
 
 // nah jadi dnegan ada nya event line ini, maka kita tidak perlu seperti ngasih pertanyaan ualng, jadi setiap di enter, maka program bukan selesai, tapi anjut lagi mengulang pertanyaa, dan nanti kondisi
 // jika inign berhenti kita haus tentukan sendiri, pake if else, dll
@@ -131,3 +131,30 @@ rl.on('line', (input) => {
 //     console.log("program selesai")
 //   }
 // }
+
+
+function tanya(quest){
+  return new Promise((resolve) => {
+      rl.question(quest, (data) => {
+        resolve(data)
+    })
+  })
+}
+
+function ulangData(ulang, kata){
+  for(let i = 0; i< ulang; i++){
+    console.log(kata)
+  }
+}
+
+(async () => {
+
+  try {
+    const ulang = await tanya("masukan jumlah perulangan : ")
+    const kata = await tanya("masukan kata yang diulang : ")
+    ulangData(Number(ulang), kata)
+  }finally {
+    console.log("program selesai...")
+    rl.close()
+  }
+})()
