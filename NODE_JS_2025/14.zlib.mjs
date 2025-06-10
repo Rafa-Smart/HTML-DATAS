@@ -1,0 +1,2 @@
+// https://chat.deepseek.com/a/chat/s/0aa792b7-1441-4c98-a9e9-bc1c0cbcf89d
+// Zlib adalah modul bawaan Node.js yang menyediakan fungsionalitas kompresi dan dekompresi menggunakan algoritma Gzip, Deflate, dan Brotli. Modul ini sangat penting untuk optimasi ukuran data dalam berbagai aplikasi Node.js.

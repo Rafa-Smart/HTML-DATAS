@@ -116,6 +116,7 @@
         }
 
         function es(n1){
+            console.log("ini coba lagi, liat dah")
             let hasil =0;
             if(n1 === 0){
                 return
@@ -141,6 +142,21 @@
         }
 
         console.log(tambahLagi(10))
+
+
+
+
+        // ini cara saya lagi yang paling terbaru
+        // dan ini berhaisl
+        console.log("tes rekursif")
+        function teslagi(n){
+            let hasil = 0;
+            if(n===0){
+                return hasil
+            }
+            return hasil += n + teslagi(n-1);
+        }
+        console.log(teslagi(10))
     </script>
 </body>
 </html>

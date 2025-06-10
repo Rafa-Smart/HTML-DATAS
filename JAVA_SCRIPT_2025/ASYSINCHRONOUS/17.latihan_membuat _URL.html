@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Gambar + Preview</title>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+        margin-top: 50px;
+        gap: 5px;
+      }
+      #response {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        min-width: 300px;
+      }
+      .preview-container {
+        margin-top: 20px;
+      }
+      .preview-container img {
+        max-width: 100%;
+        max-height: 300px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <form name="inputanUser" enctype="multipart/form-data">
+      <label for="nama">Masukan Nama:</label>
+      <input
+        type="text"
+        name="nama"
+        id="nama"
+        required
+        placeholder="masukkan nama..."
+      />
+
+      <label for="file">Masukan File:</label>
+      <input type="file" id="fileInput" name="files[]" required multiple accept="image/*" />
+
+      <input type="button" value="Kirim" id="login" />
+    </form>
+
+    <div class="preview-container" id="previewContainer">
+      <h3>Preview Gambar:</h3>
+    </div>
+
+    <div id="response">
+      <h3>Respons dari Server:</h3>
+      <pre id="responseData">Belum ada data</pre>
+    </div>
+
+    <script>
+
+
+      let dataFile = []
+
+
+      // Preview gambar setiap kali user memilih file
+      document.getElementById("fileInput").addEventListener("change", function () {
+        const previewContainer = document.getElementById("previewContainer");
+        previewContainer.innerHTML = "<h3>Preview Gambar:</h3>"; // Bersihkan preview lama
+        const files = this.files;
+
+        Array.from(files).forEach(file => {
+          if (file.type.startsWith("image/")) {
+            dataFile.push(file);
+          }
+        });
+
+        dataFile.forEach(file => {
+          const img = document.createElement("img");
+          img.src = URL.createObjectURL(file);
+          previewContainer.appendChild(img);
+        });
+
+      });
+
+
+    </script>
+  </body>
+</html>

@@ -13,6 +13,10 @@ const rl = readline.createInterface({
 })
 
 rl.addListener("line", function(data){
+    if(data === "keluar"){
+        rl.close()
+        client.emit("end")
+    }
     client.write(data)
 })
 

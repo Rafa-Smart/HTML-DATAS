@@ -51,15 +51,15 @@ import { EventEmitter } from "events";
   //   contoh penggunaan
   const emitter = new MyEventEmitter();
 
-  emitter.on("sayHello", (name) => {
+  emitter.on("sayHello", (name) => { // listener 1
     console.log(`Hello, ${name}!`);
   });
 
-  emitter.on("sayHello", (name) => {
+  emitter.on("sayHello", (name) => { // listener 2
     console.log(`How are you, ${name}?`);
   });
 
-  emitter.emit("sayHello", "Rafa");
+  emitter.emit("sayHello", "Rafa"); // disini akan menjalankan semua listener yaitu 1 dan 2, liat diatas
 
   //   Hello, Alice!
   // How are you, Alice?

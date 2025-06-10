@@ -133,27 +133,58 @@ let total = 0;
 // }
 
 
-function tanya(quest){
-  return new Promise((resolve) => {
-      rl.question(quest, (data) => {
-        resolve(data)
+// function tanya(quest){
+//   return new Promise((resolve) => {
+//       rl.question(quest, (data) => {
+//         resolve(data)
+//     })
+//   })
+// }
+
+// function ulangData(ulang, kata){
+//   for(let i = 0; i< ulang; i++){
+//     console.log(kata)
+//   }
+// }
+
+// (async () => {
+
+//   try {
+//     const ulang = await tanya("masukan jumlah perulangan : ")
+//     const kata = await tanya("masukan kata yang diulang : ")
+//     ulangData(Number(ulang), kata)
+//   }finally {
+//     console.log("program selesai...")
+//     rl.close()
+//   }
+// })()
+
+function ngambildata(pertanyaan){
+  return new Promise(resolve => {
+    rl.question(pertanyaan, hasil => {
+      resolve(hasil)
     })
   })
 }
 
-function ulangData(ulang, kata){
-  for(let i = 0; i< ulang; i++){
-    console.log(kata)
+
+async function hitungMean(jumlah){
+  let data = [];
+  for(let i = 0; i < jumlah; i++){
+    let p = await ngambildata(`masukan data ke ${i+1} -> `)
+    data.push(Number(p))
   }
+  return data
 }
 
-(async () => {
 
-  try {
-    const ulang = await tanya("masukan jumlah perulangan : ")
-    const kata = await tanya("masukan kata yang diulang : ")
-    ulangData(Number(ulang), kata)
-  }finally {
+(async() => {
+  try{
+    let jumlah = await ngambildata("masukan data jumlah = ");
+    let hasil = await hitungMean(jumlah);
+    let hasil2 = hasil.reduce((acc, x) => acc + x, 0)
+    console.log(`hasilnya dari rata rata dari pembelian anda adalah = ${hasil2/jumlah}`)
+  }finally{
     console.log("program selesai...")
     rl.close()
   }

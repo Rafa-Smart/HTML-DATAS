@@ -293,3 +293,35 @@
 //     b+= "\n"
 // }
 // console.log(b)
+
+// oke ini nyoba lagi
+
+
+
+// let t = 10
+// let s = ""
+// for(let i = 0; i <10; i++){
+//     for(j=0;j<t-i;j++){
+//         s += " "
+//     }
+//     for(k=0;k<i*2-1;k++){
+//         s += "*"
+//     }
+//     s += "\n"
+// }
+
+
+// nahh ini yng bener bre, segitiga sempurna terbalik
+console.log("=============")
+t = 0
+let s =""
+for(i=10;i>t;i--){
+    for(j=10;j>i;j--){
+        s += " "
+    }
+    for(k=0;k<i*2-1;k++){
+        s += "*"
+    }
+    s += "\n"
+}
+console.log(s)

@@ -7,7 +7,7 @@ const server = net.createServer((socket) => {
     dataSockets.unshift(socket) // kenapa unshift ?, karena agar berurutan dari 0 ke 1....
     console.log('Client terhubung');
     dataSockets.forEach((client) => { // nah disini kita inign ketiak pertama kali terhubung ada pesan, ke seluruh client bahwa ada client ini yang sudah gabung
-        client.write(`client ${dataSockets.indexOf(client) + 1} terhubung...\n\r`)
+        client.write(`client ${dataSockets.indexOf(client) + 1} terhubung...\n\r`) // sebenarnya bisa pake index sih di forEachnya
     })
 
     socket.addListener("data", ((data) => {

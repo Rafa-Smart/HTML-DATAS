@@ -59,6 +59,8 @@
         const Orang = function(nama,umur){
             this.nama = nama
             this.umur = umur
+
+            // nah kalo ini berati didalam kontexs objek hello itu dia thisnya akan merujuk ke lexical scopenya yaitu si constructor function Orang
             this.hello = () => console.log(`hallo saya ${this.nama} dan saya berumur ${this.umur} tahun.`)
             // tapi jika kita mneggunakan arrow function pda sebuah method, maka kita sebenarnya tidak memiliki konteks this pada variable didalam fungsi nya, tapi program akan mencari keluar fungsi
 
@@ -156,7 +158,7 @@
             
             // jadi inget lagi, kalo fungsi declaration itu bisa di hoisting atau bisa di panggil sebelum di deklarasikan
 
-            // sementara kalo fungsi expresion itu tidak bisa di hoisting atau tidak bisa di panggil sebelum di deklarasikan
+            // sementara kalo fungsi expresion itu tidak bisa di hoisting atau tidak bisa di panggil sebelum di deklarasikan, tapi tetap saja nanti ketika di gunakna fungsinya maka akan langsung di hoisting ke windownya (kalo isalnya dibuat tapi ga berdasarkan objeknya)
 
             // jadi kalo kita mengakses this pada fungsi declaration didalam objek maka this ini akan langsung mengacu ke global scopenya tidka langsung ke parentnya tapi langsung ke globalnya, maka umur tidak ada maka akan undefined, dan undefined ini jika di tambah 1 atau ++ maka akan Nan
 
@@ -234,8 +236,17 @@
 
             // ini ketika kita memakai arrow fungsi, bisa juga pake fungsi declaration tapi harus pake this.setTimeout
             setTimeout(() => {
+                console.log("setelah 0.6 detik")
+                console.log(this) // disini jadinya itu adlaah si box
                 this.classList.toggle(dua)
             },600)
+
+
+            // setTimeout(function(){
+            //     console.log("setelah 0.6 detik")
+            //     console.log(this) // disini jadinya itu adlaah si Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+            //     this.classList.toggle(dua)
+            // },600)
 
             // NIH PENGERTINANNYA
             // ohhh ngerti sekarang 02/04/2025
@@ -261,6 +272,14 @@
 
             // nah kalo seperti itu maka, akan dihoisting dulu lalu this ini akan berada di luar, dan merujuk pada objek window, penjelasan lanjutan ini akan ada diatas yng ini yak
             // (  disini karena this itu konteksnya adalah box maka)
+
+
+            // PENTING
+            // jadi intinya kalo misalkan kta pake fungsi yang fungsi tersebut mengembalikan sebuah callback, maka didalam callback ini kita kalo mau menggunkana this yang ada pada objek, maka kita perlu mneggunakan arow function,
+
+            // atau kalo engga maka nanti this yang ada pada callback ini, (kalo misalkan kita pake callback tapi pake function declaration maka nanti si thisnya akan merujuk ke objek window, karena fungsi callback ini akan di hoisting duluan)
+
+
         })
 
     </script>

@@ -71,6 +71,7 @@ let namaBaru = namaLengkap.replace("Ucup Surucup","Otong Surotong");*/
 
 //  jika kita di parameter pertamanya salah atau tidak sesuai dnegan nama pada variable aslinya contoh
 let namaCoba = namaLengkap.replace("Ucup salto","Otong")
+// jadi parameter pertamanya itu adalah si search valuenya jadi nanti programnya akan nyari kalimat atau regex yang sesuai dari si strngnya, lalu nanti akan direplace
 console.log(`ini adalah jika parameter ke-1 tidak sesuai dengan variable aslinya = ${namaCoba}`)
 // maka akan tetap seperti itu dan tidak erorr
 
