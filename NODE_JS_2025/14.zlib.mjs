@@ -14,7 +14,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 let __filename = fileURLToPath(import.meta.url);
-let __dirname = path.dirname(__filename);
+let __dirname = path.dirname(__filename); //c:\DATA-PEMROGRAMAN-WEB-GITHUB\NODE_JS_2025
+console.log(__dirname)
 
 const data = fs.createReadStream(
   path.join(__dirname, "TES-File-System", "3.data-tes.txt")
@@ -29,7 +30,7 @@ data.pipe(gzib).pipe(output);
 
 
 // jadi setelah di kompresi maka langung di dekompresi lagi, sebelumnya itu pas di kompresi langsung di dekompresi, maka akan rusak, makanya harusnya ini itu beda file
-output.addListener("finish", function () {
+output.addListener("finish", function () { // jadi ini kalo misalkan si outputnya sudah finish (artinya sudah di kompresi), baru kita dekompresi
   const gunzip = zlib.createGunzip();
   const input = fs.createReadStream(
     path.join(__dirname, "TES-File-System", "4.hasil-data-tes.gz")

@@ -14,11 +14,13 @@ const server = http.createServer((request, response) => {
     request.addListener("data", function (data) {
         body+=data
     });
+
     request.addListener("end", function () {
       response.setHeader("content-Type", "application/json");
       response.write(`data kamu : ${body}`);
       console.log(body);
       response.end();
+      
     });
   } else {
     if (request.url === "/rafa") {

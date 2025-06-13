@@ -12,3 +12,4 @@ client.addListener("data", function(data){
 setInterval(() => { // disini kita ingin mengirim data ke server secara berkala
     client.write(`${process.argv[2]}\r\n`)
 }, 2000)
+

@@ -12,8 +12,11 @@
 
 import fs from "fs";
 import zlib from "zlib"
-
-const readStream = fs.createReadStream("../NODE_JS_2025/TES-File-System/2.data-contoh-2.txt", {
+import path from "path"
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const readStream = fs.createReadStream(path.join(__dirname,"Tes-File-System", "1.data-contoh-1.txt" ) , {
     encoding:"utf-8",
     highWaterMark:16 // jadi hanya menerima per chunk itu 16 byte saja
     // satu charakter itu 1 byte, jadi ini akna ada 16 karakter
@@ -41,13 +44,13 @@ console.log("===================")
 
 
 // Buat stream untuk membaca file
-const readable = fs.createReadStream('../NODE_JS_2025/TES-File-System/2.data-contoh-2.txt');
+const readable = fs.createReadStream(path.join(__dirname,"Tes-File-System", "2.data-contoh-2.txt" ));
 
 // Buat stream untuk mengompresi data
 const gzip = zlib.createGzip();
 
 // Buat stream untuk menulis hasil kompresi
-const writable = fs.createWriteStream('../NODE_JS_2025/TES-File-System/2.data-contoh-2.txt.gz');
+const writable = fs.createWriteStream(path.join(__dirname,"Tes-File-System", "2.data-contoh-2.txt.gz" ));
 
 // Menggunakan pipe untuk mengalirkan data
 // nah jadi dari stream read langsung di salurkan ke stream zlib (dikompresi), lalu setelah di kompresi langsung disalurkan lagi ke stream write, dan selesai
